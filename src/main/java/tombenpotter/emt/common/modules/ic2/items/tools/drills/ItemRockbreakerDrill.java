@@ -152,7 +152,6 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
         return true;
     }
 
-    @SuppressWarnings("unused")
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
         if (!player.isSneaking()) {
@@ -186,7 +185,7 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
                 return super.onItemUse(stack, player, world, x, y, z, side, xOffset, xOffset, zOffset);
             }
             Minecraft mc = Minecraft.getMinecraft();
-            Thaumcraft.instance.renderEventHandler.startScan(player, x, y, z, System.currentTimeMillis() + 5000L);
+            Thaumcraft.instance.renderEventHandler.startScan(player, x, y, z, System.currentTimeMillis() + 5000L, 1);
             player.swingItem();
             return super.onItemUse(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
         }

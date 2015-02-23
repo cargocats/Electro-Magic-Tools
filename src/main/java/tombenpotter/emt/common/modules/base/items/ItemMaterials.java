@@ -52,7 +52,7 @@ public class ItemMaterials extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        String name = "";
+        String name = null;
         switch (itemstack.getItemDamage()) {
             case 0: {
                 name = "oreClusterUranium";

@@ -58,7 +58,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
 
     @Override
     public IIcon getIcon(int side, int meta) {
-        if (side < 1) {
+    	if (side < 1) {
             return this.bottom[meta];
         }
         if (side == 1) {
@@ -78,11 +78,11 @@ public abstract class BlockBaseContainer extends BlockContainer {
         if (facing == 0)
             tile.facing = 2;
         else if (facing == 1)
-            tile.facing = 5;
-        else if (facing == 2)
             tile.facing = 3;
-        else if (facing == 3)
+        else if (facing == 2)
             tile.facing = 4;
+        else if (facing == 3)
+            tile.facing = 5;
     }
 
     @Override

@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import thaumcraft.api.IRepairable;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
+import tombenpotter.emt.common.util.TextHelper;
 
 import java.util.List;
 
@@ -100,6 +101,6 @@ public class ItemThorHammer extends ItemSword implements IRepairable {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-        list.add("The Hammer of Thor");
+        list.add(TextHelper.localize("tooltip.EMT.hammer.broken.The Hammer of Thor"));
     }
 }

@@ -52,7 +52,7 @@ public class ItemIC2Baubles extends ItemIC2 implements IBauble {
 		}
 		return getUnlocalizedName() + "." + name;
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
 		this.icon[0] = ri.registerIcon(ModInformation.texturePath + ":armoreumaker");

@@ -118,10 +118,10 @@ public class IC2ItemRegistry {
         quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(ModInformation.modid + ".wing.quantum");
         GameRegistry.registerItem(quantumWing, "QuantumWing");
 
-        taintedThorHammer = new ItemThorHammerBroken().setUnlocalizedName(ModInformation.modid + ".hammer.broken");
-        GameRegistry.registerItem(taintedThorHammer, "TaintedMjolnir");
         thorHammer = new ItemThorHammer().setUnlocalizedName(ModInformation.modid + ".hammer");
         GameRegistry.registerItem(thorHammer, "Mjolnir");
+        taintedThorHammer = new ItemThorHammerBroken().setUnlocalizedName(ModInformation.modid + ".hammer.broken");
+        GameRegistry.registerItem(taintedThorHammer, "TaintedMjolnir");
         electricThorHammer = new ItemElectricThorHammer().setUnlocalizedName(ModInformation.modid + ".hammer.electric");
         GameRegistry.registerItem(electricThorHammer, "SuperchargedMjolnir");
 

@@ -19,9 +19,6 @@ public class BaseItemRegistry {
     public static Item woodCarver, stoneCarver, ironCarver, obsidianCarver, diamondCarver;
     public static Item baseBaubles, materials, craftingComponents;
 
-    public static Item thorHammer;
-    public static Item thorHammerBroken;
-
     public static Item focusChristmas;
 
     public static Item.ToolMaterial copperMaterial = EnumHelper.addToolMaterial("copperToolMaterial", 2, 300, 6.0F, 2.0F, 14);
@@ -34,12 +31,6 @@ public class BaseItemRegistry {
         GameRegistry.registerItem(craftingComponents, "craftingComponents");
         baseBaubles = new ItemBaseBaubles();
         GameRegistry.registerItem(baseBaubles, "BaseBaubles");
-        materials = new ItemMaterials();
-        GameRegistry.registerItem(materials, "Materials");
-        thorHammer = new ItemThorHammer();
-        GameRegistry.registerItem(thorHammer, "ThorHammer");
-        thorHammerBroken = new ItemThorHammerBroken();
-        GameRegistry.registerItem(thorHammerBroken, "ThorHammerBroken");
         focusChristmas = new ItemChristmasFocus();
         GameRegistry.registerItem(focusChristmas, "FocusChristmas");
 

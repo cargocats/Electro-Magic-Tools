@@ -13,6 +13,7 @@
 package tombenpotter.emt.common.modules.ic2;
 
 import ic2.api.item.IC2Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aspects.AspectList;
@@ -20,6 +21,7 @@ import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 import tombenpotter.emt.common.modules.base.blocks.BaseBlockRegistry;
+import tombenpotter.emt.common.modules.base.items.BaseItemRegistry;
 import tombenpotter.emt.common.modules.ic2.blocks.IC2BlockRegistry;
 import tombenpotter.emt.common.modules.ic2.items.IC2ItemRegistry;
 import tombenpotter.emt.common.util.ConfigHandler;
@@ -64,7 +66,7 @@ public class IC2Research {
         research.setPages(new ResearchPage(text));
 
         text = "1";
-        research = new EMTResearchItem("The One Ring", "EMT", new AspectList(), 6, -7, 0, new ItemStack(IC2ItemRegistry.emtBauble, 1, 2)).setRound().setAutoUnlock().registerResearchItem();
+        research = new EMTResearchItem("The One Ring", "EMT", new AspectList(), 6, -7, 0, new ItemStack(BaseItemRegistry.baseBaubles)).setRound().setAutoUnlock().registerResearchItem();
         research.setPages(new ResearchPage(text));
 
         text = "1";

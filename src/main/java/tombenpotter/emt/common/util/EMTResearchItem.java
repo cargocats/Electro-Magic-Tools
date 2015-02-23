@@ -47,7 +47,7 @@ public class EMTResearchItem extends ResearchItem {
     @Override
     @SideOnly(Side.CLIENT)
     public String getName() {
-        return TextHelper.localize(key);
+        return TextHelper.localize("emt.rsname." + key);
     }
 
     @Override

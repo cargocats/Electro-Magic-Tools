@@ -18,18 +18,26 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
 import org.lwjgl.input.Keyboard;
+
+import thaumcraft.api.IRepairable;
 import thaumcraft.common.entities.projectile.EntityAlumentum;
+import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.util.TextHelper;
 
 import java.util.List;
 
-public class ItemThorHammerBroken extends ItemThorHammer {
+public class ItemThorHammerBroken extends ItemSword implements IRepairable {
 
     public ItemThorHammerBroken() {
+    	super(ToolMaterial.EMERALD);
+        this.setCreativeTab(ElectroMagicTools.tabEMT);
         this.setMaxDamage(1000);
     }
 

@@ -3,8 +3,6 @@ package tombenpotter.emt.common.util;
 import net.minecraft.util.StatCollector;
 
 public class TextHelper {
-	public static String str = null;
-	public static String str2 = null;
 
     /**
      * Color Coding *

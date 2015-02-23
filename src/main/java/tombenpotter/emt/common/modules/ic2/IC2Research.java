@@ -13,7 +13,6 @@
 package tombenpotter.emt.common.modules.ic2;
 
 import ic2.api.item.IC2Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aspects.AspectList;

@@ -30,13 +30,13 @@ public class BaseRecipeRegistry {
     }
 
     public static void addCarversRecipes() {
-        for (int i = 0; i < OreDictionary.getOres("logWood").size(); i++) {
-            woodenCarver = GameRegistry.addShapedRecipe(BaseItemStacks.woodenCarver, " X ", "YYY", 'X', Items.flint, 'Y', OreDictionary.getOres("logWood").get(i));
-        }
-        stoneCarver = GameRegistry.addShapedRecipe(BaseItemStacks.stoneCarver, " X ", "YYY", 'X', Items.flint, 'Y', Blocks.stone);
-        ironCarver = GameRegistry.addShapedRecipe(BaseItemStacks.ironCarver, " X ", "YYY", 'X', BaseItemStacks.ironShard, 'Y', Blocks.stone);
-        obsidianCarver = GameRegistry.addShapedRecipe(BaseItemStacks.obsidianCarver, " X ", "YYY", 'X', BaseItemStacks.ironShard, 'Y', Blocks.obsidian);
-        diamondCarver = GameRegistry.addShapedRecipe(BaseItemStacks.ironCarver, " X ", "YYY", "ZZZ", 'X', BaseItemStacks.obsidianShard, 'Y', Items.diamond, 'Z', Blocks.obsidian);
+        //for (int i = 0; i < OreDictionary.getOres("logWood").size(); i++) {
+        //    woodenCarver = GameRegistry.addShapedRecipe(BaseItemStacks.woodenCarver, " X ", "YYY", 'X', Items.flint, 'Y', OreDictionary.getOres("logWood").get(i));
+        //}
+        //stoneCarver = GameRegistry.addShapedRecipe(BaseItemStacks.stoneCarver, " X ", "YYY", 'X', Items.flint, 'Y', Blocks.stone);
+        //ironCarver = GameRegistry.addShapedRecipe(BaseItemStacks.ironCarver, " X ", "YYY", 'X', BaseItemStacks.ironShard, 'Y', Blocks.stone);
+        //obsidianCarver = GameRegistry.addShapedRecipe(BaseItemStacks.obsidianCarver, " X ", "YYY", 'X', BaseItemStacks.ironShard, 'Y', Blocks.obsidian);
+        //diamondCarver = GameRegistry.addShapedRecipe(BaseItemStacks.ironCarver, " X ", "YYY", "ZZZ", 'X', BaseItemStacks.obsidianShard, 'Y', Items.diamond, 'Z', Blocks.obsidian);
     }
 
     public static void addShardsRecipes() {
@@ -91,37 +91,37 @@ public class BaseRecipeRegistry {
     }
 
     public static void addDrillRecipe() {
-        woodenDrill = toolRecipe(BaseItemStacks.woodenDrill, BaseItemStacks.woodenDrillTop, "plankWood", "stickWood");
-        stoneDrill = toolRecipe(BaseItemStacks.stoneDrill, BaseItemStacks.stoneDrillTop, "stone", "cobblestone");
-        ironDrill = toolRecipe(BaseItemStacks.ironDrill, BaseItemStacks.ironDrillTop, "ingotIron", new ItemStack(Items.leather));
-        goldenDrill = toolRecipe(BaseItemStacks.goldenDrill, BaseItemStacks.goldenDrillTop, "ingotGold", new ItemStack(Blocks.obsidian));
-        diamondDrill = toolRecipe(BaseItemStacks.diamondDrill, BaseItemStacks.diamondDrillTop, "gemDiamond", "ingotGold");
-
-        if (isOreRegistered("ingotCopper") && isOreRegistered("ingotTin"))
-            copperDrill = toolRecipe(BaseItemStacks.copperDrill, BaseItemStacks.copperDrillTop, "ingotCopper", "ingotTin");
-        if (isOreRegistered("ingotTin"))
-            tinDrill = toolRecipe(BaseItemStacks.tinDrill, BaseItemStacks.tinDrillTop, "ingotTin", "ingotGold");
-        if (isOreRegistered("ingotLead"))
-            leadDrill = toolRecipe(BaseItemStacks.leadDrill, BaseItemStacks.leadDrillTop, "ingotLead", "ingotIron");
-        if (isOreRegistered("ingotBronze"))
-            bronzeDrill = toolRecipe(BaseItemStacks.bronzeDrill, BaseItemStacks.bronzeDrillTop, "ingotBronze", new ItemStack(Blocks.obsidian));
+        //woodenDrill = toolRecipe(BaseItemStacks.woodenDrill, BaseItemStacks.woodenDrillTop, "plankWood", "stickWood");
+        //stoneDrill = toolRecipe(BaseItemStacks.stoneDrill, BaseItemStacks.stoneDrillTop, "stone", "cobblestone");
+        //ironDrill = toolRecipe(BaseItemStacks.ironDrill, BaseItemStacks.ironDrillTop, "ingotIron", new ItemStack(Items.leather));
+        //goldenDrill = toolRecipe(BaseItemStacks.goldenDrill, BaseItemStacks.goldenDrillTop, "ingotGold", new ItemStack(Blocks.obsidian));
+        //diamondDrill = toolRecipe(BaseItemStacks.diamondDrill, BaseItemStacks.diamondDrillTop, "gemDiamond", "ingotGold");
+        //
+        //if (isOreRegistered("ingotCopper") && isOreRegistered("ingotTin"))
+        //    copperDrill = toolRecipe(BaseItemStacks.copperDrill, BaseItemStacks.copperDrillTop, "ingotCopper", "ingotTin");
+        //if (isOreRegistered("ingotTin"))
+        //    tinDrill = toolRecipe(BaseItemStacks.tinDrill, BaseItemStacks.tinDrillTop, "ingotTin", "ingotGold");
+        //if (isOreRegistered("ingotLead"))
+        //    leadDrill = toolRecipe(BaseItemStacks.leadDrill, BaseItemStacks.leadDrillTop, "ingotLead", "ingotIron");
+        //if (isOreRegistered("ingotBronze"))
+        //    bronzeDrill = toolRecipe(BaseItemStacks.bronzeDrill, BaseItemStacks.bronzeDrillTop, "ingotBronze", new ItemStack(Blocks.obsidian));
     }
 
     public static void addChainsawRecipes() {
-        woodenChainsaw = toolRecipe(BaseItemStacks.woodenChainsaw, BaseItemStacks.woodenChainsawTop, "plankWood", "stickWood");
-        stoneChainsaw = toolRecipe(BaseItemStacks.stoneChainsaw, BaseItemStacks.stoneChainsawTop, "stone", "cobblestone");
-        ironChainsaw = toolRecipe(BaseItemStacks.ironChainsaw, BaseItemStacks.ironChainsawTop, "ingotIron", new ItemStack(Items.leather));
-        goldenChainsaw = toolRecipe(BaseItemStacks.goldenChainsaw, BaseItemStacks.goldenChainsawTop, "ingotGold", new ItemStack(Blocks.obsidian));
-        diamondChainsaw = toolRecipe(BaseItemStacks.diamondChainsaw, BaseItemStacks.diamondChainsawTop, "gemDiamond", "ingotGold");
-
-        if (isOreRegistered("ingotCopper") && isOreRegistered("ingotTin"))
-            copperChainsaw = toolRecipe(BaseItemStacks.copperChainsaw, BaseItemStacks.copperChainsawTop, "ingotCopper", "ingotTin");
-        if (isOreRegistered("ingotTin"))
-            tinChainsaw = toolRecipe(BaseItemStacks.tinChainsaw, BaseItemStacks.tinChainsawTop, "ingotTin", "ingotGold");
-        if (isOreRegistered("ingotLead"))
-            leadChainsaw = toolRecipe(BaseItemStacks.leadChainsaw, BaseItemStacks.leadChainsawTop, "ingotLead", "ingotIron");
-        if (isOreRegistered("ingotBronze"))
-            bronzeChainsaw = toolRecipe(BaseItemStacks.bronzeChainsaw, BaseItemStacks.bronzeChainsawTop, "ingotBronze", new ItemStack(Blocks.obsidian));
+        //woodenChainsaw = toolRecipe(BaseItemStacks.woodenChainsaw, BaseItemStacks.woodenChainsawTop, "plankWood", "stickWood");
+        //stoneChainsaw = toolRecipe(BaseItemStacks.stoneChainsaw, BaseItemStacks.stoneChainsawTop, "stone", "cobblestone");
+        //ironChainsaw = toolRecipe(BaseItemStacks.ironChainsaw, BaseItemStacks.ironChainsawTop, "ingotIron", new ItemStack(Items.leather));
+        //goldenChainsaw = toolRecipe(BaseItemStacks.goldenChainsaw, BaseItemStacks.goldenChainsawTop, "ingotGold", new ItemStack(Blocks.obsidian));
+        //diamondChainsaw = toolRecipe(BaseItemStacks.diamondChainsaw, BaseItemStacks.diamondChainsawTop, "gemDiamond", "ingotGold");
+        //
+        //if (isOreRegistered("ingotCopper") && isOreRegistered("ingotTin"))
+        //    copperChainsaw = toolRecipe(BaseItemStacks.copperChainsaw, BaseItemStacks.copperChainsawTop, "ingotCopper", "ingotTin");
+        //if (isOreRegistered("ingotTin"))
+        //    tinChainsaw = toolRecipe(BaseItemStacks.tinChainsaw, BaseItemStacks.tinChainsawTop, "ingotTin", "ingotGold");
+        //if (isOreRegistered("ingotLead"))
+        //    leadChainsaw = toolRecipe(BaseItemStacks.leadChainsaw, BaseItemStacks.leadChainsawTop, "ingotLead", "ingotIron");
+        //if (isOreRegistered("ingotBronze"))
+        //    bronzeChainsaw = toolRecipe(BaseItemStacks.bronzeChainsaw, BaseItemStacks.bronzeChainsawTop, "ingotBronze", new ItemStack(Blocks.obsidian));
     }
 
     public static IRecipe toolRecipe(ItemStack output, ItemStack X, String Y, ItemStack Z) {
@@ -163,23 +163,23 @@ public class BaseRecipeRegistry {
     }
 
     public static void addCarverRecipe(ItemStack output, ItemStack input) {
-        GameRegistry.addShapelessRecipe(output, BaseItemStacks.woodenCarver, input);
-        GameRegistry.addShapelessRecipe(output, BaseItemStacks.stoneCarver, input);
-        GameRegistry.addShapelessRecipe(output, BaseItemStacks.ironCarver, input);
-        GameRegistry.addShapelessRecipe(output, BaseItemStacks.obsidianCarver, input);
-        GameRegistry.addShapelessRecipe(output, BaseItemStacks.diamondCarver, input);
+        //GameRegistry.addShapelessRecipe(output, BaseItemStacks.woodenCarver, input);
+        //GameRegistry.addShapelessRecipe(output, BaseItemStacks.stoneCarver, input);
+        //GameRegistry.addShapelessRecipe(output, BaseItemStacks.ironCarver, input);
+        //GameRegistry.addShapelessRecipe(output, BaseItemStacks.obsidianCarver, input);
+        //GameRegistry.addShapelessRecipe(output, BaseItemStacks.diamondCarver, input);
     }
 
     public static void addCarverRecipe(ItemStack output, String input) {
-        if (isOreRegistered(input)) {
-            for (int i = 0; i < OreDictionary.getOres(input).size(); i++) {
-                GameRegistry.addShapelessRecipe(output, BaseItemStacks.woodenCarver, OreDictionary.getOres(input).get(i));
-                GameRegistry.addShapelessRecipe(output, BaseItemStacks.stoneCarver, OreDictionary.getOres(input).get(i));
-                GameRegistry.addShapelessRecipe(output, BaseItemStacks.ironCarver, OreDictionary.getOres(input).get(i));
-                GameRegistry.addShapelessRecipe(output, BaseItemStacks.obsidianCarver, OreDictionary.getOres(input).get(i));
-                GameRegistry.addShapelessRecipe(output, BaseItemStacks.diamondCarver, OreDictionary.getOres(input).get(i));
-            }
-        }
+        //if (isOreRegistered(input)) {
+        //    for (int i = 0; i < OreDictionary.getOres(input).size(); i++) {
+        //        GameRegistry.addShapelessRecipe(output, BaseItemStacks.woodenCarver, OreDictionary.getOres(input).get(i));
+        //        GameRegistry.addShapelessRecipe(output, BaseItemStacks.stoneCarver, OreDictionary.getOres(input).get(i));
+        //        GameRegistry.addShapelessRecipe(output, BaseItemStacks.ironCarver, OreDictionary.getOres(input).get(i));
+        //        GameRegistry.addShapelessRecipe(output, BaseItemStacks.obsidianCarver, OreDictionary.getOres(input).get(i));
+        //        GameRegistry.addShapelessRecipe(output, BaseItemStacks.diamondCarver, OreDictionary.getOres(input).get(i));
+        //    }
+        //}
     }
 
     public static boolean isOreRegistered(String ore) {

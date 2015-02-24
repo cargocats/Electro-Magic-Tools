@@ -60,7 +60,7 @@ item.EMT.emtitems.uumatterDrop.name=Кристаллизированная ка�
 
 item.EMT.emtbauble.euMaker.armor.name=Кольцо для зарядки брони
 item.EMT.emtbauble.euMaker.inventory.name=Кольцо для зарядки инвентаря
-item.EMT.emtbauble.oneRing.name=Кольцо Всевластия
+item.EMT.module.base.bauble.oneRing.name=Кольцо Всевластия
 
 item.EMT.goggles.electric.name=Электрические очки откровения
 item.EMT.goggles.nano.name=Нано-очки откровения
@@ -101,33 +101,33 @@ item.EMT.module.base.focus.shield.name=Набалдашник: Щит
 item.EMT.module.ic2.focus.charge.name=Набалдашник: Зарядка
 item.EMT.module.ic2.focus.charge.wand.name=Набалдашник: Зарядка жезла
 
-item.EMT.drill.wood.name=Деревянный бур
-item.EMT.drill.stone.name=Каменный бур
-item.EMT.drill.iron.name=Железный бур
-item.EMT.drill.gold.name=Золотой бур
-item.EMT.drill.diamond.name=Алмазный бур
-item.EMT.drill.copper.name=Медный бур
-item.EMT.drill.tin.name=Оловянный бур
-item.EMT.drill.lead.name=Свинцовый бур
-item.EMT.drill.bronze.name=Бронзовый бур
+item.EMT.drill.wood.name
+item.EMT.drill.stone.name
+item.EMT.drill.iron.name
+item.EMT.drill.gold.name
+item.EMT.drill.diamond.name
+item.EMT.drill.copper.name
+item.EMT.drill.tin.name
+item.EMT.drill.lead.name
+item.EMT.drill.bronze.name
 
-item.EMT.chainsaw.wood.name=Деревянная электропила
-item.EMT.chainsaw.stone.name=Каменная электропила
-item.EMT.chainsaw.iron.name=Железная электропила
-item.EMT.chainsaw.gold.name=Золотая электропила
-item.EMT.chainsaw.diamond.name=Алмазная электропила
-item.EMT.chainsaw.copper.name=Медная электропила
-item.EMT.chainsaw.tin.name=Оловянная электропила
-item.EMT.chainsaw.lead.name=Свинцовая электропила
-item.EMT.chainsaw.bronze.name=Бронзовая электропила
+item.EMT.chainsaw.wood.name
+item.EMT.chainsaw.stone.name
+item.EMT.chainsaw.iron.name
+item.EMT.chainsaw.gold.name
+item.EMT.chainsaw.diamond.name
+item.EMT.chainsaw.copper.name
+item.EMT.chainsaw.tin.name
+item.EMT.chainsaw.lead.name
+item.EMT.chainsaw.bronze.name
 
-item.EMT.omnitool.iron.name=Железный мультиинструмент
-item.EMT.omnitool.gold.name=Золотой мультиинструмент
-item.EMT.omnitool.diamond.name=Алмазный мультиинструмент
-item.EMT.omnitool.copper.name=Медный мультиинструмент
-item.EMT.omnitool.tin.name=Оловянный мультиинструмент
-item.EMT.omnitool.lead.name=Свинцовый мультиинструмент
-item.EMT.omnitool.bronze.name=Бронзовый мультиинструмент
+item.EMT.omnitool.iron.name
+item.EMT.omnitool.gold.name
+item.EMT.omnitool.diamond.name
+item.EMT.omnitool.copper.name
+item.EMT.omnitool.tin.name
+item.EMT.omnitool.lead.name
+item.EMT.omnitool.bronze.name
 
 item.EMT.module.base.components.drillTop.wood.name=Wooden Drill Top
 item.EMT.module.base.components.drillTop.stone.name=Stone Drill Top
@@ -157,15 +157,15 @@ item.EMT.module.base.components.omnitoolTop.tin.name=Tin Omnitool Top
 item.EMT.module.base.components.omnitoolTop.lead.name=Lead Omnitool Top
 item.EMT.module.base.components.omnitoolTop.bronze.name=Bronze Omnitool Top
 
-item.EMT.module.base.components.shard.wood.name=Деревянный осколок
-item.EMT.module.base.components.shard.stone.name=Каменный осколок
-item.EMT.module.base.components.shard.iron.name=Железный осколок
-item.EMT.module.base.components.shard.gold.name=Золотой осколок
-item.EMT.module.base.components.shard.obsidian.name=Обсидиановый осколок
-item.EMT.module.base.components.shard.copper.name=Медный осколок
-item.EMT.module.base.components.shard.tin.name=Оловянный осколок
-item.EMT.module.base.components.shard.lead.name=Свинцовый осколок
-item.EMT.module.base.components.shard.bronze.name=Бронзовый осколок
+item.EMT.module.base.components.shard.wood.name
+item.EMT.module.base.components.shard.stone.name
+item.EMT.module.base.components.shard.iron.name
+item.EMT.module.base.components.shard.gold.name
+item.EMT.module.base.components.shard.obsidian.name
+item.EMT.module.base.components.shard.copper.name
+item.EMT.module.base.components.shard.tin.name
+item.EMT.module.base.components.shard.lead.name
+item.EMT.module.base.components.shard.bronze.name
 
 item.EMT.carver.wood.name=Деревянный резчик по осколкам
 item.EMT.carver.stone.name=Каменный резчик по осколкам

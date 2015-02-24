@@ -34,7 +34,6 @@ public class ItemChristmasFocus extends ItemBaseFocus {
 
     public ItemChristmasFocus() {
         super("base.focus.christmas", "focus_christmas" );
-        setCreativeTab(ElectroMagicTools.tabEMT);
     }
 
     @Override

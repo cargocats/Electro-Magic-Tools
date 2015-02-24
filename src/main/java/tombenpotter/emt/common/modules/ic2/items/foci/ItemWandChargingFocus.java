@@ -18,7 +18,7 @@ public class ItemWandChargingFocus extends ItemBaseFocus {
     }
 
     @Override
-    public int getFocusColor() {
+    public int getFocusColor(ItemStack stack) {
         return 0xFFFF450;
     }
 
@@ -28,12 +28,12 @@ public class ItemWandChargingFocus extends ItemBaseFocus {
     }
 
     @Override
-    public boolean isVisCostPerTick() {
+    public boolean isVisCostPerTick(ItemStack focusstack) {
         return true;
     }
 
     @Override
-    public AspectList getVisCost() {
+    public AspectList getVisCost(ItemStack focusstack) {
         return visCost;
     }
 

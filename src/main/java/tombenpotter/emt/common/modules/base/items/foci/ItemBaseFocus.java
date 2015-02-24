@@ -1,5 +1,6 @@
 package tombenpotter.emt.common.modules.base.items.foci;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -11,28 +12,38 @@ import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandFocus;
+import thaumcraft.api.wands.ItemFocusBasic;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 
 import java.util.List;
 
-public abstract class ItemBaseFocus extends Item implements IWandFocus {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public abstract class ItemBaseFocus extends ItemFocusBasic {
 
 	private IIcon ornament, depth;
+	String t = null;
 
 	public ItemBaseFocus(String unlocName, String textureName) {
 		super();
 
 		setUnlocalizedName(ModInformation.modid + ".module." + unlocName);
-		setTextureName(ModInformation.texturePath + ":" + textureName);
 		setCreativeTab(ElectroMagicTools.tabEMT);
 		setMaxDamage(1);
 		setNoRepair();
 		setMaxStackSize(1);
+		t = textureName;
 	}
 
 	boolean hasOrnament() {
 		return false;
+	}
+	
+	@SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister ir) {
+        this.icon = ir.registerIcon(ModInformation.texturePath + ":" + t);
 	}
 
 	boolean hasDepth() {
@@ -40,7 +51,7 @@ public abstract class ItemBaseFocus extends Item implements IWandFocus {
 	}
 
 	@Override
-	public int getFocusColor() {
+	public int getFocusColor(ItemStack stack) {
 		return 0;
 	}
 
@@ -54,38 +65,33 @@ public abstract class ItemBaseFocus extends Item implements IWandFocus {
 		return EnumRarity.rare;
 	}
 
-	@Override
 	public IIcon getFocusDepthLayerIcon() {
 		return depth;
 	}
 
-	@Override
-	public IIcon getOrnament() {
+	public IIcon getOrnament(ItemStack focusstack) {
 		return ornament;
 	}
 
-	@Override
 	public WandFocusAnimation getAnimation() {
 		return WandFocusAnimation.WAVE;
 	}
 
-	@Override
 	public AspectList getVisCost() {
 		return null;
 	}
 
-	public boolean isUseItem() {
-		return isVisCostPerTick();
-	}
+	public boolean isUseItem(ItemStack stack) {
+        return isVisCostPerTick(stack);
+    }
 
-	@Override
 	public boolean isVisCostPerTick() {
 		return false;
 	}
 
 	@Override
 	public ItemStack onFocusRightClick(ItemStack paramItemStack, World paramWorld, EntityPlayer paramEntityPlayer, MovingObjectPosition paramMovingObjectPosition) {
-		if (isUseItem())
+		if (isUseItem(paramItemStack))
 			paramEntityPlayer.setItemInUse(paramItemStack, Integer.MAX_VALUE);
 		return paramItemStack;
 	}
@@ -109,7 +115,6 @@ public abstract class ItemBaseFocus extends Item implements IWandFocus {
 		return false;
 	}
 
-	@Override
 	public boolean acceptsEnchant(int id) {
 		return false;
 	}

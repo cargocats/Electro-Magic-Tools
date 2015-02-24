@@ -14,6 +14,7 @@ package tombenpotter.emt.common.modules.base.items.foci;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
@@ -22,7 +23,7 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 import tombenpotter.emt.common.modules.base.entities.EntityLaser;
 
 public class ItemExplosionFocus extends ItemBaseFocus {
-
+	
     private static final AspectList visCost = new AspectList().add(Aspect.FIRE, 200).add(Aspect.ENTROPY, 200);
 
     public ItemExplosionFocus() {
@@ -30,12 +31,12 @@ public class ItemExplosionFocus extends ItemBaseFocus {
     }
 
     @Override
-    public int getFocusColor() {
-        return 9990;
+    public int getFocusColor(ItemStack stack) {
+        return 0x8B0000;
     }
 
     @Override
-    public AspectList getVisCost() {
+    public AspectList getVisCost(ItemStack focusstack) {
         return visCost;
     }
 
@@ -47,7 +48,7 @@ public class ItemExplosionFocus extends ItemBaseFocus {
     @Override
     public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        if (wand.consumeAllVis(itemstack, player, getVisCost(), true, true)) {
+        if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             if (!world.isRemote) {
                 EntityLaser laser;
                 laser = new EntityLaser(world, player, 2);

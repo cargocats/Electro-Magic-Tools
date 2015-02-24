@@ -33,12 +33,12 @@ public class ItemChargeFocus extends ItemBaseFocus {
     }
 
     @Override
-    public int getFocusColor() {
+    public int getFocusColor(ItemStack stack) {
         return 0xFFFF00;
     }
 
     @Override
-    public AspectList getVisCost() {
+    public AspectList getVisCost(ItemStack stack) {
         return visCost;
     }
 
@@ -50,7 +50,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
     @Override
     public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        if (wand.consumeAllVis(itemstack, player, getVisCost(), true, true)) {
+        if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             if (!world.isRemote) {
 
                 int energyLeft = ConfigHandler.chargeFocusProduction;

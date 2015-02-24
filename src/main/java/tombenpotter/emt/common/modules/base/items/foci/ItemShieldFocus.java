@@ -15,14 +15,18 @@ package tombenpotter.emt.common.modules.base.items.foci;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.common.modules.ic2.blocks.IC2BlockRegistry;
 
 public class ItemShieldFocus extends ItemBaseFocus {
+	
 
     private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 10).add(Aspect.WATER, 10).add(Aspect.AIR, 10);
 
@@ -31,17 +35,12 @@ public class ItemShieldFocus extends ItemBaseFocus {
     }
 
     @Override
-    public int getFocusColor() {
-        return 555555555;
+    public int getFocusColor(ItemStack stack) {
+        return 0x1E90FF;
     }
 
     @Override
-    public boolean isUseItem() {
-        return true;
-    }
-
-    @Override
-    public AspectList getVisCost() {
+    public AspectList getVisCost(ItemStack stack) {
         return visCost;
     }
 
@@ -49,18 +48,26 @@ public class ItemShieldFocus extends ItemBaseFocus {
     public String getSortingHelper(ItemStack itemstack) {
         return "SHIELD";
     }
+    
+    @Override
+    public boolean isUseItem(ItemStack stack) {
+        return true;
+    }
 
     @Override
-    public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int time) {
+    public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {
         player.motionX = 0.0D;
         player.motionY = 0.0D;
         player.motionZ = 0.0D;
 
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        if (wand.consumeAllVis(itemstack, player, getVisCost(), true, true)) {
+        if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             int x = MathHelper.floor_double(player.posX);
             int y = MathHelper.floor_double(player.posY);
             int z = MathHelper.floor_double(player.posZ);
+            
+            ItemStack milk = (new ItemStack(Items.milk_bucket));
+            player.curePotionEffects(milk);
 
             // Player Level
             if (player.worldObj.isAirBlock(x + 1, y, z) && player.worldObj.isAirBlock(x - 1, y, z) && player.worldObj.isAirBlock(x, y, z + 1) && player.worldObj.isAirBlock(x, y, z - 1)) {
@@ -101,8 +108,5 @@ public class ItemShieldFocus extends ItemBaseFocus {
             player.worldObj.setBlockToAir(x, y + 1, z + 1);
             player.worldObj.setBlockToAir(x, y + 1, z - 1);
         }
-
-        ItemStack milk = (new ItemStack(Items.milk_bucket));
-        player.curePotionEffects(milk);
     }
 }

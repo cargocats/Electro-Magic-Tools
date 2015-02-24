@@ -12,30 +12,38 @@
 
 package tombenpotter.emt.common.modules.base.items.foci;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import tombenpotter.emt.ElectroMagicTools;
+import tombenpotter.emt.ModInformation;
 
 public class ItemChristmasFocus extends ItemBaseFocus {
 
     private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
 
     public ItemChristmasFocus() {
-        super("base.focus.christmas", "focus_christmas");
+        super("base.focus.christmas.name", "focus_christmas" );
+        setCreativeTab(ElectroMagicTools.tabEMT);
     }
 
     @Override
-    public int getFocusColor() {
-        return 99999999;
+    public int getFocusColor(ItemStack stack) {
+        return 0x00FFFF;
     }
 
     @Override
-    public AspectList getVisCost() {
+    public AspectList getVisCost(ItemStack stack) {
         return visCost;
     }
 
@@ -51,7 +59,7 @@ public class ItemChristmasFocus extends ItemBaseFocus {
             int x = mop.blockX;
             int y = mop.blockY + 1;
             int z = mop.blockZ;
-            if (wand.consumeAllVis(itemstack, player, getVisCost(), true, true)) {
+            if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
                 if (!world.isRemote) {
                     EntitySnowman snowman;
                     snowman = new EntitySnowman(world);

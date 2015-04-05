@@ -15,8 +15,8 @@ package tombenpotter.emt.proxies;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import tombenpotter.emt.client.renderer.RenderArcher;
 import tombenpotter.emt.client.renderer.RenderLaser;
-import tombenpotter.emt.common.modules.base.entities.EntityArcher;
-import tombenpotter.emt.common.modules.base.entities.EntityLaser;
+import tombenpotter.emt.common.entities.EntityArcher;
+import tombenpotter.emt.common.entities.EntityLaser;
 
 public class ClientProxy extends CommonProxy {
 

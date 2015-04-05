@@ -20,14 +20,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
 import thaumcraft.common.container.SlotOutput;
-import tombenpotter.emt.common.modules.ic2.tile.TileEntityEtherealMacerator;
+import tombenpotter.emt.common.tile.TileEntityEtherealMacerator;
 
 public class ContainerEtheralMacerator extends Container {
 
     TileEntityEtherealMacerator te;
 
     public ContainerEtheralMacerator(InventoryPlayer inventory, TileEntity te) {
-        this.te = ((TileEntityEtherealMacerator) te);
+        this.te = ((TileEntityEtherealMacerator)te);
         addSlotToContainer(new Slot(this.te, 0, 56, 26));
         addSlotToContainer(new SlotOutput(this.te, 2, 116, 26));
         addSlotToContainer(new SlotOutput(this.te, 1, 116, 53));

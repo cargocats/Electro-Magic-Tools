@@ -18,11 +18,17 @@ import cpw.mods.fml.relauncher.SideOnly;
  * Any crop extending this can be registered using registerCrop to be added into the game.
  */
 public abstract class CropCard {
+	public CropCard() {
+		modId = getModId(); // initialize mod id while we should be in the real owner's init event
+	}
+
 	/**
 	 * Plant name for identifying this crop within your mod.
 	 *
 	 * The name has to be unique within the mod and is used for saving.
 	 * By default this name will be also used to determine displayKey() and registerSprites().
+	 *
+	 * @note changing name or owner will cause existing crops in users' worlds to disappear.
 	 *
 	 * @return Plant name
 	 */
@@ -33,28 +39,25 @@ public abstract class CropCard {
 	 *
 	 * It's recommended to hard code this to your mod id.
 	 *
+	 * @note changing name or owner will cause existing crops in users' worlds to disappear.
+	 *
 	 * @return Mod id.
 	 */
 	public String owner() {
-		ModContainer modContainer = Loader.instance().activeModContainer();
-
-		if (modContainer != null) {
-			return modContainer.getModId();
-		} else {
-			// this is bad if you are not actually IC2
-			assert false;
-
-			return "IC2";
-		}
+		return modId;
 	}
 
 	/**
 	 * Translation key for display to the player.
 	 *
+	 * It's highly recommended to specify a valid key from your language file here, e.g. add
+	 * "yourmod.crop.yourCropName = Your crop's name" to the language file, override name() to
+	 * return "yourCropName" and override displayName() to return "yourmod.crop."+name().
+	 *
 	 * @return Unlocalized name.
 	 */
 	public String displayName() {
-		return "ic2.crop."+name();
+		return name(); // return the raw name for backwards compatibility
 	}
 
 	/**
@@ -63,7 +66,7 @@ public abstract class CropCard {
 	 * @return Your name
 	 */
 	public String discoveredBy() {
-		return "IC2 Team";
+		return "unknown";
 	}
 
 	/**
@@ -97,7 +100,7 @@ public abstract class CropCard {
 	 * @param crop reference to ICropTile
 	 * @return roots lengt use in isBlockBelow
 	 */
-	public int getrootslength(ICropTile crop){
+	public int getrootslength(ICropTile crop) {
 		return 1;
 	}
 
@@ -144,13 +147,17 @@ public abstract class CropCard {
 	 * Instantiate your Icons here.
 	 *
 	 * This method will get called by IC2, don't call it yourself.
+	 *
+	 * It's highly recommended to use your own assert domain here, e.g. yourmod:crop/* instead of
+	 * ic2:crop/*, which will then read assets/yourmod/textures/blocks/crop/*.png.
 	 */
 	@SideOnly(Side.CLIENT)
 	public void registerSprites(IIconRegister iconRegister) {
 		textures = new IIcon[maxSize()];
 
 		for (int i = 1; i <= textures.length; i++) {
-			textures[i - 1] = iconRegister.registerIcon("ic2:crop/"+name()+"."+i);
+			// ic2:crop/blockCrop.NAME.n is the legacy name for backwards compatiblity
+			textures[i - 1] = iconRegister.registerIcon("ic2:crop/blockCrop."+name()+"."+i);
 		}
 	}
 
@@ -406,6 +413,21 @@ public abstract class CropCard {
 		return Crops.instance.getIdFor(this);
 	}
 
+	private static String getModId() {
+		ModContainer modContainer = Loader.instance().activeModContainer();
+
+		if (modContainer != null) {
+			return modContainer.getModId();
+		} else {
+			// this is bad if you are not actually IC2
+			assert false;
+
+			return "unknown";
+		}
+	}
+
 	@SideOnly(Side.CLIENT)
 	protected IIcon textures[];
+
+	private final String modId; // TODO: make owner abstract, remove modId auto detection
 }

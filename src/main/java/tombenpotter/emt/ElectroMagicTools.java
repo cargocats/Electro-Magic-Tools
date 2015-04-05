@@ -27,8 +27,8 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tombenpotter.emt.common.commands.CommandOutputs;
-import tombenpotter.emt.common.modules.ModuleRegistry;
-import tombenpotter.emt.common.modules.base.entities.BaseEntityRegistry;
+import tombenpotter.emt.common.Registry;
+import tombenpotter.emt.common.entities.BaseEntityRegistry;
 import tombenpotter.emt.common.util.*;
 import tombenpotter.emt.proxies.CommonProxy;
 
@@ -53,7 +53,7 @@ public class ElectroMagicTools {
 
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new EventHandlerEMT());
-	    ModuleRegistry.registerModules();
+	    Registry.register();
         EssentiasOutputs.addPrimalOutputs();
         EssentiasOutputs.addOutputs();
 
@@ -83,7 +83,7 @@ public class ElectroMagicTools {
     public void postInit(FMLPostInitializationEvent event) {
         ElectroMagicTools.logger.info(localize("console.EMT.postInit.begin"));
 
-	    ModuleRegistry.registerLateModules();
+	    Registry.registerLate();
         RegistryHandler.registerIc2PostRegistrys();
 
         ElectroMagicTools.logger.info(localize("console.EMT.postInit.end"));

@@ -39,7 +39,7 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    public IIcon[] icon = new IIcon[500];
+    public IIcon[] icon = new IIcon[25];
 
     public ItemMaterials() {
         this.setCreativeTab(ElectroMagicTools.tabEMT);
@@ -106,19 +106,19 @@ public class ItemMaterials extends Item {
                 name = "featherGluedCardboardWing";
                 break;
             }
+            //case 13: {
+            //    name = "denseIronSheet";
+            //    break;
+            //}
             case 13: {
-                name = "denseIronSheet";
-                break;
-            }
-            case 14: {
                 name = "taintedFeather";
                 break;
             }
-            case 15: {
+            case 14: {
                 name = "thaumiumWing";
                 break;
             }
-            case 16: {
+            case 15: {
                 name = "uumatterDrop";
                 break;
             }
@@ -144,10 +144,10 @@ public class ItemMaterials extends Item {
         this.icon[10] = ri.registerIcon(ModInformation.texturePath + ":materials/rubberball");
         this.icon[11] = ri.registerIcon(ModInformation.texturePath + ":materials/cardboard");
         this.icon[12] = ri.registerIcon(ModInformation.texturePath + ":materials/cardboardsheet");
-        this.icon[13] = ri.registerIcon(ModInformation.texturePath + ":materials/denseironsheet");
-        this.icon[14] = ri.registerIcon(ModInformation.texturePath + ":materials/taintedfeather");
-        this.icon[15] = ri.registerIcon(ModInformation.texturePath + ":materials/thaumiumWing");
-        this.icon[16] = ri.registerIcon(ModInformation.texturePath + ":materials/uumatterdrop");
+        //this.icon[13] = ri.registerIcon(ModInformation.texturePath + ":materials/denseironsheet");
+        this.icon[13] = ri.registerIcon(ModInformation.texturePath + ":materials/taintedfeather");
+        this.icon[14] = ri.registerIcon(ModInformation.texturePath + ":materials/thaumiumWing");
+        this.icon[15] = ri.registerIcon(ModInformation.texturePath + ":materials/uumatterdrop");
     }
 
     @SideOnly(Side.CLIENT)
@@ -158,7 +158,7 @@ public class ItemMaterials extends Item {
     @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list) {
-        for (int i = 1; i <= 16; i++) {
+        for (int i = 1; i <= 15; i++) {
             list.add(new ItemStack(this, 1, i));
         }
     }
@@ -211,7 +211,7 @@ public class ItemMaterials extends Item {
 
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
         super.onUpdate(stack, world, entity, par4, par5);
-        if ((!entity.worldObj.isRemote) && ((stack.getItemDamage() == 14)) && ((entity instanceof EntityLivingBase)) && (!((EntityLivingBase) entity).isEntityUndead()) && (!((EntityLivingBase) entity).isPotionActive(Config.potionTaintPoisonID)) && (world.rand.nextInt(4321) <= stack.stackSize)) {
+        if ((!entity.worldObj.isRemote) && ((stack.getItemDamage() == 13)) && ((entity instanceof EntityLivingBase)) && (!((EntityLivingBase) entity).isEntityUndead()) && (!((EntityLivingBase) entity).isPotionActive(Config.potionTaintPoisonID)) && (world.rand.nextInt(4321) <= stack.stackSize)) {
             ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Config.potionTaintPoisonID, 120, 0, false));
             if ((entity instanceof EntityPlayer)) {
                 InventoryUtils.consumeInventoryItem((EntityPlayer) entity, stack.getItem(), stack.getItemDamage());

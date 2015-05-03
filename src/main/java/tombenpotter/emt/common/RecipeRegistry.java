@@ -43,7 +43,7 @@ import java.util.Iterator;
 
 public class RecipeRegistry {
 
-	public static ItemStack uuMCell = new ItemStack(ItemRegistry.itemEMTItems, 1, 16);
+	public static ItemStack uuMCell = new ItemStack(ItemRegistry.itemEMTItems, 1, 15);
 
     private static void registerShapedRecipes() {
 
@@ -54,7 +54,7 @@ public class RecipeRegistry {
         featherMesh = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 7), "XYX", "YXY", "XYX", 'X', new ItemStack(Items.feather), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 9));
         featherWing = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 12), "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 7), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 8), 'Z', new ItemStack(ItemRegistry.itemEMTItems, 1, 11));
         featherWings = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.featherWing), "XX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 12));
-        taintedFeathers = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 14), " X ", "XYX", " X ", 'X', new ItemStack(ConfigItems.itemResource, 1, 12), 'Y', new ItemStack(Items.feather));
+        taintedFeathers = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 13), " X ", "XYX", " X ", 'X', new ItemStack(ConfigItems.itemResource, 1, 12), 'Y', new ItemStack(Items.feather));
 
         if (!Loader.isModLoaded("gregtech_addon")) {
             GameRegistry.addShapedRecipe(IC2Items.getItem("diamondDrill"), " Y ", "YXY", 'Y', new ItemStack(Items.diamond), 'X', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE));
@@ -241,9 +241,9 @@ public class RecipeRegistry {
 
 		electricScribingTools = ThaumcraftApi.addArcaneCraftingRecipe("Electric Scribing Tools", new ItemStack(ItemRegistry.electricScribingTools), CraftingAspects.electricScribingTools, "YXY", "XZX", "YXY", 'Y', IC2Items.getItem("electronicCircuit"), 'X', new ItemStack(ConfigItems.itemInkwell), 'Z', new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE));
 
-		thaumiumWing = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.itemEMTItems, 1, 15), CraftingAspects.thaumiumWing, "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 14), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 5), 'Z', new ItemStack(ItemRegistry.itemEMTItems, 1, 13));
-
-		thaumiumWings = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.thaumiumWing), CraftingAspects.thaumiumWing, "XX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 15));
+		thaumiumWing = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.itemEMTItems, 1, 14), CraftingAspects.thaumiumWing, "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 13), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 5), 'Z', IC2Items.getItem("plateiron"));
+		
+		thaumiumWings = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.thaumiumWing), CraftingAspects.thaumiumWing, "XX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 14));
 
 		/** Crucible Recipes **/
 
@@ -324,8 +324,8 @@ public class RecipeRegistry {
 		thaumiumPlate = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 5), "X", "Y", "Z", 'Y', new ItemStack(ConfigItems.itemResource, 1, 2), 'X', new ItemStack(IC2Items.getItem("ForgeHammer").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Z', new ItemStack(Blocks.obsidian));
 		Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemResource, 1, 2)), null, new ItemStack(ItemRegistry.itemEMTItems, 1, 5));
 
-		/* Iron Sheet Recipe */
-		Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(IC2Items.getItem("denseplateiron")), null, new ItemStack(ItemRegistry.itemEMTItems, 1, 13));
+		///* Iron Sheet Recipe */
+		//Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(IC2Items.getItem("denseplateiron")), null, new ItemStack(ItemRegistry.itemEMTItems, 1, 13));
 
 		/* Ore Processing for Amber and Cinnabar */
 		if (ConfigHandler.removeAmberAndCinnabarMacerating) {

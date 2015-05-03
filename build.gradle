@@ -38,7 +38,7 @@ if (new File(projectDir, '.git').exists()) {
 }
 
 minecraft {
-    version = config.mc_version + "-" + config.forge_version
+    version = config.mc_version + "-" + config.forge_version + "-" + config.mc_version
     runDir = "run"
 
     if (project.hasProperty('mappings_version'))
@@ -79,7 +79,7 @@ task sourceJar(type: Jar) {
 }
 
 // add a javadoc jar
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar) {
     from javadoc.destinationDir
     classifier = 'javadoc'
 }
@@ -102,7 +102,7 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
             artifact sourceJar
-            artifact javadocJar
+            //artifact javadocJar
             artifact deobfJar
         }
     }

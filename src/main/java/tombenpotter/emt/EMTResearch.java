@@ -338,7 +338,7 @@ public class EMTResearch {
 
         if (ConfigHandler.uuMInfusionResearch == false) {
             text = "1";
-            research = new EMTResearchItem("UU-Matter Infusion", "EMT", ResearchAspects.uuMInfusion, 5, 5, 3, new ItemStack(ItemRegistry.itemEMTItems, 1, 16)).setParentsHidden("Electric Magic Tools").setConcealed().registerResearchItem();
+            research = new EMTResearchItem("UU-Matter Infusion", "EMT", ResearchAspects.uuMInfusion, 5, 5, 3, new ItemStack(ItemRegistry.itemEMTItems, 1, 15)).setParentsHidden("Electric Magic Tools").setConcealed().registerResearchItem();
             research.setPages(new ResearchPage(text), new ResearchPage(RecipeRegistry.charcoalToCoal), new ResearchPage(RecipeRegistry.glowstoneDustToBlock), new ResearchPage(RecipeRegistry.stoneBricksToIronOre), new ResearchPage(RecipeRegistry.arcaneStoneToCopperOre), new ResearchPage(RecipeRegistry.arcaneStoneBricksToTinOre), new ResearchPage(RecipeRegistry.amberBlockToLeadOre), new ResearchPage(RecipeRegistry.amberBricksToUraniumOre), new ResearchPage(RecipeRegistry.shardToResin), new ResearchPage(RecipeRegistry.shardToRedstone), new ResearchPage(RecipeRegistry.shardToLapis), new ResearchPage(RecipeRegistry.ironToGold), new ResearchPage(RecipeRegistry.goldToDiamond), new ResearchPage(RecipeRegistry.diamondToUranium), new ResearchPage(RecipeRegistry.uraniumToIridium));
         }
 

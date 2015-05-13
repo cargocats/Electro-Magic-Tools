@@ -89,15 +89,19 @@ public class ItemRegistry {
     public static void registerItems() {
         //craftingComponents = new ItemCraftingComponents("components");
         //GameRegistry.registerItem(craftingComponents, "craftingComponents");
-        baseBaubles = new ItemBaseBaubles();
-        GameRegistry.registerItem(baseBaubles, "BaseBaubles");
-        focusChristmas = new ItemChristmasFocus();
-        GameRegistry.registerItem(focusChristmas, "FocusChristmas");
+        //focusChristmas = new ItemChristmasFocus();
+        //GameRegistry.registerItem(focusChristmas, "FocusChristmas");
         
         itemEMTItems = new ItemMaterials().setUnlocalizedName(ModInformation.modid + ".emtitems");
         GameRegistry.registerItem(itemEMTItems, "EMTItems");
+        
+
         emtBauble = new ItemIC2Baubles().setUnlocalizedName(ModInformation.modid + ".emtbauble");
-        GameRegistry.registerItem(emtBauble, "EMTBaubles");
+       	GameRegistry.registerItem(emtBauble, "EMTBaubles");
+        	
+        baseBaubles = new ItemBaseBaubles();
+        GameRegistry.registerItem(baseBaubles, "BaseBaubles");
+  
 
         electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.electric");
         GameRegistry.registerItem(electricGoggles, "ElectricGogglesRevealing");

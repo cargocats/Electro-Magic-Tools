@@ -26,7 +26,9 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.common.blocks.BlockRegistry;
 
 public class ItemShieldFocus extends ItemBaseFocus {
-	
+	int x1 = 0;
+	int y1 = 0;
+	int z1 = 0;
 
     private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 10).add(Aspect.WATER, 10).add(Aspect.AIR, 10);
 
@@ -56,12 +58,14 @@ public class ItemShieldFocus extends ItemBaseFocus {
 
     @Override
     public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {
-        player.motionX = 0.0D;
-        player.motionY = 0.0D;
-        player.motionZ = 0.0D;
 
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+        	
+            player.motionX = 0.0D;
+            player.motionY = -0.1D;
+            player.motionZ = 0.0D;
+        	
             int x = MathHelper.floor_double(player.posX);
             int y = MathHelper.floor_double(player.posY);
             int z = MathHelper.floor_double(player.posZ);
@@ -84,6 +88,22 @@ public class ItemShieldFocus extends ItemBaseFocus {
                 player.worldObj.setBlock(x, y + 1, z + 1, BlockRegistry.shield);
                 player.worldObj.setBlock(x, y + 1, z - 1, BlockRegistry.shield);
             }
+            
+            if (y > y1 && (player.worldObj.isAirBlock(x + 1, y - 2, z) && player.worldObj.isAirBlock(x - 1, y - 2, z) && player.worldObj.isAirBlock(x, y - 2, z + 1) && player.worldObj.isAirBlock(x, y - 2, z - 1)) || (player.worldObj.getBlock(x + 1, y - 2, z) == BlockRegistry.shield && player.worldObj.getBlock(x - 1, y - 2, z) == BlockRegistry.shield && player.worldObj.getBlock(x, y - 2, z + 1) == BlockRegistry.shield && player.worldObj.getBlock(x, y - 2, z - 1) == BlockRegistry.shield)){       	
+                player.worldObj.setBlockToAir(x + 1, y - 2, z);
+                player.worldObj.setBlockToAir(x - 1, y - 2, z);
+                player.worldObj.setBlockToAir(x, y - 2, z + 1);
+                player.worldObj.setBlockToAir(x, y - 2, z - 1);
+            }
+            
+            if (y < y1 && (player.worldObj.isAirBlock(x + 1, y + 2, z) && player.worldObj.isAirBlock(x - 1, y + 2, z) && player.worldObj.isAirBlock(x, y + 2, z + 1) && player.worldObj.isAirBlock(x, y + 2, z - 1)) || (player.worldObj.getBlock(x + 1, y + 2, z) == BlockRegistry.shield && player.worldObj.getBlock(x - 1, y + 2, z) == BlockRegistry.shield && player.worldObj.getBlock(x, y + 2, z + 1) == BlockRegistry.shield && player.worldObj.getBlock(x, y + 2, z - 1) == BlockRegistry.shield)){       	
+                player.worldObj.setBlockToAir(x + 1, y + 2, z);
+                player.worldObj.setBlockToAir(x - 1, y + 2, z);
+                player.worldObj.setBlockToAir(x, y + 2, z + 1);
+                player.worldObj.setBlockToAir(x, y + 2, z - 1);
+            }
+            
+            y1 = y;
         }
     }
 

@@ -4,10 +4,8 @@ import tombenpotter.emt.common.blocks.BlockRegistry;
 import tombenpotter.emt.common.RecipeRegistry;
 import tombenpotter.emt.common.items.ItemRegistry;
 import tombenpotter.emt.common.tile.TileRegistry;
-import cpw.mods.fml.common.Loader;
 
 public class Registry{
-	
 	public static void register(){
 		BlockRegistry.registerBlocks();
 		ItemRegistry.registerItems();

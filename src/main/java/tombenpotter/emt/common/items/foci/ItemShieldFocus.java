@@ -26,9 +26,7 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.common.blocks.BlockRegistry;
 
 public class ItemShieldFocus extends ItemBaseFocus {
-	int x1 = 0;
 	int y1 = 0;
-	int z1 = 0;
 
     private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 10).add(Aspect.WATER, 10).add(Aspect.AIR, 10);
 

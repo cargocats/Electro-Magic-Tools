@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.model.ModelWings;
+import tombenpotter.emt.common.util.ConfigHandler;
 
 public class ItemFeatherWing extends ItemArmor {
 
@@ -58,9 +59,11 @@ public class ItemFeatherWing extends ItemArmor {
                 player.motionY *= 0.9;
 
             if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY = -0.6;
-
-            if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-                player.motionY = -0.3;
+            
+            if(ConfigHandler.impactOfRain){
+            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+            		player.motionY = -0.3;
+            }
 
             if (isSneaking && !player.onGround) player.motionY = -0.6;
         }

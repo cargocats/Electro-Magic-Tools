@@ -43,6 +43,7 @@ public class ConfigHandler {
     public static double outputCap;
 
     // random stuff
+    public static boolean impactOfRain;
     public static boolean capesOn;
     public static boolean toolsInBore;
     public static boolean nightVisionOff;
@@ -129,6 +130,7 @@ public class ConfigHandler {
         chanceTaintedMjolnir = config.get(CATEGORY_RANDOM, "Tainted Mjolnir spawning change", 25, "If you have a lot of mods adding dungeon loot, you should definetely increase this").getInt();
         chanceOneRing = config.get(CATEGORY_RANDOM, "One Ring spawning chance", 15, "If you have a lot of mods adding dungeon loot, you should definetely increase this").getInt();
         removeAmberAndCinnabarMacerating = config.get(CATEGORY_RANDOM, "Clear Amber/Cinnabar Macerating", true, "This is here because of conflicts between mods that add the same input and different outputs").getBoolean(removeAmberAndCinnabarMacerating);
+        impactOfRain = config.get(CATEGORY_RANDOM, "Impact of rain", true, "The impact of rain on all wings").getBoolean(impactOfRain);
 
         // DEFAULTS - Aer -  15,000  Aqua - 5,000  Ignis - 20,000  Ordo -  16,000  Perditio - 10,000  Terra - 2,000
         airOutput = config.get(CATEGORY_OUTPUTS, "Aer Output", 15000).getDouble(airOutput);

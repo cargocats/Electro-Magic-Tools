@@ -13,6 +13,7 @@ import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
+import tombenpotter.emt.common.util.ConfigHandler;
 import tombenpotter.emt.common.util.TextHelper;
 
 import java.util.List;
@@ -65,8 +66,10 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 
             if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY = -0.6;
 
-            if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-                player.motionY = -0.3;
+            if(ConfigHandler.impactOfRain){
+            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+            		player.motionY = -0.3;
+            }
 
             if (isSneaking && !player.onGround) player.motionY = -0.6;
 

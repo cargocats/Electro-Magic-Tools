@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
+import tombenpotter.emt.common.util.ConfigHandler;
 
 public class ItemQuantumWing extends ItemNanoWing {
 
@@ -50,8 +51,10 @@ public class ItemQuantumWing extends ItemNanoWing {
 
             if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY = -0.1;
 
-            if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-                player.motionY = -0.05;
+            if(ConfigHandler.impactOfRain){
+            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+            		player.motionY = -0.05;
+            }
 
             if (isSneaking && isHoldingJump) player.motionY = 0;
 

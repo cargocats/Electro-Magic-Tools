@@ -78,8 +78,10 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 
             if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY = -0.4;
 
-            if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-                player.motionY = -0.2;
+            if(ConfigHandler.impactOfRain){
+            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+            		player.motionY = -0.2;
+            }
 
             if (isSneaking && !player.onGround) player.motionY = -0.6;
         }

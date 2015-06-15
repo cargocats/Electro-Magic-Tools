@@ -42,23 +42,33 @@ public class ItemQuantumWing extends ItemNanoWing {
         if (world.isRemote) {
             boolean isJumping = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
             boolean isHoldingJump = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
-            boolean isSneaking = Minecraft.getMinecraft().gameSettings.keyBindSneak.getIsKeyPressed();
 
-            if (isJumping) player.motionY = 0.85;
-
+            if(isHoldingJump){
+            	isHolding = true;
+            	f += 1;
+            	if(f > 7) f = 7;
+            }
+            else if(isHolding){
+            	isHolding = false;
+            	player.motionY = 0.33 * f;
+            	player.motionX /= 0.6;
+            	player.motionZ /= 0.6;
+            	f = 0;
+            }
+            
             if (isHoldingJump && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
                 player.motionY *= 0.3;
 
-            if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY = -0.1;
+            if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.1;
 
             if(ConfigHandler.impactOfRain){
             	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
             		player.motionY = -0.05;
             }
 
-            if (isSneaking && isHoldingJump) player.motionY = 0;
+            if (player.isSneaking() && isHoldingJump) player.motionY = 0;
 
-            if (isSneaking && !player.onGround && !isHoldingJump) player.motionY = -0.6;
+            if (player.isSneaking() && !player.onGround && !isHoldingJump) player.motionY = -0.6;
         }
         if (player.fallDistance > 0.0F) player.fallDistance = 0;
     }

@@ -68,7 +68,7 @@ public class ElectroMagicTools {
         proxy.load();
         ElectroMagicTools.logger.info(localize("console.EMT.init.mobDrops"));
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        ElectroMagicTools.logger.info(localize("console.EMT.init.loot"));
+        ElectroMagicTools.logger.info(localize("console.EMT.init.dungeon"));
         DungeonChestGenerator.generateLoot();
 
         ElectroMagicTools.logger.info(localize("console.EMT.init.entities"));

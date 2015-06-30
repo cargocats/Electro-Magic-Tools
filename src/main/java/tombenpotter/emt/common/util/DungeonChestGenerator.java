@@ -12,7 +12,7 @@ public class DungeonChestGenerator {
             ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(ItemRegistry.taintedThorHammer), 0, 1, ConfigHandler.chanceTaintedMjolnir));
         }
         if (!ConfigHandler.oneRingSpawn) {
-            ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(ItemRegistry.emtBauble, 1, 2), 0, 1, ConfigHandler.chanceOneRing));
+            ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(ItemRegistry.baseBaubles), 0, 1, ConfigHandler.chanceOneRing));
         }
     }
 }

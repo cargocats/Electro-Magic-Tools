@@ -60,7 +60,7 @@ item.EMT.emtitems.uumatterDrop.name=Кристаллизированная ка�
 
 item.EMT.emtbauble.euMaker.armor.name=Кольцо для зарядки брони
 item.EMT.emtbauble.euMaker.inventory.name=Кольцо для зарядки инвентаря
-item.EMT.module.base.bauble.oneRing.name=Кольцо Всевластия
+item.EMT.item.bauble.oneRing.name=Кольцо Всевластия
 
 item.EMT.goggles.electric.name=Электрические очки откровения
 item.EMT.goggles.nano.name=Нано-очки откровения

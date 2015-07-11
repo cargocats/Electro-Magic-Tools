@@ -52,6 +52,7 @@ public class ElectroMagicTools {
         ElectroMagicTools.logger.info(localize("console.EMT.preInit.begin"));
 
         ConfigHandler.init(event.getSuggestedConfigurationFile());
+        MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
         FMLCommonHandler.instance().bus().register(new EventHandlerEMT());
 	    Registry.register();
         EssentiasOutputs.addPrimalOutputs();
@@ -67,7 +68,6 @@ public class ElectroMagicTools {
         ElectroMagicTools.logger.info(localize("console.EMT.init.loadProxies"));
         proxy.load();
         ElectroMagicTools.logger.info(localize("console.EMT.init.mobDrops"));
-        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         ElectroMagicTools.logger.info(localize("console.EMT.init.dungeon"));
         DungeonChestGenerator.generateLoot();
 

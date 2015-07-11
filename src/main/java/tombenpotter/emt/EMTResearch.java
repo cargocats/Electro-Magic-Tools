@@ -64,7 +64,7 @@ public class EMTResearch {
         research.setPages(new ResearchPage(text));
 
         text = "1";
-        research = new EMTResearchItem("The One Ring", "EMT", new AspectList(), 6, -7, 0, new ItemStack(ItemRegistry.baseBaubles)).setRound().setAutoUnlock().registerResearchItem();
+        research = new EMTResearchItem("The One Ring", "EMT", new AspectList(), 6, -7, 0, new ItemStack(ItemRegistry.onering)).setRound().setAutoUnlock().registerResearchItem();
         research.setPages(new ResearchPage(text));
 
         text = "1";

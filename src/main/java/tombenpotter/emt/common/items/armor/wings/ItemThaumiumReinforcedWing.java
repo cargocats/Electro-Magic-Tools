@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.IVisDiscountGear;
@@ -15,6 +16,8 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.util.ConfigHandler;
 import tombenpotter.emt.common.util.TextHelper;
+import ic2.core.IC2;
+import ic2.core.util.StackUtil;
 
 import java.util.List;
 
@@ -54,24 +57,28 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+    	this.updateWings(player, stack, world, 0.15f, 0.8f, 0.5f);
+    	
+    	
+    	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
+    	
+    	nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
+    	
         if (world.isRemote) {
-            boolean isJumping = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
-            boolean isHoldingJump = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
-            
-            if(isHoldingJump){
-            	isHolding = true;
+            if(nbtData.getBoolean("isJumping")){
+            	nbtData.setBoolean("isHolding", true);
             	f += 1;
             	if(f > 7) f = 7;
             }
-            else if(isHolding){
-            	isHolding = false;
+            else if(nbtData.getBoolean("isJumping")){
+            	nbtData.setBoolean("isHolding", false);
             	player.motionY = 0.15 * f;
             	player.motionX /= 0.8;
             	player.motionZ /= 0.8;
             	f = 0;
             }
 
-            if (isHoldingJump && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
+            if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
                 player.motionY *= 0.5;
 
             if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;

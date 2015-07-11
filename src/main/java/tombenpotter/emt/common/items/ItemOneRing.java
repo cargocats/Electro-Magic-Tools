@@ -22,13 +22,13 @@ import tombenpotter.emt.common.util.TextHelper;
 import java.util.List;
 import java.util.Random;
 
-public class ItemBaseBaubles extends ItemBase implements IBauble {
+public class ItemOneRing extends ItemBase implements IBauble {
 
 	public IIcon[] icon = new IIcon[16];
 	public static int wornTick;
 	public Random random = new Random();
 
-	public ItemBaseBaubles() {
+	public ItemOneRing() {
 		super("bauble");
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);

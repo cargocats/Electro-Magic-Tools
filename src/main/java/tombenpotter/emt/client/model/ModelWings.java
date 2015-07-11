@@ -11,6 +11,8 @@ public class ModelWings extends ModelBiped {
     ModelRenderer rightWing;
     ModelRenderer leftWing;
     ModelRenderer center;
+    
+    public boolean isJumping = false;
 
     public ModelWings() {
         textureWidth = 64;
@@ -59,7 +61,7 @@ public class ModelWings extends ModelBiped {
     
     public void setRotationAngles(float f, float f1, float pt, float f3, float f4, float f5, Entity entity){
 
-    	if(Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed()){
+    	if(isJumping){
     		this.rightWing.rotateAngleY = 0.5f;
     		this.leftWing.rotateAngleY = -0.5f;
     	}

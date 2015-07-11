@@ -1,5 +1,9 @@
 package tombenpotter.emt.common.util;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -9,6 +13,15 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class RandomHelper {
 
+	public static boolean isRKMPressed(World world){
+		if(FMLCommonHandler.instance().getSide().isClient()){
+			return Minecraft.getMinecraft().gameSettings.keyBindUseItem.getIsKeyPressed();
+		}
+			
+			
+		else return true;
+	}
+	
     public static boolean placeTorch(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
@@ -29,4 +42,6 @@ public class RandomHelper {
         }
         return false;
     }
+    
+    
 }

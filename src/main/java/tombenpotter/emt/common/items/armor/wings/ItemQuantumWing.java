@@ -39,37 +39,6 @@ public class ItemQuantumWing extends ItemNanoWing {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-        if (world.isRemote) {
-            boolean isJumping = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
-            boolean isHoldingJump = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
-
-            if(isHoldingJump){
-            	isHolding = true;
-            	f += 1;
-            	if(f > 7) f = 7;
-            }
-            else if(isHolding){
-            	isHolding = false;
-            	player.motionY = 0.33 * f;
-            	player.motionX /= 0.6;
-            	player.motionZ /= 0.6;
-            	f = 0;
-            }
-            
-            if (isHoldingJump && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
-                player.motionY *= 0.3;
-
-            if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.1;
-
-            if(ConfigHandler.impactOfRain){
-            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-            		player.motionY = -0.05;
-            }
-
-            if (player.isSneaking() && isHoldingJump) player.motionY = 0;
-
-            if (player.isSneaking() && !player.onGround && !isHoldingJump) player.motionY = -0.6;
-        }
-        if (player.fallDistance > 0.0F) player.fallDistance = 0;
+    	this.updateWings(player, stack, world, 0.33f, 0.6f, 0.3f);
     }
 }

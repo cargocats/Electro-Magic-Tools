@@ -1,9 +1,7 @@
 #=============Creative Tab Name=============
 itemGroup.EMT.creativeTab=电子魔法工具
-
 #=============Thaumonomicon Tab Name=============
 tc.research_category.EMT=电子魔法工具
-
 #=============GUI=============
 gui.EMT.config.title=Electro-Magic Tools Configuration
 gui.EMT.etherealMacerator.title=天域加工机
@@ -11,7 +9,6 @@ gui.EMT.wandRecharge.title=工业法杖充能站
 gui.EMT.inventory=物品栏
 gui.EMT.book.aspect.output.eu.title=源质发电机
 gui.EMT.book.aspect.output.essentia.eu=源质发电功率
-
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
 tooltip.EMT.hammer.electric=%player%的雷神之锤
@@ -33,11 +30,9 @@ tooltip.EMT.output.double.nether=处于下界时发电量
 tooltip.EMT.output.double.lava=处于岩浆中发电量
 tooltip.EMT.output.double.half.height=处于160层上方发电量
 tooltip.EMT.output.double.half.low=处于10层以下发电量
-
 #=============Entity Names=============
 entity.Tombenpotter's Electro-Magic Tools.entityLaser.name=激光
 entity.Tombenpotter's Electro-Magic Tools.entityArcher.name=守卫雪人
-
 #=============Item Names=============
 item.EMT.emtitems.oreClusterUranium=铀矿簇
 item.EMT.emtitems.crushedOreAmber.name=粉碎琥珀矿
@@ -56,50 +51,38 @@ item.EMT.emtitems.denseIronSheet.name=致密铁片
 item.EMT.emtitems.taintedFeather.name=腐化羽毛
 item.EMT.emtitems.thaumiumWing.name=神秘增强翼
 item.EMT.emtitems.uumatterDrop.name=结晶UU物质液滴
-
 item.EMT.emtbauble.euMaker.armor.name=装备充电戒指
 item.EMT.emtbauble.euMaker.inventory.name=物品充电戒指
 item.EMT.item.bauble.oneRing.name=魔戒
-
 item.EMT.goggles.electric.name=电子护目镜
 item.EMT.goggles.nano.name=纳米揭示护目镜
 item.EMT.goggles.quantum.name=量子揭示护目镜
 item.EMT.goggles.solar.name=太阳能揭示护目镜
-
 item.EMT.boots.traveller.electric.name=电子旅行者之靴
 item.EMT.boots.traveller.nano.name=纳米旅行者之靴
 item.EMT.boots.traveller.quantum.name=量子旅行者之靴
-
 item.EMT.scribingtools.electric.name=电子笔与墨
-
 item.EMT.wing.feather.name=粘合纸板羽翼
 item.EMT.wing.thaumium.name=神秘翼
 item.EMT.wing.nano.name=纳米翼
 item.EMT.wing.quantum.name=量子翼
-
 item.EMT.hammer.broken.name=破损的雷神之锤
 item.EMT.hammer.name=雷神之锤
 item.EMT.hammer.electric.name=高压雷神之锤
-
 item.EMT.drill.thaumium.name=神秘电钻
-
 item.EMT.chainsaw.diamond.name=钻石电锯
 item.EMT.chainsaw.thaumium.name=神秘电锯
-
 item.EMT.omnitool.iron.name=铁制钻锯
 item.EMT.omnitool.diamond.name=钻石钻锯
 item.EMT.omnitool.thaumium.name=神秘钻锯
-
 item.EMT.chainsaw.stream.name=奔雷电锯
 item.EMT.drill.rockbreaker.name=破岩者电钻
 item.EMT.hoeofgrowth.electric.name=电子句芒锄
-
 item.EMT.focus.explosion.name=法杖核心：爆炸
 item.EMT.focus.christmas.name=法杖核心：圣诞
 item.EMT.focus.shield.name=法杖核心：护盾
 item.EMT.focus.charge.name=法杖核心：充电
 item.EMT.focus.charge.wand.name=法杖核心: 化魔
-
 item.EMT.drill.wood.name=木电钻
 item.EMT.drill.stone.name=石电钻
 item.EMT.drill.iron.name=铁制电钻
@@ -109,7 +92,6 @@ item.EMT.drill.copper.name=铜电钻
 item.EMT.drill.tin.name=锡电钻
 item.EMT.drill.lead.name=铅电钻
 item.EMT.drill.bronze.name=青铜电钻
-
 item.EMT.chainsaw.wood.name=木电锯
 item.EMT.chainsaw.stone.name=石电锯
 item.EMT.chainsaw.iron.name=铁制电锯
@@ -119,7 +101,6 @@ item.EMT.chainsaw.copper.name=铜电锯
 item.EMT.chainsaw.tin.name=锡电锯
 item.EMT.chainsaw.lead.name=铅电锯
 item.EMT.chainsaw.bronze.name=青铜电锯
-
 item.EMT.omnitool.iron.name=铁制钻锯
 item.EMT.omnitool.gold.name=金钻锯
 item.EMT.omnitool.diamond.name=钻石钻锯
@@ -127,7 +108,6 @@ item.EMT.omnitool.copper.name=铜钻锯
 item.EMT.omnitool.tin.name=锡钻锯
 item.EMT.omnitool.lead.name=铅钻锯
 item.EMT.omnitool.bronze.name=青铜钻锯
-
 item.EMT.module.base.components.drillTop.wood.name=木钻头
 item.EMT.module.base.components.drillTop.stone.name=石钻头
 item.EMT.module.base.components.drillTop.iron.name=铁钻头
@@ -137,7 +117,6 @@ item.EMT.module.base.components.drillTop.tin.name=锡钻头
 item.EMT.module.base.components.drillTop.copper.name=铜钻头
 item.EMT.module.base.components.drillTop.lead.name=铅钻头
 item.EMT.module.base.components.drillTop.bronze.name=青铜钻头
-
 item.EMT.module.base.components.chainsawTop.wood.name=木锯刃
 item.EMT.module.base.components.chainsawTop.stone.name=石锯刃
 item.EMT.module.base.components.chainsawTop.iron.name=铁锯刃
@@ -147,7 +126,6 @@ item.EMT.module.base.components.chainsawTop.tin.name=锡锯刃
 item.EMT.module.base.components.chainsawTop.copper.name=铜锯刃
 item.EMT.module.base.components.chainsawTop.lead.name=铅锯刃
 item.EMT.module.base.components.chainsawTop.bronze.name=青铜锯刃
-
 item.EMT.module.base.components.omnitoolTop.iron.name=铁钻锯头
 item.EMT.module.base.components.omnitoolTop.gold.name=金钻锯头
 item.EMT.module.base.components.omnitoolTop.diamond.name=钻石钻锯头
@@ -155,7 +133,6 @@ item.EMT.module.base.components.omnitoolTop.copper.name=铜钻锯头
 item.EMT.module.base.components.omnitoolTop.tin.name=锡钻锯头
 item.EMT.module.base.components.omnitoolTop.lead.name=铅钻锯头
 item.EMT.module.base.components.omnitoolTop.bronze.name=青铜钻锯头
-
 item.EMT.module.base.components.shard.wood.name=木锯片
 item.EMT.module.base.components.shard.stone.name=石锯片
 item.EMT.module.base.components.shard.iron.name=铁锯片
@@ -165,13 +142,11 @@ item.EMT.module.base.components.shard.copper.name=铜锯片
 item.EMT.module.base.components.shard.tin.name=锡锯片
 item.EMT.module.base.components.shard.lead.name=铅锯片
 item.EMT.module.base.components.shard.bronze.name=青铜锯片
-
 item.EMT.carver.wood.name=木锯片模板
 item.EMT.carver.stone.name=石锯片模板
 item.EMT.carver.iron.name=铁锯片模板
 item.EMT.carver.obsidian.name=黑曜石锯片模板
 item.EMT.carver.diamond.name=钻石锯片模板
-
 #=============Block Names=============
 tile.EMT.shield.name=护盾方块
 tile.EMT.portablenode.name=便携式节点
@@ -204,7 +179,6 @@ tile.EMT.emtsolars2.earth.name=地注魔太阳能(1级)
 tile.EMT.emtsolars2.doubleearth.name=地注魔太阳能(2级)
 tile.EMT.emtsolars2.tripleearth.name=地注魔太阳能(3级)
 tile.EMT.essentiaGenerator.name=源质发电机
-
 #=============Thaumonomicon Flavor Text=============
 emt.tag.Electric Magic Tools=谁说科技和魔法不能互相结合?
 emt.tag.Thaumium Drill=魔法式采矿
@@ -260,7 +234,6 @@ emt.tag.Feather Wings=在动漫里才会起效...
 emt.tag.Thaumium Reinforced Wings=好多了
 emt.tag.Nanosuit Wings=纳米大法好!
 emt.tag.Quantum Wings=最后的一步...
-
 #=============Thaumonomicon Texts=============
 emt.text.Electric Magic Tools=谁说魔法和科技不能共同工作? 我们的研究者们集合了魔法学院顶尖的神秘使们带来了魔法与电子工具的组合.
 emt.text.Thaumium Drill=你已发现了一种向神秘力量注入普通电子的方法。将神秘材料融入钻石产生了一个能快速采集石头的高性能工具<BR><BR>尽管神秘板是十分有用并强力的材料， 它还不能与铱相比。它更像是一个过渡工具。<BR><BR>这个工具不是最强的，但你觉得你未来能升级它。
@@ -287,7 +260,7 @@ emt.text.Mjolnir=你走遍了世界，为了找到这个可能存在的雷神之
 emt.text.The Legend=你总是听到关于锤子的那个传说。<BR><BR>传说有一个闪电之神，托尔，有一把能够召唤闪电的锤子。<BR><BR>传说神在他的次元隐退，留下了他的锤子，在某个被保护好的地牢里藏了起来，只有有能力的家伙才能找到它。<BR><BR>你有很多时间去探索这个世界，去试着找到这把锤子。
 emt.text.Lightning Summoner=这个物品是你的死敌：高压苦力怕所掉落的。你觉得它以后会派上用场。
 emt.text.Supercharged Mjolnir=在对于所有的地牢进行探索之后，你已经找到了一种方法来制服“托尔的力量”，使得他的锤子变为你的所有物。此外，你可以你的锤子召唤守卫雪傀儡来保护你。然而这把锤子失去了在你所指之处召唤闪电的力量，并且使用时会在你的周围召唤一圈闪电。
-emt.text.Industrial Wand Charging Station=你已试着将法杖充能基座和强大的UU物质结合起来。结果得到了一个能再生法杖魔力的机器，回复每种要素魔力1vis将会消耗50000EU。
+emt.text.Industrial Wand Charging Station=你已试着将法杖充能基座和强大的UU物质结合起来。结果得到了一个能再生法杖魔力的机器，回复每种要素魔力1vis将会消耗 50000 EU。
 emt.text.Compressed Solars=你找到了一种将9普通太阳能压缩为1个魔法太阳能的方法，它工作起来就像是10个普通太阳能发电10eu/t。你将这个过程在压缩太阳能上重复以增加每个方块的产能。你也可以用魔法注魔做出三重压缩的太阳能大大提高发电效率。
 emt.text.Solar Helmet of Revealing=你现在有了一顶像你的量子揭示护目镜一样工作的头盔，也能给你背包黑穿着的装备充电！在白天以128EU/t功率发电， 夜晚不发电。
 emt.text.Diamond Chainsaw=你不知道为何用钻石升级电锯就像钻石升级电钻那样的想法从未出现在脑海中。这个升级使得电锯能储存更多的电力并且更快的破坏方块。
@@ -316,12 +289,10 @@ emt.text.Feather Wings=把羽毛黏上硬纸板再做成翅膀的形状听着是
 emt.text.Thaumium Reinforced Wings=注入魔力的神秘锭是众所周知的。因此，用神秘锭来强化你的纸板翼是个好主意。按下空格键会将你推得更高，如果一直按住则会缓慢下降。潜行则会快速下降。摔落伤害减免:50%.
 emt.text.Nanosuit Wings=利用神秘锭将魔法与纳米科技结合到你的飞行翼上.. 听着很符合逻辑。现在你可以推的比之前还要高，按住空格下落的也比之前要慢。摔落伤害减免:75%.
 emt.text.Quantum Wings=在探索完纳米科技所有的可能性后，你决定做最后一搏，量子。你可以在空中再跳几格的高度， 极好的防护，并且的下降的过程极大减缓了。然而，量子的不可预测又一次发生了。同时按住潜行键和空格键时你的下降会完全停止。你不知道为何会这样，但它就是这样。摔落伤害减免:100%.
-
 #=============Console Logging=============
 console.EMT.preInit.begin=谋略如何统治世界
 console.EMT.preInit.configRead=创建/读取配置文件中
 console.EMT.preInit.end=谋略完成
-
 console.EMT.init.begin=召集盟军
 console.EMT.init.loadProxies=读取proxies信息
 console.EMT.init.mobDrops=添加新的怪物掉落物
@@ -330,15 +301,57 @@ console.EMT.init.recipes=添加合成配方
 console.EMT.init.entities=注册新的实体
 console.EMT.init.guiHandler=注册新的GUI
 console.EMT.init.end=盟军已汇聚一堂
-
 console.EMT.postInit.begin=即将占领世界
 console.EMT.postInit.recipes=增加合成配方
 console.EMT.postInit.recipes.uumatter=添加UU注魔配方
 console.EMT.postInit.end=世界已被我们占领. 敬请享受!
-
 console.EMT.config.refresh=正在刷新配置文件
-
 console.EMT.recipes.amberConflict=移除冲突的琥珀矿合成配方
 console.EMT.recipes.cinnabarConflict=移除冲突的朱砂矿合成配方
-
 console.EMT.modLoaded.GT=检测到格雷科技. 已禁用钻石电钻的合成公式
+#=============Tooltips=============
+#This comes after a player name. The 's is depicting ownership.
+tooltip.EMT.hammer.broken.The Hammer of Thor=The Hammer of Thor
+item.EMT.module.base.focus.explosion.name=法杖核心：爆炸
+item.EMT.module.base.focus.christmas.name=法杖核心：圣诞
+item.EMT.module.base.focus.shield.name=法杖核心：护盾
+item.EMT.module.ic2.focus.charge.name=法杖核心：充电
+item.EMT.module.ic2.focus.charge.wand.name=法杖核心: 化魔
+emt.rsname.Iron Omnitool=铁制钻锯
+emt.rsname.Explosion Focus=Explosion Focus
+emt.rsname.Kris-tmas Focus=Kris-tmas Focus
+emt.rsname.Potentia Generator=Potentia Generator
+emt.rsname.Ignis Generator=Ignis Generator
+emt.rsname.Auram Generator=Auram Generator
+emt.rsname.Arbor Generator=Arbor Generator
+emt.rsname.Aer Generator=Aer Generator
+emt.rsname.Chainsaw of the Stream=Chainsaw of the Stream
+emt.rsname.Drill of the Rockbreaker=Drill of the Rockbreaker
+emt.rsname.Shield Block=Shield Block
+emt.rsname.Tiny Uranium=Tiny Uranium
+emt.rsname.Lightning Summoner=Lightning Summoner
+emt.rsname.Supercharged Mjolnir=Supercharged Mjolnir
+emt.rsname.Industrial Wand Charging Station=Industrial Wand Charging Station
+emt.rsname.Compressed Solars=Compressed Solars
+emt.rsname.Solar Helmet of Revealing=Solar Helmet of Revealing
+emt.rsname.Diamond Chainsaw=Diamond Chainsaw
+emt.rsname.Macerating Native Ore Clusters=Macerating Native Ore Clusters
+emt.rsname.Nano Boots of the Traveller=Nano Boots of the Traveller
+emt.rsname.Etheral Processor=Etheral Processor
+emt.rsname.Water Infused Solar Panels=Water Infused Solar Panels
+emt.rsname.Entropy Infused Solar Panels=Entropy Infused Solar Panels
+emt.rsname.Order Infused Solar Panels=Order Infused Solar Panels
+emt.rsname.Fire Infused Solar Panels=Fire Infused Solar Panels
+emt.rsname.Air Infused Solar Panels=Air Infused Solar Panels
+emt.rsname.Earth Infused Solar Panels=Earth Infused Solar Panels
+emt.rsname.UU-Matter Infusion=UU-Matter Infusion
+emt.rsname.Portable Node=Portable Node
+emt.rsname.Electric Hoe of Growth=Electric Hoe of Growth
+emt.rsname.Wand Focus: Wand Charging=Wand Focus: Wand Charging
+emt.rsname.Inventory Charging Ring=Inventory Charging Ring
+emt.rsname.Armor Charging Ring=Armor Charging Ring
+emt.rsname.The One Ring=The One Ring
+emt.rsname.Feather Wings=Feather Wings
+emt.rsname.Thaumium Reinforced Wings=Thaumium Reinforced Wings
+emt.rsname.Nanosuit Wings=Nanosuit Wings
+emt.rsname.Quantum Wings=Quantum Wings

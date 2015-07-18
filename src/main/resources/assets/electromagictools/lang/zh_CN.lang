@@ -355,3 +355,7 @@ emt.rsname.Feather Wings=Feather Wings
 emt.rsname.Thaumium Reinforced Wings=Thaumium Reinforced Wings
 emt.rsname.Nanosuit Wings=Nanosuit Wings
 emt.rsname.Quantum Wings=Quantum Wings
+#=============Entity Names=============
+entity.EMT.entityLaser.name=镭射器
+entity.EMT.entityArcher.name=雪人守卫
+emt.rsname.Mjolnir=雷神之锤

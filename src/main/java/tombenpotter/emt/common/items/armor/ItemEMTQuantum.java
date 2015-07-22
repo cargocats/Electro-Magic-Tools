@@ -96,11 +96,6 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		icon4 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_q");
 	}
 
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
-		return getIconFromDamage(par1);
-	}
-
 	@SubscribeEvent
 	public void onEntityLivingFallEvent(LivingFallEvent event) {
 		if ((IC2.platform.isSimulating()) && ((event.entity instanceof EntityLivingBase))) {
@@ -116,15 +111,14 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 			}
 		}
 	}
-	
-	public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase entity, ItemStack armor, DamageSource source, double damage, int slot)
-	{
-	    return super.getProperties(entity, armor, source, damage, slot);
-	}
 
 	public double getDamageAbsorptionRatio() {
 		return 1.1D;
 	}
+	
+    private double getBaseAbsorptionRatio() {
+        return 0.15D;
+    }
 
 	public int getEnergyPerDamage() {
 		return 20000;
@@ -146,6 +140,12 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		boolean jetpack = nbtData.getBoolean("jetpack");
 		boolean hoverMode = nbtData.getBoolean("hoverMode");
 		boolean jetpackUsed = false;
+		String useother = nbtData.getString("useother");
+		
+		if(!useother.equals("TW") && !useother.equals("NW") && !useother.equalsIgnoreCase("QW") && !useother.equals("Jetpack") && !useother.equals("None")){
+			nbtData.setString("useother", "None");
+		}
+		
 		if ((IC2.keyboard.isJumpKeyDown(player)) && (IC2.keyboard.isModeSwitchKeyDown(player)) && (toggleTimer == 0)) {
 			toggleTimer = 30;
 			hoverMode = !hoverMode;
@@ -163,7 +163,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("ic2.itemArmorJetpackElectric")) && toggleTimer == 0){
+			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("ic2.itemArmorJetpackElectric")) && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					player.inventory.armorInventory[2].stackTagCompound.setBoolean("jetpack", true);
@@ -178,7 +178,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("item.EMT.wing.thaumium")) && toggleTimer == 0){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
@@ -191,12 +191,13 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("item.EMT.wing.nano")) && toggleTimer == 0){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
 					if(player.inventory.armorInventory[2] == itemStack){
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "NW");
+						player.inventory.armorInventory[2].stackTagCompound.setInteger("NWCharge", (int) ElectricItem.manager.getCharge(player.inventory.getCurrentItem()));
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 					}
 				}
@@ -204,12 +205,13 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("item.EMT.wing.quantum")) && toggleTimer == 0){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
 					if(player.inventory.armorInventory[2] == itemStack){
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "QW");
+						player.inventory.armorInventory[2].stackTagCompound.setInteger("QWCharge", (int) ElectricItem.manager.getCharge(player.inventory.getCurrentItem()));
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 					}
 				}
@@ -225,7 +227,10 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 						jetpack = false;
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
 		            	ItemStack charged = new ItemStack(IC2Items.getItem("electricJetpack").getItem());
-		            	ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge"), player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge"), true, false);
+		            	if(player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge") > 50)
+		            		ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge"), player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge"), true, false);
+		            	else
+							ElectricItem.manager.charge(charged, 50, 50, true, false);
 		            	player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
 					
@@ -238,13 +243,23 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("NW")){
 						IC2.platform.messagePlayer(player, "Nano wings disabled.", new Object[0]);
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.nanoWing));
+						ItemStack charged = new ItemStack(ItemRegistry.nanoWing);
+						if(player.inventory.armorInventory[2].stackTagCompound.getInteger("NWCharge") > 1)
+							ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("NWCharge"), player.inventory.armorInventory[2].stackTagCompound.getInteger("NWCharge"), true, false);
+						else
+							ElectricItem.manager.charge(charged, 1, 1, true, false);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
 					
 					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("QW")){
 						IC2.platform.messagePlayer(player, "Quantum wings disabled.", new Object[0]);
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.quantumWing));
+						ItemStack charged = new ItemStack(ItemRegistry.quantumWing);
+						if(player.inventory.armorInventory[2].stackTagCompound.getInteger("QWCharge") > 1)
+							ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("QWCharge"), player.inventory.armorInventory[2].stackTagCompound.getInteger("QWCharge"), true, false);
+						else
+							ElectricItem.manager.charge(charged, 1, 1, true, false);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
 				}
 			}
@@ -255,20 +270,19 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("TW"))) {
-			useWings(player, itemStack, world, 0.15f, 0.8f, 0.5f);
+			useWings(player, itemStack, world, 0.15f, 0.7f, 0.5f, false);
 		}
 		
 		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("NW"))) {
-			useWings(player, itemStack, world, 0.25f, 0.7f, 0.3f);
+			useWings(player, itemStack, world, 0.25f, 0.6f, 0.3f, true);
 		}
 		
 		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("QW"))) {
-			useWings(player, itemStack, world,  0.33f, 0.6f, 0.3f);
+			useWings(player, itemStack, world,  0.33f, 0.5f, 0.2f, true);
 		}
 		
 		if ((IC2.platform.isSimulating()) && (toggleTimer > 0)) {
 			toggleTimer = (byte) (toggleTimer - 1);
-
 			nbtData.setByte("toggleTimer", toggleTimer);
 		}
 		if ((IC2.platform.isRendering()) && (player == IC2.platform.getPlayerInstance())) {
@@ -291,9 +305,9 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 			}
 		}
 		
-		if(world.isRemote)
+		if(world.isRemote){
 			getIconIndex(itemStack);
-		
+		}
 		ret = jetpackUsed;
 
 		player.extinguish();
@@ -308,20 +322,33 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconIndex(ItemStack stack){
-		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
-			return icon1;
+		try{
+			if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+				return icon1;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("TW")){
+				return icon2;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("NW")){
+				return icon3;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("QW")){
+				return icon4;
+			}
 		}
-		if((stack.stackTagCompound.getString("useother")).equals("TW")){
-			return icon2;
+		catch(Exception ex){
+			return icon0;
 		}
-		if((stack.stackTagCompound.getString("useother")).equals("NW")){
-			return icon3;
-		}
-		if((stack.stackTagCompound.getString("useother")).equals("QW")){
-			return icon4;
-		}
+		
 		return icon0;
 	}
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IIcon getIconFromDamage(int par1)
+    {
+      return icon0;
+    }
 	
 	@Override
 	public int getItemEnchantability() {
@@ -347,7 +374,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		if((stack.stackTagCompound.getString("useother")).equals("QW")){
 			return ModInformation.texturePath + ":textures/models/quantum_wings_q.png";
 		}
-		return super.getArmorTexture(stack, entity, slot, type);
+		return ModInformation.texturePath + ":textures/models/quantum.png";
     }
 	
     @Override
@@ -370,6 +397,12 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		list.add(String.valueOf((int)ElectricItem.manager.getCharge(stack)) + " EU");
 		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
 			list.add((stack.stackTagCompound.getInteger("jetpackCharge")) + " EU JETPACK");
+		}
+		if((stack.stackTagCompound.getString("useother")).equals("NW")){
+			list.add((stack.stackTagCompound.getInteger("NWCharge")) + " EU NW");
+		}
+		if((stack.stackTagCompound.getString("useother")).equals("QW")){
+			list.add((stack.stackTagCompound.getInteger("QWCharge")) + " EU QW");
 		}
     }
 
@@ -433,35 +466,39 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		return true;
 	}
 	
-	void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1){
+	void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, boolean isElectric){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
     	
-    	nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
-    	if(nbtData.getBoolean("isJumping")){
-        	nbtData.setBoolean("isHolding", true);
-            f += 1;
-            if(f > 7) f = 7;
-        }
-        else if(nbtData.getBoolean("isHolding")){
-            nbtData.setBoolean("isHolding", false);	
-            player.motionY = motionY * f;
-            player.motionX /= motionXZ;
-            player.motionZ /= motionXZ;
-            f = 0;
-        }
+		if((nbtData.getString("useother").equals("NW") && nbtData.getInteger("NWCharge") > 0) || (nbtData.getString("useother").equals("QW") && nbtData.getInteger("QWCharge") > 0) || nbtData.getString("useother").equals("TW")){
+    	
+			nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
+    		if(nbtData.getBoolean("isJumping")){
+        		nbtData.setBoolean("isHolding", true);
+        		nbtData.setInteger("f", nbtData.getInteger("f") + 1);
+            	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
+        	}
+        	else if(nbtData.getBoolean("isHolding")){
+            	nbtData.setBoolean("isHolding", false);	
+            	player.motionY = motionY * nbtData.getInteger("f");
+            	player.motionX /= motionXZ;
+            	player.motionZ /= motionXZ;
+            	world.playSoundEffect(player.posX + 0.5D, player.posY + 0.5D, player.posZ + 0.5D, "mob.ghast.fireball", 1.0F, 0.7F + 0.3F);
+            	nbtData.setInteger("f", 0);
+        	}
 
-        if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
-            player.motionY *= f1;
+        	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0)
+        		player.motionY *= f1;
 
-        if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
+        	if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
             
-        if(ConfigHandler.impactOfRain){
-        	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+        	if(ConfigHandler.impactOfRain){
+        		if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
             		player.motionY = -0.3;
-        }
+        	}
 
-        if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
+        	if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
         
-        if (player.fallDistance > 0.0F) player.fallDistance = 0;
+        	if (player.fallDistance > 0.0F) player.fallDistance = 0;
+		}
     }
 }

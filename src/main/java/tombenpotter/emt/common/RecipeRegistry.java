@@ -166,7 +166,6 @@ public class RecipeRegistry {
 
 	public static void registerLateRecipes() {
 		/** Infusion Recipes **/
-
 		thaumiumDrill = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Drill", new ItemStack(ItemRegistry.thaumiumDrill), 5, CraftingAspects.thaumiumDrillCrafting, new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron")});
 
 		thaumiumChainsaw = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Chainsaw", new ItemStack(ItemRegistry.thaumiumChainsaw), 5, CraftingAspects.thaumiumChainsawCrafting, new ItemStack(ItemRegistry.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron")});
@@ -220,6 +219,8 @@ public class RecipeRegistry {
 		nanoWings = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Wings", new ItemStack(ItemRegistry.nanoWing), 4, CraftingAspects.nanoWing, new ItemStack(ItemRegistry.thaumiumWing), new ItemStack[]{IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), new ItemStack(IC2Items.getItem("nanoBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1)});
 
 		quantumWings = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Wings", new ItemStack(ItemRegistry.quantumWing), 6, CraftingAspects.quantumWing, new ItemStack(ItemRegistry.nanoWing, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1)});
+			
+		infusedQuantumArmor = ThaumcraftApi.addInfusionCraftingRecipe("InfusedQuantumArmor", new ItemStack(ItemRegistry.quantumArmor), 5, CraftingAspects.quantumWing, new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{new ItemStack(Items.diamond), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(BlockRegistry.shield), new ItemStack(BlockRegistry.shield)});
 
 		/** Arcane Worktable Recipes **/
 
@@ -295,7 +296,7 @@ public class RecipeRegistry {
 
 		/** IC2 Stuff related recipes **/
 
-		/* Ore Clusters Macerator Recipes */
+		/* Ore Clusters Macerator Recipes */	
 		ItemStack ironClusterRecipe = IC2Items.getItem("smallIronDust").copy();
 		ironClusterRecipe.stackSize = 22;
 		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)), null, ironClusterRecipe);
@@ -396,7 +397,7 @@ public class RecipeRegistry {
 	public static InfusionRecipe shardToRedstone;
 	public static InfusionRecipe shardToLapis;
 	public static InfusionRecipe glowstoneDustToBlock;
-
+	public static InfusionRecipe infusedQuantumArmor;
 	public static InfusionRecipe thaumiumDrill;
 	public static InfusionRecipe thaumiumChainsaw;
 	public static InfusionRecipe thaumicQuantumHelmet;

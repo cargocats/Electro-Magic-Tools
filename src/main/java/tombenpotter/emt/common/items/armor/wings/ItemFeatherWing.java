@@ -41,7 +41,6 @@ public class ItemFeatherWing extends ItemArmor {
     @Override
     @SideOnly(Side.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-    	if(stack.stackTagCompound.getBoolean("isJumping")){ return ModInformation.texturePath + ":textures/models/quantumwing.png";}
         return ModInformation.texturePath + ":textures/models/featherwing.png";
     }
 
@@ -68,19 +67,20 @@ public class ItemFeatherWing extends ItemArmor {
     	
     		if(nbtData.getBoolean("isJumping")){
         		nbtData.setBoolean("isHolding", true);
-            	f += 1;
-            	if(f > 7) f = 7;
+        		nbtData.setInteger("f", nbtData.getInteger("f") + 1);
+            	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
         	}
             else if(nbtData.getBoolean("isHolding")){
             	nbtData.setBoolean("isHolding", false);
             		
-            	player.motionY = motionY * f;
+            	player.motionY = motionY * nbtData.getInteger("f");
             	player.motionX /= motionXZ;
             	player.motionZ /= motionXZ;
-            	f = 0;
+            	world.playSoundEffect(player.posX + 0.5D, player.posY + 0.5D, player.posZ + 0.5D, "mob.ghast.fireball", 1.0F, 0.7F + 0.3F);
+            	nbtData.setInteger("f", 0);
             }
 
-        	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
+        	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0)
             	player.motionY *= f1;
 
         	if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;

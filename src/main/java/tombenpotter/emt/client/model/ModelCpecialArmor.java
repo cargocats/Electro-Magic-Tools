@@ -7,6 +7,8 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -106,9 +108,9 @@ public class ModelCpecialArmor extends ModelBiped
         model.rotateAngleZ = z;
     }
 
-    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
+    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
-        this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, p_78088_1_);
+        this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, entity);
 
         this.bipedBody.render(p_78088_7_);
         this.bipedRightArm.render(p_78088_7_);
@@ -127,6 +129,11 @@ public class ModelCpecialArmor extends ModelBiped
 
     public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity entity)
     {
+    	EntityPlayer player = (EntityPlayer) entity;
+    	if(player.inventory.getCurrentItem() != null)
+    		this.heldItemRight = 1;
+    	else
+    		this.heldItemRight = 0;
         this.bipedHead.rotateAngleY = p_78087_4_ / (180F / (float)Math.PI);
         this.bipedHead.rotateAngleX = p_78087_5_ / (180F / (float)Math.PI);
         this.bipedRightArm.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float)Math.PI) * 2.0F * p_78087_2_ * 0.5F;
@@ -213,7 +220,7 @@ public class ModelCpecialArmor extends ModelBiped
         this.bipedRightArm.rotateAngleX += MathHelper.sin(p_78087_3_ * 0.067F) * 0.05F;
         this.bipedLeftArm.rotateAngleX -= MathHelper.sin(p_78087_3_ * 0.067F) * 0.05F;
 
-        if (this.aimedBow)
+        if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemBow && player.isUsingItem())
         {
             f6 = 0.0F;
             f7 = 0.0F;

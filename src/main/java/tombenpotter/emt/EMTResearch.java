@@ -36,7 +36,6 @@ public class EMTResearch {
     public static void addResearch() {
         ResearchItem research;
         String text;
-        // String text2;
 
         /** Research that can't be disabled **/
         text = "1";
@@ -395,5 +394,9 @@ public class EMTResearch {
             research = new EMTResearchItem("Quantum Wings", "EMT", ResearchAspects.quantumWing, 0, 8, 3, new ItemStack(ItemRegistry.quantumWing)).setParents("Nanosuit Wings").setConcealed().registerResearchItem();
             research.setPages(new ResearchPage(text), new ResearchPage(RecipeRegistry.quantumWings));
         }
+        
+        text = "1";
+        research = new EMTResearchItem("InfusedQuantumArmor", "EMT", ResearchAspects.quantumWing, 0, 10, 4, new ItemStack(ItemRegistry.quantumArmor)).setParents("Quantum Wings").setConcealed().registerResearchItem();
+        research.setPages(new ResearchPage(text), new ResearchPage(RecipeRegistry.infusedQuantumArmor));
     }
 }

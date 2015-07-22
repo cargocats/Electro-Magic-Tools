@@ -10,7 +10,7 @@ import java.util.Random;
 
 public abstract class TileEntitySolarBase extends TileEntityEMT implements IWrenchable {
 
-    public BasicSource energySource = new BasicSource(this, 10000, 1);
+    public BasicSource energySource= new BasicSource(this, 10000, 4);
     public static Random random = new Random();
     public boolean initialized;
     public boolean theSunIsVisible;

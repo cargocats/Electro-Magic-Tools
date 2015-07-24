@@ -19,9 +19,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import thaumcraft.common.entities.monster.EntityTaintChicken;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
@@ -68,10 +66,5 @@ public class EventHandlerEMT {
                 event.craftMatrix.getStackInSlot(i).damageItem(1, event.player);
             }
         }
-    }
-    
-    @SubscribeEvent
-    public void breaktool(PlayerDestroyItemEvent event){
-    	event.entityPlayer.stopUsingItem();
     }
 }

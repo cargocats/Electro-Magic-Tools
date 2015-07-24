@@ -1,6 +1,7 @@
 package tombenpotter.emt.common.util;
 
-import tombenpotter.emt.EMTResearch;
+import tombenpotter.emt.common.EMTResearch;
+
 
 public class RegistryHandler {
 

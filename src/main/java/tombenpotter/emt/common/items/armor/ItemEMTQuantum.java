@@ -394,8 +394,8 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(String.valueOf((int)ElectricItem.manager.getCharge(stack)) + " EU");
-		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+		list.add(String.valueOf((int)ElectricItem.manager.getCharge(stack)) + "EU");
+    	if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
 			list.add((stack.stackTagCompound.getInteger("jetpackCharge")) + " EU JETPACK");
 		}
 		if((stack.stackTagCompound.getString("useother")).equals("NW")){

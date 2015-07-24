@@ -77,6 +77,7 @@ item.EMT.wing.feather.name=Feather Duct-Taped Wings
 item.EMT.wing.thaumium.name=Thaumium Reinforced Wings
 item.EMT.wing.nano.name=Nanosuit Wings
 item.EMT.wing.quantum.name=Quantum Wings
+ic2.EMT.quantum=Infused Quantum Сhestplate
 
 item.EMT.hammer.broken.name=Broken Relic of Mjolnir
 item.EMT.hammer.name=Mjolnir
@@ -95,83 +96,11 @@ item.EMT.chainsaw.stream.name=Chainsaw of the Stream
 item.EMT.drill.rockbreaker.name=Drill of the Rockbreaker
 item.EMT.hoeofgrowth.electric.name=Electric Hoe of Growth
 
-item.EMT.module.base.focus.explosion.name=Wand Focus: Explosion
-item.EMT.module.base.focus.christmas.name=Wand Focus: Kris-tmas
-item.EMT.module.base.focus.shield.name=Wand Focus: Shield
-item.EMT.module.ic2.focus.charge.name=Wand Focus: Charging
-item.EMT.module.ic2.focus.charge.wand.name=Wand Focus: Wand Charging
-
-item.EMT.drill.wood.name=Wooden Drill
-item.EMT.drill.stone.name=Stone Drill
-item.EMT.drill.iron.name=Iron Drill
-item.EMT.drill.gold.name=Golden Drill
-item.EMT.drill.diamond.name=Diamond Drill
-item.EMT.drill.copper.name=Copper Drill
-item.EMT.drill.tin.name=Tin Drill
-item.EMT.drill.lead.name=Lead Drill
-item.EMT.drill.bronze.name=Bronze Drill
-
-item.EMT.chainsaw.wood.name=Wooden Chainsaw
-item.EMT.chainsaw.stone.name=Stone Chainsaw
-item.EMT.chainsaw.iron.name=Iron Chainsaw
-item.EMT.chainsaw.gold.name=Golden Chainsaw
-item.EMT.chainsaw.diamond.name=Diamond Chainsaw
-item.EMT.chainsaw.copper.name=Copper Chainsaw
-item.EMT.chainsaw.tin.name=Tin Chainsaw
-item.EMT.chainsaw.lead.name=Lead Chainsaw
-item.EMT.chainsaw.bronze.name=Bronze Chainsaw
-
-item.EMT.omnitool.iron.name=Iron Omnitool
-item.EMT.omnitool.gold.name=Golden Omnitool
-item.EMT.omnitool.diamond.name=Diamond Omnitool
-item.EMT.omnitool.copper.name=Copper Omnitool
-item.EMT.omnitool.tin.name=Tin Omnitool
-item.EMT.omnitool.lead.name=Lead Omnitool
-item.EMT.omnitool.bronze.name=Bronze Omnitool
-
-item.EMT.module.base.components.drillTop.wood.name=Wooden Drill Top
-item.EMT.module.base.components.drillTop.stone.name=Stone Drill Top
-item.EMT.module.base.components.drillTop.iron.name=Iron Drill Top
-item.EMT.module.base.components.drillTop.gold.name=Golden Drill Top
-item.EMT.module.base.components.drillTop.diamond.name=Diamond Drill Top
-item.EMT.module.base.components.drillTop.tin.name=Tin Drill Top
-item.EMT.module.base.components.drillTop.copper.name=Copper Drill Top
-item.EMT.module.base.components.drillTop.lead.name=Lead Drill Top
-item.EMT.module.base.components.drillTop.bronze.name=Bronze Drill Top
-
-item.EMT.module.base.components.chainsawTop.wood.name=Wooden Chainsaw Top
-item.EMT.module.base.components.chainsawTop.stone.name=Stone Chainsaw Top
-item.EMT.module.base.components.chainsawTop.iron.name=Iron Chainsaw Top
-item.EMT.module.base.components.chainsawTop.gold.name=Golden Chainsaw Top
-item.EMT.module.base.components.chainsawTop.diamond.name=Diamond Chainsaw Top
-item.EMT.module.base.components.chainsawTop.tin.name=Tin Chainsaw Top
-item.EMT.module.base.components.chainsawTop.copper.name=Copper Chainsaw Top
-item.EMT.module.base.components.chainsawTop.lead.name=Lead Chainsaw Top
-item.EMT.module.base.components.chainsawTop.bronze.name=Bronze Chainsaw Top
-
-item.EMT.module.base.components.omnitoolTop.iron.name=Iron Omnitool Top
-item.EMT.module.base.components.omnitoolTop.gold.name=Golden Omnitool Top
-item.EMT.module.base.components.omnitoolTop.diamond.name=Diamond Omnitool Top
-item.EMT.module.base.components.omnitoolTop.copper.name=Copper Omnitool Top
-item.EMT.module.base.components.omnitoolTop.tin.name=Tin Omnitool Top
-item.EMT.module.base.components.omnitoolTop.lead.name=Lead Omnitool Top
-item.EMT.module.base.components.omnitoolTop.bronze.name=Bronze Omnitool Top
-
-item.EMT.module.base.components.shard.wood.name=Wooden Shard
-item.EMT.module.base.components.shard.stone.name=Stone Shard
-item.EMT.module.base.components.shard.iron.name=Iron Shard
-item.EMT.module.base.components.shard.gold.name=Golden Shard
-item.EMT.module.base.components.shard.obsidian.name=Obsidian Shard
-item.EMT.module.base.components.shard.copper.name=Copper Shard
-item.EMT.module.base.components.shard.tin.name=Tin Shard
-item.EMT.module.base.components.shard.lead.name=Lead Shard
-item.EMT.module.base.components.shard.bronze.name=Bronze Shard
-
-item.EMT.carver.wood.name=Wooden Shard Carver
-item.EMT.carver.stone.name=Stone Shard Carver
-item.EMT.carver.iron.name=Iron Shard Carver
-item.EMT.carver.obsidian.name=Obsidian Shard Carver
-item.EMT.carver.diamond.name=Diamond Shard Carver
+item.EMT.focus.explosion.name=Wand Focus: Explosion
+item.EMT.focus.christmas.name=Wand Focus: Kris-tmas
+item.EMT.focus.shield.name=Wand Focus: Shield
+item.EMT.focus.charge.name=Wand Focus: Charging
+item.EMT.focus.charge.wand.name=Wand Focus: Wand Charging
 
 #=============Block Names=============
 tile.EMT.shield.name=Shield Block
@@ -382,7 +311,7 @@ emt.rsname.Order Infused Solar Panels=Order Infused Solar Panels
 emt.text.Order Infused Solar Panels=Harnessing the power of Order, you have managed to triple the output of your Solar Panels at day!
 
 emt.rsname.Fire Infused Solar Panels=Fire Infused Solar Panels
-emt.text.Fire Infused Solar Panels=Fascinated by the Nether, you created a monster. These Solar Panels work like normal in the Overworld, but also produce more energy when they are located in the Nether! A monster I tell you..
+emt.text.Fire Infused Solar Panels=Fascinated by the Nether, you created a monster. These Solar Panels work like normal in the Overworld, but also produce more energy when they are located in the Nether! A monster I tell you...
 
 emt.rsname.Air Infused Solar Panels=Air Infused Solar Panels
 emt.text.Air Infused Solar Panels=Your adventurous mind and the natural amount of air existing at the top of the world make these Solar Panels yield more energy when located over Y = 160.
@@ -427,7 +356,7 @@ emt.rsname.Quantum Wings=Quantum Wings
 emt.text.Quantum Wings=After exploring all the possibilities of nanotechnologies, you decided to do the last jump. Quantum. You can thrust yourself many blocks high, have a very good protection, and your fall is slowed down a lot. However, the quantum unpredictability happened once again. Your fall will be completely stopped when spacebar and sneak are maintained. You don't know why, but it works. Included: fall damage reduction, 100%.
 
 emt.rsname.InfusedQuantumArmor=Infused Quantum Сhestplate.
-emt.text.InfusedQuantumArmor=RANDOMTEXT
+emt.text.InfusedQuantumArmor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + Ctrl.
 #=============Console Logging=============
 console.EMT.preInit.begin=Starting planning the world domination
 console.EMT.preInit.configRead=Creating/Reading the config file

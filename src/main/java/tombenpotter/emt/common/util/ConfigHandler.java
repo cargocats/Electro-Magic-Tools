@@ -13,7 +13,6 @@ public class ConfigHandler {
     public static String CATEGORY_RESEARCH = "Research";
     public static String CATEGORY_VALUES = "Numeric Values";
     public static String CATEGORY_OUTPUTS = "Essentia Generator Outputs";
-	public static String CATEGORY_MODULES = "Modules";
 
     public static int essentiaGeneratorsDelay;
     public static int etherealProcessorBaseSpeed;
@@ -105,9 +104,6 @@ public class ConfigHandler {
     public static boolean quantumWingsResearch;
     public static boolean aerGeneratorResearch;
 
-	public static boolean enableIC2Module;
-	public static boolean enableTEModule;
-
     public static void init(File file) {
         config = new Configuration(file);
         syncConfig();
@@ -119,7 +115,6 @@ public class ConfigHandler {
         config.addCustomCategoryComment(CATEGORY_RESEARCH, "The only way to disable some researches. " + "Be careful, if you disable some researches, " + "all researches linked to it will be removed too. " + "Really, don't touch that unless you know exactly what you are doing.");
         config.addCustomCategoryComment(CATEGORY_OUTPUTS, "Change outputs linked to different Essentias here");
 	    config.addCustomCategoryComment(CATEGORY_RANDOM, "Options that don't fit into the other categories.");
-	    config.addCustomCategoryComment(CATEGORY_MODULES, "Currently does nothing. Here for dev purposes.");
 
         capesOn = config.get(CATEGORY_RANDOM, "Enable capes", true, "This config option is to enable or disable capes for people who have them. " + "Seriously, you shouldn't touch that unless you have another cape and " + "it conflicts with it.").getBoolean(capesOn);
         toolsInBore = config.get(CATEGORY_RANDOM, "Tools for Arcane Bore", false, "This will augment the durablilty of the tools, and will also decrease the EU cost to 1. " + "The tools should have the same number of uses than before.").getBoolean(toolsInBore);
@@ -204,9 +199,6 @@ public class ConfigHandler {
         nanoWingResearch = config.get(CATEGORY_RESEARCH, "Nanosuit Wings", false).getBoolean(nanoWingResearch);
         quantumWingsResearch = config.get(CATEGORY_RESEARCH, "Quantum Wings", false).getBoolean(quantumWingsResearch);
         aerGeneratorResearch = config.get(CATEGORY_RESEARCH, "Aer Generator", false).getBoolean(aerGeneratorResearch);
-
-	    enableIC2Module = config.get(CATEGORY_MODULES, "IC2 Module", true).getBoolean(enableIC2Module);
-	    enableTEModule = config.get(CATEGORY_MODULES, "TE Module", true).getBoolean(enableTEModule);
 
         if (config.hasChanged()) {
             config.save();

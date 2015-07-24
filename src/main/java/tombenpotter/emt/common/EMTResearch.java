@@ -10,7 +10,7 @@
  * http://www.minecraftforum.net/topic/1585216-
  ******************************************************************************/
 
-package tombenpotter.emt;
+package tombenpotter.emt.common;
 
 import ic2.api.item.IC2Items;
 import net.minecraft.item.ItemStack;

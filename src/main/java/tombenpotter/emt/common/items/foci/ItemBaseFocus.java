@@ -29,7 +29,7 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 	public ItemBaseFocus(String unlocName, String textureName) {
 		super();
 
-		setUnlocalizedName(ModInformation.modid + ".module." + unlocName);
+		setUnlocalizedName(ModInformation.modid + unlocName);
 		setCreativeTab(ElectroMagicTools.tabEMT);
 		setMaxDamage(1);
 		setNoRepair();

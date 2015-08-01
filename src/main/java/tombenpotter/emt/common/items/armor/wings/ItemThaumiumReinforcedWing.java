@@ -57,39 +57,6 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-    	this.updateWings(player, stack, world, 0.15f, 0.8f, 0.5f);
-    	
-    	
-    	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
-    	
-    	nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
-    	
-        if (world.isRemote) {
-            if(nbtData.getBoolean("isJumping")){
-            	nbtData.setBoolean("isHolding", true);
-            	f += 1;
-            	if(f > 7) f = 7;
-            }
-            else if(nbtData.getBoolean("isJumping")){
-            	nbtData.setBoolean("isHolding", false);
-            	player.motionY = 0.15 * f;
-            	player.motionX /= 0.8;
-            	player.motionZ /= 0.8;
-            	f = 0;
-            }
-
-            if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0 && !player.capabilities.isCreativeMode)
-                player.motionY *= 0.5;
-
-            if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
-
-            if(ConfigHandler.impactOfRain){
-            	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-            		player.motionY = -0.3;
-            }
-
-            if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
-        }
-        if (player.fallDistance > 0.0F) player.fallDistance = 0;
+    	this.updateWings(player, stack, world, 0.15f, 0.7f, 0.5f);
     }
 }

@@ -40,17 +40,17 @@ public class BlockEMTSolars2 extends BlockBaseContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister ri) {
-        this.top[0] = ri.registerIcon(ModInformation.texturePath + ":solars/air/doublesolartop");
-        this.top[1] = ri.registerIcon(ModInformation.texturePath + ":solars/air/triplesolartop");
-        this.top[2] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/solartop");
-        this.top[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/doublesolartop");
-        this.top[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/triplesolartop");
+        this.top[0] = ri.registerIcon(ModInformation.texturePath + ":solars/solartop");
+        this.top[1] = ri.registerIcon(ModInformation.texturePath + ":solars/solartop");
+        this.top[2] = ri.registerIcon(ModInformation.texturePath + ":solars/solartop");
+        this.top[3] = ri.registerIcon(ModInformation.texturePath + ":solars/doublesolartop");
+        this.top[4] = ri.registerIcon(ModInformation.texturePath + ":solars/triplesolartop");
 
-        this.bottom[0] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airbottom");
-        this.bottom[1] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airbottom");
-        this.bottom[2] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthbottom");
-        this.bottom[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthbottom");
-        this.bottom[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthbottom");
+        this.bottom[0] = ri.registerIcon(ModInformation.texturePath + ":solars/bottom");
+        this.bottom[1] = ri.registerIcon(ModInformation.texturePath + ":solars/bottom");
+        this.bottom[2] = ri.registerIcon(ModInformation.texturePath + ":solars/bottom");
+        this.bottom[3] = ri.registerIcon(ModInformation.texturePath + ":solars/bottom");
+        this.bottom[4] = ri.registerIcon(ModInformation.texturePath + ":solars/bottom");
 
         this.frontOff[0] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
         this.frontOff[1] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
@@ -58,11 +58,11 @@ public class BlockEMTSolars2 extends BlockBaseContainer {
         this.frontOff[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
         this.frontOff[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
 
-        this.side[0] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
-        this.side[1] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
-        this.side[2] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
-        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
-        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
+        this.side[0] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[1] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[2] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
     }
 
     @SideOnly(Side.CLIENT)

@@ -22,7 +22,7 @@ public class BlockRegistry {
     public static Block emtSolars;
     public static Block emtMachines;
     public static Block emtSolars2;
-    public static Block essentiaGenerator;
+    //public static Block essentiaGenerator;
 
 
     public static void registerBlocks() {
@@ -44,7 +44,7 @@ public class BlockRegistry {
         essentiaGens = new BlockEssentiaGenerators().setBlockName(ModInformation.modid + ".essentiaGens");
         GameRegistry.registerBlock(essentiaGens, ItemBlockEssentiaGenerators.class, "EssentiaGenerators");
 
-        essentiaGenerator = new BlockEssentiaGenerator().setBlockName(ModInformation.modid + ".essentiaGenerator");
-        GameRegistry.registerBlock(essentiaGenerator, ItemBlockEssentiaGenerator.class, "Essentia Generator");
+        //essentiaGenerator = new BlockEssentiaGenerator().setBlockName(ModInformation.modid + ".essentiaGenerator");
+        //GameRegistry.registerBlock(essentiaGenerator, ItemBlockEssentiaGenerator.class, "Essentia Generator");
     }
 }

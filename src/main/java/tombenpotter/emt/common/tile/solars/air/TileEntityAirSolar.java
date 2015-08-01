@@ -12,6 +12,7 @@
 
 package tombenpotter.emt.common.tile.solars.air;
 
+import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import tombenpotter.emt.common.blocks.BlockRegistry;

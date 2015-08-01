@@ -77,6 +77,7 @@ item.EMT.wing.feather.name=Склеенные крылья из картона
 item.EMT.wing.thaumium.name=Укреплённые таум-крылья
 item.EMT.wing.nano.name=Нано-крылья
 item.EMT.wing.quantum.name=Квантовые крылья
+ic2.EMT.quantum=Наполненный квантовый нагрудник
 
 item.EMT.hammer.broken.name=Сломанная реликвия Мьёлнира
 item.EMT.hammer.name=Мьёлнир
@@ -95,83 +96,11 @@ item.EMT.chainsaw.stream.name=Электропила Потока
 item.EMT.drill.rockbreaker.name=Бур Камнелома
 item.EMT.hoeofgrowth.electric.name=Электрическая мотыга Роста
 
-item.EMT.module.base.focus.explosion.name=Набалдашник: Взрыв
-item.EMT.module.base.focus.christmas.name=Набалдашник: Рождество
-item.EMT.module.base.focus.shield.name=Набалдашник: Щит
-item.EMT.module.ic2.focus.charge.name=Набалдашник: Зарядка
-item.EMT.module.ic2.focus.charge.wand.name=Набалдашник: Зарядка жезла
-
-item.EMT.drill.wood.name
-item.EMT.drill.stone.name
-item.EMT.drill.iron.name
-item.EMT.drill.gold.name
-item.EMT.drill.diamond.name
-item.EMT.drill.copper.name
-item.EMT.drill.tin.name
-item.EMT.drill.lead.name
-item.EMT.drill.bronze.name
-
-item.EMT.chainsaw.wood.name
-item.EMT.chainsaw.stone.name
-item.EMT.chainsaw.iron.name
-item.EMT.chainsaw.gold.name
-item.EMT.chainsaw.diamond.name
-item.EMT.chainsaw.copper.name
-item.EMT.chainsaw.tin.name
-item.EMT.chainsaw.lead.name
-item.EMT.chainsaw.bronze.name
-
-item.EMT.omnitool.iron.name
-item.EMT.omnitool.gold.name
-item.EMT.omnitool.diamond.name
-item.EMT.omnitool.copper.name
-item.EMT.omnitool.tin.name
-item.EMT.omnitool.lead.name
-item.EMT.omnitool.bronze.name
-
-item.EMT.module.base.components.drillTop.wood.name=Wooden Drill Top
-item.EMT.module.base.components.drillTop.stone.name=Stone Drill Top
-item.EMT.module.base.components.drillTop.iron.name=Iron Drill Top
-item.EMT.module.base.components.drillTop.gold.name=Golden Drill Top
-item.EMT.module.base.components.drillTop.diamond.name=Diamond Drill Top
-item.EMT.module.base.components.drillTop.tin.name=Tin Drill Top
-item.EMT.module.base.components.drillTop.copper.name=Copper Drill Top
-item.EMT.module.base.components.drillTop.lead.name=Lead Drill Top
-item.EMT.module.base.components.drillTop.bronze.name=Bronze Drill Top
-
-item.EMT.module.base.components.chainsawTop.wood.name=Wooden Chainsaw Top
-item.EMT.module.base.components.chainsawTop.stone.name=Stone Chainsaw Top
-item.EMT.module.base.components.chainsawTop.iron.name=Iron Chainsaw Top
-item.EMT.module.base.components.chainsawTop.gold.name=Golden Chainsaw Top
-item.EMT.module.base.components.chainsawTop.diamond.name=Diamond Chainsaw Top
-item.EMT.module.base.components.chainsawTop.tin.name=Tin Chainsaw Top
-item.EMT.module.base.components.chainsawTop.copper.name=Copper Chainsaw Top
-item.EMT.module.base.components.chainsawTop.lead.name=Lead Chainsaw Top
-item.EMT.module.base.components.chainsawTop.bronze.name=Bronze Chainsaw Top
-
-item.EMT.module.base.components.omnitoolTop.iron.name=Iron Omnitool Top
-item.EMT.module.base.components.omnitoolTop.gold.name=Golden Omnitool Top
-item.EMT.module.base.components.omnitoolTop.diamond.name=Diamond Omnitool Top
-item.EMT.module.base.components.omnitoolTop.copper.name=Copper Omnitool Top
-item.EMT.module.base.components.omnitoolTop.tin.name=Tin Omnitool Top
-item.EMT.module.base.components.omnitoolTop.lead.name=Lead Omnitool Top
-item.EMT.module.base.components.omnitoolTop.bronze.name=Bronze Omnitool Top
-
-item.EMT.module.base.components.shard.wood.name
-item.EMT.module.base.components.shard.stone.name
-item.EMT.module.base.components.shard.iron.name
-item.EMT.module.base.components.shard.gold.name
-item.EMT.module.base.components.shard.obsidian.name
-item.EMT.module.base.components.shard.copper.name
-item.EMT.module.base.components.shard.tin.name
-item.EMT.module.base.components.shard.lead.name
-item.EMT.module.base.components.shard.bronze.name
-
-item.EMT.carver.wood.name=Деревянный резчик по осколкам
-item.EMT.carver.stone.name=Каменный резчик по осколкам
-item.EMT.carver.iron.name=Железный резчик по осколкам
-item.EMT.carver.obsidian.name=Обсидиановый резчик по осколкам
-item.EMT.carver.diamond.name=Алмазный резчик по осколкам
+item.EMT.focus.explosion.name=Набалдашник: Взрыв
+item.EMT.focus.christmas.name=Набалдашник: Рождество
+item.EMT.focus.shield.name=Набалдашник: Щит
+item.EMT.focus.charge.name=Набалдашник: Зарядка
+item.EMT.focus.charge.wand.name=Набалдашник: Зарядка жезла
 
 #=============Block Names=============
 tile.EMT.shield.name=Щит-блок
@@ -420,8 +349,12 @@ emt.tag.Nanosuit Wings=Нанотехнологии в помощь!
 emt.text.Nanosuit Wings=Объединение магии таум-металла с нанотехнологиями в Ваших крыльях.. кажется логичным. Вы можете взлететь намного выше, чем когда-либо, и падать намного медленнее, если пробел зажат. Также включает: уменьшение урона от падения на 75%.
 
 emt.rsname.Quantum Wings=Квантовые крылья
-emt.tag.Quantum Wings=Последний шаг...
-emt.text.Quantum Wings=После исследования всех возможностей нанотехнологий, Вы решили сделать последний прыжок. Квантовый. Вы можете взмыть на много блоков вверх, имея очень хорошую защиту и Ваше падение будет замедленно. Однако квантовая непредсказуемость случается. Ваше падение будет полностью остановлено, когда кнопки пробел и приседания зажаты. Вы не знаете, почему, но это работает. Также включает: уменьшение урона от падения на 100%.
+emt.tag.Quantum Wings=А вот и квантовые технологии!
+emt.text.Quantum Wings=После исследования всех возможностей нанотехнологий, Вы решили сделать последний прыжок. Квантовый. Вы можете взмыть на много блоков вверх, имея очень хорошую защиту и Ваше падение будет замедленно. Однако квантовая непредсказуемость случается. Ваше падение будет полностью остановлено, когда кнопки пробел и приседания зажаты. Вы не знаете почему, но это работает. Также включает: уменьшение урона от падения на 100%.
+
+emt.rsname.InfusedQuantumArmor=Наполненный квантовый нагрудник.
+emt.tag.InfusedQuantumArmor=Последний шаг...
+emt.text.InfusedQuantumArmor=Вам было нечего делать, и Вы решили заняться хоть чем-то полезным. Вам в голову пришла идея создания брони, на которую можно нацепить крылья или ранец, чтобы быть защищёнными в полёте. Возмите в руку крылья или ранец, и присядьте чтобы надеть их на броню. Чтобы снять их, зажмите Shift + LCtrl.
 
 #=============Console Logging=============
 console.EMT.preInit.begin=Начало планирования над мировым господством

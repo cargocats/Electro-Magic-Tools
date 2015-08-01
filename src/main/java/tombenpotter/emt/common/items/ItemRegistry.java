@@ -79,8 +79,6 @@ public class ItemRegistry {
     public static ItemArmor.ArmorMaterial featherWingMaterial = EnumHelper.addArmorMaterial("FEATEHRWiNG", 1, new int[]{2, 2, 2, 2}, 6);
 
     public static void registerItems() {
-    	quantumArmor = new ItemEMTQuantum(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.modid + "quantum");
-    	
         itemEMTItems = new ItemMaterials().setUnlocalizedName(ModInformation.modid + ".emtitems");
         GameRegistry.registerItem(itemEMTItems, "EMTItems");
         
@@ -90,6 +88,8 @@ public class ItemRegistry {
         onering = new ItemOneRing();
         GameRegistry.registerItem(onering, "BaseBaubles");
   
+        quantumArmor = new ItemEMTQuantum(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.modid + ".quantum");
+        
         electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.electric");
         GameRegistry.registerItem(electricGoggles, "ElectricGogglesRevealing");
         

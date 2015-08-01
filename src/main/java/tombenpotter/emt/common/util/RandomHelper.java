@@ -1,5 +1,7 @@
 package tombenpotter.emt.common.util;
 
+import ic2.api.item.ElectricItem;
+import tombenpotter.emt.common.items.ItemRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,5 +45,9 @@ public class RandomHelper {
         return false;
     }
     
-    
+    public static ItemStack getChargedItem(Item item, int charge){
+    	ItemStack stack = new ItemStack(item);
+		ElectricItem.manager.charge(stack, charge, charge, true, false);
+		return stack;
+    }
 }

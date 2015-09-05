@@ -19,6 +19,7 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
+import tombenpotter.emt.client.EMTKeys;
 import tombenpotter.emt.common.RecipeRegistry;
 import tombenpotter.emt.common.blocks.BlockRegistry;
 import tombenpotter.emt.common.items.ItemRegistry;

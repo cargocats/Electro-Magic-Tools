@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
@@ -67,10 +68,9 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	IIcon icon2;
 	IIcon icon3;
 	IIcon icon4;
-	public int f = 0;
-    boolean isHolding = false;
+	Random rnd;
+	
 	protected static final Map<Integer, Integer> potionRemovalCost = new HashMap();
-	private float jumpCharge;
 	public static AudioSource audioSource;
 	private static boolean lastJetpackUsed = false;
 	
@@ -84,6 +84,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		potionRemovalCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));
 		potionRemovalCost.put(Integer.valueOf(IC2Potion.radiation.id), Integer.valueOf(10000));
 		potionRemovalCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(25000));
+		rnd = new Random();
 		
 	}
 
@@ -218,7 +219,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 			}
 		}
 		
-		if(player.inventory.getCurrentItem() == null && IC2.keyboard.isBoostKeyDown(player) && IC2.keyboard.isSneakKeyDown(player) && toggleTimer == 0 && IC2.platform.isSimulating()){
+		if(player.inventory.getCurrentItem() == null && nbtData.getBoolean("unequip") && player.isSneaking() && toggleTimer == 0 && IC2.platform.isSimulating()){
 			toggleTimer = 30;
 			if(player.inventory.armorInventory[2] == itemStack){
 				if(player.inventory.getCurrentItem() == null){
@@ -261,6 +262,8 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 							ElectricItem.manager.charge(charged, 1, 1, true, false);
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
+					
+					nbtData.setBoolean("unequip", false);
 				}
 			}
 		}
@@ -343,12 +346,28 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		return icon0;
 	}
     
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIconFromDamage(int par1)
-    {
-      return icon0;
-    }
+	@Override
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
+		try{
+			if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+				return icon1;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("TW")){
+				return icon2;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("NW")){
+				return icon3;
+			}
+			if((stack.stackTagCompound.getString("useother")).equals("QW")){
+				return icon4;
+			}
+		}
+		catch(Exception e){
+			return icon0;
+		}
+		
+		return icon0;
+	}
 	
 	@Override
 	public int getItemEnchantability() {
@@ -394,16 +413,18 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(String.valueOf((int)ElectricItem.manager.getCharge(stack)) + "EU");
-    	if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
-			list.add((stack.stackTagCompound.getInteger("jetpackCharge")) + " EU JETPACK");
-		}
-		if((stack.stackTagCompound.getString("useother")).equals("NW")){
-			list.add((stack.stackTagCompound.getInteger("NWCharge")) + " EU NW");
-		}
-		if((stack.stackTagCompound.getString("useother")).equals("QW")){
-			list.add((stack.stackTagCompound.getInteger("QWCharge")) + " EU QW");
-		}
+    	try{
+    		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+    			list.add((stack.stackTagCompound.getInteger("jetpackCharge")) + " EU JETPACK");
+    		}
+    		if((stack.stackTagCompound.getString("useother")).equals("NW")){
+    			list.add((stack.stackTagCompound.getInteger("NWCharge")) + " EU NW");
+    		}
+    		if((stack.stackTagCompound.getString("useother")).equals("QW")){
+    			list.add((stack.stackTagCompound.getInteger("QWCharge")) + " EU QW");
+    		}
+    	}
+    	catch(NullPointerException e){}
     }
 
 	public boolean useJetpack(EntityPlayer player, boolean hoverMode, ItemStack stack) {
@@ -480,9 +501,14 @@ public class ItemEMTQuantum extends ItemArmorElectric {
         	else if(nbtData.getBoolean("isHolding")){
             	nbtData.setBoolean("isHolding", false);	
             	player.motionY = motionY * nbtData.getInteger("f");
-            	player.motionX /= motionXZ;
-            	player.motionZ /= motionXZ;
-            	world.playSoundEffect(player.posX + 0.5D, player.posY + 0.5D, player.posZ + 0.5D, "mob.ghast.fireball", 1.0F, 0.7F + 0.3F);
+            	if(player.motionX < 0.7 && player.motionZ < 0.7){
+            		player.motionX /= motionXZ;
+            		player.motionZ /= motionXZ;
+            	}
+            	world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
+            	for(int i = 0; i < 4; i++){
+            		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
+            	}
             	nbtData.setInteger("f", 0);
         	}
 

@@ -58,11 +58,11 @@ public class BlockEMTSolars2 extends BlockBaseContainer {
         this.frontOff[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
         this.frontOff[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
 
-        this.side[0] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[1] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[2] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[0] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
+        this.side[1] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
+        this.side[2] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
+        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
+        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/earth/earthside");
     }
 
     @SideOnly(Side.CLIENT)

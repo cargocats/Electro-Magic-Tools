@@ -15,6 +15,8 @@ package tombenpotter.emt.common.util;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +25,11 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import thaumcraft.common.entities.monster.EntityTaintChicken;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
+import tombenpotter.emt.client.EMTKeys;
 import tombenpotter.emt.common.items.ItemRegistry;
 import tombenpotter.emt.common.items.ItemShardCarver;
+import tombenpotter.emt.common.network.PacketEMTKeys;
+import tombenpotter.emt.proxies.ClientProxy;
 
 public class EventHandlerEMT {
 
@@ -51,8 +56,8 @@ public class EventHandlerEMT {
     }
 
     @SubscribeEvent
-    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
-        if (eventArgs.modID.equals(ModInformation.modid)) {
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.modID.equals(ModInformation.modid)) {
             ConfigHandler.syncConfig();
             ElectroMagicTools.logger.info(TextHelper.localize("console.EMT.config.refresh"));
         }
@@ -66,5 +71,12 @@ public class EventHandlerEMT {
                 event.craftMatrix.getStackInSlot(i).damageItem(1, event.player);
             }
         }
+    }
+    
+    @SubscribeEvent
+    public void clientTick(ClientTickEvent e) {
+    	if(EMTKeys.getKey("UnEquip").getIsKeyPressed()){
+    		ElectroMagicTools.INSTANCE.sendToServer(new PacketEMTKeys());
+    	}
     }
 }

@@ -22,21 +22,26 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import tombenpotter.emt.common.commands.CommandOutputs;
 import tombenpotter.emt.common.Registry;
 import tombenpotter.emt.common.entities.BaseEntityRegistry;
+import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.common.util.*;
 import tombenpotter.emt.proxies.CommonProxy;
-
 import static tombenpotter.emt.common.util.TextHelper.localize;
 
 @Mod(modid = ModInformation.modid, name = ModInformation.name, version = ModInformation.version, guiFactory = ModInformation.guiFactory, dependencies = ModInformation.depend)
 public class ElectroMagicTools {
 
+	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("EMT");
 
     @SidedProxy(clientSide = ModInformation.clientProxy, serverSide = ModInformation.commonProxy)
     public static CommonProxy proxy;
@@ -56,6 +61,7 @@ public class ElectroMagicTools {
 	    Registry.register();
         EssentiasOutputs.addPrimalOutputs();
         EssentiasOutputs.addOutputs();
+        registerPackets();
 
         ElectroMagicTools.logger.info(localize("console.EMT.preInit.end"));
     }
@@ -92,5 +98,9 @@ public class ElectroMagicTools {
     @EventHandler
     public void onFMLServerStart(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandOutputs());
+    }
+    
+    public void registerPackets(){
+    	INSTANCE.registerMessage(PacketEMTKeys.class, PacketEMTKeys.class, 0, Side.SERVER);
     }
 }

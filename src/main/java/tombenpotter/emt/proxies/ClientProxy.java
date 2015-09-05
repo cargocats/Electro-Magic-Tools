@@ -12,7 +12,12 @@
 
 package tombenpotter.emt.proxies;
 
+import org.lwjgl.input.Keyboard;
+
+import net.minecraft.client.settings.KeyBinding;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import tombenpotter.emt.client.EMTKeys;
 import tombenpotter.emt.client.renderer.RenderArcher;
 import tombenpotter.emt.client.renderer.RenderLaser;
 import tombenpotter.emt.common.entities.EntityArcher;
@@ -23,6 +28,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void load() {
         registerRenders();
+    	EMTKeys.registerKeys();
     }
 
     public void registerRenders() {

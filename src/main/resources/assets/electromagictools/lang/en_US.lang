@@ -77,7 +77,7 @@ item.EMT.wing.feather.name=Feather Duct-Taped Wings
 item.EMT.wing.thaumium.name=Thaumium Reinforced Wings
 item.EMT.wing.nano.name=Nanosuit Wings
 item.EMT.wing.quantum.name=Quantum Wings
-ic2.EMT.quantum=Infused Quantum Сhestplate
+ic2.EMT.quantum=Infused Quantum Chestplate
 
 item.EMT.hammer.broken.name=Broken Relic of Mjolnir
 item.EMT.hammer.name=Mjolnir
@@ -356,7 +356,7 @@ emt.rsname.Quantum Wings=Quantum Wings
 emt.text.Quantum Wings=After exploring all the possibilities of nanotechnologies, you decided to do the last jump. Quantum. You can thrust yourself many blocks high, have a very good protection, and your fall is slowed down a lot. However, the quantum unpredictability happened once again. Your fall will be completely stopped when spacebar and sneak are maintained. You don't know why, but it works. Included: fall damage reduction, 100%.
 
 emt.rsname.InfusedQuantumArmor=Infused Quantum Сhestplate.
-emt.text.InfusedQuantumArmor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + Ctrl.
+emt.text.InfusedQuantumArmor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + "Unequip"(see in options).
 #=============Console Logging=============
 console.EMT.preInit.begin=Starting planning the world domination
 console.EMT.preInit.configRead=Creating/Reading the config file

@@ -163,11 +163,17 @@ public class EntityLaser extends Entity implements IProjectile {
 		if (this.inGround) {
 			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 3, true);
+			this.worldObj.createExplosion(this, (int)this.posX, (int)this.posY, (int)this.posZ, 3, true);
 			this.setDead();
+			//for(int x = 0;  x < 6; x++){
+			//	for(int z = 0; z < 6; z++){
+			//		this.worldObj.setBlockToAir((int)this.posX + x, (int)this.posY, (int)this.posZ + z);
+			//	}
+			//}
+			//this.setDead();
 			if (j == this.inTile && k == this.inData) {
 				++this.ticksInGround;
-
+			
 				if (this.ticksInGround == 1200) {
 					this.setDead();
 				}
@@ -184,7 +190,7 @@ public class EntityLaser extends Entity implements IProjectile {
 			Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
-			vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			vec31 = Vec3.createVectorHelper(this.posX - 5, this.posY, this.posZ);
 			vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (movingobjectposition != null) {

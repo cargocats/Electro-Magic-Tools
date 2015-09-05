@@ -105,19 +105,19 @@ public class BlockEMTSolars extends BlockBaseContainer {
         this.side[0] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
         this.side[1] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
         this.side[2] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[5] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[6] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[7] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[8] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[9] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[10] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[11] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[12] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[13] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[14] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
-        this.side[15] = ri.registerIcon(ModInformation.texturePath + ":solars/side");
+        this.side[3] = ri.registerIcon(ModInformation.texturePath + ":solars/water/waterside");
+        this.side[4] = ri.registerIcon(ModInformation.texturePath + ":solars/water/waterside");
+        this.side[5] = ri.registerIcon(ModInformation.texturePath + ":solars/water/waterside");
+        this.side[6] = ri.registerIcon(ModInformation.texturePath + ":solars/dark/darkside");
+        this.side[7] = ri.registerIcon(ModInformation.texturePath + ":solars/dark/darkside");
+        this.side[8] = ri.registerIcon(ModInformation.texturePath + ":solars/dark/darkside");
+        this.side[9] = ri.registerIcon(ModInformation.texturePath + ":solars/order/orderside");
+        this.side[10] = ri.registerIcon(ModInformation.texturePath + ":solars/order/orderside");
+        this.side[11] = ri.registerIcon(ModInformation.texturePath + ":solars/order/orderside");
+        this.side[12] = ri.registerIcon(ModInformation.texturePath + ":solars/fire/fireside");
+        this.side[13] = ri.registerIcon(ModInformation.texturePath + ":solars/fire/fireside");
+        this.side[14] = ri.registerIcon(ModInformation.texturePath + ":solars/fire/fireside");
+        this.side[15] = ri.registerIcon(ModInformation.texturePath + ":solars/air/airside");
     }
 
     @SideOnly(Side.CLIENT)

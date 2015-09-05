@@ -1,5 +1,7 @@
 package tombenpotter.emt.common.items.armor.wings;
 
+import java.util.Random;
+
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +24,7 @@ import tombenpotter.emt.common.util.ConfigHandler;
 public class ItemFeatherWing extends ItemArmor {
 
     public int visDiscount = 0;
-    int f;
+    Random rnd;
 
     public ItemFeatherWing(ArmorMaterial material, int par3, int par4) {
         super(material, par3, par4);
@@ -30,6 +32,7 @@ public class ItemFeatherWing extends ItemArmor {
         this.setMaxDamage(120);
         this.setCreativeTab(ElectroMagicTools.tabEMT);
         this.isDamageable();
+        rnd = new Random();
     }
 
     @SideOnly(Side.CLIENT)
@@ -74,9 +77,14 @@ public class ItemFeatherWing extends ItemArmor {
             	nbtData.setBoolean("isHolding", false);
             		
             	player.motionY = motionY * nbtData.getInteger("f");
-            	player.motionX /= motionXZ;
-            	player.motionZ /= motionXZ;
-            	world.playSoundEffect(player.posX + 0.5D, player.posY + 0.5D, player.posZ + 0.5D, "mob.ghast.fireball", 1.0F, 0.7F + 0.3F);
+            	if(player.motionX < 0.7 && player.motionZ < 0.7){
+            		player.motionX /= motionXZ;
+            		player.motionZ /= motionXZ;
+            	}
+            	world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
+            	for(int i = 0; i < 4; i++){
+            		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
+            	}
             	nbtData.setInteger("f", 0);
             }
 

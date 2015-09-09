@@ -68,7 +68,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
         Block bi = world.getBlock(x, y, z);
-        if ((!player.isSneaking()) && (Utils.isWoodLog(world, x, y, z))) {
+        if ((!player.isSneaking()) && (Utils.isWoodLog(world, x, y, z)) && ElectricItem.manager.getCharge(itemstack) > cost) {
             if (!world.isRemote) {
                 if (BlockUtils.breakFurthestBlock(world, x, y, z, bi, player)) {
                     world.playSoundEffect(x, y, z, "thaumcraft:bubble", 0.15F, 1.0F);

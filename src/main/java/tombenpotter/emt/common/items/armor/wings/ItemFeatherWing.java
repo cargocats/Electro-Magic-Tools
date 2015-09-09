@@ -50,11 +50,14 @@ public class ItemFeatherWing extends ItemArmor {
     @Override
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, int armorSlot) {
-    	if(entity instanceof EntityPlayer){
-    		ModelWings mw = new ModelWings();
-    		mw.isJumping = stack.stackTagCompound.getBoolean("isJumping");
-    		return mw;
+    	try{
+    		if(entity instanceof EntityPlayer){
+    			ModelWings mw = new ModelWings();
+    			mw.isJumping = stack.stackTagCompound.getBoolean("isJumping");
+    			return mw;
+    		}
     	}
+    	catch(NullPointerException e){return new ModelWings();}
     	return new ModelWings();
     }
 
@@ -65,40 +68,42 @@ public class ItemFeatherWing extends ItemArmor {
     
     public void updateWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
+    	boolean isJmuping = nbtData.getBoolean("isJumping");
+    	boolean isHolding = nbtData.getBoolean("isHolding");
+    	int f = nbtData.getInteger("f");
     	
     	nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
     	
-    		if(nbtData.getBoolean("isJumping")){
-        		nbtData.setBoolean("isHolding", true);
-        		nbtData.setInteger("f", nbtData.getInteger("f") + 1);
-            	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
-        	}
-            else if(nbtData.getBoolean("isHolding")){
-            	nbtData.setBoolean("isHolding", false);
+    	if(isJmuping){
+        	nbtData.setBoolean("isHolding", true);
+        	nbtData.setInteger("f", f + 1);
+           	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
+       	}
+        else if(isHolding){
+           	nbtData.setBoolean("isHolding", false);
             		
-            	player.motionY = motionY * nbtData.getInteger("f");
-            	if(player.motionX < 0.7 && player.motionZ < 0.7){
-            		player.motionX /= motionXZ;
-            		player.motionZ /= motionXZ;
-            	}
-            	world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
-            	for(int i = 0; i < 4; i++){
-            		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
-            	}
-            	nbtData.setInteger("f", 0);
-            }
+           	player.motionY = motionY * f;
+           	if(player.motionX < 0.7 && player.motionZ < 0.7){
+           		player.motionX /= motionXZ;
+           		player.motionZ /= motionXZ;
+           	}
+           	world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
+           	for(int i = 0; i < 4; i++){
+           		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
+           	}
+           	nbtData.setInteger("f", 0);
+        }
 
-        	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0)
-            	player.motionY *= f1;
-
-        	if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
+    	if (isJmuping && !player.onGround && player.motionY < 0)
+           	player.motionY *= f1;
+    	if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
             
-        	if(ConfigHandler.impactOfRain){
-        		if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-            			player.motionY = -0.3;
-        	}
+        if(ConfigHandler.impactOfRain){
+        	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
+            	player.motionY = -0.3;
+        }
 
-        	if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
+        if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
         
         if (player.fallDistance > 0.0F) player.fallDistance = 0;
     }

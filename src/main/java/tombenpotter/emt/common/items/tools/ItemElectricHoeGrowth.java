@@ -39,7 +39,7 @@ import java.util.List;
 public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
 	public IIcon icon;
-    public int maxCharge = 1000000;
+    public int maxCharge = 10000;
     public int growthCost = 1000;
     public int tillCost = 100;
 
@@ -83,13 +83,13 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
     {
-    	if(ElectricItem.manager.getCharge(stack) > 10000){
+    	if(ElectricItem.manager.getCharge(stack) > 50){
+    		ElectricItem.manager.discharge(stack, 50, 2, true, false, false);
     		boolean did = false;
     		for (int x1 = -1; x1 <= 1; x1++) {
     			for (int z1 = -1; z1 <= 1; z1++) {
     				if (super.onItemUse(stack, player, world, x + x1, y, z + z1, par7, par8, par9, par10))
     				{
-    					ElectricItem.manager.discharge(stack, 250, 2, true, false, false);
     					Thaumcraft.proxy.blockSparkle(world, x + x1, y, z + z1, 8401408, 2);
     					if (!did) {
     						did = true;

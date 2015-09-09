@@ -143,7 +143,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		boolean jetpackUsed = false;
 		String useother = nbtData.getString("useother");
 		
-		if(!useother.equals("TW") && !useother.equals("NW") && !useother.equalsIgnoreCase("QW") && !useother.equals("Jetpack") && !useother.equals("None")){
+		if(!useother.equals("TW") && !useother.equals("NW") && !useother.equals("QW") && !useother.equals("Jetpack") && !useother.equals("None")){
 			nbtData.setString("useother", "None");
 		}
 		
@@ -164,7 +164,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("ic2.itemArmorJetpackElectric")) && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
+			if(IC2.keyboard.isSneakKeyDown(player) && (player.inventory.getCurrentItem().getUnlocalizedName().equals("ic2.itemArmorJetpackElectric")) && toggleTimer == 0 && useother.equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					player.inventory.armorInventory[2].stackTagCompound.setBoolean("jetpack", true);
@@ -179,7 +179,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing && toggleTimer == 0 && useother.equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
@@ -192,7 +192,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing && toggleTimer == 0 && useother.equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
@@ -206,7 +206,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		}
 		
 		if(player.inventory.getCurrentItem() != null){
-			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing && toggleTimer == 0 && nbtData.getString("useother").equals("None")){
+			if(IC2.keyboard.isSneakKeyDown(player) && player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing && toggleTimer == 0 && useother.equals("None")){
 				toggleTimer = 30;
 				if (IC2.platform.isSimulating()) {
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
@@ -223,7 +223,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 			toggleTimer = 30;
 			if(player.inventory.armorInventory[2] == itemStack){
 				if(player.inventory.getCurrentItem() == null){
-					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("Jetpack")){
+					if(useother.equals("Jetpack")){
 						IC2.platform.messagePlayer(player, "Jetpack disabled.", new Object[0]);
 						jetpack = false;
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
@@ -235,13 +235,13 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 		            	player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
 					
-					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("TW")){
+					if(useother.equals("TW")){
 						IC2.platform.messagePlayer(player, "Thaumium wings disabled.", new Object[0]);
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.thaumiumWing));
 					}
 					
-					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("NW")){
+					if(useother.equals("NW")){
 						IC2.platform.messagePlayer(player, "Nano wings disabled.", new Object[0]);
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
 						ItemStack charged = new ItemStack(ItemRegistry.nanoWing);
@@ -252,7 +252,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 					}
 					
-					if(player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("QW")){
+					if(useother.equals("QW")){
 						IC2.platform.messagePlayer(player, "Quantum wings disabled.", new Object[0]);
 						player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
 						ItemStack charged = new ItemStack(ItemRegistry.quantumWing);
@@ -268,19 +268,19 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 			}
 		}
 		
-		if ((jetpack) && ((IC2.keyboard.isJumpKeyDown(player)) && (player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("Jetpack")) || ((hoverMode) && (player.motionY < -0.029999999329447746D)))) {
+		if ((jetpack) && ((IC2.keyboard.isJumpKeyDown(player)) && (useother.equals("Jetpack")) || ((hoverMode) && (player.motionY < -0.029999999329447746D)))) {
 			jetpackUsed = useJetpack(player, hoverMode, itemStack);
 		}
 		
-		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("TW"))) {
+		if ((useother.equals("TW"))) {
 			useWings(player, itemStack, world, 0.15f, 0.7f, 0.5f, false);
 		}
 		
-		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("NW"))) {
+		if ((useother.equals("NW"))) {
 			useWings(player, itemStack, world, 0.25f, 0.6f, 0.3f, true);
 		}
 		
-		if ((player.inventory.armorInventory[2].stackTagCompound.getString("useother").equals("QW"))) {
+		if ((useother.equals("QW"))) {
 			useWings(player, itemStack, world,  0.33f, 0.5f, 0.2f, true);
 		}
 		
@@ -326,16 +326,17 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	@Override
 	public IIcon getIconIndex(ItemStack stack){
 		try{
-			if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+			String useother = stack.stackTagCompound.getString("useother");
+			if(useother.equals("Jetpack")){
 				return icon1;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("TW")){
+			if(useother.equals("TW")){
 				return icon2;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("NW")){
+			if(useother.equals("NW")){
 				return icon3;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("QW")){
+			if(useother.equals("QW")){
 				return icon4;
 			}
 		}
@@ -349,16 +350,17 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
 		try{
-			if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+			String useother = stack.stackTagCompound.getString("useother");
+			if(useother.equals("Jetpack")){
 				return icon1;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("TW")){
+			if(useother.equals("TW")){
 				return icon2;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("NW")){
+			if(useother.equals("NW")){
 				return icon3;
 			}
-			if((stack.stackTagCompound.getString("useother")).equals("QW")){
+			if(useother.equals("QW")){
 				return icon4;
 			}
 		}
@@ -381,16 +383,17 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	@Override
     @SideOnly(Side.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+		String useother = stack.stackTagCompound.getString("useother");
+		if(useother.equals("Jetpack")){
 			return ModInformation.texturePath + ":textures/models/quantum_jetpack.png";
 		}
-		if((stack.stackTagCompound.getString("useother")).equals("TW")){
+		if(useother.equals("TW")){
 			return ModInformation.texturePath + ":textures/models/quantum_wings_t.png";
 		}
-		if((stack.stackTagCompound.getString("useother")).equals("NW")){
+		if(useother.equals("NW")){
 			return ModInformation.texturePath + ":textures/models/quantum_wings_n.png";
 		}
-		if((stack.stackTagCompound.getString("useother")).equals("QW")){
+		if(useother.equals("QW")){
 			return ModInformation.texturePath + ":textures/models/quantum_wings_q.png";
 		}
 		return ModInformation.texturePath + ":textures/models/quantum.png";
@@ -398,29 +401,36 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	
     @Override
     @SideOnly(Side.CLIENT)
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack stack, int armorSlot) {
-		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
-			ModelCpecialArmor mbm = new ModelCpecialArmor(1, 1);
-			return mbm;
-		}
-		if((stack.stackTagCompound.getString("useother")).equals("TW") || (stack.stackTagCompound.getString("useother")).equals("NW") || (stack.stackTagCompound.getString("useother")).equals("QW")){
-			ModelCpecialArmor mbm = new ModelCpecialArmor(1, 2);
-			mbm.isJumping = stack.stackTagCompound.getBoolean("isJumping");
-			return mbm;
-		}
-		return super.getArmorModel(entityLiving, stack, armorSlot);
+    public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, int armorSlot) {
+    	try{
+    		if(entity instanceof EntityPlayer){
+    			String useother = stack.stackTagCompound.getString("useother");
+    			if(useother.equals("Jetpack")){
+    				ModelCpecialArmor mbm = new ModelCpecialArmor(1, 1);
+    				return mbm;
+    			}
+    			if(useother.equals("TW") || useother.equals("NW") || useother.equals("QW")){
+    				ModelCpecialArmor mbm = new ModelCpecialArmor(1, 2);
+    				mbm.isJumping = stack.stackTagCompound.getBoolean("isJumping");
+    				return mbm;
+    			}
+    		}
+    	}
+    	catch(NullPointerException e){new ModelCpecialArmor(1, 0);}
+		return new ModelCpecialArmor(1, 0);
     }
 	
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
     	try{
-    		if((stack.stackTagCompound.getString("useother")).equals("Jetpack")){
+    		String useother = stack.stackTagCompound.getString("useother");
+    		if(useother.equals("Jetpack")){
     			list.add((stack.stackTagCompound.getInteger("jetpackCharge")) + " EU JETPACK");
     		}
-    		if((stack.stackTagCompound.getString("useother")).equals("NW")){
+    		if(useother.equals("NW")){
     			list.add((stack.stackTagCompound.getInteger("NWCharge")) + " EU NW");
     		}
-    		if((stack.stackTagCompound.getString("useother")).equals("QW")){
+    		if(useother.equals("QW")){
     			list.add((stack.stackTagCompound.getInteger("QWCharge")) + " EU QW");
     		}
     	}

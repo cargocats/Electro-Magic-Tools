@@ -1,4 +1,4 @@
-![](/src\main\resources\logo.png?raw=true)
+![](/src/main/resources/logo.png?raw=true)
 
 #Electro-Magic Tools
 

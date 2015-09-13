@@ -60,7 +60,7 @@ public class RecipeRegistry {
         if (!Loader.isModLoaded("gregtech_addon")) {
             GameRegistry.addShapedRecipe(IC2Items.getItem("diamondDrill"), " Y ", "YXY", 'Y', new ItemStack(Items.diamond), 'X', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE));
         } else {
-            ElectroMagicTools.logger.info(GregTech Addon detected. Disabling the fix for the Diamond Drill recipe.);
+            ElectroMagicTools.logger.info("GregTech Addon detected. Disabling the fix for the Diamond Drill recipe.");
         }
 
         GameRegistry.addRecipe(IC2Items.getItem("nanoHelmet"), "XYX", "XZX", 'X', IC2Items.getItem("carbonPlate"), 'Y', new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Z', new ItemStack(IC2Items.getItem("nightvisionGoggles").getItem(), 1, OreDictionary.WILDCARD_VALUE));
@@ -335,7 +335,7 @@ public class RecipeRegistry {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
 					it.remove();
-					ElectroMagicTools.logger.info(Removing conflicting amber macerating recipe(s));
+					ElectroMagicTools.logger.info("Removing conflicting amber macerating recipe(s)");
 				}
 			}
 
@@ -343,7 +343,7 @@ public class RecipeRegistry {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
 					it.remove();
-					ElectroMagicTools.logger.info(Removing Conflicting cinnabar macerating recipe(s));
+					ElectroMagicTools.logger.info("Removing Conflicting cinnabar macerating recipe(s)");
 				}
 			}
 		}

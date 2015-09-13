@@ -59,7 +59,7 @@ public class EventHandlerEMT {
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.modID.equals(ModInformation.modid)) {
             ConfigHandler.syncConfig();
-            ElectroMagicTools.logger.info(Refreshing configuration file.);
+            ElectroMagicTools.logger.info("Refreshing configuration file.");
         }
     }
 

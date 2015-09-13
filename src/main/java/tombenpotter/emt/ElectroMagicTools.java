@@ -53,7 +53,7 @@ public class ElectroMagicTools {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        ElectroMagicTools.logger.info(Starting planning the world domination);
+        ElectroMagicTools.logger.info("Starting planning the world domination");
 
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new EventHandlerEMT());
@@ -62,36 +62,36 @@ public class ElectroMagicTools {
         EssentiasOutputs.addOutputs();
         registerPackets();
 
-        ElectroMagicTools.logger.info(Planning complete);
+        ElectroMagicTools.logger.info("Planning complete");
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
-        ElectroMagicTools.logger.info(Gathering allies);
+        ElectroMagicTools.logger.info("Gathering allies");
 
-        ElectroMagicTools.logger.info(Loading the proxies);
+        ElectroMagicTools.logger.info("Loading the proxies");
         proxy.load();
-        ElectroMagicTools.logger.info(Making mobs drop additional items);
+        ElectroMagicTools.logger.info("Making mobs drop additional items");
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        ElectroMagicTools.logger.info(Adding dungeon loot);
+        ElectroMagicTools.logger.info("Adding dungeon loot");
         DungeonChestGenerator.generateLoot();
 
-        ElectroMagicTools.logger.info(Registering entities);
+        ElectroMagicTools.logger.info("Registering entities");
         BaseEntityRegistry.registerEMTEntities();
-        ElectroMagicTools.logger.info(Registering the GUI Handler);
+        ElectroMagicTools.logger.info("Registering the GUI Handler");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
-        ElectroMagicTools.logger.info(Allies gathered.);
+        ElectroMagicTools.logger.info("Allies gathered.");
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        ElectroMagicTools.logger.info(Starting the world takeover);
+        ElectroMagicTools.logger.info("Starting the world takeover");
 
 	    Registry.registerLate();
         RegistryHandler.registerIc2PostRegistrys();
 
-        ElectroMagicTools.logger.info(World takeover complete. Enjoy!);
+        ElectroMagicTools.logger.info("World takeover complete. Enjoy!");
     }
 
     @EventHandler

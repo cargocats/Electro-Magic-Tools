@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
@@ -58,7 +59,7 @@ public class RecipeRegistry {
         taintedFeathers = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 13), " X ", "XYX", " X ", 'X', new ItemStack(ConfigItems.itemResource, 1, 12), 'Y', new ItemStack(Items.feather));
 
         if (!Loader.isModLoaded("gregtech_addon")) {
-            GameRegistry.addShapedRecipe(IC2Items.getItem("diamondDrill"), " Y ", "YXY", 'Y', new ItemStack(Items.diamond), 'X', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE));
+           GameRegistry.addRecipe(new ShapedOreRecipe(IC2Items.getItem("diamondDrill"), " Y ", "YXY", 'Y', "gemDiamond", 'X', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE)));
         } else {
             ElectroMagicTools.logger.info("GregTech Addon detected. Disabling the fix for the Diamond Drill recipe.");
         }

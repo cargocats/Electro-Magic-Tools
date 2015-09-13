@@ -163,14 +163,11 @@ public class EntityLaser extends Entity implements IProjectile {
 		if (this.inGround) {
 			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-			this.worldObj.createExplosion(this, (int)this.posX, (int)this.posY, (int)this.posZ, 3, true);
-			this.setDead();
-			//for(int x = 0;  x < 6; x++){
-			//	for(int z = 0; z < 6; z++){
-			//		this.worldObj.setBlockToAir((int)this.posX + x, (int)this.posY, (int)this.posZ + z);
-			//	}
-			//}
-			//this.setDead();
+			if(!this.worldObj.isRemote){
+				this.worldObj.createExplosion(this, (int)this.posX, (int)this.posY, (int)this.posZ, 3, true);
+				this.setDead();
+			}
+			
 			if (j == this.inTile && k == this.inData) {
 				++this.ticksInGround;
 			

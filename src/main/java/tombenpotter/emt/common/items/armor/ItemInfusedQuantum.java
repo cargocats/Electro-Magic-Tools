@@ -61,7 +61,7 @@ import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
-public class ItemEMTQuantum extends ItemArmorElectric {
+public class ItemInfusedQuantum extends ItemArmorElectric {
 	
 	IIcon icon0;
 	IIcon icon1;
@@ -74,7 +74,7 @@ public class ItemEMTQuantum extends ItemArmorElectric {
 	public static AudioSource audioSource;
 	private static boolean lastJetpackUsed = false;
 	
-	public ItemEMTQuantum(InternalName internalName, int armorType1) {
+	public ItemInfusedQuantum(InternalName internalName, int armorType1) {
 		super(internalName, InternalName.quantum, armorType1, 2000000, 12000.0D, 4);
 		
 		MinecraftForge.EVENT_BUS.register(this);

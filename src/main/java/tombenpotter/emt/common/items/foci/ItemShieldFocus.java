@@ -59,7 +59,7 @@ public class ItemShieldFocus extends ItemBaseFocus {
     public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         
-        if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+        if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
         	
             player.motionX = 0.0D;
             if(!player.capabilities.isCreativeMode && player.motionY < 0)

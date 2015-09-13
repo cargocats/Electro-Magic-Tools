@@ -58,7 +58,7 @@ public class ItemChristmasFocus extends ItemBaseFocus {
             int x = mop.blockX;
             int y = mop.blockY + 1;
             int z = mop.blockZ;
-            if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+            if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
                 if (!world.isRemote) {
                     EntitySnowman snowman;
                     snowman = new EntitySnowman(world);

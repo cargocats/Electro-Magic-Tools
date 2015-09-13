@@ -72,7 +72,7 @@ public class ElectroMagicTools {
         ElectroMagicTools.logger.info("Loading the proxies");
         proxy.load();
         ElectroMagicTools.logger.info("Making mobs drop additional items");
-        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandlerEMT());
         ElectroMagicTools.logger.info("Adding dungeon loot");
         DungeonChestGenerator.generateLoot();
 

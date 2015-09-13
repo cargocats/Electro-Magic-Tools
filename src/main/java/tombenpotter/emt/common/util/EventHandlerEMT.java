@@ -12,6 +12,8 @@
 
 package tombenpotter.emt.common.util;
 
+import java.util.Random;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -32,26 +34,18 @@ import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.proxies.ClientProxy;
 
 public class EventHandlerEMT {
+	Random rnd = new Random();
 
     @SubscribeEvent
     public void onEntityLivingDrops(LivingDropsEvent event) {
-        if (event.source.getEntity() != null && event.source.getEntity() instanceof EntityPlayer) {
-            if (event.entityLiving instanceof EntityCreeper) {
-                EntityCreeper creeper = (EntityCreeper) event.entityLiving;
-                if (creeper.getPowered()) {
-                    event.drops.add(new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(ItemRegistry.itemEMTItems, 1, 6)));
-                }
+    	if (event.entityLiving instanceof EntityCreeper) {
+            EntityCreeper creeper = (EntityCreeper) event.entityLiving;
+            if (creeper.getPowered()) {
+                event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, 1, 6), 1);
             }
-            if (event.entityLiving instanceof EntityTaintChicken) {
-                event.drops.add(new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(ItemRegistry.itemEMTItems, 1, 14)));
-            }
-        }
-
-        if (event.entityLiving instanceof EntityCreeper) {
-            event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, 6), 1);
         }
         if (event.entityLiving instanceof EntityTaintChicken) {
-            event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, 14), 1);
+            event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, rnd.nextInt(3), 13), 1);
         }
     }
 

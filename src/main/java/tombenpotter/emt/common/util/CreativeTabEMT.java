@@ -26,7 +26,7 @@ public class CreativeTabEMT extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(ItemRegistry.thorHammer);
+        return new ItemStack(ItemRegistry.rockbreakerDrill);
     }
 
     @Override

@@ -13,10 +13,8 @@ public class PacketEMTKeys implements IMessage, IMessageHandler<PacketEMTKeys, I
 	@Override
 	public IMessage onMessage(PacketEMTKeys message, MessageContext ctx) {
 		if(ctx.getServerHandler().playerEntity.inventory.armorInventory[2] != null && ctx.getServerHandler().playerEntity.inventory.armorInventory[2].getItem() == ItemRegistry.quantumArmor){
-			System.out.println("Odel.");
 			ctx.getServerHandler().playerEntity.inventory.armorInventory[2].stackTagCompound.setBoolean("unequip", true);
 		}
-		System.out.println("Prinyal.");
 		return null;
 	}
 

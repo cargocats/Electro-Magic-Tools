@@ -50,7 +50,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
     @Override
     public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+        if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             if (!world.isRemote) {
 
                 int energyLeft = ConfigHandler.chargeFocusProduction;

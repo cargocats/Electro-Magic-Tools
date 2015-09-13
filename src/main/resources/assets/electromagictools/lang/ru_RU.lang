@@ -355,29 +355,3 @@ emt.text.Quantum Wings=После исследования всех возмож
 emt.rsname.InfusedQuantumArmor=Наполненный квантовый нагрудник.
 emt.tag.InfusedQuantumArmor=Последний шаг...
 emt.text.InfusedQuantumArmor=Вам было нечего делать, и Вы решили заняться хоть чем-то полезным. Вам в голову пришла идея создания брони, на которую можно нацепить крылья или ранец, чтобы быть защищёнными в полёте. Возмите в руку крылья или ранец, и присядьте чтобы надеть их на броню. Чтобы снять их, зажмите Shift + "Снять"(Смотрите в настройках).
-
-#=============Console Logging=============
-console.EMT.preInit.begin=Начало планирования над мировым господством
-console.EMT.preInit.configRead=Создание/чтение файла конфигурации
-console.EMT.preInit.end=Планирование завершено
-
-console.EMT.init.begin=Сбор союзников
-console.EMT.init.loadProxies=Загрузка прокси
-console.EMT.init.mobDrops=Добавление предметов для мобов
-console.EMT.init.dungeon=Добавление сокровищ
-console.EMT.init.recipes=Добавление рецептов
-console.EMT.init.entities=Регистрация сущностей
-console.EMT.init.guiHandler=Регистрация обработчика интерфейса
-console.EMT.init.end=Союзники собраны.
-
-console.EMT.postInit.begin=Начало захвата мира
-console.EMT.postInit.recipes=Добавление рецептов
-console.EMT.postInit.recipes.uumatter=Добавление рецептов наполнения для материи
-console.EMT.postInit.end=Захват мира завершён. Наслаждайтесь!
-
-console.EMT.config.refresh=Обновление конфигурационного файла.
-
-console.EMT.recipes.amberConflict=Удаление конфликтующих рецептов дробления янтаря
-console.EMT.recipes.cinnabarConflict=Удаление конфликтующих рецептов дробления киновари
-
-console.EMT.modLoaded.GT=Обнаружен аддон GregTech. Отключение исправления для рецепта алмазного бура...

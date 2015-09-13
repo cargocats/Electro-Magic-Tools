@@ -357,28 +357,3 @@ emt.text.Quantum Wings=在探索完纳米科技所有的可能性后,你决定�
 
 emt.rsname.InfusedQuantumArmor=注魔量子胸甲
 emt.text.InfusedQuantumArmor=你已经无事可做,但是你决定做一些有用的东西.你的脑海中浮现出一个想法,在制作盔甲时可以把羽翼或者背包系在一起以保证飞行的安全.持有羽翼或者背包时在潜行状态下右击可以将它们系在盔甲上.要将它们拿下来时只需要按住Shift + Ctrl.
-#=============Console Logging=============
-console.EMT.preInit.begin=谋略如何统治世界
-console.EMT.preInit.configRead=创建/读取配置文件中
-console.EMT.preInit.end=谋略完成
-
-console.EMT.init.begin=召集盟军
-console.EMT.init.loadProxies=读取proxies信息
-console.EMT.init.mobDrops=添加新的怪物掉落物
-console.EMT.init.dungeon=增加地牢物品
-console.EMT.init.recipes=添加合成配方
-console.EMT.init.entities=注册新的实体
-console.EMT.init.guiHandler=注册新的GUI
-console.EMT.init.end=盟军已汇聚一堂
-
-console.EMT.postInit.begin=即将占领世界
-console.EMT.postInit.recipes=增加合成配方
-console.EMT.postInit.recipes.uumatter=添加UU注魔配方
-console.EMT.postInit.end=世界已被我们占领.敬请享受!
-
-console.EMT.config.refresh=正在刷新配置文件
-
-console.EMT.recipes.amberConflict=移除冲突的琥珀矿合成配方
-console.EMT.recipes.cinnabarConflict=移除冲突的朱砂矿合成配方
-
-console.EMT.modLoaded.GT=检测到格雷科技.已禁用钻石电钻的合成公式

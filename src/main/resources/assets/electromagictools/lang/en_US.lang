@@ -357,28 +357,3 @@ emt.text.Quantum Wings=After exploring all the possibilities of nanotechnologies
 
 emt.rsname.InfusedQuantumArmor=Infused Quantum Сhestplate.
 emt.text.InfusedQuantumArmor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + "Unequip"(see in options).
-#=============Console Logging=============
-console.EMT.preInit.begin=Starting planning the world domination
-console.EMT.preInit.configRead=Creating/Reading the config file
-console.EMT.preInit.end=Planning complete
-
-console.EMT.init.begin=Gathering allies
-console.EMT.init.loadProxies=Loading the proxies
-console.EMT.init.mobDrops=Making mobs drop additional items
-console.EMT.init.dungeon=Adding dungeon loot
-console.EMT.init.recipes=Adding the Init recipes
-console.EMT.init.entities=Registering entities
-console.EMT.init.guiHandler=Registering the GUI Handler
-console.EMT.init.end=Allies gathered.
-
-console.EMT.postInit.begin=Starting the world takeover
-console.EMT.postInit.recipes=Adding PostInit recipes
-console.EMT.postInit.recipes.uumatter=Adding the UU-Matter Infusion recipes
-console.EMT.postInit.end=World takeover complete. Enjoy!
-
-console.EMT.config.refresh=Refreshing configuration file.
-
-console.EMT.recipes.amberConflict=Removing conflicting amber macerating recipe(s)
-console.EMT.recipes.cinnabarConflict=Removing Conflicting cinnabar macerating recipe(s)
-
-console.EMT.modLoaded.GT=GregTech Addon detected. Disabling the fix for the Diamond Drill recipe.

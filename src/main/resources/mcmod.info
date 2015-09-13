@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["fewizz", "TheSilentium"],
   "credits": "Azanor, Tombenpotter, TehNut, the IC2 guys and the forge guys!",
-  "logoFile": "emt.png",
+  "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": ["Thaumcraft 4", "IC2"]
 }

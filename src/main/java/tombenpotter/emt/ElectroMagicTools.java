@@ -36,7 +36,6 @@ import tombenpotter.emt.common.entities.BaseEntityRegistry;
 import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.common.util.*;
 import tombenpotter.emt.proxies.CommonProxy;
-import static tombenpotter.emt.common.util.TextHelper.localize;
 
 @Mod(modid = ModInformation.modid, name = ModInformation.name, version = ModInformation.version, guiFactory = ModInformation.guiFactory, dependencies = ModInformation.depend)
 public class ElectroMagicTools {
@@ -54,7 +53,7 @@ public class ElectroMagicTools {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        ElectroMagicTools.logger.info(localize("console.EMT.preInit.begin"));
+        ElectroMagicTools.logger.info(Starting planning the world domination);
 
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new EventHandlerEMT());
@@ -63,36 +62,36 @@ public class ElectroMagicTools {
         EssentiasOutputs.addOutputs();
         registerPackets();
 
-        ElectroMagicTools.logger.info(localize("console.EMT.preInit.end"));
+        ElectroMagicTools.logger.info(Planning complete);
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
-        ElectroMagicTools.logger.info(localize("console.EMT.init.begin"));
+        ElectroMagicTools.logger.info(Gathering allies);
 
-        ElectroMagicTools.logger.info(localize("console.EMT.init.loadProxies"));
+        ElectroMagicTools.logger.info(Loading the proxies);
         proxy.load();
-        ElectroMagicTools.logger.info(localize("console.EMT.init.mobDrops"));
+        ElectroMagicTools.logger.info(Making mobs drop additional items);
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        ElectroMagicTools.logger.info(localize("console.EMT.init.dungeon"));
+        ElectroMagicTools.logger.info(Adding dungeon loot);
         DungeonChestGenerator.generateLoot();
 
-        ElectroMagicTools.logger.info(localize("console.EMT.init.entities"));
+        ElectroMagicTools.logger.info(Registering entities);
         BaseEntityRegistry.registerEMTEntities();
-        ElectroMagicTools.logger.info(localize("console.EMT.init.guiHandler"));
+        ElectroMagicTools.logger.info(Registering the GUI Handler);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
-        ElectroMagicTools.logger.info(localize("console.EMT.init.end"));
+        ElectroMagicTools.logger.info(Allies gathered.);
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        ElectroMagicTools.logger.info(localize("console.EMT.postInit.begin"));
+        ElectroMagicTools.logger.info(Starting the world takeover);
 
 	    Registry.registerLate();
         RegistryHandler.registerIc2PostRegistrys();
 
-        ElectroMagicTools.logger.info(localize("console.EMT.postInit.end"));
+        ElectroMagicTools.logger.info(World takeover complete. Enjoy!);
     }
 
     @EventHandler

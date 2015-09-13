@@ -9,6 +9,14 @@
 /asm/*
 /bin/*
 /libs/*
+/download/*
+/.settings/*
+/eclipse/*
+/debug/*
+/.metadata/*
+/config/*
+/logs/*
+/saves/*
 
 #File Extensions
 *.psd
@@ -17,7 +25,22 @@
 *.iws
 *.classpath
 *.project
+*.lock
 
 #Specific files
 MCFPost.txt
 Thumbs.db
+options.txt
+
+#Remove OS generated garbage
+*/.DS_Store
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+#Vim backups
+*~

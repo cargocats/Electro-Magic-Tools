@@ -34,6 +34,7 @@ import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.util.ConfigHandler;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 
@@ -116,7 +117,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
-            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase().contains("torch")) {
+            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
                 continue;
             }
             Item item = torchStack.getItem();

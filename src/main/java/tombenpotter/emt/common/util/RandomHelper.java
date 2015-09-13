@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import java.util.Locale;
+
 public class RandomHelper {
 
 	public static boolean isRKMPressed(World world){
@@ -27,7 +29,7 @@ public class RandomHelper {
     public static boolean placeTorch(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
-            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase().contains("torch")) continue;
+            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) continue;
             Item item = torchStack.getItem();
             if (!(item instanceof ItemBlock)) continue;
             int oldMeta = torchStack.getItemDamage();

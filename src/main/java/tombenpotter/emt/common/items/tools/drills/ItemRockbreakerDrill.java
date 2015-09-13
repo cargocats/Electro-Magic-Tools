@@ -45,6 +45,7 @@ import tombenpotter.emt.common.util.ConfigHandler;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
@@ -157,7 +158,7 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
         if (!player.isSneaking()) {
             for (int i = 0; i < player.inventory.mainInventory.length; i++) {
                 ItemStack torchStack = player.inventory.mainInventory[i];
-                if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase().contains("torch")) {
+                if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
                     continue;
                 }
                 Item item = torchStack.getItem();

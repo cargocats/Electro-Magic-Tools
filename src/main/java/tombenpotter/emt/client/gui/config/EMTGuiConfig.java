@@ -10,6 +10,7 @@ import tombenpotter.emt.ModInformation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static tombenpotter.emt.common.util.ConfigHandler.*;
 
@@ -23,10 +24,10 @@ public class EMTGuiConfig extends GuiConfig {
     private static List<IConfigElement> getConfigElements(GuiScreen parent) {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
 
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RANDOM.toLowerCase())));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_VALUES.toLowerCase())));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RESEARCH.toLowerCase())));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_OUTPUTS.toLowerCase())));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RANDOM.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_VALUES.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RESEARCH.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_OUTPUTS.toLowerCase(Locale.US))));
 
         return list;
     }

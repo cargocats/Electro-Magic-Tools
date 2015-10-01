@@ -34,7 +34,6 @@ public class ModelCpecialArmor extends ModelBiped
     public int heldItemRight;
     public boolean isSneak;
     public boolean aimedBow;
-    private static final String __OBFID = "CL_00000840";
 
     public ModelCpecialArmor()
     {

@@ -11,6 +11,7 @@ gui.EMT.wandRecharge.title=Промышленная станция зарядк�
 gui.EMT.inventory=Инвентарь
 gui.EMT.book.aspect.output.eu.title=Книга выхода эссенции
 gui.EMT.book.aspect.output.essentia.eu=Выход EU за эссенцию
+gui.EMT.key.unequip=Снять
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
@@ -57,45 +58,34 @@ item.EMT.emtitems.denseIronSheet.name=Плотный железный лист
 item.EMT.emtitems.taintedFeather.name=Заражённое перо
 item.EMT.emtitems.thaumiumWing.name=Укреплённое таум-крыло
 item.EMT.emtitems.uumatterDrop.name=Кристаллизированная капля материи
-
 item.EMT.emtbauble.euMaker.armor.name=Кольцо для зарядки брони
 item.EMT.emtbauble.euMaker.inventory.name=Кольцо для зарядки инвентаря
 item.EMT.item.bauble.oneRing.name=Кольцо Всевластия
-
 item.EMT.goggles.electric.name=Электрические очки откровения
 item.EMT.goggles.nano.name=Нано-очки откровения
 item.EMT.goggles.quantum.name=Квантовые очки откровения
 item.EMT.goggles.solar.name=Солнечные очки откровения
-
 item.EMT.boots.traveller.electric.name=Электрические ботинки путешественника
 item.EMT.boots.traveller.nano.name=Нано-ботинки путешественника
 item.EMT.boots.traveller.quantum.name=Квантовые ботинки путешественника
-
 item.EMT.scribingtools.electric.name=Электрическая чернильница с пером
-
 item.EMT.wing.feather.name=Склеенные крылья из картона
 item.EMT.wing.thaumium.name=Укреплённые таум-крылья
 item.EMT.wing.nano.name=Нано-крылья
 item.EMT.wing.quantum.name=Квантовые крылья
 ic2.EMT.quantum=Наполненный квантовый нагрудник
-
 item.EMT.hammer.broken.name=Сломанная реликвия Мьёлнира
 item.EMT.hammer.name=Мьёлнир
 item.EMT.hammer.electric.name=Сильнозаряженный Мьёлнир
-
 item.EMT.drill.thaumium.name=Таум-бур
-
 item.EMT.chainsaw.diamond.name=Алмазная электропила
 item.EMT.chainsaw.thaumium.name=Таум-электропила
-
 item.EMT.omnitool.iron.name=Железный мультиинструмент
 item.EMT.omnitool.diamond.name=Алмазный мультиинструмент
 item.EMT.omnitool.thaumium.name=Таум-мультиинструмент
-
 item.EMT.chainsaw.stream.name=Электропила Потока
 item.EMT.drill.rockbreaker.name=Бур Камнелома
 item.EMT.hoeofgrowth.electric.name=Электрическая мотыга Роста
-
 item.EMT.focus.explosion.name=Набалдашник: Взрыв
 item.EMT.focus.christmas.name=Набалдашник: Рождество
 item.EMT.focus.shield.name=Набалдашник: Щит

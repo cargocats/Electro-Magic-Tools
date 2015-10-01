@@ -1,24 +1,16 @@
-/*******************************************************************************
- * Copyright (c) 2014 Tombenpotter.
- * All rights reserved. 
- *
- * This program and the accompanying materials are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- *
- * This class was made by Tombenpotter and is distributed as a part of the Electro-Magic Tools mod.
- * Electro-Magic Tools is a derivative work on Thaumcraft 4 (c) Azanor 2012.
- * http://www.minecraftforum.net/topic/1585216-
- ******************************************************************************/
-
 package tombenpotter.emt.common.items.tools.chainsaws;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import ic2.core.IC2;
+import ic2.core.audio.AudioSource;
+import ic2.core.audio.PositionSpec;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -42,6 +34,8 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     public int cost = 200;
     public int hitCost = 300;
     public int tier = 2;
+    public static AudioSource audio;
+    int tick;
 
     public ItemDiamondChainsaw() {
         super(ToolMaterial.EMERALD);
@@ -129,6 +123,27 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
         }
 
         return super.onItemUse(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
+    }
+    
+    @Override
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+    {
+    	if(entity instanceof EntityLivingBase){
+    		if (IC2.platform.isRendering()) {
+    			if (flag) {
+    				if (audio == null) audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
+    				if (audio != null) {
+    					audio.updatePosition();	
+    					audio.play();
+    				}
+    			} else if (!flag && audio != null) {
+    				audio.stop();
+    				audio.remove();
+    				audio = null;
+    				IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
+    			}
+    		}
+    	}
     }
 
     @Override

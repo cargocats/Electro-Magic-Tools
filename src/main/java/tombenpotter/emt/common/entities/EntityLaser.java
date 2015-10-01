@@ -187,7 +187,7 @@ public class EntityLaser extends Entity implements IProjectile {
 			Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
-			vec31 = Vec3.createVectorHelper(this.posX - 5, this.posY, this.posZ);
+			vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (movingobjectposition != null) {
@@ -252,9 +252,9 @@ public class EntityLaser extends Entity implements IProjectile {
 					this.zTile = movingobjectposition.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-					this.motionX = (double) ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-					this.motionY = (double) ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-					this.motionZ = (double) ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
+					this.motionX = movingobjectposition.hitVec.xCoord - this.posX;
+					this.motionY = movingobjectposition.hitVec.yCoord - this.posY;
+					this.motionZ = movingobjectposition.hitVec.zCoord - this.posZ;
 					f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 					this.posX -= this.motionX / (double) f2 * 0.05000000074505806D;
 					this.posY -= this.motionY / (double) f2 * 0.05000000074505806D;

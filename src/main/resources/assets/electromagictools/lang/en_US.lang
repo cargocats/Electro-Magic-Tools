@@ -11,6 +11,7 @@ gui.EMT.wandRecharge.title=Industrial Wand Recharge Station
 gui.EMT.inventory=Inventory
 gui.EMT.book.aspect.output.eu.title=Essentia Outputs Book
 gui.EMT.book.aspect.output.essentia.eu=EU Output per Essentia
+gui.EMT.key.unequip=Unequip
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
@@ -57,45 +58,34 @@ item.EMT.emtitems.denseIronSheet.name=Dense Iron Sheet
 item.EMT.emtitems.taintedFeather.name=Tainted Feather
 item.EMT.emtitems.thaumiumWing.name=Thaumium Reinforced Wing
 item.EMT.emtitems.uumatterDrop.name=Crystallized UU-Matter Drop
-
 item.EMT.emtbauble.euMaker.armor.name=Armor Charging Ring
 item.EMT.emtbauble.euMaker.inventory.name=Inventory Charging Ring
 item.EMT.item.bauble.oneRing.name=The One Ring
-
 item.EMT.goggles.electric.name=Electric Goggles of Revealing
 item.EMT.goggles.nano.name=Nanosuit Goggles of Revealing
 item.EMT.goggles.quantum.name=Quantum Goggles of Revealing
 item.EMT.goggles.solar.name=Solar Goggles of Revealing
-
 item.EMT.boots.traveller.electric.name=Electric Boots of the Traveller
 item.EMT.boots.traveller.nano.name=Nanosuit Boots of the Traveller
 item.EMT.boots.traveller.quantum.name=Quantum Boots of the Traveller
-
 item.EMT.scribingtools.electric.name=Electric Scribing Tools
-
 item.EMT.wing.feather.name=Feather Duct-Taped Wings
 item.EMT.wing.thaumium.name=Thaumium Reinforced Wings
 item.EMT.wing.nano.name=Nanosuit Wings
 item.EMT.wing.quantum.name=Quantum Wings
 ic2.EMT.quantum=Infused Quantum Chestplate
-
 item.EMT.hammer.broken.name=Broken Relic of Mjolnir
 item.EMT.hammer.name=Mjolnir
 item.EMT.hammer.electric.name=Supercharged Mjolnir
-
 item.EMT.drill.thaumium.name=Thaumium Drill
-
 item.EMT.chainsaw.diamond.name=Diamond Chainsaw
 item.EMT.chainsaw.thaumium.name=Thaumium Chainsaw
-
 item.EMT.omnitool.iron.name=Iron Omnitool
 item.EMT.omnitool.diamond.name=Diamond Omnitool
 item.EMT.omnitool.thaumium.name=Thaumium Omnitool
-
 item.EMT.chainsaw.stream.name=Chainsaw of the Stream
 item.EMT.drill.rockbreaker.name=Drill of the Rockbreaker
 item.EMT.hoeofgrowth.electric.name=Electric Hoe of Growth
-
 item.EMT.focus.explosion.name=Wand Focus: Explosion
 item.EMT.focus.christmas.name=Wand Focus: Kris-tmas
 item.EMT.focus.shield.name=Wand Focus: Shield

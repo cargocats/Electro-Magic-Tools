@@ -1,15 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2014 Tombenpotter.
- * All rights reserved. 
- *
- * This program and the accompanying materials are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- *
- * This class was made by Tombenpotter and is distributed as a part of the Electro-Magic Tools mod.
- * Electro-Magic Tools is a derivative work on Thaumcraft 4 (c) Azanor 2012.
- * http://www.minecraftforum.net/topic/1585216-
- ******************************************************************************/
-
 package tombenpotter.emt.common.util;
 
 import java.util.Random;
@@ -29,7 +17,6 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.EMTKeys;
 import tombenpotter.emt.common.items.ItemRegistry;
-import tombenpotter.emt.common.items.ItemShardCarver;
 import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.proxies.ClientProxy;
 
@@ -56,20 +43,10 @@ public class EventHandlerEMT {
             ElectroMagicTools.logger.info("Refreshing configuration file.");
         }
     }
-
-    @SubscribeEvent
-    public void onCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
-        for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
-            if (event.craftMatrix.getStackInSlot(i) != null && event.craftMatrix.getStackInSlot(i).getItem() instanceof ItemShardCarver && event.player != null) {
-                event.craftMatrix.getStackInSlot(i).stackSize = 2;
-                event.craftMatrix.getStackInSlot(i).damageItem(1, event.player);
-            }
-        }
-    }
     
     @SubscribeEvent
     public void clientTick(ClientTickEvent e) {
-    	if(EMTKeys.getKey("UnEquip").getIsKeyPressed()){
+    	if(EMTKeys.keyUnequipPressed()){
     		ElectroMagicTools.INSTANCE.sendToServer(new PacketEMTKeys());
     	}
     }

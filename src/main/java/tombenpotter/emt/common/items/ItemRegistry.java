@@ -11,12 +11,12 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.common.items.armor.ItemInfusedQuantum;
 import tombenpotter.emt.common.items.armor.wings.ItemFeatherWing;
 import tombenpotter.emt.common.items.armor.wings.ItemThaumiumReinforcedWing;
 import tombenpotter.emt.common.items.armor.boots.ItemElectricBootsTraveller;
 import tombenpotter.emt.common.items.armor.boots.ItemNanoBootsTraveller;
 import tombenpotter.emt.common.items.armor.boots.ItemQuantumBootsTraveller;
+import tombenpotter.emt.common.items.armor.chestplates.ItemInfusedQuantumChestplate;
 import tombenpotter.emt.common.items.armor.goggles.ItemElectricGoggles;
 import tombenpotter.emt.common.items.armor.goggles.ItemNanoGoggles;
 import tombenpotter.emt.common.items.armor.goggles.ItemQuantumGoggles;
@@ -88,7 +88,7 @@ public class ItemRegistry {
         onering = new ItemOneRing();
         GameRegistry.registerItem(onering, "BaseBaubles");
   
-        quantumArmor = new ItemInfusedQuantum(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.modid + ".quantum");
+        quantumArmor = new ItemInfusedQuantumChestplate(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.modid + ".quantum");
         
         electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.electric");
         GameRegistry.registerItem(electricGoggles, "ElectricGogglesRevealing");

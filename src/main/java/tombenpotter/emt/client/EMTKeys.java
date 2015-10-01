@@ -8,32 +8,20 @@ import java.util.Set;
 
 import org.lwjgl.input.Keyboard;
 
+import tombenpotter.emt.common.util.TextHelper;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.settings.KeyBinding;
 
 public class EMTKeys{
-	private static Map<String, KeyBinding> keys = new HashMap<String, KeyBinding>();
-	
-	public static void addKey(KeyBinding kb, String name){
-		keys.put(name, kb);
-	}
+	public static KeyBinding keyUnequip;
 	
 	public static void registerKeys(){
-		addKey(new KeyBinding("UnEquip", Keyboard.KEY_Z, "EMT"), "UnEquip");
-		
-		for(Entry<String, KeyBinding> entry : keys.entrySet()){
-			ClientRegistry.registerKeyBinding(entry.getValue());
-		}
+		keyUnequip = new KeyBinding(TextHelper.localize("gui.EMT.key.unequip"), Keyboard.KEY_Z, "EMT");
+		ClientRegistry.registerKeyBinding(keyUnequip);
+
 	}
 	
-	public static KeyBinding getKey(String name){
-
-		for(Entry<String, KeyBinding> entry : keys.entrySet()){
-			if(name.equals(entry.getKey())){
-				return entry.getValue();
-			}
-		}
-		
-		return null;
+	public static boolean keyUnequipPressed(){
+		return keyUnequip.getIsKeyPressed();
 	}
 }

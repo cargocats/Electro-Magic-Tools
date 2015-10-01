@@ -2,6 +2,7 @@ package tombenpotter.emt.common.items.armor.wings;
 
 import java.util.Random;
 
+import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
 import cpw.mods.fml.relauncher.Side;
@@ -63,10 +64,10 @@ public class ItemFeatherWing extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-    	updateWings(player, stack, world, 0.09f, 0.9f, 0.9f);
+    	updateWings(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
     }
     
-    public void updateWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1){
+    public void updateWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
     	boolean isJmuping = nbtData.getBoolean("isJumping");
     	boolean isHolding = nbtData.getBoolean("isHolding");
@@ -83,7 +84,8 @@ public class ItemFeatherWing extends ItemArmor {
            	nbtData.setBoolean("isHolding", false);
             		
            	player.motionY = motionY * f;
-           	if(player.motionX < 0.7 && player.motionZ < 0.7){
+           	ElectricItem.manager.use(stack, ((motionY * nbtData.getInteger("f")) * 100) * amount, player);
+           	if(player.motionX < 0.5 && player.motionZ < 0.5 && player.motionX > -0.5 && player.motionZ > -0.5){
            		player.motionX /= motionXZ;
            		player.motionZ /= motionXZ;
            	}

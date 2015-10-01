@@ -1,15 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2014 Tombenpotter.
- * All rights reserved. 
- *
- * This program and the accompanying materials are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- *
- * This class was made by Tombenpotter and is distributed as a part of the Electro-Magic Tools mod.
- * Electro-Magic Tools is a derivative work on Thaumcraft 4 (c) Azanor 2012.
- * http://www.minecraftforum.net/topic/1585216-
- ******************************************************************************/
-
 package tombenpotter.emt.common.items.tools;
 
 import cpw.mods.fml.relauncher.Side;
@@ -55,7 +43,6 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 	    this.icon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/hoe_growth");
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
         ItemStack itemStack = new ItemStack(this, 1);
@@ -83,8 +70,8 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
     {
-    	if(ElectricItem.manager.getCharge(stack) > 50){
-    		ElectricItem.manager.discharge(stack, 50, 2, true, false, false);
+    	if(ElectricItem.manager.canUse(stack, 50)){
+    		ElectricItem.manager.use(stack, 50, player);
     		boolean did = false;
     		for (int x1 = -1; x1 <= 1; x1++) {
     			for (int z1 = -1; z1 <= 1; z1++) {
@@ -104,24 +91,23 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
     				{
     					Block block = world.getBlock(x, y, z);
     					int meta = world.getBlockMetadata(x, y, z);
-    					if ((block == ConfigBlocks.blockCustomPlant) && (meta == 0) && (ElectricItem.manager.getCharge(stack) + 20 <= this.getMaxCharge(stack)))
+    					if ((block == ConfigBlocks.blockCustomPlant) && (meta == 0) && ElectricItem.manager.canUse(stack, 50))
     					{
     						((BlockCustomPlant)block).growGreatTree(world, x, y, z, world.rand);
-    						ElectricItem.manager.discharge(stack, 50, 2, true, false, false);
+    						ElectricItem.manager.use(stack, 50, player);
     						Thaumcraft.proxy.blockSparkle(world, x, y, z, 0, 2);
     						did = true;
     					}
-    					else if ((block == ConfigBlocks.blockCustomPlant) && (meta == 1) && (ElectricItem.manager.getCharge(stack) + 150 <= this.getMaxCharge(stack)))
+    					else if ((block == ConfigBlocks.blockCustomPlant) && (meta == 1) && ElectricItem.manager.canUse(stack, 250))
     					{
     						((BlockCustomPlant)block).growSilverTree(world, x, y, z, world.rand);
-    						ElectricItem.manager.discharge(stack, 250, 2, true, false, false);
+    						ElectricItem.manager.use(stack, 250, player);
     						Thaumcraft.proxy.blockSparkle(world, x, y, z, 0, 2);
     						did = true;
     					}
     				}
     				else
     				{
-    					ElectricItem.manager.discharge(stack, 1, 2, true, false, false);
     					Thaumcraft.proxy.blockSparkle(world, x, y, z, 0, 3);
     				}
     				if (did) {

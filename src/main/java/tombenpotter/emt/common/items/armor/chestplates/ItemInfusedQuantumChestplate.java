@@ -33,7 +33,7 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.model.ModelCpecialArmor;
 import tombenpotter.emt.client.model.ModelWings;
-import tombenpotter.emt.common.items.ItemRegistry;
+import tombenpotter.emt.common.init.ItemRegistry;
 import tombenpotter.emt.common.items.armor.wings.ItemNanoWing;
 import tombenpotter.emt.common.items.armor.wings.ItemQuantumWing;
 import tombenpotter.emt.common.util.ConfigHandler;
@@ -131,20 +131,20 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	}
 
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(itemStack);
+		NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
 		
-		byte toggleTimer = nbtData.getByte("toggleTimer");
+		byte toggleTimer = nbt.getByte("toggleTimer");
 		boolean ret = false;
 
-		boolean jetpack = nbtData.getBoolean("jetpack");
-		boolean hoverMode = nbtData.getBoolean("hoverMode");
+		boolean jetpack = nbt.getBoolean("jetpack");
+		boolean hoverMode = nbt.getBoolean("hoverMode");
 		boolean jetpackUsed = false;
-		String useother = nbtData.getString("useother");
+		String useother = nbt.getString("useother");
 		
 		if(!world.isRemote){
 		
 			if(!useother.equals("TW") && !useother.equals("NW") && !useother.equals("QW") && !useother.equals("Jetpack") && !useother.equals("None")){
-				nbtData.setString("useother", "None");
+				nbt.setString("useother", "None");
 			}
 		
 			if ((IC2.keyboard.isJumpKeyDown(player)) && (IC2.keyboard.isModeSwitchKeyDown(player)) && (toggleTimer == 0)) {
@@ -152,7 +152,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				hoverMode = !hoverMode;
 				if (IC2.platform.isSimulating()) 
 				{
-					nbtData.setBoolean("hoverMode", hoverMode);
+					nbt.setBoolean("hoverMode", hoverMode);
 					if (hoverMode) 
 					{
 						IC2.platform.messagePlayer(player, "Hover Mode enabled.", new Object[0]);
@@ -165,57 +165,57 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		
 			if(player.inventory.getCurrentItem() != null && player.isSneaking() && toggleTimer == 0 && useother.equals("None")){
 				if(player.inventory.getCurrentItem().getItem() == IC2Items.getItem("electricJetpack").getItem()){
-					nbtData.setBoolean("jetpack", true);
+					nbt.setBoolean("jetpack", true);
 					IC2.platform.messagePlayer(player, "Jetpack enabled.", new Object[0]);
 
-					nbtData.setString("useother", "Jetpack");
+					nbt.setString("useother", "Jetpack");
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000){
 						ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
 					}
-					nbtData.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
+					nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 
 				}
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing){
 					IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "TW");
+					nbt.setString("useother", "TW");
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing){
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "NW");
+					nbt.setString("useother", "NW");
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemNanoWing.maxCharge){
 						ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
 					}
-					nbtData.setInteger("NWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
+					nbt.setInteger("NWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing){
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "QW");
+					nbt.setString("useother", "QW");
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemQuantumWing.maxCharge){
 						ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
 					}
-					nbtData.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
+					nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int)ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			}
 		
-			if(player.inventory.getCurrentItem() == null && player.inventory.armorInventory[2] == itemStack && nbtData.getBoolean("unequip") && player.isSneaking() && toggleTimer == 0 && IC2.platform.isSimulating()){
+			if(player.inventory.getCurrentItem() == null && nbt.getBoolean("unequip") && player.isSneaking() && toggleTimer == 0 && IC2.platform.isSimulating()){
 				toggleTimer = 30;
 
 				if(useother.equals("Jetpack")){
 					IC2.platform.messagePlayer(player, "Jetpack disabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
+					nbt.setString("useother", "None");
 		           	ItemStack charged = new ItemStack(IC2Items.getItem("electricJetpack").getItem());
-		           	if(player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge") > 0)
-		           		ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("jetpackCharge"), 1, true, false);
+		           	if(nbt.getInteger("jetpackCharge") > 0)
+		           		ElectricItem.manager.charge(charged, nbt.getInteger("jetpackCharge"), 1, true, false);
 		           	else
 						ElectricItem.manager.charge(charged, 0, 1, true, false);
 		           	player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
@@ -223,16 +223,16 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 					
 				if(useother.equals("TW")){
 					IC2.platform.messagePlayer(player, "Thaumium wings disabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
+					nbt.setString("useother", "None");
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.thaumiumWing));
 				}
 					
 				if(useother.equals("NW")){
 					IC2.platform.messagePlayer(player, "Nano wings disabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
+					nbt.setString("useother", "None");
 					ItemStack charged = new ItemStack(ItemRegistry.nanoWing);
-					if(nbtData.getInteger("NWCharge") > 0)
-						ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("NWCharge"), 3, true, false);
+					if(nbt.getInteger("NWCharge") > 0)
+						ElectricItem.manager.charge(charged, nbt.getInteger("NWCharge"), 3, true, false);
 					else
 						ElectricItem.manager.charge(charged, 0, 3, true, false);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
@@ -240,16 +240,16 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 					
 				if(useother.equals("QW")){
 					IC2.platform.messagePlayer(player, "Quantum wings disabled.", new Object[0]);
-					player.inventory.armorInventory[2].stackTagCompound.setString("useother", "None");
+					nbt.setString("useother", "None");
 					ItemStack charged = new ItemStack(ItemRegistry.quantumWing);
-					if(nbtData.getInteger("QWCharge") > 0)
-						ElectricItem.manager.charge(charged, player.inventory.armorInventory[2].stackTagCompound.getInteger("QWCharge"), 3, true, false);
+					if(nbt.getInteger("QWCharge") > 0)
+						ElectricItem.manager.charge(charged, nbt.getInteger("QWCharge"), 3, true, false);
 					else
 						ElectricItem.manager.charge(charged, 0, 3, true, false);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 				}
 					
-				nbtData.setBoolean("unequip", false);
+				nbt.setBoolean("unequip", false);
 				
 			}
 		}
@@ -268,7 +268,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		
 		if ((IC2.platform.isSimulating()) && (toggleTimer > 0)) {
 			toggleTimer = (byte) (toggleTimer - 1);
-			nbtData.setByte("toggleTimer", toggleTimer);
+			nbt.setByte("toggleTimer", toggleTimer);
 		}
 		if ((IC2.platform.isRendering()) && (player == IC2.platform.getPlayerInstance())) {
 			if (lastJetpackUsed != jetpackUsed) {
@@ -389,16 +389,6 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
     	try{
     		String useother = stack.stackTagCompound.getString("useother");
     		list.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + tier);
-    		//list.add(ElectricItem.manager.getCharge(stack) + " EU");
-    		//if(useother.equals("Jetpack")){
-    		//	list.add(stack.stackTagCompound.getInteger("jetpackCharge") + " EU JETPACK");
-    		//}
-    		//if(useother.equals("NW")){
-    		//	list.add(stack.stackTagCompound.getInteger("NWCharge") + " EU NW");
-    		//}
-    		//if(useother.equals("QW")){
-    		//	list.add(stack.stackTagCompound.getInteger("QWCharge") + " EU QW");
-    		//}
     	}
     	catch(NullPointerException e){}
     }
@@ -406,7 +396,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	public boolean useJetpack(EntityPlayer player, boolean hoverMode, ItemStack stack) {
 		int jetpackMaxCharge = 30000;
 		
-		ItemStack jetpack = player.inventory.armorInventory[2];
+		ItemStack jetpack = stack;
 		if (ElectricItem.manager.getCharge(stack) <= 0)
 			return false;
 		

@@ -19,8 +19,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import tombenpotter.emt.common.commands.CommandOutputs;
-import tombenpotter.emt.common.Registry;
-import tombenpotter.emt.common.entities.BaseEntityRegistry;
+import tombenpotter.emt.common.init.EntityRegistry;
+import tombenpotter.emt.common.init.Registry;
 import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.common.util.*;
 import tombenpotter.emt.proxies.CommonProxy;
@@ -65,7 +65,7 @@ public class ElectroMagicTools {
         DungeonChestGenerator.generateLoot();
 
         ElectroMagicTools.logger.info("Registering entities");
-        BaseEntityRegistry.registerEMTEntities();
+        EntityRegistry.registerEMTEntities();
         ElectroMagicTools.logger.info("Registering the GUI Handler");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 

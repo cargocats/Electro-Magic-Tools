@@ -1,6 +1,6 @@
 package tombenpotter.emt.common.network;
 
-import tombenpotter.emt.common.items.ItemRegistry;
+import tombenpotter.emt.common.init.ItemRegistry;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;

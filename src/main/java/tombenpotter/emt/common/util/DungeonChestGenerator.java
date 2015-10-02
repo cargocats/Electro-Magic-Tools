@@ -1,9 +1,9 @@
 package tombenpotter.emt.common.util;
 
+import tombenpotter.emt.common.init.ItemRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-import tombenpotter.emt.common.items.ItemRegistry;
 
 public class DungeonChestGenerator {
 

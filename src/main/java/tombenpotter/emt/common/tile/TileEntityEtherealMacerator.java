@@ -13,8 +13,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.ConfigItems;
+import tombenpotter.emt.common.init.BlockRegistry;
 import tombenpotter.emt.common.tile.TileEntityEMT;
-import tombenpotter.emt.common.blocks.BlockRegistry;
 import tombenpotter.emt.common.util.ConfigHandler;
 
 public class TileEntityEtherealMacerator extends TileEntityEMT implements ISidedInventory, IWrenchable {

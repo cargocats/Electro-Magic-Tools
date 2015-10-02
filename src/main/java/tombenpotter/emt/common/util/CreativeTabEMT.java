@@ -1,9 +1,9 @@
 package tombenpotter.emt.common.util;
 
+import tombenpotter.emt.common.init.ItemRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import tombenpotter.emt.common.items.ItemRegistry;
 
 public class CreativeTabEMT extends CreativeTabs {
 

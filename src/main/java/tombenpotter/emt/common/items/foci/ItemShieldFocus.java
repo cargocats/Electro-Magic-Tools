@@ -11,7 +11,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import tombenpotter.emt.ElectroMagicTools;
-import tombenpotter.emt.common.blocks.BlockRegistry;
+import tombenpotter.emt.common.init.BlockRegistry;
 
 public class ItemShieldFocus extends ItemBaseFocus {
 	int y1 = 0;

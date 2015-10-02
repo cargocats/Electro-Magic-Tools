@@ -8,6 +8,7 @@ import ic2.core.IC2;
 import ic2.core.audio.AudioSource;
 import ic2.core.audio.PositionSpec;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -35,7 +36,6 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     public int hitCost = 300;
     public int tier = 2;
     public static AudioSource audio;
-    int tick;
 
     public ItemDiamondChainsaw() {
         super(ToolMaterial.EMERALD);

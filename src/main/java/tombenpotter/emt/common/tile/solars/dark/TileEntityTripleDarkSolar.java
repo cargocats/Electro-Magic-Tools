@@ -2,7 +2,7 @@ package tombenpotter.emt.common.tile.solars.dark;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import tombenpotter.emt.common.blocks.BlockRegistry;
+import tombenpotter.emt.common.init.BlockRegistry;
 import tombenpotter.emt.common.util.ConfigHandler;
 
 public class TileEntityTripleDarkSolar extends TileEntityDarkSolar {

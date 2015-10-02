@@ -1,7 +1,6 @@
 package tombenpotter.emt.common.util;
 
 import ic2.api.item.ElectricItem;
-import tombenpotter.emt.common.items.ItemRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

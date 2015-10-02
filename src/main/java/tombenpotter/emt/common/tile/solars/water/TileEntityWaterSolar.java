@@ -2,7 +2,7 @@ package tombenpotter.emt.common.tile.solars.water;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import tombenpotter.emt.common.blocks.BlockRegistry;
+import tombenpotter.emt.common.init.BlockRegistry;
 import tombenpotter.emt.common.tile.solars.TileEntitySolarBase;
 import tombenpotter.emt.common.util.ConfigHandler;
 

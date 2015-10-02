@@ -16,7 +16,7 @@ import thaumcraft.common.entities.monster.EntityTaintChicken;
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.EMTKeys;
-import tombenpotter.emt.common.items.ItemRegistry;
+import tombenpotter.emt.common.init.ItemRegistry;
 import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.proxies.ClientProxy;
 

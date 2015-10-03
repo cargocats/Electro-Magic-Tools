@@ -385,7 +385,7 @@ public class EMTResearch {
         }
         
         text = "1";
-        research = new EMTResearchItem("InfusedQuantumArmor", "EMT", ResearchAspects.quantumWing, 0, 10, 4, new ItemStack(ItemRegistry.quantumArmor)).setParents("Quantum Wings").setConcealed().registerResearchItem();
+        research = new EMTResearchItem("Infused Quantum Armor", "EMT", ResearchAspects.quantumWing, 0, 10, 4, new ItemStack(ItemRegistry.quantumArmor)).setParents("Quantum Wings").setConcealed().registerResearchItem();
         research.setPages(new ResearchPage(text), new ResearchPage(RecipeRegistry.infusedQuantumArmor));
     }
 }

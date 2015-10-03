@@ -36,8 +36,8 @@ public class EMTResearchItem extends ResearchItem {
     }
 
     @Override
-    public ResearchItem setPages(ResearchPage... par) {
-        for (ResearchPage page : par) {
+    public ResearchItem setPages(ResearchPage... rp) {
+        for (ResearchPage page : rp) {
             if (page.type == PageType.TEXT)
                 page.text = "emt.text." + key;
 
@@ -54,6 +54,6 @@ public class EMTResearchItem extends ResearchItem {
             }
         }
 
-        return super.setPages(par);
+        return super.setPages(rp);
     }
 }

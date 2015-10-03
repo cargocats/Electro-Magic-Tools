@@ -180,7 +180,7 @@ emt.tag.Feather Wings=It only works in anime...
 emt.tag.Thaumium Reinforced Wings=Already much better
 emt.tag.Nanosuit Wings=Nanotechnologies to the rescue!
 emt.tag.Quantum Wings=Quantum technologies.
-emt.tag.InfusedQuantumArmor=The last step is here...
+emt.tag.Infused Quantum Armor=The last step is here...
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=Electric Magic Tools
@@ -345,5 +345,5 @@ emt.text.Nanosuit Wings=Combining the magic harnessed by Thaumium with the nanot
 emt.rsname.Quantum Wings=Quantum Wings
 emt.text.Quantum Wings=After exploring all the possibilities of nanotechnologies, you decided to do the last jump. Quantum. You can thrust yourself many blocks high, have a very good protection, and your fall is slowed down a lot. However, the quantum unpredictability happened once again. Your fall will be completely stopped when spacebar and sneak are maintained. You don't know why, but it works. Included: fall damage reduction, 100%.
 
-emt.rsname.InfusedQuantumArmor=Infused Quantum Сhestplate.
-emt.text.InfusedQuantumArmor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + "Unequip"(see in options).
+emt.rsname.Infused Quantum Armor=Infused Quantum Сhestplate.
+emt.text.Infused Quantum Armor=You had been nothing to do and you decided to do something useful. You had an idea in your head of making armor which you can fasten the wings or backpack for being protected in flight. Take the wings or backpack in your hands and sit down to put their on armor. To remove them, hold Shift + "Unequip"(see in options).

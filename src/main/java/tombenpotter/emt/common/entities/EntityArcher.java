@@ -72,7 +72,7 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 
     @Override
     protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Blocks.web, 1, 1), 0.0F);
+        this.entityDropItem(new ItemStack(Items.snowball, 1, 1), 0.0F);
     }
 
     protected void addRandomArmor() {

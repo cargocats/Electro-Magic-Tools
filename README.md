@@ -6,9 +6,8 @@ Electro-Magic Tools is a Minecraft mod which integrates Thaumcraft 4 with Indust
 
 #Downloads
 
-Github:
-
-https://github.com/fewizz/Electro-Magic-Tools/releases
+[CURSE](http://minecraft.curseforge.com/projects/electro-magic-tools)
+[Github](https://github.com/fewizz/Electro-Magic-Tools/releases)
 
 #Issues
 

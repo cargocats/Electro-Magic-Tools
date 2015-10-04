@@ -81,7 +81,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
     {
     	if(entity instanceof EntityLivingBase){
     		if (IC2.platform.isRendering()) {
-    			if (flag) {
+    			if (flag && !dropped) {
     				if (audio == null) audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
     				if (audio != null) {
     					audio.updatePosition();	
@@ -93,8 +93,21 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
     				audio = null;
     				IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
     			}
+    			dropped = false;
     		}
     	}
+    }
+    
+    @Override
+    public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
+    {
+    	if(audio != null){
+    		audio.stop();
+    		audio.remove();
+    		audio = null;
+    		dropped = true;
+    	}
+    	return true;
     }
 
     @Override

@@ -36,6 +36,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     public int hitCost = 300;
     public int tier = 2;
     public static AudioSource audio;
+    boolean dropped = false;
 
     public ItemDiamondChainsaw() {
         super(ToolMaterial.EMERALD);
@@ -126,11 +127,23 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     }
     
     @Override
+    public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
+    {
+    	if (audio != null) {
+    		audio.stop();
+    		audio.remove();
+    		audio = null;
+    		dropped = true;
+    	}
+    	return true;
+    }
+    
+    @Override
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
     {
     	if(entity instanceof EntityLivingBase){
     		if (IC2.platform.isRendering()) {
-    			if (flag) {
+    			if (flag && !dropped) {
     				if (audio == null) audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
     				if (audio != null) {
     					audio.updatePosition();	
@@ -142,6 +155,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     				audio = null;
     				IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
     			}
+    			dropped = false;
     		}
     	}
     }

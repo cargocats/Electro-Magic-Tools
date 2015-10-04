@@ -149,7 +149,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     					audio.updatePosition();	
     					audio.play();
     				}
-    			} else if (!flag && audio != null) {
+    			} else if (!flag && audio != null && ((((EntityPlayer)entity).inventory.getCurrentItem() != null && ((EntityPlayer)entity).inventory.getCurrentItem().getItem() != this) || (((EntityPlayer)entity).inventory.getCurrentItem() == null))) {
     				audio.stop();
     				audio.remove();
     				audio = null;

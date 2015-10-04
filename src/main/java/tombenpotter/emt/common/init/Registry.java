@@ -9,6 +9,7 @@ public class Registry{
 	}
 	
 	public static void registerLate(){
+		BlockRegistry.addAspects();
         RecipeRegistry.registerLateRecipes();
         RecipeRegistry.registerUUMInfusionRecipes();
 	}

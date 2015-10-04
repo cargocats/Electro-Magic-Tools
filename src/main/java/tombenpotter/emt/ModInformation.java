@@ -4,7 +4,7 @@ public class ModInformation {
 
     public static final String name = "Electro-Magic Tools";
     public static final String modid = "EMT";
-    public static final String version = "1.2.0";
+    public static final String version = "1.2.2";
     public static final String texturePath = "electromagictools";
     public static final String guiFactory = "tombenpotter.emt.client.gui.config.EMTGuiFactory";
     public static final String clientProxy = "tombenpotter.emt.proxies.ClientProxy";

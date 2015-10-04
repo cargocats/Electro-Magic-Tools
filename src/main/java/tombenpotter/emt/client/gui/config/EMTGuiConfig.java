@@ -24,10 +24,10 @@ public class EMTGuiConfig extends GuiConfig {
     private static List<IConfigElement> getConfigElements(GuiScreen parent) {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
 
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RANDOM.toLowerCase(Locale.US))));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_VALUES.toLowerCase(Locale.US))));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_RESEARCH.toLowerCase(Locale.US))));
-        list.add(new ConfigElement<ConfigCategory>(config.getCategory(CATEGORY_OUTPUTS.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(RANDOM.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(VALUES.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(RESEARCH.toLowerCase(Locale.US))));
+        list.add(new ConfigElement<ConfigCategory>(config.getCategory(OUTPUTS.toLowerCase(Locale.US))));
 
         return list;
     }

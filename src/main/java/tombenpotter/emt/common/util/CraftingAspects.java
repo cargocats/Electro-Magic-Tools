@@ -53,4 +53,5 @@ public class CraftingAspects {
     public static AspectList nanoWing = new AspectList().add(Aspect.FLIGHT, 48).add(Aspect.AIR, 32).add(Aspect.MECHANISM, 48).add(Aspect.ENERGY, 32);
     public static AspectList quantumWing = new AspectList().add(Aspect.FLIGHT, 48).add(Aspect.AIR, 32).add(Aspect.MECHANISM, 48).add(Aspect.ENERGY, 32).add(Aspect.ARMOR, 48);
     public static AspectList aerGenerator = new AspectList().add(Aspect.EXCHANGE, 16).add(Aspect.AIR, 8);
+    public static AspectList uuMatterCrystal = new AspectList().add(Aspect.ENTROPY, 16).add(Aspect.AIR, 8).add(Aspect.CRYSTAL, 16).add(Aspect.COLD, 32).add(Aspect.MAGIC, 8);
 }

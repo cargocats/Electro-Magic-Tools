@@ -57,29 +57,18 @@ public class BlockEssentiaGenerators extends BlockBaseContainer {
 
     @Override
     public TileEntity createTileEntity(World world, int meta) {
-        if (meta == 0) {
-            return new TileEntityPotentiaGenerator();
-        }
-        if (meta == 1) {
-            return new TileEntityIgnisGenerator();
-        }
-        if (meta == 2) {
-            return new TileEntityAuramGenerator();
-        }
-        if (meta == 3) {
-            return new TileEntityArborGenerator();
-        }
-        if (meta == 4) {
-            return new TileEntityAerGenerator();
-        }
+    	switch(meta){
+    		case 0 : return new TileEntityPotentiaGenerator();
+    		case 1 : return new TileEntityIgnisGenerator();
+    		case 2 : return new TileEntityAuramGenerator();
+    		case 3 : return new TileEntityArborGenerator();
+    		case 4 : return new TileEntityAerGenerator();
+    	}
         return super.createTileEntity(world, meta);
     }
 
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-        float f = (float) par2 + 0.5F;
-        float f1 = (float) par3 + 1.0F;
-        float f2 = (float) par4 + 0.5F;
-        par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+    	world.spawnParticle("largesmoke", x + 0.5f, y + 1.0f, z + 0.5f, 0.0D, 0.0D, 0.0D);
     }
 }

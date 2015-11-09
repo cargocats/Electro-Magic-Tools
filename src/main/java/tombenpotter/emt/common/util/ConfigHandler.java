@@ -14,13 +14,18 @@ public class ConfigHandler {
     public static String VALUES = "Numeric Values";
     public static String OUTPUTS = "Essentia Generator Outputs";
 
-    public static int essentiaGeneratorsDelay;
     public static int etherealProcessorBaseSpeed;
     public static int etherealProcessorBonus;
     public static int chargeFocusProduction;
     public static int armorBaubleProduction;
     public static int inventoryBaubleProdution;
     public static int wandChargeFocusCost;
+    
+    public static int aerGenerator;
+    public static int arborGenerator;
+    public static int auramGenerator;
+    public static int ignisGenerator;
+    public static int potentiaGenerator;
 
     // values
     public static double wandChargerConsumption;
@@ -141,7 +146,6 @@ public class ConfigHandler {
         compressedSolarOutput = config.get(VALUES, "Compressed Solar Panel Output", 10, "This is the number you have to modify if you want to make the Compressed Solar Panel yield " + "more or less EU per tick. Really, you shouldn't touch that, " + "since it's pretty balanced as it is.").getDouble(compressedSolarOutput);
         doubleCompressedSolarOutput = config.get(VALUES, "Double Compressed Solar Panel Output", 100, "This is the number you have to modify if you want to make the Double Compressed Solar Panel " + "yield more or less EU per tick. Really, you shouldn't touch that, " + "since it's pretty balanced as it is.").getDouble(doubleCompressedSolarOutput);
         tripleCompressedSolarOutput = config.get(VALUES, "Triple Compressed Solar Panel Output", 1000, "This is the number you have to modify if you want to make the Triple Compressed Solar Panel " + "yield more or less EU per tick. Really, you shouldn't touch that, " + "since it's pretty balanced as it is.").getDouble(tripleCompressedSolarOutput);
-        essentiaGeneratorsDelay = config.get(VALUES, "Essentia Generators draw rate", 120, "The number of ticks the Essentia Generators wait before using 2 Essentia. " + "If you want them to be slower, increase the number.").getInt(essentiaGeneratorsDelay);
         nanoBootsSpeed = config.get(VALUES, "Nano Boots of the Traveller Speed", 0.25, "Watch out, that goes up REALLY quickly.").getDouble(nanoBootsSpeed);
         quantumBootsSpeed = config.get(VALUES, "Quantum Boots of the Traveller Speed", 0.5, "Watch out, that goes up REALLY quickly.").getDouble(quantumBootsSpeed);
         nanoBootsJump = config.get(VALUES, "Nano Boots of the Traveller jump", 0.6, "Watch out, that goes up REALLY quickly.").getDouble(nanoBootsJump);
@@ -152,6 +156,12 @@ public class ConfigHandler {
         armorBaubleProduction = config.get(VALUES, "Armor Charging Ring production", 32, "Default is 32").getInt();
         inventoryBaubleProdution = config.get(VALUES, "Inventory Charging Ring production", 32, "Default is 32").getInt();
         wandChargeFocusCost = config.get(VALUES, "Wand Focus: Wand Charging Cost", 40000, "Default is 40000").getInt();
+        
+        aerGenerator = config.get(VALUES, "Aer generator", 300, "EU/t").getInt();
+        auramGenerator = config.get(VALUES, "Auram generator", 400, "EU/t").getInt();
+        arborGenerator = config.get(VALUES, "Arbor generator", 450, "EU/t").getInt();
+        ignisGenerator = config.get(VALUES, "Ignis generator", 400, "EU/t").getInt();
+        potentiaGenerator = config.get(VALUES, "Potentia generator", 200, "EU/t").getInt();
 
         thaumiumDrillResearch = config.get(RESEARCH, "Thaumium Drill", false).getBoolean(thaumiumDrillResearch);
         thaumiumChainsawResearch = config.get(RESEARCH, "Thaumium Chainsaw", false).getBoolean(thaumiumChainsawResearch);

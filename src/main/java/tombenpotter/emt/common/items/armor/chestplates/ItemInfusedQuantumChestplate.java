@@ -73,6 +73,12 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	IIcon icon4;
 	Random rnd;
 	
+	public final byte NONE = 0;
+	public final byte JETPACK = 1;
+	public final byte THAUMIUM = 2;
+	public final byte NANO = 3;
+	public final byte QUANTUM = 4;
+	
 	protected static final Map<Integer, Integer> potionRemovalCost = new HashMap();
 	public static AudioSource audioSource;
 	private static boolean lastJetpackUsed = false;
@@ -87,8 +93,10 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		rnd = new Random();
 		
 	}
+	
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		icon0 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest");
 		icon1 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_jetpack");
@@ -97,6 +105,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		icon4 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_q");
 	}
 
+	
 	@SubscribeEvent
 	public void onEntityLivingFallEvent(LivingFallEvent event) {
 		if ((IC2.platform.isSimulating()) && ((event.entity instanceof EntityLivingBase))) {
@@ -112,39 +121,41 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			}
 		}
 	}
+	
 
+	@Override
 	public double getDamageAbsorptionRatio() {
 		return 1.1D;
 	}
 	
-    private double getBaseAbsorptionRatio() {
-        return 0.15D;
-    }
 
+    @Override
 	public int getEnergyPerDamage() {
 		return 20000;
 	}
+    
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
+	
 
+	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
 		
 		byte toggleTimer = nbt.getByte("toggleTimer");
 		boolean ret = false;
-
-		boolean jetpack = nbt.getBoolean("jetpack");
 		boolean hoverMode = nbt.getBoolean("hoverMode");
 		boolean jetpackUsed = false;
-		String useother = nbt.getString("useother");
+		byte wing = nbt.getByte("wing");
 		
 		if(!world.isRemote){
 		
-			if(!useother.equals("TW") && !useother.equals("NW") && !useother.equals("QW") && !useother.equals("Jetpack") && !useother.equals("None")){
-				nbt.setString("useother", "None");
+			if(wing == 0){
+				nbt.setByte("wing", NONE);
 			}
 		
 			if ((IC2.keyboard.isJumpKeyDown(player)) && (IC2.keyboard.isModeSwitchKeyDown(player)) && (toggleTimer == 0)) {
@@ -163,12 +174,10 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				}
 			}
 		
-			if(player.inventory.getCurrentItem() != null && player.isSneaking() && toggleTimer == 0 && useother.equals("None")){
+			if(player.inventory.getCurrentItem() != null && player.isSneaking() && toggleTimer == 0 && wing == NONE){
 				if(player.inventory.getCurrentItem().getItem() == IC2Items.getItem("electricJetpack").getItem()){
-					nbt.setBoolean("jetpack", true);
 					IC2.platform.messagePlayer(player, "Jetpack enabled.", new Object[0]);
-
-					nbt.setString("useother", "Jetpack");
+					nbt.setByte("wing", JETPACK);
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000){
 						ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
@@ -180,13 +189,13 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing){
 					IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
-					nbt.setString("useother", "TW");
+					nbt.setByte("wing", THAUMIUM);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing){
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
-					nbt.setString("useother", "NW");
+					nbt.setByte("wing", NANO);
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemNanoWing.maxCharge){
 						ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
@@ -197,7 +206,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			
 				else if(player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing){
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
-					nbt.setString("useother", "QW");
+					nbt.setByte("wing", QUANTUM);
 					int charge = (int)ElectricItem.manager.getCharge(itemStack);
 					if(ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemQuantumWing.maxCharge){
 						ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
@@ -210,9 +219,9 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			if(player.inventory.getCurrentItem() == null && nbt.getBoolean("unequip") && player.isSneaking() && toggleTimer == 0 && IC2.platform.isSimulating()){
 				toggleTimer = 30;
 
-				if(useother.equals("Jetpack")){
+				if(wing == JETPACK){
 					IC2.platform.messagePlayer(player, "Jetpack disabled.", new Object[0]);
-					nbt.setString("useother", "None");
+					nbt.setByte("wing", NONE);
 		           	ItemStack charged = new ItemStack(IC2Items.getItem("electricJetpack").getItem());
 		           	if(nbt.getInteger("jetpackCharge") > 0)
 		           		ElectricItem.manager.charge(charged, nbt.getInteger("jetpackCharge"), 1, true, false);
@@ -221,15 +230,15 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		           	player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 				}
 					
-				if(useother.equals("TW")){
+				if(wing == THAUMIUM){
 					IC2.platform.messagePlayer(player, "Thaumium wings disabled.", new Object[0]);
-					nbt.setString("useother", "None");
+					nbt.setByte("wing", NONE);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.thaumiumWing));
 				}
 					
-				if(useother.equals("NW")){
+				if(wing == NANO){
 					IC2.platform.messagePlayer(player, "Nano wings disabled.", new Object[0]);
-					nbt.setString("useother", "None");
+					nbt.setByte("wing", NONE);
 					ItemStack charged = new ItemStack(ItemRegistry.nanoWing);
 					if(nbt.getInteger("NWCharge") > 0)
 						ElectricItem.manager.charge(charged, nbt.getInteger("NWCharge"), 3, true, false);
@@ -238,9 +247,9 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 				}
 					
-				if(useother.equals("QW")){
+				if(wing == QUANTUM){
 					IC2.platform.messagePlayer(player, "Quantum wings disabled.", new Object[0]);
-					nbt.setString("useother", "None");
+					nbt.setByte("wing", NONE);
 					ItemStack charged = new ItemStack(ItemRegistry.quantumWing);
 					if(nbt.getInteger("QWCharge") > 0)
 						ElectricItem.manager.charge(charged, nbt.getInteger("QWCharge"), 3, true, false);
@@ -250,19 +259,18 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				}
 					
 				nbt.setBoolean("unequip", false);
-				
 			}
 		}
 		
-		if ((IC2.keyboard.isJumpKeyDown(player) && useother.equals("Jetpack")) || (hoverMode && player.motionY < -0.029999999329447746D)) {
+		if ((IC2.keyboard.isJumpKeyDown(player) && wing == JETPACK) || (hoverMode && player.motionY < -0.029999999329447746D)) {
 			jetpackUsed = useJetpack(player, hoverMode, itemStack);
 		}
 		
-		if(useother.equals("TW"))
+		if(wing == THAUMIUM)
 			useWings(player, itemStack, world, 0.15f, 0.7f, 0.5f, 0, false);
-		if(useother.equals("NW"))
+		if(wing == NANO)
 			useWings(player, itemStack, world, 0.25f, 0.6f, 0.3f, 5, true);
-		if(useother.equals("QW"))
+		if(wing == QUANTUM)
 			useWings(player, itemStack, world,  0.33f, 0.5f, 0.2f, 7, true);
 		
 		
@@ -299,44 +307,41 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		}
 	}
 	
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconIndex(ItemStack stack){
 		try{
-			String useother = stack.stackTagCompound.getString("useother");
+			byte wing = stack.stackTagCompound.getByte("wing");
 			
-			if(useother.equals("Jetpack"))
-				return icon1;
-			if(useother.equals("TW"))
-				return icon2;
-			if(useother.equals("NW"))
-				return icon3;
-			if(useother.equals("QW"))
-				return icon4;
-			
-			return icon0;
+			switch(wing){
+				case JETPACK : return icon1;
+				case THAUMIUM : return icon2;
+				case NANO : return icon3;
+				case QUANTUM : return icon4;
+				default : return icon0;
+			}
 		}
 		catch(Exception ex){return icon0;}
 	}
+	
     
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
 		try{
-			String useother = stack.stackTagCompound.getString("useother");
+			byte wing = stack.stackTagCompound.getByte("wing");
 			
-			if(useother.equals("Jetpack"))
-				return icon1;
-			if(useother.equals("TW"))
-				return icon2;
-			if(useother.equals("NW"))
-				return icon3;
-			if(useother.equals("QW"))
-				return icon4;
-			
-			return icon0;
+			switch(wing){
+				case JETPACK : return icon1;
+				case THAUMIUM : return icon2;
+				case NANO : return icon3;
+				case QUANTUM : return icon4;
+				default : return icon0;
+			}
 		}
 		catch(Exception e){return icon0;}
 	}
+	
 	
 	@Override
 	public int getItemEnchantability() {
@@ -347,33 +352,33 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
         }
 	}
 	
+	
 	@Override
     @SideOnly(Side.CLIENT)
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		String useother = stack.stackTagCompound.getString("useother");
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {	
+		byte wing = stack.stackTagCompound.getByte("wing");
 		
-		if(useother.equals("Jetpack"))
-			return ModInformation.texturePath + ":textures/models/quantum_jetpack.png";
-		if(useother.equals("TW"))
-			return ModInformation.texturePath + ":textures/models/quantum_wings_t.png";
-		if(useother.equals("NW"))
-			return ModInformation.texturePath + ":textures/models/quantum_wings_n.png";
-		if(useother.equals("QW"))
-			return ModInformation.texturePath + ":textures/models/quantum_wings_q.png";
-		return ModInformation.texturePath + ":textures/models/quantum.png";
+		switch(wing){
+			case JETPACK : return ModInformation.texturePath + ":textures/models/quantum_jetpack.png";
+			case THAUMIUM : return ModInformation.texturePath + ":textures/models/quantum_wings_t.png";
+			case NANO : return ModInformation.texturePath + ":textures/models/quantum_wings_n.png";
+			case QUANTUM : return ModInformation.texturePath + ":textures/models/quantum_wings_q.png";
+			default : return ModInformation.texturePath + ":textures/models/quantum.png";
+		}
     }
+	
 	
     @Override
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, int armorSlot) {
     	try{
     		if(entity instanceof EntityPlayer){
-    			String useother = stack.stackTagCompound.getString("useother");
-    			if(useother.equals("Jetpack")){
+    			byte wing = stack.stackTagCompound.getByte("wing");
+    			if(wing == JETPACK){
     				ModelCpecialArmor mbm = new ModelCpecialArmor(1, 1);
     				return mbm;
     			}
-    			if(useother.equals("TW") || useother.equals("NW") || useother.equals("QW")){
+    			else if(wing != 0){
     				ModelCpecialArmor mbm = new ModelCpecialArmor(1, 2);
     				mbm.isJumping = stack.stackTagCompound.getBoolean("isJumping");
     				return mbm;
@@ -384,22 +389,21 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		return new ModelCpecialArmor(1, 0);
     }
 	
+    
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
     	try{
-    		String useother = stack.stackTagCompound.getString("useother");
     		list.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + tier);
     	}
     	catch(NullPointerException e){}
     }
 
+    
 	public boolean useJetpack(EntityPlayer player, boolean hoverMode, ItemStack stack) {
 		int jetpackMaxCharge = 30000;
-		
 		ItemStack jetpack = stack;
 		if (ElectricItem.manager.getCharge(stack) <= 0)
 			return false;
-		
 		float power = 1.0F;
 		float dropPercentage = 0.05F;
 		if (((float)ElectricItem.manager.getCharge(stack) / (float)jetpackMaxCharge) <= dropPercentage){
@@ -447,12 +451,12 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			consume = 10.0D;
 		}
 		ElectricItem.manager.use(stack, consume, player);
-		
 		player.fallDistance = 0.0F;
 		player.distanceWalkedModified = 0.0F;
 		IC2.platform.resetPlayerInAirTime(player);
 		return true;
 	}
+	
 	
 	void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount, boolean isElectric){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
@@ -477,19 +481,14 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
            	}
            	nbtData.setInteger("f", 0);
         }
-
        	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0)
        		player.motionY *= f1;
-
         if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
-            
        	if(ConfigHandler.impactOfRain){
         	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
         		player.motionY = -0.3;
         }
         if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
-       
         if (player.fallDistance > 0.0F) player.fallDistance = 0;
-		
     }
 }

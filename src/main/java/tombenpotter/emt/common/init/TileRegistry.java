@@ -6,7 +6,6 @@ import tombenpotter.emt.common.tile.TileEntityPortableNode;
 import tombenpotter.emt.common.tile.generators.TileEntityAerGenerator;
 import tombenpotter.emt.common.tile.generators.TileEntityArborGenerator;
 import tombenpotter.emt.common.tile.generators.TileEntityAuramGenerator;
-import tombenpotter.emt.common.tile.generators.TileEntityEssentiaGenerator;
 import tombenpotter.emt.common.tile.generators.TileEntityIgnisGenerator;
 import tombenpotter.emt.common.tile.generators.TileEntityPotentiaGenerator;
 import tombenpotter.emt.common.tile.solars.air.TileEntityAirSolar;
@@ -64,6 +63,5 @@ public class TileRegistry {
         GameRegistry.registerTileEntity(TileEntityEarthSolar.class, "tileentityearthsolar");
         GameRegistry.registerTileEntity(TileEntityDoubleEarthSolar.class, "tileentitydoubleearthsolar");
         GameRegistry.registerTileEntity(TileEntityTripleEarthSolar.class, "tileentitytripleearthsolar");
-        GameRegistry.registerTileEntity(TileEntityEssentiaGenerator.class, "tileentityessentiagenerator");
     }
 }

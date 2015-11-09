@@ -220,7 +220,7 @@ emt.rsname.Shield Focus=Shield Focus
 emt.text.Shield Focus=With some experimentation with the Portable Hole, you have found out more about the transportation of objects to alternate dimensions. You believe you can reverse these effects to summon a swath of blocks from a dimension full of matter to shield you from any oncoming disaster. Caution is to be taken when using this focus, as when bringing these blocks into our dimension, it will transpose any blocks in the way into the dimension it came from, never to return again. You will also be unable to move while this shield is in existence.
 
 emt.rsname.Potentia Generator=Potentia Generator
-emt.text.Potentia Generator=After much studying and research, you have finally discovered how to create electricity from your leftover Essentia.<BR><BR>This Generator will produce between 3000 and 3500 EU per unit of Potentia, making it very efficient. Simply place a Warded Jar containing Potentia in a 8 blocks radius of the machine and it will draw it in to create EU.<BR><BR>While Potentia seems like the most logical choice for producing Essentia with EU, you believe you will be able to generate electricity from different Essentia in the near future with a bit of tinkering.
+emt.text.Potentia Generator=After much studying and research, you have finally discovered how to create electricity from your leftover Essentia.<BR><BR>Simply place a Warded Jar containing Potentia in a 8 blocks radius of the machine and it will draw it in to create EU.<BR><BR>While Potentia seems like the most logical choice for producing Essentia with EU, you believe you will be able to generate electricity from different Essentia in the near future with a bit of tinkering.
 
 emt.rsname.Ignis Generator=Ignis Generator
 emt.text.Ignis Generator=Just as you thought, with a bit of tweaking, you have found a way to instead use Ignis Essentia to produce power. On the inside, this machine is able to heat water by consuming Ignis. The steam produced by this heat then spins the turbines, similar to a typical Generator.
@@ -232,7 +232,7 @@ emt.rsname.Arbor Generator=Arbor Generator
 emt.text.Arbor Generator=You always seem to have excess Arbor Essentia sitting around. Not anymore! By modifying your original Potentia Generator, you have found a way to produce energy using Arbor Essentia instead.
 
 emt.rsname.Aer Generator=Aer Generator
-emt.text.Aer Generator=You have discovered the enormous power of the air, and therefore decided to try out a modification of your original Potentia Generator capable of compressing air from Aer Essentia in a nearby jar, giving you 300 EU per unit.
+emt.text.Aer Generator=You have discovered the enormous power of the air, and therefore decided to try out a modification of your original Potentia Generator capable of compressing air from Aer Essentia in a nearby jar.
 
 emt.rsname.Chainsaw of the Stream=Chainsaw of the Stream
 emt.text.Chainsaw of the Stream=After studying both the Axe of the Stream and the Thaumium Chainsaw, you managed to combine most of their abilities, resulting in an electric tool that can chop down whole trees without much effort.

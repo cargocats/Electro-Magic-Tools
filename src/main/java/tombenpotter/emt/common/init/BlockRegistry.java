@@ -11,7 +11,6 @@ import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.blocks.BlockEMTMachines;
 import tombenpotter.emt.common.blocks.BlockEMTSolars;
 import tombenpotter.emt.common.blocks.BlockEMTSolars2;
-import tombenpotter.emt.common.blocks.BlockEssentiaGenerator;
 import tombenpotter.emt.common.blocks.BlockEssentiaGenerators;
 import tombenpotter.emt.common.blocks.BlockPortableNode;
 import tombenpotter.emt.common.blocks.BlockShield;

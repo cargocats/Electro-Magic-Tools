@@ -7,18 +7,27 @@ import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import ic2.core.Ic2Items;
+import ic2.core.item.ItemFluidCell;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.crafting.ShapelessArcaneRecipe;
+import thaumcraft.common.blocks.ItemJarFilled;
+import thaumcraft.common.blocks.ItemJarNode;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import tombenpotter.emt.ElectroMagicTools;
@@ -207,7 +216,7 @@ public class RecipeRegistry {
 
 		quantumWings = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Wings", RandomHelper.getChargedItem(ItemRegistry.quantumWing, 10), 6, CraftingAspects.quantumWing, new ItemStack(ItemRegistry.nanoWing, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1)});
 			
-		infusedQuantumArmor = ThaumcraftApi.addInfusionCraftingRecipe("InfusedQuantumArmor", RandomHelper.getChargedItem(ItemRegistry.quantumArmor, 10), 5, CraftingAspects.quantumWing, new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{new ItemStack(Items.diamond), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(BlockRegistry.shield), new ItemStack(BlockRegistry.shield)});
+		infusedQuantumArmor = ThaumcraftApi.addInfusionCraftingRecipe("Infused Quantum Armor", RandomHelper.getChargedItem(ItemRegistry.quantumArmor, 10), 5, CraftingAspects.quantumWing, new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack[]{new ItemStack(Items.diamond), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(BlockRegistry.shield), new ItemStack(BlockRegistry.shield)});
 
 		/** Arcane Worktable Recipes **/
 
@@ -217,9 +226,11 @@ public class RecipeRegistry {
 
 		christmasFocus = ThaumcraftApi.addArcaneCraftingRecipe("Kris-tmas Focus", new ItemStack(ItemRegistry.christmasFocus), CraftingAspects.christmasFocusCrafting, "XYX", "YZY", "XYX", 'X', new ItemStack(Blocks.snow), 'Y', new ItemStack(Blocks.pumpkin), 'Z', new ItemStack(ConfigItems.itemFocusFrost));
 
-		electricGoggles = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", RandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), CraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A', new ItemStack(IC2Items.getItem("chargedReBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B', Items.repeater);
+		electricGoggles = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", RandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), CraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A', new ItemStack(IC2Items.getItem("reBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE),'B', Items.repeater);
+		
+		electricGoggles2 = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", RandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), CraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A', new ItemStack(IC2Items.getItem("chargedReBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B', Items.repeater);
 
-		shieldBlock = ThaumcraftApi.addArcaneCraftingRecipe("Shield Blocks", new ItemStack(BlockRegistry.shield, 8), CraftingAspects.shieldBlockCrafting, "XYX", "X X", "XYX", 'X', new ItemStack(Blocks.glass), 'Y', new ItemStack(Blocks.obsidian));
+		shieldBlock = ThaumcraftApi.addArcaneCraftingRecipe("Shield Block", new ItemStack(BlockRegistry.shield, 6), CraftingAspects.shieldBlockCrafting, "XYX", "X X", "XYX", 'X', new ItemStack(Blocks.glass), 'Y', new ItemStack(Blocks.obsidian));
 
 		tinyUranium = ThaumcraftApi.addShapelessArcaneCraftingRecipe("Tiny Uranium", new ItemStack(IC2Items.getItem("smallUran235").getItem(), 7), CraftingAspects.tinyUraniumCrafting, IC2Items.getItem("Uran238"));
 
@@ -279,7 +290,11 @@ public class RecipeRegistry {
 
 		tripleEarthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 4), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.earthSolars);
 
-		portableNode = ThaumcraftApi.addCrucibleRecipe("Portable Node", new ItemStack(BlockRegistry.portableNode), new ItemStack(ConfigItems.itemJarFilled), CraftingAspects.portableNode);
+		ItemStack itemStack = new ItemStack(ConfigItems.itemJarNode);
+		((ItemJarNode)itemStack.getItem()).setAspects(itemStack, new AspectList());
+		portableNode = ThaumcraftApi.addCrucibleRecipe("Portable Node", new ItemStack(BlockRegistry.portableNode), itemStack, CraftingAspects.portableNode);
+		
+		uuMCrystal = ThaumcraftApi.addCrucibleRecipe("UU-Matter Infusion", new ItemStack(ItemRegistry.itemEMTItems, 1, 15), Ic2Items.uuMatterCell.copy(), CraftingAspects.uuMatterCrystal);
 
 		/** IC2 Stuff related recipes **/
 
@@ -417,6 +432,7 @@ public class RecipeRegistry {
 	public static ShapelessArcaneRecipe tinyUranium;
 	public static ShapedArcaneRecipe christmasFocus;
 	public static ShapedArcaneRecipe electricGoggles;
+	public static ShapedArcaneRecipe electricGoggles2;
 	public static ShapedArcaneRecipe shieldBlock;
 	public static ShapedArcaneRecipe compressedSolar;
 	public static ShapedArcaneRecipe doubleCompressedSolar;
@@ -448,6 +464,7 @@ public class RecipeRegistry {
 	public static CrucibleRecipe doubleEarthSolar;
 	public static CrucibleRecipe tripleEarthSolar;
 	public static CrucibleRecipe portableNode;
+	public static CrucibleRecipe uuMCrystal;
 
 	public static IRecipe thaumiumPlate;
 }

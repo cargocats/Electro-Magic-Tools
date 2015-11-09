@@ -42,74 +42,54 @@ public class ItemMaterials extends Item {
     public String getUnlocalizedName(ItemStack itemstack) {
         String name = null;
         switch (itemstack.getItemDamage()) {
-            case 0: {
+            case 0: 
                 name = "oreClusterUranium";
-                break;
-            }
-            case 1: {
+                break; 
+            case 1: 
                 name = "crushedOreAmber";
-                break;
-            }
-            case 2: {
+                break;           
+            case 2: 
                 name = "purifiedOreAmber";
-                break;
-            }
-            case 3: {
+                break;           
+            case 3: 
                 name = "crushedOreCinnabar";
-                break;
-            }
-            case 4: {
+                break;          
+            case 4: 
                 name = "purifiedOreCinnabar";
-                break;
-            }
-            case 5: {
+                break;        
+            case 5: 
                 name = "thaumiumPlate";
-                break;
-            }
-            case 6: {
+                break;         
+            case 6: 
                 name = "lightningSummoner";
-                break;
-            }
-            case 7: {
+                break;        
+            case 7: 
                 name = "featherMesh";
-                break;
-            }
-            case 8: {
+                break;        
+            case 8: 
                 name = "glue";
-                break;
-            }
-            case 9: {
+                break;         
+            case 9: 
                 name = "ductTape";
-                break;
-            }
-            case 10: {
+                break;        
+            case 10: 
                 name = "rubberBall";
-                break;
-            }
-            case 11: {
+                break;        
+            case 11: 
                 name = "cardboard";
-                break;
-            }
-            case 12: {
+                break;        
+            case 12: 
                 name = "featherGluedCardboardWing";
-                break;
-            }
-            //case 13: {
-            //    name = "denseIronSheet";
-            //    break;
-            //}
-            case 13: {
+                break;        
+            case 13: 
                 name = "taintedFeather";
-                break;
-            }
-            case 14: {
+                break;        
+            case 14: 
                 name = "thaumiumWing";
-                break;
-            }
-            case 15: {
+                break;        
+            case 15: 
                 name = "uumatterDrop";
-                break;
-            }
+                break;           
             default:
                 name = "nothing";
                 break;
@@ -132,7 +112,6 @@ public class ItemMaterials extends Item {
         this.icon[10] = ri.registerIcon(ModInformation.texturePath + ":materials/rubberball");
         this.icon[11] = ri.registerIcon(ModInformation.texturePath + ":materials/cardboard");
         this.icon[12] = ri.registerIcon(ModInformation.texturePath + ":materials/cardboardsheet");
-        //this.icon[13] = ri.registerIcon(ModInformation.texturePath + ":materials/denseironsheet");
         this.icon[13] = ri.registerIcon(ModInformation.texturePath + ":materials/taintedfeather");
         this.icon[14] = ri.registerIcon(ModInformation.texturePath + ":materials/thaumiumWing");
         this.icon[15] = ri.registerIcon(ModInformation.texturePath + ":materials/uumatterdrop");
@@ -158,10 +137,10 @@ public class ItemMaterials extends Item {
             float f = 1.0F;
             float f1 = player.prevRotationPitch + ((player.rotationPitch - player.prevRotationPitch) * f);
             float f2 = player.prevRotationYaw + ((player.rotationYaw - player.prevRotationYaw) * f);
-            double d = player.prevPosX + ((player.posX - player.prevPosX) * f);
-            double d1 = (player.prevPosY + ((player.posY - player.prevPosY) * f) + 1.6200000000000001D) - player.yOffset;
-            double d2 = player.prevPosZ + ((player.posZ - player.prevPosZ) * f);
-            Vec3 vec3d = Vec3.createVectorHelper(d, d1, d2);
+            double playerX = player.prevPosX + ((player.posX - player.prevPosX) * f);
+            double playerY = (player.prevPosY + ((player.posY - player.prevPosY) * f) + 1.6200000000000001D) - player.yOffset;
+            double playerZ = player.prevPosZ + ((player.posZ - player.prevPosZ) * f);
+            Vec3 playerLoc = Vec3.createVectorHelper(playerX, playerY, playerZ);
             float f3 = MathHelper.cos((-f2 * 0.01745329F) - 3.141593F);
             float f4 = MathHelper.sin((-f2 * 0.01745329F) - 3.141593F);
             float f5 = -MathHelper.cos(-f1 * 0.01745329F);
@@ -170,8 +149,8 @@ public class ItemMaterials extends Item {
             float f8 = f6;
             float f9 = f3 * f5;
             double d3 = 5000D;
-            Vec3 vec3d1 = vec3d.addVector(f7 * d3, f8 * d3, f9 * d3);
-            MovingObjectPosition movingobjectposition = player.worldObj.rayTraceBlocks(vec3d, vec3d1, true);
+            Vec3 vec3d1 = playerLoc.addVector(f7 * d3, f8 * d3, f9 * d3);
+            MovingObjectPosition movingobjectposition = player.worldObj.rayTraceBlocks(playerLoc, vec3d1, true);
             if (movingobjectposition == null) {
                 return stack;
             }

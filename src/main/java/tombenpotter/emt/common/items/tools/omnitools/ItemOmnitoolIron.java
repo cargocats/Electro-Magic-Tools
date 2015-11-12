@@ -143,6 +143,10 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
             return 4;
         }
     }
+    
+    public void setDamage(ItemStack stack, int damage){
+    	super.setDamage(stack, damage > 1 ? damage : 1);
+    }
 
     @Override
     public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {

@@ -66,11 +66,11 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	
-	IIcon icon0;
-	IIcon icon1;
-	IIcon icon2;
-	IIcon icon3;
-	IIcon icon4;
+	IIcon iconNONE;
+	IIcon iconJETPACK;
+	IIcon iconTHAUMIUM;
+	IIcon iconNANO;
+	IIcon iconQUANTUM;
 	Random rnd;
 	
 	public final byte NONE = 0;
@@ -98,11 +98,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		icon0 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest");
-		icon1 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_jetpack");
-		icon2 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_t");
-		icon3 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_n");
-		icon4 = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_q");
+		iconNONE = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest");
+		iconJETPACK = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_jetpack");
+		iconTHAUMIUM = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_t");
+		iconNANO = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_n");
+		iconQUANTUM = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_q");
 	}
 
 	
@@ -267,11 +267,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		}
 		
 		if(wing == THAUMIUM)
-			useWings(player, itemStack, world, 0.15f, 0.7f, 0.5f, 0, false);
+			useWing(player, itemStack, world, 0.15f, 0.7f, 0.5f, 0, false);
 		if(wing == NANO)
-			useWings(player, itemStack, world, 0.25f, 0.6f, 0.3f, 5, true);
+			useWing(player, itemStack, world, 0.25f, 0.6f, 0.3f, 5, true);
 		if(wing == QUANTUM)
-			useWings(player, itemStack, world,  0.33f, 0.5f, 0.2f, 7, true);
+			useWing(player, itemStack, world,  0.33f, 0.5f, 0.2f, 7, true);
 		
 		
 		if ((IC2.platform.isSimulating()) && (toggleTimer > 0)) {
@@ -315,14 +315,14 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			byte wing = stack.stackTagCompound.getByte("wing");
 			
 			switch(wing){
-				case JETPACK : return icon1;
-				case THAUMIUM : return icon2;
-				case NANO : return icon3;
-				case QUANTUM : return icon4;
-				default : return icon0;
+				case JETPACK : return iconJETPACK;
+				case THAUMIUM : return iconTHAUMIUM;
+				case NANO : return iconNANO;
+				case QUANTUM : return iconQUANTUM;
+				default : return iconNONE;
 			}
 		}
-		catch(Exception ex){return icon0;}
+		catch(Exception ex){return iconNONE;}
 	}
 	
     
@@ -332,24 +332,23 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			byte wing = stack.stackTagCompound.getByte("wing");
 			
 			switch(wing){
-				case JETPACK : return icon1;
-				case THAUMIUM : return icon2;
-				case NANO : return icon3;
-				case QUANTUM : return icon4;
-				default : return icon0;
+				case JETPACK : return iconJETPACK;
+				case THAUMIUM : return iconTHAUMIUM;
+				case NANO : return iconNANO;
+				case QUANTUM : return iconQUANTUM;
+				default : return iconNONE;
 			}
 		}
-		catch(Exception e){return icon0;}
+		catch(Exception e){return iconNONE;}
 	}
 	
 	
 	@Override
 	public int getItemEnchantability() {
-        if (ConfigHandler.enchanting == false) {
+        if (ConfigHandler.enchanting == false)
             return 0;
-        } else {
+        else 
             return 4;
-        }
 	}
 	
 	
@@ -380,7 +379,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
     			}
     			else if(wing != 0){
     				ModelCpecialArmor mbm = new ModelCpecialArmor(1, 2);
-    				mbm.isJumping = stack.stackTagCompound.getBoolean("isJumping");
+    				mbm.isJumping = IC2.keyboard.isJumpKeyDown((EntityPlayer) entity);
     				return mbm;
     			}
     		}
@@ -458,19 +457,21 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	}
 	
 	
-	void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount, boolean isElectric){
+	void useWing(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount, boolean isElectric){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
-
-		nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
-    	if(nbtData.getBoolean("isJumping")){
+		boolean isJumping = IC2.keyboard.isJumpKeyDown(player);
+		
+    	if(isJumping){
+    		byte f = nbtData.getByte("f");
        		nbtData.setBoolean("isHolding", true);
-       		nbtData.setInteger("f", nbtData.getInteger("f") + 1);
-           	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
+       		nbtData.setByte("f", (byte) (f + 1));
+           	if(f > 7) nbtData.setByte("f", (byte) 7);
        	}
        	else if(nbtData.getBoolean("isHolding")){
+       		byte f = nbtData.getByte("f");
            	nbtData.setBoolean("isHolding", false);	
-           	player.motionY = motionY * nbtData.getInteger("f");
-           	ElectricItem.manager.use(stack, ((motionY * nbtData.getInteger("f")) * 100) * amount, player);
+           	player.motionY = motionY * f;
+           	ElectricItem.manager.use(stack, ((motionY * f) * 10) * amount, player);
            	if(player.motionX < 0.5 && player.motionZ < 0.5 && player.motionX > -0.5 && player.motionZ > -0.5){
            		player.motionX /= motionXZ;
            		player.motionZ /= motionXZ;
@@ -479,16 +480,30 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
            	for(int i = 0; i < 4; i++){
            		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
            	}
-           	nbtData.setInteger("f", 0);
+           	
+           	nbtData.setByte("f", (byte) 0);
         }
-       	if (nbtData.getBoolean("isJumping") && !player.onGround && player.motionY < 0)
+    	
+       	if (isJumping && !player.onGround && player.motionY < 0){
        		player.motionY *= f1;
-        if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
-       	if(ConfigHandler.impactOfRain){
-        	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-        		player.motionY = -0.3;
+       	}
+       	
+        if (player.isInWater() && !player.capabilities.isCreativeMode) {
+        	player.motionY += -0.05;
         }
-        if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
-        if (player.fallDistance > 0.0F) player.fallDistance = 0;
+        
+       	if(ConfigHandler.impactOfRain){
+        	if ((world.getBiomeGenForCoords((int)player.posX, (int)player.posZ)).canSpawnLightningBolt() && world.canBlockSeeTheSky((int)player.posX, (int)player.posY, (int)player.posZ) && world.isRaining() && !player.capabilities.isCreativeMode){
+        		player.motionY += -0.05;
+        	}
+        }
+       	
+        if (player.isSneaking() && !player.onGround && player.motionY < 0) {
+        	player.motionY *= 0.6;
+        }
+        
+        if (player.fallDistance > 0.0F) {
+        	player.fallDistance = 0;
+        }
     }
 }

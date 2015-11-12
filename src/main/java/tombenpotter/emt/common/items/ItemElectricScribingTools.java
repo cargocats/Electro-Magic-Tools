@@ -66,4 +66,8 @@ public class ItemElectricScribingTools extends ItemInkwell implements IElectricI
     public Item getEmptyItem(ItemStack itemStack) {
         return this;
     }
+    
+    public void setDamage(ItemStack stack, int damage){
+    	super.setDamage(stack, damage > 1 ? damage : 1);
+    }
 }

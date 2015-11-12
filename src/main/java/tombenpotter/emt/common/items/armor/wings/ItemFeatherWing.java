@@ -64,27 +64,27 @@ public class ItemFeatherWing extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-    	updateWings(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
+    	useWing(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
     }
     
-    public void updateWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount){
+    public void useWing(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount){
     	NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
     	boolean isJmuping = nbtData.getBoolean("isJumping");
     	boolean isHolding = nbtData.getBoolean("isHolding");
-    	int f = nbtData.getInteger("f");
     	
     	nbtData.setBoolean("isJumping", IC2.keyboard.isJumpKeyDown(player));
     	
     	if(isJmuping){
+    		byte f = nbtData.getByte("f");
         	nbtData.setBoolean("isHolding", true);
-        	nbtData.setInteger("f", f + 1);
-           	if(nbtData.getInteger("f") > 7) nbtData.setInteger("f", 7);
+        	nbtData.setByte("f", (byte) (f + 1));
+           	if(f > 7) nbtData.setByte("f", (byte) 7);
        	}
         else if(isHolding){
+        	byte f = nbtData.getByte("f");
            	nbtData.setBoolean("isHolding", false);
-            		
            	player.motionY = motionY * f;
-           	ElectricItem.manager.use(stack, ((motionY * nbtData.getInteger("f")) * 100) * amount, player);
+           	ElectricItem.manager.use(stack, ((motionY * f) * 10) * amount, player);
            	if(player.motionX < 0.5 && player.motionZ < 0.5 && player.motionX > -0.5 && player.motionZ > -0.5){
            		player.motionX /= motionXZ;
            		player.motionZ /= motionXZ;
@@ -93,20 +93,29 @@ public class ItemFeatherWing extends ItemArmor {
            	for(int i = 0; i < 4; i++){
            		world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
            	}
-           	nbtData.setInteger("f", 0);
+           	nbtData.setByte("f", (byte) 0);
         }
 
-    	if (isJmuping && !player.onGround && player.motionY < 0)
+    	if (isJmuping && !player.onGround && player.motionY < 0){
            	player.motionY *= f1;
-    	if (player.isInWater() && !player.capabilities.isCreativeMode) player.motionY += -0.2;
+    	}
+    	
+    	if (player.isInWater() && !player.capabilities.isCreativeMode){
+    		player.motionY += -0.03;
+    	}
             
-        if(ConfigHandler.impactOfRain){
-        	if ((player.worldObj.isRaining() || player.worldObj.isThundering()) && !player.capabilities.isCreativeMode)
-            	player.motionY = -0.3;
+       	if(ConfigHandler.impactOfRain){
+        	if ((world.getBiomeGenForCoords((int)player.posX, (int)player.posZ)).canSpawnLightningBolt() && world.canBlockSeeTheSky((int)player.posX, (int)player.posY, (int)player.posZ) && world.isRaining() && !player.capabilities.isCreativeMode){
+        		player.motionY += -0.03;
+        	}
         }
 
-        if (player.isSneaking() && !player.onGround) player.motionY = -0.6;
+        if (player.isSneaking() && !player.onGround && player.motionY < 0){
+        	player.motionY *= 0.6;
+        }
         
-        if (player.fallDistance > 0.0F) player.fallDistance = 0;
+        if (player.fallDistance > 0.0F){
+        	player.fallDistance = 0;
+        }
     }
 }

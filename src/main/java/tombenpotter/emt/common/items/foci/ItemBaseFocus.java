@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class ItemBaseFocus extends ItemFocusBasic {
 
 	private IIcon ornament, depth;
-	String t = null;
+	String textureName = null;
 
 	public ItemBaseFocus(String unlocName, String textureName) {
 		super();
@@ -34,7 +34,7 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 		setMaxDamage(1);
 		setNoRepair();
 		setMaxStackSize(1);
-		t = textureName;
+		this.textureName = textureName;
 	}
 
 	boolean hasOrnament() {
@@ -43,7 +43,7 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 	
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister ir) {
-        this.icon = ir.registerIcon(ModInformation.texturePath + ":" + t);
+        this.icon = ir.registerIcon(ModInformation.texturePath + ":" + textureName);
 	}
 
 	boolean hasDepth() {

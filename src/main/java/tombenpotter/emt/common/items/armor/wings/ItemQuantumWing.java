@@ -39,7 +39,7 @@ public class ItemQuantumWing extends ItemNanoWing {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-    	this.updateWings(player, stack, world, 0.33f, 0.5f, 0.2f, 7);
+    	this.useWing(player, stack, world, 0.33f, 0.5f, 0.2f, 7);
     }
     
     @Override

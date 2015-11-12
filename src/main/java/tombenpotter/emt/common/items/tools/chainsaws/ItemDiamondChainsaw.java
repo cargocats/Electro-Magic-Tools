@@ -178,6 +178,10 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
         return ConfigHandler.enchanting;
     }
+    
+    public void setDamage(ItemStack stack, int damage){
+    	super.setDamage(stack, damage > 1 ? damage : 1);
+    }
 
     /* IC2 API METHODS */
 

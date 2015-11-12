@@ -119,6 +119,10 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
     	else
     		return false;
     }
+    
+    public void setDamage(ItemStack stack, int damage){
+    	super.setDamage(stack, damage > 1 ? damage : 1);
+    }
 
     /* IC2 API METHODS */
 

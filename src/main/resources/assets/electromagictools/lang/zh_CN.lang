@@ -11,6 +11,7 @@ gui.EMT.wandRecharge.title=工业法杖充能站
 gui.EMT.inventory=物品栏
 gui.EMT.book.aspect.output.eu.title=源质发电机
 gui.EMT.book.aspect.output.essentia.eu=源质发电功率
+gui.EMT.key.unequip=Unequip
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
@@ -57,45 +58,34 @@ item.EMT.emtitems.denseIronSheet.name=致密铁片
 item.EMT.emtitems.taintedFeather.name=腐化羽毛
 item.EMT.emtitems.thaumiumWing.name=神秘增强羽翼
 item.EMT.emtitems.uumatterDrop.name=结晶UU物质液滴
-
 item.EMT.emtbauble.euMaker.armor.name=装备充电指环
 item.EMT.emtbauble.euMaker.inventory.name=物品充电指环
 item.EMT.item.bauble.oneRing.name=魔戒
-
 item.EMT.goggles.electric.name=电子护目镜
 item.EMT.goggles.nano.name=纳米揭示护目镜
 item.EMT.goggles.quantum.name=量子揭示护目镜
 item.EMT.goggles.solar.name=太阳能揭示护目镜
-
 item.EMT.boots.traveller.electric.name=电子旅行者之靴
 item.EMT.boots.traveller.nano.name=纳米旅行者之靴
 item.EMT.boots.traveller.quantum.name=量子旅行者之靴
-
 item.EMT.scribingtools.electric.name=电子笔与墨
-
 item.EMT.wing.feather.name=粘合纸板羽翼
 item.EMT.wing.thaumium.name=神秘羽翼
 item.EMT.wing.nano.name=纳米羽翼
 item.EMT.wing.quantum.name=量子羽翼
 ic2.EMT.quantum=注魔量子胸甲
-
 item.EMT.hammer.broken.name=破损的雷神之锤
 item.EMT.hammer.name=雷神之锤
 item.EMT.hammer.electric.name=高压雷神之锤
-
 item.EMT.drill.thaumium.name=神秘钻头
-
 item.EMT.chainsaw.diamond.name=钻石链锯
 item.EMT.chainsaw.thaumium.name=神秘链锯
-
 item.EMT.omnitool.iron.name=铁制钻锯
 item.EMT.omnitool.diamond.name=钻石钻锯
 item.EMT.omnitool.thaumium.name=神秘钻锯
-
 item.EMT.chainsaw.stream.name=奔雷电锯
 item.EMT.drill.rockbreaker.name=破岩者电钻
 item.EMT.hoeofgrowth.electric.name=电子句芒锄
-
 item.EMT.focus.explosion.name=法杖核心:爆炸
 item.EMT.focus.christmas.name=法杖核心:圣诞
 item.EMT.focus.shield.name=法杖核心:护盾
@@ -190,7 +180,7 @@ emt.tag.Feather Wings=在动漫里才会起效...
 emt.tag.Thaumium Reinforced Wings=好多了
 emt.tag.Nanosuit Wings=纳米大法好!
 emt.tag.Quantum Wings=量子科技
-emt.tag.InfusedQuantumArmor=最后的一步...
+emt.tag.Infused Quantum Armor=最后的一步...
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=电力魔法工具
@@ -257,7 +247,7 @@ emt.rsname.Tiny Uranium=小堆铀
 emt.text.Tiny Uranium=在你将自己所有的矿物都用在了核反应堆的材料上后,你终于用尽了用来做你所需燃料棒的铀.在很长时间的研究后,你试着将你剩下的铀转化为更有用的粒!<BR><BR>不幸的是,这个过程有些浪费,不过你相信它会有所值.
 
 emt.rsname.Mjolnir=雷神之锤
-emt.text.Mjolnir=你走遍了世界,为了找到这个可能存在的雷神之锤.一天,你偶然发现了它的碎片,你很沮丧.经过长时间辛苦的研究,你找到了让这个魔法工具重现昔日荣光的方法.<BR><BR>你有种感觉（似乎常常有这种感觉）,尽管这个工具十分强力,但你还能做更多.
+emt.text.Mjolnir=你走遍了世界,为了找到这个可能存在的雷神之锤.一天,你偶然发现了它的碎片,你很沮丧.经过长时间辛苦的研究,你找到了让这个魔法工具重现昔日荣光的方法.<BR><BR>你有种感觉(似乎常常有这种感觉),尽管这个工具十分强力,但你还能做更多.
 
 emt.rsname.The Legend=传说之物
 emt.text.The Legend=你总是听到关于那个锤子的传说.<BR><BR>传说有一个闪电之神,托尔,有一把能够召唤闪电的锤子.<BR><BR>传说神在他的次元隐退,留下了他的锤子,在某个被保护好的地牢里藏了起来,只有有能力的家伙才能找到它.<BR><BR>你有很多时间去探索这个世界,去试着找到这把锤子.
@@ -266,7 +256,7 @@ emt.rsname.Lightning Summoner=闪电碎片
 emt.text.Lightning Summoner=这个物品是你的死敌:高压苦力怕所掉落的.你觉得它以后会派上用场.
 
 emt.rsname.Supercharged Mjolnir=高压雷神之锤
-emt.text.Supercharged Mjolnir=在对于所有的地牢进行探索之后,你已经找到了一种方法来制服“托尔的力量”,使得他的锤子变为你的所有物.此外,你可以你的锤子召唤守卫雪傀儡来保护你.然而这把锤子失去了在你所指之处召唤闪电的力量,并且使用时会在你的周围召唤一圈闪电.
+emt.text.Supercharged Mjolnir=在对于所有的地牢进行探索之后,你已经找到了一种方法来制服"托尔的力量",使得他的锤子变为你的所有物.此外,你可以你的锤子召唤守卫雪傀儡来保护你.然而这把锤子失去了在你所指之处召唤闪电的力量,并且使用时会在你的周围召唤一圈闪电.
 
 emt.rsname.Industrial Wand Charging Station=I工业法杖充能站
 emt.text.Industrial Wand Charging Station=你已试着将法杖充能基座和强大的UU物质结合起来.结果得到了一个能再生法杖魔力的机器,回复每种要素魔力1vis将会消耗50000EU.
@@ -287,7 +277,7 @@ emt.rsname.Macerating Native Ore Clusters=矿簇粉碎工艺
 emt.text.Macerating Native Ore Clusters=你可以磨粉所有的矿簇,除了朱砂矿簇.你将会从每个矿簇中得到22个小堆粉.
 
 emt.rsname.Electric Boots of the Traveller=电子旅行者之靴
-emt.text.Electric Boots of the Traveller=通过许多精密机械部件和对魔法的接触,你用更稳定的形式重现了旅行者之靴.这些靴子,不像初始的,不会因长时间穿着而损坏,用电力代替耐久.这些靴子免疫一切掉落伤害（不消耗电力）,并保有旅行者之靴的所有特性.
+emt.text.Electric Boots of the Traveller=通过许多精密机械部件和对魔法的接触,你用更稳定的形式重现了旅行者之靴.这些靴子,不像初始的,不会因长时间穿着而损坏,用电力代替耐久.这些靴子免疫一切掉落伤害(不消耗电力),并保有旅行者之靴的所有特性.
 
 emt.rsname.Nano Boots of the Traveller=纳米旅行者之靴
 emt.text.Nano Boots of the Traveller=你的电子旅行者之靴还不错,但你觉得你能做的更好.你已发现了一种将这些靴子升级到纳米的方法,改良机械零件和靴子的符文.这些靴子提供了比以往更高的跳跃高度和更快的奔跑速度.
@@ -299,13 +289,13 @@ emt.rsname.Electric Scribing Tools=电子笔与墨
 emt.text.Electric Scribing Tools=你不想再杀墨鱼了.因此你研究出了一种补充书写工具的方法,使得他们不再需要墨水.通过静电和圆珠笔技术你做出了能在内部快速回复墨水的工具,只需要充电就能持续使用.
 
 emt.rsname.Etheral Processor=天域加工机
-emt.text.Etheral Processor=在你为了处理众多矿物而开发炼狱熔炉的地狱能量后,你脑子中出现了一些完全不同的想法.现在你使用名为“古德”的力量,来自天空和叫做天堂的这些.这个天域加工机使得每个冶炼的产物双倍,并且有10%的几率产生一个神秘粒作为奖励.你知道他有两个缺点:尽管它使冶炼产物双倍,但这也要双倍于一个物品的冶炼时间.并且由于它是高级魔法的发明,一些普通的冶炼合成会失效.你相信圆石不能在这个奇妙的机器里被烧成石头.
+emt.text.Etheral Processor=在你为了处理众多矿物而开发炼狱熔炉的地狱能量后,你脑子中出现了一些完全不同的想法.现在你使用名为"古德"的力量,来自天空和叫做天堂的这些.这个天域加工机使得每个冶炼的产物双倍,并且有10%的几率产生一个神秘粒作为奖励.你知道他有两个缺点:尽管它使冶炼产物双倍,但这也要双倍于一个物品的冶炼时间.并且由于它是高级魔法的发明,一些普通的冶炼合成会失效.你相信圆石不能在这个奇妙的机器里被烧成石头.
 
 emt.rsname.Water Infused Solar Panels=注魔太阳能发电机(水)
 emt.text.Water Infused Solar Panels=你总是讨厌下雨,他别是当你所有的能源来自太阳能时.你如此讨厌它于是你决定寻找一种让太阳能在雨天工作的方法.你做出来了...这种..水注魔太阳能能在下雨时工作,并且只在下雨时发电.
 
 emt.rsname.Entropy Infused Solar Panels=注魔太阳能发电机(混沌)
-emt.text.Entropy Infused Solar Panels=你知道太阳能晚上会停止工作.为了解决这个问题,你找到了一种让你的太阳能在晚上工作的方法!（只能在晚上工作）
+emt.text.Entropy Infused Solar Panels=你知道太阳能晚上会停止工作.为了解决这个问题,你找到了一种让你的太阳能在晚上工作的方法!(只能在晚上工作)
 
 emt.rsname.Order Infused Solar Panels=注魔太阳能发电机(秩序)
 emt.text.Order Infused Solar Panels=利用秩序的力量,你已经有办法让你的太阳能在白天输出三倍的电力!
@@ -328,10 +318,10 @@ emt.text.Portable Node=在对缸中节点进行深入研究后,你成功制作�
 emt.rsname.Electric Hoe of Growth=电力勾芒锄
 emt.text.Electric Hoe of Growth=你试着升级你的句芒锄.现在它对土地和植物就像之前的句芒锄一样工作.<BR><BR>然而,对你来说这个工具里的魔力过于强力难以全部转为使用一般电力的性能,在它用坏前你还会有几次使用的次数,它是可充电的.
 
-emt.rsname.Wand Focus: Charging=法杖核心:化魔
+emt.rsname.Wand Focus: Charging=法杖核心:充电
 emt.text.Wand Focus: Charging=你意识到你总是随身带着一支法杖和你的电子设备.但有时,你用光了电子工具里的电.因此你做出了这个核心.它很简单也很实用,将法杖的魔力转化为一般的电力来给物品充电.
 
-emt.rsname.Wand Focus: Wand Charging=法杖核心:充电
+emt.rsname.Wand Focus: Wand Charging=法杖核心:化魔
 emt.text.Wand Focus: Wand Charging=你发现了一种方法利用工业充能站的能力并将其嵌入法杖核心,逆转原有的过程.现在它会从物品中抽取电力给你的法杖充能,尽管消耗率很高.此外,你意识到你需要一整套符文护甲才能启动法杖充能的过程.
 
 emt.rsname.Inventory Charging Ring=物品充能指环
@@ -355,5 +345,5 @@ emt.text.Nanosuit Wings=利用神秘锭将魔法与纳米科技结合到你的�
 emt.rsname.Quantum Wings=量子羽翼
 emt.text.Quantum Wings=在探索完纳米科技所有的可能性后,你决定做最后一搏,量子.你可以在空中再跳几格的高度, 极好的防护,并且的下降的过程极大减缓了.然而,量子的不可预测又一次发生了.同时按住潜行键和空格键时你的下降会完全停止.你不知道为何会这样,但它就是这样.摔落伤害减免:100%.
 
-emt.rsname.InfusedQuantumArmor=注魔量子胸甲
-emt.text.InfusedQuantumArmor=你已经无事可做,但是你决定做一些有用的东西.你的脑海中浮现出一个想法,在制作盔甲时可以把羽翼或者背包系在一起以保证飞行的安全.持有羽翼或者背包时在潜行状态下右击可以将它们系在盔甲上.要将它们拿下来时只需要按住Shift + Ctrl.
+emt.rsname.Infused Quantum Armor=注魔量子胸甲
+emt.text.Infused Quantum Armor=你已经无事可做,但是你决定做一些有用的东西.你的脑海中浮现出一个想法,在制作盔甲时可以把羽翼或者背包系在一起以保证飞行的安全.持有羽翼或者背包时在潜行状态下右击可以将它们系在盔甲上.要将它们拿下来时只需要按住Shift + Ctrl.

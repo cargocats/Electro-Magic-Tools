@@ -230,10 +230,10 @@ public class RecipeRegistry {
 				new ItemStack[] { new ItemStack(ItemRegistry.chargeFocus), new ItemStack(IC2Items.getItem("energyPack").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate") });
 
 		inventoryChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Inventory Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 1), 6, CraftingAspects.inventoryChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-				new ItemStack[] { new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), IC2Items.getItem("windMill"), IC2Items.getItem("nuclearReactor") });
+				new ItemStack[] { new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator, ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
 		armorChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Armor Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 0), 6, CraftingAspects.armorChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-				new ItemStack[] { new ItemStack(ItemRegistry.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), IC2Items.getItem("windMill"), IC2Items.getItem("nuclearReactor") });
+				new ItemStack[] { new ItemStack(ItemRegistry.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator, ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
 		nanoWings = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Wings", RandomHelper.getChargedItem(ItemRegistry.nanoWing, 10), 4, CraftingAspects.nanoWing, new ItemStack(ItemRegistry.thaumiumWing),
 				new ItemStack[] { IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), new ItemStack(IC2Items.getItem("nanoBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1) });

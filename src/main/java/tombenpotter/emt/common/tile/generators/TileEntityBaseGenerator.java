@@ -10,57 +10,57 @@ import tombenpotter.emt.common.util.ConfigHandler;
 
 public abstract class TileEntityBaseGenerator extends TileEntityEMT {
 
-    public BasicSource energySource = new BasicSource(this, 1000000000, 3);
-    public Aspect aspect;
-    public int output;
-    public int tick = 0;
+	public BasicSource energySource = new BasicSource(this, 1000000000, 3);
+	public Aspect aspect;
+	public int output;
+	public int tick = 0;
 
-    public TileEntityBaseGenerator() {
-        output = 20;
-    }
+	public TileEntityBaseGenerator() {
+		output = 20;
+	}
 
-    @Override
-    public void updateEntity() {
-    	if(tick > 0)
-    		tick--;
-    	
-    	if(tick == 0){
-    		energySource.updateEntity();
-        	createEnergy();
-        	tick = 20;
-    	}
-    }
+	@Override
+	public void updateEntity() {
+		if (tick > 0)
+			tick--;
 
-    public void createEnergy() {
-        if (!this.worldObj.isRemote && EssentiaHandler.drainEssentia(this, aspect, ForgeDirection.UNKNOWN, 8)) {
-            energySource.addEnergy(output * 20);
-        }
-    }
+		if (tick == 0) {
+			energySource.updateEntity();
+			createEnergy();
+			tick = 20;
+		}
+	}
 
-    @Override
-    public void onChunkUnload() {
-        energySource.onChunkUnload();
-    }
+	public void createEnergy() {
+		if (!this.worldObj.isRemote && EssentiaHandler.drainEssentia(this, aspect, ForgeDirection.UNKNOWN, 8)) {
+			energySource.addEnergy(output * 20);
+		}
+	}
 
-    @Override
-    public void invalidate() {
-        energySource.invalidate();
-        super.invalidate();
-    }
+	@Override
+	public void onChunkUnload() {
+		energySource.onChunkUnload();
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        energySource.readFromNBT(tag);
-    }
+	@Override
+	public void invalidate() {
+		energySource.invalidate();
+		super.invalidate();
+	}
 
-    @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
-        energySource.writeToNBT(tag);
-    }
-    
-    public int getOutput(){
-    	return output;
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		energySource.readFromNBT(tag);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		energySource.writeToNBT(tag);
+	}
+
+	public int getOutput() {
+		return output;
+	}
 }

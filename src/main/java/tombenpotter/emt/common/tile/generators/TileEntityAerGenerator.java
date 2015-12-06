@@ -6,9 +6,9 @@ import tombenpotter.emt.common.util.EssentiasOutputs;
 
 public class TileEntityAerGenerator extends TileEntityBaseGenerator {
 
-    public TileEntityAerGenerator() {
-        aspect = Aspect.AIR;
-        EssentiasOutputs.outputs.get(aspect.getTag());
-        output = ConfigHandler.aerGenerator;
-    }
+	public TileEntityAerGenerator() {
+		aspect = Aspect.AIR;
+		EssentiasOutputs.outputs.get(aspect.getTag());
+		output = ConfigHandler.aerGenerator;
+	}
 }

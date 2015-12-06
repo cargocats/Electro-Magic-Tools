@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -44,15 +45,15 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.yOffset = 0.0F;
 	}
 
-	public EntityLaser(World par1World, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase, float par4, float par5) {
-		super(par1World);
+	public EntityLaser(World world, EntityLivingBase entity, EntityLivingBase par3EntityLivingBase, float par4, float par5) {
+		super(world);
 		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = par2EntityLivingBase;
+		this.shootingEntity = entity;
 
-		this.posY = par2EntityLivingBase.posY + (double) par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
-		double d0 = par3EntityLivingBase.posX - par2EntityLivingBase.posX;
+		this.posY = entity.posY + (double) entity.getEyeHeight() - 0.10000000149011612D;
+		double d0 = par3EntityLivingBase.posX - entity.posX;
 		double d1 = par3EntityLivingBase.boundingBox.minY + (double) (par3EntityLivingBase.height / 3.0F) - this.posY;
-		double d2 = par3EntityLivingBase.posZ - par2EntityLivingBase.posZ;
+		double d2 = par3EntityLivingBase.posZ - entity.posZ;
 		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
 		if (d3 >= 1.0E-7D) {
@@ -60,20 +61,20 @@ public class EntityLaser extends Entity implements IProjectile {
 			float f3 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
 			double d4 = d0 / d3;
 			double d5 = d2 / d3;
-			this.setLocationAndAngles(par2EntityLivingBase.posX + d4, this.posY, par2EntityLivingBase.posZ + d5, f2, f3);
+			this.setLocationAndAngles(entity.posX + d4, this.posY, entity.posZ + d5, f2, f3);
 			this.yOffset = 0.0F;
 			float f4 = (float) d3 * 0.2F;
 			this.setThrowableHeading(d0, d1 + (double) f4, d2, par4, par5);
 		}
 	}
 
-	public EntityLaser(World par1World, EntityLivingBase par2EntityLivingBase, float par3) {
-		super(par1World);
+	public EntityLaser(World world, EntityLivingBase entity, float par3) {
+		super(world);
 		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = par2EntityLivingBase;
+		this.shootingEntity = entity;
 
 		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + (double) par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
+		this.setLocationAndAngles(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
@@ -132,7 +133,6 @@ public class EntityLaser extends Entity implements IProjectile {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void onUpdate() {
 		super.onUpdate();
 
@@ -163,18 +163,19 @@ public class EntityLaser extends Entity implements IProjectile {
 		if (this.inGround) {
 			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-			if(!this.worldObj.isRemote){
-				this.worldObj.createExplosion(this, (int)this.posX, (int)this.posY, (int)this.posZ, 3, true);
+			if (!this.worldObj.isRemote) {
+				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, 3, true);
 				this.setDead();
 			}
-			
+
 			if (j == this.inTile && k == this.inData) {
 				++this.ticksInGround;
-			
+
 				if (this.ticksInGround == 1200) {
 					this.setDead();
 				}
-			} else {
+			}
+			else {
 				this.inGround = false;
 				this.motionX *= (double) (this.rand.nextFloat() * 0.2F);
 				this.motionY *= (double) (this.rand.nextFloat() * 0.2F);
@@ -182,7 +183,8 @@ public class EntityLaser extends Entity implements IProjectile {
 				this.ticksInGround = 0;
 				this.ticksInAir = 0;
 			}
-		} else {
+		}
+		else {
 			++this.ticksInAir;
 			Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
@@ -246,7 +248,8 @@ public class EntityLaser extends Entity implements IProjectile {
 						this.prevRotationYaw += 180.0F;
 						this.ticksInAir = 0;
 					}
-				} else {
+				}
+				else {
 					this.xTile = movingobjectposition.blockX;
 					this.yTile = movingobjectposition.blockY;
 					this.zTile = movingobjectposition.blockZ;
@@ -308,22 +311,22 @@ public class EntityLaser extends Entity implements IProjectile {
 		}
 	}
 
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		par1NBTTagCompound.setShort("xTile", (short) this.xTile);
-		par1NBTTagCompound.setShort("yTile", (short) this.yTile);
-		par1NBTTagCompound.setShort("zTile", (short) this.zTile);
-		par1NBTTagCompound.setByte("inTile", (byte) Block.getIdFromBlock(this.inTile));
-		par1NBTTagCompound.setByte("inData", (byte) this.inData);
-		par1NBTTagCompound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		nbt.setShort("xTile", (short) this.xTile);
+		nbt.setShort("yTile", (short) this.yTile);
+		nbt.setShort("zTile", (short) this.zTile);
+		nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.inTile));
+		nbt.setByte("inData", (byte) this.inData);
+		nbt.setBoolean("inGround", this.inGround);
 	}
 
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		this.xTile = par1NBTTagCompound.getShort("xTile");
-		this.yTile = par1NBTTagCompound.getShort("yTile");
-		this.zTile = par1NBTTagCompound.getShort("zTile");
-		this.inTile = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
-		this.inData = par1NBTTagCompound.getByte("inData") & 255;
-		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		this.xTile = nbt.getShort("xTile");
+		this.yTile = nbt.getShort("yTile");
+		this.zTile = nbt.getShort("zTile");
+		this.inTile = Block.getBlockById(nbt.getByte("inTile") & 255);
+		this.inData = nbt.getByte("inData") & 255;
+		this.inGround = nbt.getBoolean("inGround");
 	}
 
 	public void onCollide(Entity par1Entity) {

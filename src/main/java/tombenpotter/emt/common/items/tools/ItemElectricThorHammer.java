@@ -35,7 +35,6 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
         this.setCreativeTab(ElectroMagicTools.tabEMT);
         this.setMaxDamage(27);
         this.setMaxStackSize(1);
-        // OreDictionary.registerOre("craftingToolForgeHammer", this);
     }
 
     @SideOnly(Side.CLIENT)

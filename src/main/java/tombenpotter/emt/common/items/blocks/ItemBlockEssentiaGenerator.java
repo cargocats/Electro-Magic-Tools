@@ -12,9 +12,4 @@ public class ItemBlockEssentiaGenerator extends ItemBlock {
     public ItemBlockEssentiaGenerator(Block id) {
         super(id);
     }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        //  list.add("");
-    }
 }

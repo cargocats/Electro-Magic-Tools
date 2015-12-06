@@ -72,7 +72,6 @@ public class BlockPortableNode extends BlockAiry {
         return this.texture[0];
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item id, CreativeTabs tab, List list) {
         list.add(new ItemStack(id, 1, 0));

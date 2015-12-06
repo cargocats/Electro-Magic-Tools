@@ -10,29 +10,30 @@ import tombenpotter.emt.common.entities.EntityLaser;
 
 public class EntityRegistry {
 
-    private static int startEID = 300;
-    private static int entityIDs = 0;
+	private static int startEID = 300;
+	private static int entityIDs = 0;
 
-    private static int getUniqueEntityID() {
+	private static int getUniqueEntityID() {
 
-        do {
-            startEID++;
-        } while (EntityList.getStringFromID(startEID) != null);
-        return startEID;
-    }
+		do {
+			startEID++;
+		}
+		while (EntityList.getStringFromID(startEID) != null);
+		return startEID;
+	}
 
-    @SuppressWarnings("unchecked")
-    public static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec) {
-        int id = getUniqueEntityID();
-        EntityList.IDtoClassMapping.put(id, entity);
-        EntityList.entityEggs.put(id, new EntityEggInfo(id, colPrim, colSec));
-        return;
-    }
+	@SuppressWarnings("unchecked")
+	public static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec) {
+		int id = getUniqueEntityID();
+		EntityList.IDtoClassMapping.put(id, entity);
+		EntityList.entityEggs.put(id, new EntityEggInfo(id, colPrim, colSec));
+		return;
+	}
 
-    public static void registerEMTEntities() {
+	public static void registerEMTEntities() {
 
-    	cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityLaser.class, "entityLaser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-    	cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityArcher.class, "entityArcher", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-        registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
-    }
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
+	}
 }

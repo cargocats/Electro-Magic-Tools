@@ -46,7 +46,6 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
         this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/drill_thaumium");
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
         ItemStack itemStack = new ItemStack(this, 1);
@@ -116,10 +115,6 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     @Override
     public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
         return ConfigHandler.enchanting;
-    }
-    
-    public void setDamage(ItemStack stack, int damage){
-    	super.setDamage(stack, damage > 1 ? damage : 1);
     }
 
     /* IC2 API METHODS */

@@ -16,39 +16,43 @@ import java.util.Locale;
 
 public class RandomHelper {
 
-	public static boolean isRKMPressed(World world){
-		if(FMLCommonHandler.instance().getSide().isClient()){
+	public static boolean isRKMPressed(World world) {
+		if (FMLCommonHandler.instance().getSide().isClient()) {
 			return Minecraft.getMinecraft().gameSettings.keyBindUseItem.getIsKeyPressed();
 		}
-			
-			
-		else return true;
+
+		else
+			return true;
 	}
-	
-    public static boolean placeTorch(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
-        for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-            ItemStack torchStack = player.inventory.mainInventory[i];
-            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) continue;
-            Item item = torchStack.getItem();
-            if (!(item instanceof ItemBlock)) continue;
-            int oldMeta = torchStack.getItemDamage();
-            int oldSize = torchStack.stackSize;
-            boolean result = torchStack.tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset, zOffset);
-            if (player.capabilities.isCreativeMode) {
-                torchStack.setItemDamage(oldMeta);
-                torchStack.stackSize = oldSize;
-            } else if (torchStack.stackSize <= 0) {
-                ForgeEventFactory.onPlayerDestroyItem(player, torchStack);
-                player.inventory.mainInventory[i] = null;
-            }
-            if (result) return true;
-        }
-        return false;
-    }
-    
-    public static ItemStack getChargedItem(Item item, int charge){
-    	ItemStack stack = new ItemStack(item);
+
+	public static boolean placeTorch(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
+		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+			ItemStack torchStack = player.inventory.mainInventory[i];
+			if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch"))
+				continue;
+			Item item = torchStack.getItem();
+			if (!(item instanceof ItemBlock))
+				continue;
+			int oldMeta = torchStack.getItemDamage();
+			int oldSize = torchStack.stackSize;
+			boolean result = torchStack.tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset, zOffset);
+			if (player.capabilities.isCreativeMode) {
+				torchStack.setItemDamage(oldMeta);
+				torchStack.stackSize = oldSize;
+			}
+			else if (torchStack.stackSize <= 0) {
+				ForgeEventFactory.onPlayerDestroyItem(player, torchStack);
+				player.inventory.mainInventory[i] = null;
+			}
+			if (result)
+				return true;
+		}
+		return false;
+	}
+
+	public static ItemStack getChargedItem(Item item, int charge) {
+		ItemStack stack = new ItemStack(item);
 		ElectricItem.manager.charge(stack, charge, charge, true, false);
 		return stack;
-    }
+	}
 }

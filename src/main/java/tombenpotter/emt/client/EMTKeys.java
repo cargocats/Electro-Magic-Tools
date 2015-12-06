@@ -12,16 +12,15 @@ import tombenpotter.emt.common.util.TextHelper;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.settings.KeyBinding;
 
-public class EMTKeys{
+public class EMTKeys {
 	public static KeyBinding keyUnequip;
-	
-	public static void registerKeys(){
+
+	public static void registerKeys() {
 		keyUnequip = new KeyBinding(TextHelper.localize("gui.EMT.key.unequip"), Keyboard.KEY_Z, "EMT");
 		ClientRegistry.registerKeyBinding(keyUnequip);
-
 	}
-	
-	public static boolean keyUnequipPressed(){
+
+	public static boolean keyUnequipPressed() {
 		return keyUnequip.getIsKeyPressed();
 	}
 }

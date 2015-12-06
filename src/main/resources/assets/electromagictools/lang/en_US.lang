@@ -37,30 +37,30 @@ tooltip.EMT.output.double.half.height=when the block is over Y = 160
 tooltip.EMT.output.double.half.low=when the block is under Y = 10
 
 #=============Entity Names=============
-entity.EMT.entityLaser.name=Laser
-entity.EMT.entityArcher.name=Guardian Snowman
+entity.EMT.laser.name=Laser
+entity.EMT.archer.name=Guardian Snowman
 
 #=============Item Names=============
-item.EMT.emtitems.oreClusterUranium=Uranium Native Cluster
-item.EMT.emtitems.crushedOreAmber.name=Crushed Amber Ore
-item.EMT.emtitems.purifiedOreAmber.name=Purified Amber Ore
-item.EMT.emtitems.crushedOreCinnabar.name=Crushed Cinnabar Ore
-item.EMT.emtitems.purifiedOreCinnabar.name=Purified Cinnabar Ore
-item.EMT.emtitems.thaumiumPlate.name=Thaumium Plate
-item.EMT.emtitems.lightningSummoner.name=Lightning Summoner
-item.EMT.emtitems.featherMesh.name=Feather Mesh
-item.EMT.emtitems.glue.name=Glue
-item.EMT.emtitems.ductTape.name=Duct Tape
-item.EMT.emtitems.rubberBall.name=Rubber Ball
-item.EMT.emtitems.cardboard.name=Cardboard Sheet
-item.EMT.emtitems.featherGluedCardboardWing.name=Feather Glued Cardboard Wing
-item.EMT.emtitems.denseIronSheet.name=Dense Iron Sheet
-item.EMT.emtitems.taintedFeather.name=Tainted Feather
-item.EMT.emtitems.thaumiumWing.name=Thaumium Reinforced Wing
-item.EMT.emtitems.uumatterDrop.name=Crystallized UU-Matter Drop
-item.EMT.emtbauble.euMaker.armor.name=Armor Charging Ring
-item.EMT.emtbauble.euMaker.inventory.name=Inventory Charging Ring
-item.EMT.item.bauble.oneRing.name=The One Ring
+item.EMT.oreClusterUranium=Uranium Native Cluster
+item.EMT.crushedOreAmber.name=Crushed Amber Ore
+item.EMT.purifiedOreAmber.name=Purified Amber Ore
+item.EMT.crushedOreCinnabar.name=Crushed Cinnabar Ore
+item.EMT.purifiedOreCinnabar.name=Purified Cinnabar Ore
+item.EMT.thaumiumPlate.name=Thaumium Plate
+item.EMT.lightningSummoner.name=Lightning Summoner
+item.EMT.featherMesh.name=Feather Mesh
+item.EMT.glue.name=Glue
+item.EMT.ductTape.name=Duct Tape
+item.EMT.rubberBall.name=Rubber Ball
+item.EMT.cardboard.name=Cardboard Sheet
+item.EMT.featherGluedCardboardWing.name=Feather Glued Cardboard Wing
+item.EMT.denseIronSheet.name=Dense Iron Sheet
+item.EMT.taintedFeather.name=Tainted Feather
+item.EMT.thaumiumWing.name=Thaumium Reinforced Wing
+item.EMT.uumatterDrop.name=Crystallized UU-Matter Drop
+item.EMT.bauble.euMaker.armor.name=Armor Charging Ring
+item.EMT.bauble.euMaker.inventory.name=Inventory Charging Ring
+item.EMT.bauble.oneRing.name=The One Ring
 item.EMT.goggles.electric.name=Electric Goggles of Revealing
 item.EMT.goggles.nano.name=Nanosuit Goggles of Revealing
 item.EMT.goggles.quantum.name=Quantum Goggles of Revealing
@@ -73,7 +73,7 @@ item.EMT.wing.feather.name=Feather Duct-Taped Wings
 item.EMT.wing.thaumium.name=Thaumium Reinforced Wings
 item.EMT.wing.nano.name=Nanosuit Wings
 item.EMT.wing.quantum.name=Quantum Wings
-ic2.EMT.quantum=Infused Quantum Chestplate
+item.EMT.chestplates.infusedQuantum.name=Infused Quantum Chestplate
 item.EMT.hammer.broken.name=Broken Relic of Mjolnir
 item.EMT.hammer.name=Mjolnir
 item.EMT.hammer.electric.name=Supercharged Mjolnir

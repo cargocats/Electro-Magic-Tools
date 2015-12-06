@@ -40,10 +40,10 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 	boolean hasOrnament() {
 		return false;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister ir) {
-        this.icon = ir.registerIcon(ModInformation.texturePath + ":" + textureName);
+	public void registerIcons(IIconRegister ir) {
+		this.icon = ir.registerIcon(ModInformation.texturePath + ":" + textureName);
 	}
 
 	boolean hasDepth() {
@@ -82,8 +82,8 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 	}
 
 	public boolean isUseItem(ItemStack stack) {
-        return isVisCostPerTick(stack);
-    }
+		return isVisCostPerTick(stack);
+	}
 
 	public boolean isVisCostPerTick() {
 		return false;
@@ -124,7 +124,6 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 		return 5;
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		AspectList cost = getVisCost();

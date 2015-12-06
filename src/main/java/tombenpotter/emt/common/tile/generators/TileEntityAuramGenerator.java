@@ -6,9 +6,9 @@ import tombenpotter.emt.common.util.EssentiasOutputs;
 
 public class TileEntityAuramGenerator extends TileEntityBaseGenerator {
 
-    public TileEntityAuramGenerator() {
-        aspect = Aspect.AURA;
-        EssentiasOutputs.outputs.get(aspect.getTag());
-        output = ConfigHandler.auramGenerator;
-    }
+	public TileEntityAuramGenerator() {
+		aspect = Aspect.AURA;
+		EssentiasOutputs.outputs.get(aspect.getTag());
+		output = ConfigHandler.auramGenerator;
+	}
 }

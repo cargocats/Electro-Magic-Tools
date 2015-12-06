@@ -7,12 +7,12 @@ import tombenpotter.emt.common.util.ConfigHandler;
 
 public class TileEntityDoubleOrderSolar extends TileEntityOrderSolar {
 
-    public TileEntityDoubleOrderSolar() {
-        output = ConfigHandler.doubleCompressedSolarOutput;
-    }
+	public TileEntityDoubleOrderSolar() {
+		output = ConfigHandler.doubleCompressedSolarOutput;
+	}
 
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(BlockRegistry.emtSolars, 1, 10);
-    }
+	@Override
+	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+		return new ItemStack(BlockRegistry.emtSolars, 1, 10);
+	}
 }

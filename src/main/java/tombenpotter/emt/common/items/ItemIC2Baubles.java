@@ -38,21 +38,21 @@ public class ItemIC2Baubles extends ItemBase implements IBauble {
 	public String getUnlocalizedName(ItemStack itemstack) {
 		String name = "";
 		switch (itemstack.getItemDamage()) {
-			case 0: {
-				name = "euMaker.armor";
-				break;
-			}
-			case 1: {
-				name = "euMaker.inventory";
-				break;
-			}
-			default:
-				name = "nothing";
-				break;
+		case 0: {
+			name = "euMaker.armor";
+			break;
+		}
+		case 1: {
+			name = "euMaker.inventory";
+			break;
+		}
+		default:
+			name = "nothing";
+			break;
 		}
 		return getUnlocalizedName() + "." + name;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
 		this.icon[0] = ri.registerIcon(ModInformation.texturePath + ":armoreumaker");
@@ -64,7 +64,6 @@ public class ItemIC2Baubles extends ItemBase implements IBauble {
 		return this.icon[meta];
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list) {
 		list.add(new ItemStack(this, 1, 0));
@@ -75,7 +74,8 @@ public class ItemIC2Baubles extends ItemBase implements IBauble {
 	public BaubleType getBaubleType(ItemStack stack) {
 		if (stack.getItemDamage() <= 1) {
 			return BaubleType.RING;
-		} else {
+		}
+		else {
 			return null;
 		}
 	}

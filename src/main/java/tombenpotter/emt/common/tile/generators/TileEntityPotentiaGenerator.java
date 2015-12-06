@@ -7,9 +7,9 @@ import tombenpotter.emt.common.util.EssentiasOutputs;
 
 public class TileEntityPotentiaGenerator extends TileEntityBaseGenerator {
 
-    public TileEntityPotentiaGenerator() {
-        aspect = Aspect.ENERGY;
-        EssentiasOutputs.outputs.get(aspect.getTag());
-        output = ConfigHandler.potentiaGenerator;
-    }
+	public TileEntityPotentiaGenerator() {
+		aspect = Aspect.ENERGY;
+		EssentiasOutputs.outputs.get(aspect.getTag());
+		output = ConfigHandler.potentiaGenerator;
+	}
 }

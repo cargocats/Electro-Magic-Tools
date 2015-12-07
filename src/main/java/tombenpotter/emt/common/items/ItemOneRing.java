@@ -76,101 +76,86 @@ public class ItemOneRing extends ItemBase implements IBauble {
 
 	@Override
 	public void onWornTick(ItemStack stack, EntityLivingBase player) {
+		if (!player.isInvisible()) {
+			player.setInvisible(true);
+		}
+		NBTTagCompound tag = new NBTTagCompound();
+		((EntityPlayer) player).writeToNBT(tag);
+		NBTTagCompound forgeTag = tag.getCompoundTag("ForgeData");
+
+		int corruption = 0;
+
+		if (forgeTag.hasKey("MindCorruption"))
+			corruption = forgeTag.getInteger("MindCorruption");
+		else
+			forgeTag.setInteger("MindCorruption", 0);
+
+		((EntityPlayer) player).capabilities.disableDamage = true;
+
 		if (!player.worldObj.isRemote) {
-			if (stack != null && player instanceof EntityPlayer && stack.getItemDamage() == 0) {
-				if (!player.isInvisible()) {
-					player.setInvisible(true);
-				}
-				((EntityPlayer) player).capabilities.disableDamage = true;
+			if (corruption <= 0) {
+				((EntityPlayer) player).addChatMessage(new ChatComponentText(TextHelper.PURPLE + "You have worn the Ring. Your soul has now been forever " + TextHelper.PURPLE + "tainted. " + TextHelper.RED + TextHelper.ITALIC + "Beware of wearing the ring. The tainting will only " + TextHelper.RED + TextHelper.ITALIC + "increase, and strange things will start happening."));
+			}
+			else if (corruption > 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
+				player.addPotionEffect(new PotionEffect(Potion.blindness.id, 500, 2, false));
+			}
+			else if (corruption >= 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
+				player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
+			}
+			else if (corruption >= 24000 && corruption < 72000 && random.nextInt(2000) == 0) {
+				((EntityPlayer) player).capabilities.disableDamage = false;
 
-				NBTTagCompound tag = new NBTTagCompound();
-				((EntityPlayer) player).writeToNBT(tag);
+				player.attackEntityFrom(DamageSource.magic, 5);
+			}
+			else if (corruption >= 72000 && corruption < 120000 && random.nextInt(4000) == 0) {
+				((EntityPlayer) player).capabilities.disableDamage = false;
 
-				NBTTagCompound forgeTag;
+				player.motionY += 2d;
+			}
+			else if (corruption >= 120000 && random.nextInt(10000) == 0) {
+				((EntityPlayer) player).capabilities.disableDamage = false;
 
-				forgeTag = tag.getCompoundTag("ForgeData");
-
-				int corruption = 0;
-				if (forgeTag.hasKey("MindCorruption")) {
-					corruption = forgeTag.getInteger("MindCorruption");
-				}
-				else {
-					forgeTag.setInteger("MindCorruption", 0);
-				}
-
-				if (corruption <= 0) {
-					((EntityPlayer) player).addChatMessage(new ChatComponentText(TextHelper.PURPLE + "You have worn the Ring. Your soul has now been forever " + TextHelper.PURPLE + "tainted. " + TextHelper.RED + TextHelper.ITALIC + "Beware of wearing the ring. The tainting will only " + TextHelper.RED + TextHelper.ITALIC + "increase, and strange things will start happening."));
-				}
-				else if (corruption > 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
-					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 500, 2, false));
-				}
-				else if (corruption >= 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
-					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
-				}
-				else if (corruption >= 24000 && corruption < 72000 && random.nextInt(2000) == 0) {
-					for (int i = 0; i <= 5; i++)
-						((EntityPlayer) player).capabilities.disableDamage = false;
-
-					player.attackEntityFrom(DamageSource.magic, 5);
-				}
-				else if (corruption >= 72000 && corruption < 120000 && random.nextInt(4000) == 0) {
-					for (int i = 0; i <= 100; i++)
-						((EntityPlayer) player).capabilities.disableDamage = false;
-
-					player.motionY = 2;
-				}
-				else if (corruption >= 120000 && random.nextInt(10000) == 0) {
-					for (int i = 0; i <= 510; i++)
-						((EntityPlayer) player).capabilities.disableDamage = false;
-
-					player.addPotionEffect(new PotionEffect(Potion.wither.id, 5000, 4, false));
-				}
-				else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
-					player.isDead = true;
-				}
-
-				forgeTag.setInteger("MindCorruption", ++corruption);
-				tag.setTag("ForgeData", forgeTag);
-				((EntityPlayer) player).readFromNBT(tag);
+				player.addPotionEffect(new PotionEffect(Potion.wither.id, 5000, 4, false));
+			}
+			else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
+				player.isDead = true;
 			}
 		}
+		forgeTag.setInteger("MindCorruption", ++corruption);
+		tag.setTag("ForgeData", forgeTag);
+		((EntityPlayer) player).readFromNBT(tag);
 	}
 
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-		if (stack != null && player instanceof EntityPlayer && stack.getItemDamage() == 0) {
-			player.setInvisible(true);
+		NBTTagCompound tag = new NBTTagCompound();
+		((EntityPlayer) player).writeToNBT(tag);
+		tag.getCompoundTag("ForgeData").setInteger("MindCorruption", 0);
+		((EntityPlayer) player).readFromNBT(tag);
 
-			NBTTagCompound tag = new NBTTagCompound();
-			((EntityPlayer) player).writeToNBT(tag);
-			tag.getCompoundTag("ForgeData").setInteger("MindCorruption", 0);
-			((EntityPlayer) player).readFromNBT(tag);
-		}
 	}
 
 	@Override
 	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-		if (stack != null && stack.getItemDamage() == 0) {
-			player.setInvisible(false);
-			if (player instanceof EntityPlayer && !((EntityPlayer) player).capabilities.isCreativeMode)
-				((EntityPlayer) player).capabilities.disableDamage = false;
-
-			NBTTagCompound tag = new NBTTagCompound();
-			((EntityPlayer) player).writeToNBT(tag);
-			tag.removeTag("ForgeData");
-			((EntityPlayer) player).readFromNBT(tag);
-			
-			player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
-		}
+		player.setInvisible(false);
+		if (!((EntityPlayer) player).capabilities.isCreativeMode)
+			((EntityPlayer) player).capabilities.disableDamage = false;
+		NBTTagCompound tag = new NBTTagCompound();
+		((EntityPlayer) player).writeToNBT(tag);
+		tag.removeTag("ForgeData");
+		((EntityPlayer) player).readFromNBT(tag);
+		player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
 	}
 
 	@Override
 	public boolean canEquip(ItemStack stack, EntityLivingBase player) {
-		return true;
+		return stack.getItemDamage() == 0 && player instanceof EntityPlayer;
 	}
 
 	@Override
 	public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
-		return true;
+		NBTTagCompound tag = new NBTTagCompound();
+		((EntityPlayer) player).writeToNBT(tag);
+		return tag.getCompoundTag("ForgeData").getInteger("MindCorruption") > 600 ? true : false;
 	}
 }

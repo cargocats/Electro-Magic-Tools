@@ -13,7 +13,7 @@ public interface IBauble {
 
     /**
      * This method return the type of bauble this is.
-     * Type is used to determine the slots it can go into.
+     * Type is used to determine the slots it can go into.	
      */
     public BaubleType getBaubleType(ItemStack itemstack);
 

@@ -93,7 +93,6 @@ public class ItemOneRing extends ItemBase implements IBauble {
 				int corruption = 0;
 				if (forgeTag.hasKey("MindCorruption")) {
 					corruption = forgeTag.getInteger("MindCorruption");
-					System.out.println(corruption);
 				}
 				else {
 					forgeTag.setInteger("MindCorruption", 0);

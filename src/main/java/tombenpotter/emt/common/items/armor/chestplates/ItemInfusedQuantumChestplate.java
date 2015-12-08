@@ -23,6 +23,7 @@ import ic2.core.util.ConfigUtil;
 import ic2.core.util.Keyboard;
 import ic2.core.util.StackUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	public final byte NANO = 3;
 	public final byte QUANTUM = 4;
 
-	protected static final Map<Integer, Integer> potionRemovalCost = new HashMap();
+	protected static ArrayList<Integer> potionRemovalCost = new ArrayList<Integer>();
 	public static AudioSource audioSource;
 	private static boolean lastJetpackUsed = false;
 
@@ -87,11 +88,10 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		super(internalName, InternalName.quantum, armorType, 2000000, 12000.0D, 4);
 		MinecraftForge.EVENT_BUS.register(this);
 		this.setCreativeTab(ElectroMagicTools.tabEMT);
-		potionRemovalCost.put(Potion.poison.id, 10000);
-		potionRemovalCost.put(IC2Potion.radiation.id, 10000);
-		potionRemovalCost.put(Potion.wither.id, 25000);
+		potionRemovalCost.add(Potion.poison.id);
+		potionRemovalCost.add(IC2Potion.radiation.id);
+		potionRemovalCost.add(Potion.wither.id);
 		rnd = new Random();
-
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -157,6 +157,18 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		byte wing = nbt.getByte("wing");
 
 		if (!world.isRemote) {
+			
+			for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {           
+				//for(Integer potionID : potionRemovalCost){
+				//	if(effect.getPotionID() == potionID.intValue()){
+				//		
+				//	}
+				//}
+				if(potionRemovalCost.contains(new Integer(effect.getPotionID()))){
+					 IC2.platform.removePotion(player, effect.getPotionID());
+				}
+			}
+			
 			if (nbt.hasKey("useother")) {
 				String useother = nbt.getString("useother");
 				if (useother.equals("Jetpack")) {
@@ -501,7 +513,8 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			byte f = nbtData.getByte("f");
 			nbtData.setBoolean("isHolding", false);
 			player.motionY = motionY * f;
-			ElectricItem.manager.use(stack, ((motionY * f) * 10) * amount, player);
+			if(isElectric)
+				ElectricItem.manager.use(stack, ((motionY * f) * 10) * amount, player);
 			if (player.motionX < 0.5 && player.motionZ < 0.5 && player.motionX > -0.5 && player.motionZ > -0.5) {
 				player.motionX /= motionXZ;
 				player.motionZ /= motionXZ;

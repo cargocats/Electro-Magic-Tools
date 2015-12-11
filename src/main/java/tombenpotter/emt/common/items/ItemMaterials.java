@@ -8,6 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -17,6 +19,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.lib.utils.InventoryUtils;
@@ -126,10 +130,11 @@ public class ItemMaterials extends Item {
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (stack != null && stack.getItemDamage() == 6) {
+	
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+    {
+		if (stack != null && stack.getItemDamage() == 6 && this.getMaxItemUseDuration(stack) - count >= 40) {
+			World world = player.worldObj;
 			player.swingItem();
 			float f = 1.0F;
 			float f1 = player.prevRotationPitch + ((player.rotationPitch - player.prevRotationPitch) * f);
@@ -145,17 +150,14 @@ public class ItemMaterials extends Item {
 			float f7 = f4 * f5;
 			float f8 = f6;
 			float f9 = f3 * f5;
-			double d3 = 5000D;
+			float d3 = 5000;
 			Vec3 vec3d1 = playerLoc.addVector(f7 * d3, f8 * d3, f9 * d3);
 			MovingObjectPosition movingobjectposition = player.worldObj.rayTraceBlocks(playerLoc, vec3d1, true);
-			if (movingobjectposition == null) {
-				return stack;
-			}
 			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
-				int i = movingobjectposition.blockX;
-				int j = movingobjectposition.blockY;
-				int k = movingobjectposition.blockZ;
-				world.spawnEntityInWorld(new EntityLightningBolt(world, i, j, k));
+				int x2 = movingobjectposition.blockX;
+				int y2 = movingobjectposition.blockY;
+				int z2 = movingobjectposition.blockZ;
+				world.spawnEntityInWorld(new EntityLightningBolt(world, x2, y2, z2));
 			}
 			else if (movingobjectposition.typeOfHit == MovingObjectType.ENTITY) {
 				Entity entityhit = movingobjectposition.entityHit;
@@ -164,15 +166,35 @@ public class ItemMaterials extends Item {
 				double z = entityhit.posZ;
 				world.spawnEntityInWorld(new EntityLightningBolt(world, x, y, z));
 			}
-			if (player.capabilities.isCreativeMode) {
-				return stack;
-			}
-			else {
+			if (!player.capabilities.isCreativeMode) {
 				player.inventory.consumeInventoryItem(this);
-				return stack;
 			}
+			player.stopUsingItem();
+		}
+    }
+
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (stack.getItemDamage() == 6) {
+			ArrowNockEvent event = new ArrowNockEvent(player, stack);
+			MinecraftForge.EVENT_BUS.post(event);
+			if (event.isCanceled()) {
+				return event.result;
+			}
+			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
 		}
 		return stack;
+	}
+
+	public int getMaxItemUseDuration(ItemStack stack) {
+		if (stack.getItemDamage() == 6)
+			return 72000;
+		return super.getMaxItemUseDuration(stack);
+	}
+
+	public EnumAction getItemUseAction(ItemStack stack) {
+		if (stack.getItemDamage() == 6)
+			return EnumAction.bow;
+		return EnumAction.none;
 	}
 
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {

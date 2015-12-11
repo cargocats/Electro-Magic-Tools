@@ -158,12 +158,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 
 		if (!world.isRemote) {
 			
-			for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {           
-				//for(Integer potionID : potionRemovalCost){
-				//	if(effect.getPotionID() == potionID.intValue()){
-				//		
-				//	}
-				//}
+			for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {
 				if(potionRemovalCost.contains(new Integer(effect.getPotionID()))){
 					 IC2.platform.removePotion(player, effect.getPotionID());
 				}

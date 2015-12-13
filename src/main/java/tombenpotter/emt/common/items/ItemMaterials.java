@@ -130,9 +130,8 @@ public class ItemMaterials extends Item {
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
-	
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
-    {
+
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		if (stack != null && stack.getItemDamage() == 6 && this.getMaxItemUseDuration(stack) - count >= 40) {
 			World world = player.worldObj;
 			player.swingItem();
@@ -171,7 +170,7 @@ public class ItemMaterials extends Item {
 			}
 			player.stopUsingItem();
 		}
-    }
+	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (stack.getItemDamage() == 6) {

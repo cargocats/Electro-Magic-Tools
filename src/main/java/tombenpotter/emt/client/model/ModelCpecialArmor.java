@@ -15,35 +15,22 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class ModelCpecialArmor extends ModelBiped {
-	public ModelRenderer bipedHead;
-	public ModelRenderer bipedBody;
-	public ModelRenderer bipedRightArm;
-	public ModelRenderer bipedLeftArm;
-
 	public ModelRenderer rightWing;
 	public ModelRenderer leftWing;
 	public ModelRenderer center;
-
 	public ModelRenderer jetpack;
-
 	public boolean isJumping;
-
 	public int type = 0;// 0 - nothing, 1 - jetpack, 2 - wings
-	public int heldItemLeft;
-	public int heldItemRight;
-	public boolean isSneak;
-	public boolean aimedBow;
 
 	public ModelCpecialArmor() {
-		this(0.0F, 0);
+		this(1, 0);
 	}
 
-	public ModelCpecialArmor(float p_i1148_1_, int type) {
-		this(p_i1148_1_, 0.0F, 64, 32, type);
+	public ModelCpecialArmor(float scale, int type) {
+		this(scale, 0.0F, 64, 32, type);
 	}
 
 	public ModelCpecialArmor(float p_i1149_1_, float p_i1149_2_, int p_i1149_3_, int p_i1149_4_, int type) {
-
 		this.type = type;
 		switch (this.type) {
 		case 1:

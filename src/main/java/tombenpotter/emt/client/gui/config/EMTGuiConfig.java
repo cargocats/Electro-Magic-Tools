@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static tombenpotter.emt.common.util.ConfigHandler.*;
+import static tombenpotter.emt.common.util.EMTConfigHandler.*;
 
 public class EMTGuiConfig extends GuiConfig {
 

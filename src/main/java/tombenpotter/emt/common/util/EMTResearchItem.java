@@ -26,13 +26,13 @@ public class EMTResearchItem extends ResearchItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getName() {
-		return TextHelper.localize("emt.rsname." + key);
+		return EMTTextHelper.localize("emt.rsname." + key);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getText() {
-		return "[EMT] " + TextHelper.localize("emt.tag." + key);
+		return "[EMT] " + EMTTextHelper.localize("emt.tag." + key);
 	}
 
 	@Override

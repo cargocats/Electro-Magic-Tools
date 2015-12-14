@@ -5,8 +5,9 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EntityLiving;
 import tombenpotter.emt.ElectroMagicTools;
-import tombenpotter.emt.common.entities.EntityArcher;
-import tombenpotter.emt.common.entities.EntityLaser;
+import tombenpotter.emt.common.entity.EntityArcher;
+import tombenpotter.emt.common.entity.EntityLaser;
+import tombenpotter.emt.common.entity.EntityShield;
 
 public class EntityRegistry {
 
@@ -22,7 +23,6 @@ public class EntityRegistry {
 		return startEID;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec) {
 		int id = getUniqueEntityID();
 		EntityList.IDtoClassMapping.put(id, entity);
@@ -34,6 +34,7 @@ public class EntityRegistry {
 
 		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
 	}
 }

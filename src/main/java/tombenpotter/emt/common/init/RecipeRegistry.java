@@ -31,9 +31,9 @@ import thaumcraft.common.blocks.ItemJarNode;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import tombenpotter.emt.ElectroMagicTools;
-import tombenpotter.emt.common.util.ConfigHandler;
-import tombenpotter.emt.common.util.CraftingAspects;
-import tombenpotter.emt.common.util.RandomHelper;
+import tombenpotter.emt.common.util.EMTConfigHandler;
+import tombenpotter.emt.common.util.EMTCraftingAspects;
+import tombenpotter.emt.common.util.EMTRandomHelper;
 
 import java.util.Iterator;
 
@@ -44,8 +44,8 @@ public class RecipeRegistry {
 	private static void registerShapedRecipes() {
 
 		/** Crafting Recipes **/
-		ironOmnitool = GameRegistry.addShapedRecipe(RandomHelper.getChargedItem(ItemRegistry.ironOmnitool, 10), "X", "Z", "Y", 'X', new ItemStack(IC2Items.getItem("chainsaw").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Y', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Z', IC2Items.getItem("plateiron"));
-		diamondChainsaw = GameRegistry.addShapedRecipe(RandomHelper.getChargedItem(ItemRegistry.diamondChainsaw, 10), " X ", "XYX", 'X', new ItemStack(Items.diamond), 'Y', new ItemStack(IC2Items.getItem("chainsaw").getItem(), 1, OreDictionary.WILDCARD_VALUE));
+		ironOmnitool = GameRegistry.addShapedRecipe(EMTRandomHelper.getChargedItem(ItemRegistry.ironOmnitool, 10), "X", "Z", "Y", 'X', new ItemStack(IC2Items.getItem("chainsaw").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Y', new ItemStack(IC2Items.getItem("miningDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Z', IC2Items.getItem("plateiron"));
+		diamondChainsaw = GameRegistry.addShapedRecipe(EMTRandomHelper.getChargedItem(ItemRegistry.diamondChainsaw, 10), " X ", "XYX", 'X', new ItemStack(Items.diamond), 'Y', new ItemStack(IC2Items.getItem("chainsaw").getItem(), 1, OreDictionary.WILDCARD_VALUE));
 		ductTape = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 9), "XXX", "YYY", "XXX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 8), 'Y', new ItemStack(Items.paper));
 		featherMesh = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 7), "XYX", "YXY", "XYX", 'X', new ItemStack(Items.feather), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 9));
 		featherWing = GameRegistry.addShapedRecipe(new ItemStack(ItemRegistry.itemEMTItems, 1, 12), "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 7), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 8), 'Z', new ItemStack(ItemRegistry.itemEMTItems, 1, 11));
@@ -90,23 +90,23 @@ public class RecipeRegistry {
 
 		ItemStack iridium = IC2Items.getItem("iridiumOre").copy();
 		iridium.stackSize = 2;
-		uraniumToIridium = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", iridium, 4, CraftingAspects.uuMatterInfusions, IC2Items.getItem("Uran238"), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell });
+		uraniumToIridium = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", iridium, 4, EMTCraftingAspects.uuMatterInfusions, IC2Items.getItem("Uran238"), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell });
 
 		ItemStack uranium = IC2Items.getItem("Uran238").copy();
 		uranium.stackSize = 2;
-		diamondToUranium = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", uranium, 4, CraftingAspects.lesserUUMInfusions, new ItemStack(Items.diamond), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell });
+		diamondToUranium = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", uranium, 4, EMTCraftingAspects.lesserUUMInfusions, new ItemStack(Items.diamond), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell });
 
 		ItemStack diamond = new ItemStack(Items.diamond).copy();
 		diamond.stackSize = 1;
-		goldToDiamond = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", diamond, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(Items.gold_ingot), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell });
+		goldToDiamond = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", diamond, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(Items.gold_ingot), new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell });
 
 		ItemStack gold = new ItemStack(Items.gold_ingot).copy();
 		gold.stackSize = 2;
-		ironToGold = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", gold, 4, CraftingAspects.cheapestUUMInfusions, new ItemStack(Items.iron_ingot), new ItemStack[] { uuMCell, uuMCell, uuMCell });
+		ironToGold = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", gold, 4, EMTCraftingAspects.cheapestUUMInfusions, new ItemStack(Items.iron_ingot), new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
 		ItemStack ironOre = new ItemStack(Blocks.iron_ore).copy();
 		ironOre.stackSize = 16;
-		stoneBricksToIronOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", ironOre, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(Blocks.stonebrick), new ItemStack[] { uuMCell, uuMCell });
+		stoneBricksToIronOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", ironOre, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(Blocks.stonebrick), new ItemStack[] { uuMCell, uuMCell });
 
 		/**
 		 * ItemStack copperOre = Items.getItem("copperOre").copy(); BUGGED IN
@@ -114,7 +114,7 @@ public class RecipeRegistry {
 		 **/
 		ItemStack copperOre = IC2Items.getItem("crushedCopperOre").copy();
 		copperOre.stackSize = 32;
-		arcaneStoneToCopperOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", copperOre, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6), new ItemStack[] { uuMCell, uuMCell });
+		arcaneStoneToCopperOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", copperOre, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6), new ItemStack[] { uuMCell, uuMCell });
 
 		/**
 		 * ItemStack tinOre = Items.getItem("tinOre").copy(); BUGGED IN 1.6 IF
@@ -122,7 +122,7 @@ public class RecipeRegistry {
 		 **/
 		ItemStack tinOre = IC2Items.getItem("crushedTinOre").copy();
 		tinOre.stackSize = 32;
-		arcaneStoneBricksToTinOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", tinOre, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 7), new ItemStack[] { uuMCell, uuMCell });
+		arcaneStoneBricksToTinOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", tinOre, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 7), new ItemStack[] { uuMCell, uuMCell });
 
 		/**
 		 * ItemStack leadOre = Items.getItem("leadOre").copy(); BUGGED IN 1.6 IF
@@ -130,200 +130,200 @@ public class RecipeRegistry {
 		 **/
 		ItemStack leadOre = IC2Items.getItem("crushedLeadOre").copy();
 		leadOre.stackSize = 32;
-		amberBlockToLeadOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", leadOre, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 0), new ItemStack[] { uuMCell, uuMCell });
+		amberBlockToLeadOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", leadOre, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 0), new ItemStack[] { uuMCell, uuMCell });
 
 		ItemStack uraniumOre = IC2Items.getItem("uraniumOre").copy();
 		uraniumOre.stackSize = 8;
-		amberBricksToUraniumOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", uraniumOre, 4, CraftingAspects.lesserUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 1), new ItemStack[] { uuMCell, uuMCell, uuMCell });
+		amberBricksToUraniumOre = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", uraniumOre, 4, EMTCraftingAspects.lesserUUMInfusions, new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 1), new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
 		ItemStack coal = new ItemStack(Items.coal, 1, 0).copy();
 		coal.stackSize = 16;
-		charcoalToCoal = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", coal, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(Items.coal, 1, 1), new ItemStack[] { uuMCell, uuMCell });
+		charcoalToCoal = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", coal, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(Items.coal, 1, 1), new ItemStack[] { uuMCell, uuMCell });
 
 		ItemStack stickyResin = IC2Items.getItem("resin").copy();
 		stickyResin.stackSize = 21;
-		shardToResin = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", stickyResin, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
+		shardToResin = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", stickyResin, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
 		ItemStack redstone = new ItemStack(Items.redstone).copy();
 		redstone.stackSize = 24;
-		shardToRedstone = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", redstone, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
+		shardToRedstone = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", redstone, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
 		ItemStack lapisLazuli = new ItemStack(Items.dye, 1, 4).copy();
 		lapisLazuli.stackSize = 8;
-		shardToLapis = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", lapisLazuli, 4, CraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
+		shardToLapis = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", lapisLazuli, 4, EMTCraftingAspects.cheapUUMInfusions, new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
 		ItemStack glowstone = new ItemStack(Blocks.glowstone).copy();
 		glowstone.stackSize = 1;
-		glowstoneDustToBlock = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", glowstone, 4, CraftingAspects.cheapestUUMInfusions, new ItemStack(Items.glowstone_dust), new ItemStack[] { uuMCell });
+		glowstoneDustToBlock = ThaumcraftApi.addInfusionCraftingRecipe("UU-Matter Infusion", glowstone, 4, EMTCraftingAspects.cheapestUUMInfusions, new ItemStack(Items.glowstone_dust), new ItemStack[] { uuMCell });
 	}
 
 	public static void registerLateRecipes() {
 		/** Infusion Recipes **/
-		thaumiumDrill = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Drill", RandomHelper.getChargedItem(ItemRegistry.thaumiumDrill, 10), 5, CraftingAspects.thaumiumDrillCrafting, new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+		thaumiumDrill = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Drill", EMTRandomHelper.getChargedItem(ItemRegistry.thaumiumDrill, 10), 5, EMTCraftingAspects.thaumiumDrillCrafting, new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron") });
 
-		thaumiumChainsaw = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Chainsaw", RandomHelper.getChargedItem(ItemRegistry.thaumiumChainsaw, 10), 5, CraftingAspects.thaumiumChainsawCrafting, new ItemStack(ItemRegistry.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE),
+		thaumiumChainsaw = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Chainsaw", EMTRandomHelper.getChargedItem(ItemRegistry.thaumiumChainsaw, 10), 5, EMTCraftingAspects.thaumiumChainsawCrafting, new ItemStack(ItemRegistry.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron") });
 
-		thaumicQuantumHelmet = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Goggles of Revealing", RandomHelper.getChargedItem(ItemRegistry.quantumThaumicHelmet, 10), 6, CraftingAspects.thaumicQuantumHelmetCrafting, new ItemStack(ItemRegistry.nanoThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
+		thaumicQuantumHelmet = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Goggles of Revealing", EMTRandomHelper.getChargedItem(ItemRegistry.quantumThaumicHelmet, 10), 6, EMTCraftingAspects.thaumicQuantumHelmetCrafting, new ItemStack(ItemRegistry.nanoThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.milk_bucket), new ItemStack(IC2Items.getItem("quantumHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("advancedCircuit") });
 
-		thaumicNanoHelmet = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Goggles of Revealing", RandomHelper.getChargedItem(ItemRegistry.nanoThaumicHelmet, 10), 5, CraftingAspects.thaumicNanoHelmetCrafting, new ItemStack(ItemRegistry.electricGoggles, 1, OreDictionary.WILDCARD_VALUE),
+		thaumicNanoHelmet = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Goggles of Revealing", EMTRandomHelper.getChargedItem(ItemRegistry.nanoThaumicHelmet, 10), 5, EMTCraftingAspects.thaumicNanoHelmetCrafting, new ItemStack(ItemRegistry.electricGoggles, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.gold_ingot), new ItemStack(IC2Items.getItem("nanoHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("carbonPlate"), IC2Items.getItem("electronicCircuit") });
 
-		thaumiumOmnitool = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Omnitool", RandomHelper.getChargedItem(ItemRegistry.thaumiumOmnitool, 10), 6, CraftingAspects.thaumiumOmnitoolCrafting, new ItemStack(ItemRegistry.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
+		thaumiumOmnitool = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Omnitool", EMTRandomHelper.getChargedItem(ItemRegistry.thaumiumOmnitool, 10), 6, EMTCraftingAspects.thaumiumOmnitoolCrafting, new ItemStack(ItemRegistry.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), IC2Items.getItem("carbonPlate"), IC2Items.getItem("plateobsidian") });
 
-		diamondOmnitoolToThaumium = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Omnitool", new ItemStack(ItemRegistry.thaumiumOmnitool), 6, CraftingAspects.thaumiumOmnitoolCrafting, new ItemStack(ItemRegistry.diamondOmnitool, 1, OreDictionary.WILDCARD_VALUE),
+		diamondOmnitoolToThaumium = ThaumcraftApi.addInfusionCraftingRecipe("Thaumium Omnitool", new ItemStack(ItemRegistry.thaumiumOmnitool), 6, EMTCraftingAspects.thaumiumOmnitoolCrafting, new ItemStack(ItemRegistry.diamondOmnitool, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Blocks.diamond_block), new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9), new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9), new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("carbonPlate"), IC2Items.getItem("advancedCircuit") });
 
-		explosionFocus = ThaumcraftApi.addInfusionCraftingRecipe("Explosion Focus", new ItemStack(ItemRegistry.explosionFocus), 6, CraftingAspects.laserFocusCrafting, new ItemStack(ConfigItems.itemFocusHellbat, 1),
+		explosionFocus = ThaumcraftApi.addInfusionCraftingRecipe("Explosion Focus", new ItemStack(ItemRegistry.explosionFocus), 6, EMTCraftingAspects.laserFocusCrafting, new ItemStack(ConfigItems.itemFocusHellbat, 1),
 				new ItemStack[] { new ItemStack(IC2Items.getItem("miningLaser").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.arrow), new ItemStack(Items.gunpowder), new ItemStack(Items.firework_charge), new ItemStack(ConfigItems.itemResource, 1, 1) });
 
-		shieldFocus = ThaumcraftApi.addInfusionCraftingRecipe("Shield Focus", new ItemStack(ItemRegistry.shieldFocus), 4, CraftingAspects.shieldFocusCrafting, new ItemStack(ConfigItems.itemFocusPortableHole, 1),
+		shieldFocus = ThaumcraftApi.addInfusionCraftingRecipe("Shield Focus", new ItemStack(ItemRegistry.shieldFocus), 4, EMTCraftingAspects.shieldFocusCrafting, new ItemStack(ConfigItems.itemFocusPortableHole, 1),
 				new ItemStack[] { IC2Items.getItem("reinforcedStone"), IC2Items.getItem("reinforcedGlass"), IC2Items.getItem("reinforcedStone"), IC2Items.getItem("reinforcedGlass"), new ItemStack(Blocks.soul_sand), new ItemStack(Blocks.obsidian), new ItemStack(Blocks.obsidian) });
 
-		potentiaGenerator = ThaumcraftApi.addInfusionCraftingRecipe("Potentia Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 0), 6, CraftingAspects.potentiaGeneratorCrafting, IC2Items.getItem("semifluidGenerator"),
+		potentiaGenerator = ThaumcraftApi.addInfusionCraftingRecipe("Potentia Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 0), 6, EMTCraftingAspects.potentiaGeneratorCrafting, IC2Items.getItem("semifluidGenerator"),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(ConfigItems.itemFocusTrade), new ItemStack(Blocks.hopper), new ItemStack(ConfigBlocks.blockJar), IC2Items.getItem("mvTransformer"), IC2Items.getItem("advancedMachine"), IC2Items.getItem("orewashingplant"), IC2Items.getItem("scrap") });
 
-		streamChainsaw = ThaumcraftApi.addInfusionCraftingRecipe("Chainsaw of the Stream", RandomHelper.getChargedItem(ItemRegistry.streamChainsaw, 10), 6, CraftingAspects.streamChaisnawCrafting, new ItemStack(ItemRegistry.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
+		streamChainsaw = ThaumcraftApi.addInfusionCraftingRecipe("Chainsaw of the Stream", EMTRandomHelper.getChargedItem(ItemRegistry.streamChainsaw, 10), 6, EMTCraftingAspects.streamChaisnawCrafting, new ItemStack(ItemRegistry.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.water_bucket), new ItemStack(ConfigItems.itemAxeElemental), new ItemStack(ConfigBlocks.blockMagicalLog), new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("overclockerUpgrade") });
 
-		rockbreakerDrill = ThaumcraftApi.addInfusionCraftingRecipe("Drill of the Rockbreaker", RandomHelper.getChargedItem(ItemRegistry.rockbreakerDrill, 10), 6, CraftingAspects.rockbreakerDrillCrafting, new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { new ItemStack(Items.flint_and_steel), new ItemStack(Items.fire_charge),
+		rockbreakerDrill = ThaumcraftApi.addInfusionCraftingRecipe("Drill of the Rockbreaker", EMTRandomHelper.getChargedItem(ItemRegistry.rockbreakerDrill, 10), 6, EMTCraftingAspects.rockbreakerDrillCrafting, new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), new ItemStack[] { new ItemStack(Items.flint_and_steel), new ItemStack(Items.fire_charge),
 				new ItemStack(ConfigItems.itemPickElemental), new ItemStack(ConfigItems.itemShovelElemental), new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("reinforcedStone"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("overclockerUpgrade") });
 
-		thorHammer = ThaumcraftApi.addInfusionCraftingRecipe("Mjolnir", new ItemStack(ItemRegistry.thorHammer), 7, CraftingAspects.thorHammerCrafting, new ItemStack(ItemRegistry.taintedThorHammer, 1, OreDictionary.WILDCARD_VALUE),
+		thorHammer = ThaumcraftApi.addInfusionCraftingRecipe("Mjolnir", new ItemStack(ItemRegistry.thorHammer), 7, EMTCraftingAspects.thorHammerCrafting, new ItemStack(ItemRegistry.taintedThorHammer, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(ItemRegistry.itemEMTItems, 1, 6), new ItemStack(ItemRegistry.itemEMTItems, 1, 6), new ItemStack(ConfigItems.itemSwordElemental), new ItemStack(ConfigItems.itemResource, 1, 1), new ItemStack(ConfigItems.itemFocusShock), IC2Items.getItem("rubber") });
 
-		superchargedThorHammer = ThaumcraftApi.addInfusionCraftingRecipe("Supercharged Mjolnir", RandomHelper.getChargedItem(ItemRegistry.electricThorHammer, 10), 10, CraftingAspects.superchargedThorHammerCrafting, new ItemStack(ItemRegistry.thorHammer, 1, OreDictionary.WILDCARD_VALUE),
+		superchargedThorHammer = ThaumcraftApi.addInfusionCraftingRecipe("Supercharged Mjolnir", EMTRandomHelper.getChargedItem(ItemRegistry.electricThorHammer, 10), 10, EMTCraftingAspects.superchargedThorHammerCrafting, new ItemStack(ItemRegistry.thorHammer, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(ItemRegistry.itemEMTItems, 1, 6), new ItemStack(ItemRegistry.itemEMTItems, 1, 6), new ItemStack(Blocks.web), new ItemStack(ConfigItems.itemFocusHellbat), new ItemStack(ConfigItems.itemSwordElemental), new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate"),
 						IC2Items.getItem("iridiumPlate"), new ItemStack(IC2Items.getItem("nanoSaber").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
-		wandRecharger = ThaumcraftApi.addInfusionCraftingRecipe("Industrial Wand Charging Station", new ItemStack(BlockRegistry.emtMachines, 1, 0), 6, CraftingAspects.wandCharger, new ItemStack(ConfigBlocks.blockStoneDevice, 1, 5),
+		wandRecharger = ThaumcraftApi.addInfusionCraftingRecipe("Industrial Wand Charging Station", new ItemStack(BlockRegistry.emtMachines, 1, 0), 6, EMTCraftingAspects.wandCharger, new ItemStack(ConfigBlocks.blockStoneDevice, 1, 5),
 				new ItemStack[] { IC2Items.getItem("replicator"), IC2Items.getItem("iridiumPlate"), new ItemStack(Blocks.diamond_block), new ItemStack(ConfigItems.itemShard, 1, 5), new ItemStack(ConfigBlocks.blockJar) });
 
-		solarHelmetRevealing = ThaumcraftApi.addInfusionCraftingRecipe("Solar Helmet of Revealing", RandomHelper.getChargedItem(ItemRegistry.solarHelmetRevealing, 10), 5, CraftingAspects.solarHelmetRevealing, new ItemStack(ItemRegistry.quantumThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
+		solarHelmetRevealing = ThaumcraftApi.addInfusionCraftingRecipe("Solar Helmet of Revealing", EMTRandomHelper.getChargedItem(ItemRegistry.solarHelmetRevealing, 10), 5, EMTCraftingAspects.solarHelmetRevealing, new ItemStack(ItemRegistry.quantumThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(BlockRegistry.emtSolars, 1, 1), IC2Items.getItem("glassFiberCableItem"), new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemShard, 1, 4) });
 
-		electricBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Electric Boots of the Traveller", RandomHelper.getChargedItem(ItemRegistry.electricBootsTraveller, 10), 2, CraftingAspects.electricBootsTravel, new ItemStack(ConfigItems.itemBootsTraveller),
+		electricBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Electric Boots of the Traveller", EMTRandomHelper.getChargedItem(ItemRegistry.electricBootsTraveller, 10), 2, EMTCraftingAspects.electricBootsTravel, new ItemStack(ConfigItems.itemBootsTraveller),
 				new ItemStack[] { new ItemStack(Items.diamond), IC2Items.getItem("elemotor"), IC2Items.getItem("coil"), IC2Items.getItem("hazmatBoots"), new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
-		nanoBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Nano Boots of the Traveller", RandomHelper.getChargedItem(ItemRegistry.nanoBootsTraveller, 10), 2, CraftingAspects.nanoBootsTravel, new ItemStack(ItemRegistry.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
+		nanoBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Nano Boots of the Traveller", EMTRandomHelper.getChargedItem(ItemRegistry.nanoBootsTraveller, 10), 2, EMTCraftingAspects.nanoBootsTravel, new ItemStack(ItemRegistry.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(IC2Items.getItem("nanoBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
-		quantumBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Boots of the Traveller", RandomHelper.getChargedItem(ItemRegistry.quantumBootsTraveller, 10), 2, CraftingAspects.quantumBootsTravel, new ItemStack(ItemRegistry.nanoBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
+		quantumBootsTravel = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Boots of the Traveller", EMTRandomHelper.getChargedItem(ItemRegistry.quantumBootsTraveller, 10), 2, EMTCraftingAspects.quantumBootsTravel, new ItemStack(ItemRegistry.nanoBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Blocks.diamond_block), new ItemStack(IC2Items.getItem("quantumBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate") });
 
-		etheralProcessor = ThaumcraftApi.addInfusionCraftingRecipe("Etheral Processor", new ItemStack(BlockRegistry.emtMachines, 1, 1), 3, CraftingAspects.etherealProcessor, IC2Items.getItem("macerator"),
+		etheralProcessor = ThaumcraftApi.addInfusionCraftingRecipe("Etheral Processor", new ItemStack(BlockRegistry.emtMachines, 1, 1), 3, EMTCraftingAspects.etherealProcessor, IC2Items.getItem("macerator"),
 				new ItemStack[] { IC2Items.getItem("electroFurnace"), new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9), new ItemStack(Blocks.end_stone), new ItemStack(Blocks.end_stone), new ItemStack(Blocks.iron_block), new ItemStack(Blocks.iron_block), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5) });
 
-		tripleCompressedSolar = ThaumcraftApi.addInfusionCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 2), 2, CraftingAspects.compressedSolars, new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack[] { new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1),
+		tripleCompressedSolar = ThaumcraftApi.addInfusionCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 2), 2, EMTCraftingAspects.compressedSolars, new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack[] { new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1),
 				new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 1) });
 
-		electricHoeGrowth = ThaumcraftApi.addInfusionCraftingRecipe("Electric Hoe of Growth", RandomHelper.getChargedItem(ItemRegistry.electricHoeGrowth, 10), 4, CraftingAspects.electricHoeGrowth, new ItemStack(ConfigItems.itemHoeElemental),
+		electricHoeGrowth = ThaumcraftApi.addInfusionCraftingRecipe("Electric Hoe of Growth", EMTRandomHelper.getChargedItem(ItemRegistry.electricHoeGrowth, 10), 4, EMTCraftingAspects.electricHoeGrowth, new ItemStack(ConfigItems.itemHoeElemental),
 				new ItemStack[] { new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(IC2Items.getItem("electricHoe").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.dye, 1, 15), IC2Items.getItem("elemotor"), IC2Items.getItem("coil"), new ItemStack(Blocks.sapling, 1, OreDictionary.WILDCARD_VALUE) });
 
-		chargeFocus = ThaumcraftApi.addInfusionCraftingRecipe("Wand Focus: Charging", new ItemStack(ItemRegistry.chargeFocus), 4, CraftingAspects.chargeFocus, new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+		chargeFocus = ThaumcraftApi.addInfusionCraftingRecipe("Wand Focus: Charging", new ItemStack(ItemRegistry.chargeFocus), 4, EMTCraftingAspects.chargeFocus, new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { IC2Items.getItem("generator"), IC2Items.getItem("batBox"), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ItemRegistry.itemEMTItems, 1, 5), new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE) });
 
-		wandChargeFocus = ThaumcraftApi.addInfusionCraftingRecipe("Wand Focus: Wand Charging", new ItemStack(ItemRegistry.wandChargeFocus), 5, CraftingAspects.wandChargeFocus, new ItemStack(BlockRegistry.emtMachines, 1, 0),
+		wandChargeFocus = ThaumcraftApi.addInfusionCraftingRecipe("Wand Focus: Wand Charging", new ItemStack(ItemRegistry.wandChargeFocus), 5, EMTCraftingAspects.wandChargeFocus, new ItemStack(BlockRegistry.emtMachines, 1, 0),
 				new ItemStack[] { new ItemStack(ItemRegistry.chargeFocus), new ItemStack(IC2Items.getItem("energyPack").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate") });
 
-		inventoryChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Inventory Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 1), 6, CraftingAspects.inventoryChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
+		inventoryChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Inventory Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 1), 6, EMTCraftingAspects.inventoryChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
 				new ItemStack[] { new ItemStack(ItemRegistry.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator, ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
-		armorChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Armor Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 0), 6, CraftingAspects.armorChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
+		armorChargingRing = ThaumcraftApi.addInfusionCraftingRecipe("Armor Charging Ring", new ItemStack(ItemRegistry.emtBauble, 1, 0), 6, EMTCraftingAspects.armorChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
 				new ItemStack[] { new ItemStack(ItemRegistry.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator, ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
-		nanoWings = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Wings", RandomHelper.getChargedItem(ItemRegistry.nanoWing, 10), 4, CraftingAspects.nanoWing, new ItemStack(ItemRegistry.thaumiumWing),
+		nanoWings = ThaumcraftApi.addInfusionCraftingRecipe("Nanosuit Wings", EMTRandomHelper.getChargedItem(ItemRegistry.nanoWing, 10), 4, EMTCraftingAspects.nanoWing, new ItemStack(ItemRegistry.thaumiumWing),
 				new ItemStack[] { IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"), new ItemStack(IC2Items.getItem("nanoBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1) });
 
-		quantumWings = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Wings", RandomHelper.getChargedItem(ItemRegistry.quantumWing, 10), 6, CraftingAspects.quantumWing, new ItemStack(ItemRegistry.nanoWing, 1, OreDictionary.WILDCARD_VALUE),
+		quantumWings = ThaumcraftApi.addInfusionCraftingRecipe("Quantum Wings", EMTRandomHelper.getChargedItem(ItemRegistry.quantumWing, 10), 6, EMTCraftingAspects.quantumWing, new ItemStack(ItemRegistry.nanoWing, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ConfigItems.itemResource, 1, 1) });
 
-		infusedQuantumArmor = ThaumcraftApi.addInfusionCraftingRecipe("Infused Quantum Armor", RandomHelper.getChargedItem(ItemRegistry.quantumArmor, 10), 5, CraftingAspects.quantumWing, new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+		infusedQuantumArmor = ThaumcraftApi.addInfusionCraftingRecipe("Infused Quantum Armor", EMTRandomHelper.getChargedItem(ItemRegistry.quantumArmor, 10), 5, EMTCraftingAspects.quantumWing, new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack[] { new ItemStack(Items.diamond), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"), new ItemStack(BlockRegistry.shield), new ItemStack(BlockRegistry.shield) });
 
 		/** Arcane Worktable Recipes **/
 
-		diamondOmnitool = ThaumcraftApi.addShapelessArcaneCraftingRecipe("Diamond Omnitool", RandomHelper.getChargedItem(ItemRegistry.diamondOmnitool, 10), CraftingAspects.diamondOmnitoolCrafting, new ItemStack(ItemRegistry.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE));
+		diamondOmnitool = ThaumcraftApi.addShapelessArcaneCraftingRecipe("Diamond Omnitool", EMTRandomHelper.getChargedItem(ItemRegistry.diamondOmnitool, 10), EMTCraftingAspects.diamondOmnitoolCrafting, new ItemStack(ItemRegistry.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE));
 
-		ironOmnitoolToDiamond = ThaumcraftApi.addArcaneCraftingRecipe("Diamond Omnitool", new ItemStack(ItemRegistry.diamondOmnitool), CraftingAspects.diamondOmnitoolCrafting, "XAX", "XBX", "XAX", 'X', new ItemStack(Items.diamond), 'A', IC2Items.getItem("advancedCircuit"), 'B', new ItemStack(ItemRegistry.ironOmnitool, 1, OreDictionary.WILDCARD_VALUE));
+		ironOmnitoolToDiamond = ThaumcraftApi.addArcaneCraftingRecipe("Diamond Omnitool", new ItemStack(ItemRegistry.diamondOmnitool), EMTCraftingAspects.diamondOmnitoolCrafting, "XAX", "XBX", "XAX", 'X', new ItemStack(Items.diamond), 'A', IC2Items.getItem("advancedCircuit"), 'B', new ItemStack(ItemRegistry.ironOmnitool, 1, OreDictionary.WILDCARD_VALUE));
 
-		christmasFocus = ThaumcraftApi.addArcaneCraftingRecipe("Kris-tmas Focus", new ItemStack(ItemRegistry.christmasFocus), CraftingAspects.christmasFocusCrafting, "XYX", "YZY", "XYX", 'X', new ItemStack(Blocks.snow), 'Y', new ItemStack(Blocks.pumpkin), 'Z', new ItemStack(ConfigItems.itemFocusFrost));
+		christmasFocus = ThaumcraftApi.addArcaneCraftingRecipe("Kris-tmas Focus", new ItemStack(ItemRegistry.christmasFocus), EMTCraftingAspects.christmasFocusCrafting, "XYX", "YZY", "XYX", 'X', new ItemStack(Blocks.snow), 'Y', new ItemStack(Blocks.pumpkin), 'Z', new ItemStack(ConfigItems.itemFocusFrost));
 
-		electricGoggles = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", RandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), CraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A',
+		electricGoggles = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", EMTRandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), EMTCraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A',
 				new ItemStack(IC2Items.getItem("reBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B', Items.repeater);
 
-		electricGoggles2 = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", RandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), CraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A',
+		electricGoggles2 = ThaumcraftApi.addArcaneCraftingRecipe("Electric Goggles", EMTRandomHelper.getChargedItem(ItemRegistry.electricGoggles, 10), EMTCraftingAspects.electricGogglesCrafting, " Y ", "AZA", "BXB", 'Z', new ItemStack(ConfigItems.itemGoggles), 'X', IC2Items.getItem("electronicCircuit"), 'Y', new ItemStack(Items.diamond_helmet), 'A',
 				new ItemStack(IC2Items.getItem("chargedReBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'B', Items.repeater);
 
-		shieldBlock = ThaumcraftApi.addArcaneCraftingRecipe("Shield Block", new ItemStack(BlockRegistry.shield, 6), CraftingAspects.shieldBlockCrafting, "XYX", "X X", "XYX", 'X', new ItemStack(Blocks.glass), 'Y', new ItemStack(Blocks.obsidian));
+		shieldBlock = ThaumcraftApi.addArcaneCraftingRecipe("Shield Block", new ItemStack(BlockRegistry.shield, 6), EMTCraftingAspects.shieldBlockCrafting, "XYX", "X X", "XYX", 'X', new ItemStack(Blocks.glass), 'Y', new ItemStack(Blocks.obsidian));
 
-		tinyUranium = ThaumcraftApi.addShapelessArcaneCraftingRecipe("Tiny Uranium", new ItemStack(IC2Items.getItem("smallUran235").getItem(), 7), CraftingAspects.tinyUraniumCrafting, IC2Items.getItem("Uran238"));
+		tinyUranium = ThaumcraftApi.addShapelessArcaneCraftingRecipe("Tiny Uranium", new ItemStack(IC2Items.getItem("smallUran235").getItem(), 7), EMTCraftingAspects.tinyUraniumCrafting, IC2Items.getItem("Uran238"));
 
-		compressedSolar = ThaumcraftApi.addArcaneCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.compressedSolars, "XXX", "XXX", "XXX", 'X', IC2Items.getItem("solarPanel"));
+		compressedSolar = ThaumcraftApi.addArcaneCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.compressedSolars, "XXX", "XXX", "XXX", 'X', IC2Items.getItem("solarPanel"));
 
-		doubleCompressedSolar = ThaumcraftApi.addArcaneCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.compressedSolars, "XXX", "XXX", "XXX", 'X', new ItemStack(BlockRegistry.emtSolars, 1, 0));
+		doubleCompressedSolar = ThaumcraftApi.addArcaneCraftingRecipe("Compressed Solars", new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.compressedSolars, "XXX", "XXX", "XXX", 'X', new ItemStack(BlockRegistry.emtSolars, 1, 0));
 
-		electricScribingTools = ThaumcraftApi.addArcaneCraftingRecipe("Electric Scribing Tools", RandomHelper.getChargedItem(ItemRegistry.electricScribingTools, 10), CraftingAspects.electricScribingTools, "YXY", "XZX", "YXY", 'Y', IC2Items.getItem("electronicCircuit"), 'X', new ItemStack(ConfigItems.itemInkwell), 'Z',
+		electricScribingTools = ThaumcraftApi.addArcaneCraftingRecipe("Electric Scribing Tools", EMTRandomHelper.getChargedItem(ItemRegistry.electricScribingTools, 10), EMTCraftingAspects.electricScribingTools, "YXY", "XZX", "YXY", 'Y', IC2Items.getItem("electronicCircuit"), 'X', new ItemStack(ConfigItems.itemInkwell), 'Z',
 				new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE));
 
-		thaumiumWing = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.itemEMTItems, 1, 14), CraftingAspects.thaumiumWing, "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 13), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 5), 'Z', IC2Items.getItem("plateiron"));
+		thaumiumWing = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.itemEMTItems, 1, 14), EMTCraftingAspects.thaumiumWing, "XYZ", "XYZ", "XYZ", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 13), 'Y', new ItemStack(ItemRegistry.itemEMTItems, 1, 5), 'Z', IC2Items.getItem("plateiron"));
 
-		thaumiumWings = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.thaumiumWing), CraftingAspects.thaumiumWing, "XX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 14));
+		thaumiumWings = ThaumcraftApi.addArcaneCraftingRecipe("Thaumium Reinforced Wings", new ItemStack(ItemRegistry.thaumiumWing), EMTCraftingAspects.thaumiumWing, "XX", 'X', new ItemStack(ItemRegistry.itemEMTItems, 1, 14));
 
 		/** Crucible Recipes **/
 
-		ignisGenerator = ThaumcraftApi.addCrucibleRecipe("Ignis Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 1), new ItemStack(BlockRegistry.essentiaGens, 1, 0), CraftingAspects.ignisGeneratorCrafting);
+		ignisGenerator = ThaumcraftApi.addCrucibleRecipe("Ignis Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 1), new ItemStack(BlockRegistry.essentiaGens, 1, 0), EMTCraftingAspects.ignisGeneratorCrafting);
 
-		auramGenerator = ThaumcraftApi.addCrucibleRecipe("Auram Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 2), new ItemStack(BlockRegistry.essentiaGens, 1, 0), CraftingAspects.auramGeneratorCrafting);
+		auramGenerator = ThaumcraftApi.addCrucibleRecipe("Auram Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 2), new ItemStack(BlockRegistry.essentiaGens, 1, 0), EMTCraftingAspects.auramGeneratorCrafting);
 
-		arborGenerator = ThaumcraftApi.addCrucibleRecipe("Arbor Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 3), new ItemStack(BlockRegistry.essentiaGens, 1, 0), CraftingAspects.arborGeneratorCrafting);
+		arborGenerator = ThaumcraftApi.addCrucibleRecipe("Arbor Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 3), new ItemStack(BlockRegistry.essentiaGens, 1, 0), EMTCraftingAspects.arborGeneratorCrafting);
 
-		aerGenerator = ThaumcraftApi.addCrucibleRecipe("Aer Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 4), new ItemStack(BlockRegistry.essentiaGens, 1, 0), CraftingAspects.aerGenerator);
+		aerGenerator = ThaumcraftApi.addCrucibleRecipe("Aer Generator", new ItemStack(BlockRegistry.essentiaGens, 1, 4), new ItemStack(BlockRegistry.essentiaGens, 1, 0), EMTCraftingAspects.aerGenerator);
 
-		waterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 3), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.waterSolars);
+		waterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 3), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.waterSolars);
 
-		doubleWaterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 4), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.waterSolars);
+		doubleWaterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 4), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.waterSolars);
 
-		tripleWaterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 5), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.waterSolars);
+		tripleWaterSolar = ThaumcraftApi.addCrucibleRecipe("Water Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 5), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.waterSolars);
 
-		darkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 6), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.darkSolars);
+		darkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 6), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.darkSolars);
 
-		doubleDarkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 7), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.darkSolars);
+		doubleDarkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 7), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.darkSolars);
 
-		tripleDarkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 8), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.darkSolars);
+		tripleDarkSolar = ThaumcraftApi.addCrucibleRecipe("Entropy Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 8), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.darkSolars);
 
-		orderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 9), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.orderSolars);
+		orderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 9), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.orderSolars);
 
-		doubleOrderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 10), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.orderSolars);
+		doubleOrderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 10), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.orderSolars);
 
-		tripleOrderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 11), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.orderSolars);
+		tripleOrderSolar = ThaumcraftApi.addCrucibleRecipe("Order Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 11), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.orderSolars);
 
-		fireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 12), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.fireSolars);
+		fireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 12), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.fireSolars);
 
-		doubleFireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 13), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.fireSolars);
+		doubleFireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 13), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.fireSolars);
 
-		tripleFireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 14), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.fireSolars);
+		tripleFireSolar = ThaumcraftApi.addCrucibleRecipe("Fire Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 14), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.fireSolars);
 
-		airSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 15), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.airSolars);
+		airSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars, 1, 15), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.airSolars);
 
-		doubleAirSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 0), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.airSolars);
+		doubleAirSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 0), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.airSolars);
 
-		tripleAirSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.airSolars);
+		tripleAirSolar = ThaumcraftApi.addCrucibleRecipe("Air Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 1), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.airSolars);
 
-		earthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 2), new ItemStack(BlockRegistry.emtSolars, 1, 0), CraftingAspects.earthSolars);
+		earthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 2), new ItemStack(BlockRegistry.emtSolars, 1, 0), EMTCraftingAspects.earthSolars);
 
-		doubleEarthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 3), new ItemStack(BlockRegistry.emtSolars, 1, 1), CraftingAspects.earthSolars);
+		doubleEarthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 3), new ItemStack(BlockRegistry.emtSolars, 1, 1), EMTCraftingAspects.earthSolars);
 
-		tripleEarthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 4), new ItemStack(BlockRegistry.emtSolars, 1, 2), CraftingAspects.earthSolars);
+		tripleEarthSolar = ThaumcraftApi.addCrucibleRecipe("Earth Infused Solar Panels", new ItemStack(BlockRegistry.emtSolars2, 1, 4), new ItemStack(BlockRegistry.emtSolars, 1, 2), EMTCraftingAspects.earthSolars);
 
 		ItemStack itemStack = new ItemStack(ConfigItems.itemJarNode);
 		((ItemJarNode) itemStack.getItem()).setAspects(itemStack, new AspectList());
-		portableNode = ThaumcraftApi.addCrucibleRecipe("Portable Node", new ItemStack(BlockRegistry.portableNode), itemStack, CraftingAspects.portableNode);
+		portableNode = ThaumcraftApi.addCrucibleRecipe("Portable Node", new ItemStack(BlockRegistry.portableNode), itemStack, EMTCraftingAspects.portableNode);
 
-		uuMCrystal = ThaumcraftApi.addCrucibleRecipe("UU-Matter Infusion", new ItemStack(ItemRegistry.itemEMTItems, 1, 15), Ic2Items.uuMatterCell.copy(), CraftingAspects.uuMatterCrystal);
+		uuMCrystal = ThaumcraftApi.addCrucibleRecipe("UU-Matter Infusion", new ItemStack(ItemRegistry.itemEMTItems, 1, 15), Ic2Items.uuMatterCell.copy(), EMTCraftingAspects.uuMatterCrystal);
 
 		/** IC2 Stuff related recipes **/
 
@@ -357,7 +357,7 @@ public class RecipeRegistry {
 		Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemResource, 1, 2)), null, new ItemStack(ItemRegistry.itemEMTItems, 1, 5));
 
 		/* Ore Processing for Amber and Cinnabar */
-		if (ConfigHandler.removeAmberAndCinnabarMacerating) {
+		if (EMTConfigHandler.removeAmberAndCinnabarMacerating) {
 			for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {

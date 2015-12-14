@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import tombenpotter.emt.common.init.BlockRegistry;
-import tombenpotter.emt.common.util.ConfigHandler;
+import tombenpotter.emt.common.util.EMTConfigHandler;
 
 public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements IInventory, IWrenchable {
 
@@ -77,7 +77,7 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
 				ItemStack wand = getStackInSlot(0);
 				if (wand != null && wand.getItem() instanceof ItemWandCasting) {
 					ItemWandCasting wandItem = (ItemWandCasting) wand.getItem();
-					if (ic2EnergySink.useEnergy(ConfigHandler.wandChargerConsumption) && wandItem.getAspectsWithRoom(wand) != null) {
+					if (ic2EnergySink.useEnergy(EMTConfigHandler.wandChargerConsumption) && wandItem.getAspectsWithRoom(wand) != null) {
 						wandItem.addVis(wand, Aspect.ORDER, 1, true);
 						wandItem.addVis(wand, Aspect.FIRE, 1, true);
 						wandItem.addVis(wand, Aspect.ENTROPY, 1, true);

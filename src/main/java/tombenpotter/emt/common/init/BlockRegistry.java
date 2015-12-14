@@ -8,17 +8,17 @@ import static thaumcraft.api.ThaumcraftApi.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.common.blocks.BlockEMTMachines;
-import tombenpotter.emt.common.blocks.BlockEMTSolars;
-import tombenpotter.emt.common.blocks.BlockEMTSolars2;
-import tombenpotter.emt.common.blocks.BlockEssentiaGenerators;
-import tombenpotter.emt.common.blocks.BlockPortableNode;
-import tombenpotter.emt.common.blocks.BlockShield;
-import tombenpotter.emt.common.items.blocks.ItemBlockEMTMachines;
-import tombenpotter.emt.common.items.blocks.ItemBlockEMTSolars;
-import tombenpotter.emt.common.items.blocks.ItemBlockEMTSolars2;
-import tombenpotter.emt.common.items.blocks.ItemBlockEssentiaGenerator;
-import tombenpotter.emt.common.items.blocks.ItemBlockEssentiaGenerators;
+import tombenpotter.emt.common.block.BlockEMTMachines;
+import tombenpotter.emt.common.block.BlockEMTSolars;
+import tombenpotter.emt.common.block.BlockEMTSolars2;
+import tombenpotter.emt.common.block.BlockEssentiaGenerators;
+import tombenpotter.emt.common.block.BlockPortableNode;
+import tombenpotter.emt.common.block.BlockShield;
+import tombenpotter.emt.common.item.block.ItemBlockEMTMachines;
+import tombenpotter.emt.common.item.block.ItemBlockEMTSolars;
+import tombenpotter.emt.common.item.block.ItemBlockEMTSolars2;
+import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerator;
+import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerators;
 
 public class BlockRegistry {
 

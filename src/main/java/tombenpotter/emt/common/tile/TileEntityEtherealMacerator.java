@@ -15,7 +15,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.ConfigItems;
 import tombenpotter.emt.common.init.BlockRegistry;
 import tombenpotter.emt.common.tile.TileEntityEMT;
-import tombenpotter.emt.common.util.ConfigHandler;
+import tombenpotter.emt.common.util.EMTConfigHandler;
 
 public class TileEntityEtherealMacerator extends TileEntityEMT implements ISidedInventory, IWrenchable {
 
@@ -24,7 +24,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
 	private static final int[] slots_sides = new int[] { 1 };
 
 	private ItemStack[] slots = new ItemStack[3];
-	public int maceratingSpeed = ConfigHandler.etherealProcessorBaseSpeed;
+	public int maceratingSpeed = EMTConfigHandler.etherealProcessorBaseSpeed;
 	public int cookTime;
 
 	public int getSizeInventory() {
@@ -180,7 +180,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
 
 	public void addBonus() {
 		if (this.canSmelt()) {
-			if (this.worldObj.rand.nextInt(ConfigHandler.etherealProcessorBonus) == 0) {
+			if (this.worldObj.rand.nextInt(EMTConfigHandler.etherealProcessorBonus) == 0) {
 				if (this.slots[1] == null) {
 					this.setInventorySlotContents(1, new ItemStack(ConfigItems.itemNugget, 1, 6));
 				}

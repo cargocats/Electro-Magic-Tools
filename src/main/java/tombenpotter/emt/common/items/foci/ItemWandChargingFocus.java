@@ -1,10 +1,13 @@
 package tombenpotter.emt.common.items.foci;
 
+import java.util.Map.Entry;
+
 import ic2.api.item.ElectricItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import tombenpotter.emt.common.items.foci.ItemBaseFocus;
 import tombenpotter.emt.common.util.ConfigHandler;
@@ -33,8 +36,25 @@ public class ItemWandChargingFocus extends ItemBaseFocus {
 	}
 
 	@Override
-	public AspectList getVisCost(ItemStack focusstack) {
+	public AspectList getVisCost(ItemStack stack) {
+		AspectList actualCost = new AspectList();
+		for (Entry<Aspect, Integer> e : visCost.aspects.entrySet())
+			actualCost.add(e.getKey(), (int)(e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
 		return visCost;
+	}
+
+	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) 
+	{
+	  return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
+	}
+		
+	/**
+	 * Use this method to define custom logic about which upgrades can be applied. This can be used to set up upgrade "trees" 
+	 * that make certain upgrades available only when others are unlocked first, when certain research is completed, or similar logic.
+	 * 
+	 */
+	public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
+		return true;
 	}
 
 	@Override
@@ -46,12 +66,13 @@ public class ItemWandChargingFocus extends ItemBaseFocus {
 			ItemStack armor = player.inventory.armorInventory[1];
 			if (armor != null) {
 				if ((ElectricItem.manager.use(armor, ConfigHandler.wandChargeFocusCost / 4, player) && (ElectricItem.manager.use(armor, ConfigHandler.wandChargeFocusCost / 4, player)) && (ElectricItem.manager.use(armor, ConfigHandler.wandChargeFocusCost / 4, player)) && (ElectricItem.manager.use(armor, ConfigHandler.wandChargeFocusCost / 4, player)))) {
-					wandItem.addVis(itemstack, Aspect.ORDER, 1, true);
-					wandItem.addVis(itemstack, Aspect.FIRE, 1, true);
-					wandItem.addVis(itemstack, Aspect.ENTROPY, 1, true);
-					wandItem.addVis(itemstack, Aspect.WATER, 1, true);
-					wandItem.addVis(itemstack, Aspect.EARTH, 1, true);
-					wandItem.addVis(itemstack, Aspect.AIR, 1, true);
+					int amount = (int)(100 * Math.pow(1.1, getUpgradeLevel(itemstack, FocusUpgradeType.potency)));
+					wandItem.addRealVis(itemstack, Aspect.ORDER, amount, true);
+					wandItem.addRealVis(itemstack, Aspect.FIRE, amount, true);
+					wandItem.addRealVis(itemstack, Aspect.ENTROPY, amount, true);
+					wandItem.addRealVis(itemstack, Aspect.WATER, amount, true);
+					wandItem.addRealVis(itemstack, Aspect.EARTH, amount, true);
+					wandItem.addRealVis(itemstack, Aspect.AIR, amount, true);
 				}
 			}
 		}

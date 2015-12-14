@@ -2,14 +2,18 @@ package tombenpotter.emt.common.items.foci;
 
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
-import tombenpotter.emt.common.items.foci.ItemBaseFocus;
 import tombenpotter.emt.common.util.ConfigHandler;
 
 public class ItemChargeFocus extends ItemBaseFocus {
@@ -27,6 +31,9 @@ public class ItemChargeFocus extends ItemBaseFocus {
 
 	@Override
 	public AspectList getVisCost(ItemStack stack) {
+		AspectList actualCost = new AspectList();
+		for (Entry<Aspect, Integer> e : visCost.aspects.entrySet())
+			actualCost.add(e.getKey(), (int)(e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
 		return visCost;
 	}
 
@@ -35,13 +42,27 @@ public class ItemChargeFocus extends ItemBaseFocus {
 		return "WANDCHARGING";
 	}
 
+	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) 
+	{
+	  return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
+	}
+		
+	/**
+	 * Use this method to define custom logic about which upgrades can be applied. This can be used to set up upgrade "trees" 
+	 * that make certain upgrades available only when others are unlocked first, when certain research is completed, or similar logic.
+	 * 
+	 */
+	public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
+		return true;
+	}
+
 	@Override
 	public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
 		ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
 		if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
 			if (!world.isRemote) {
 
-				int energyLeft = ConfigHandler.chargeFocusProduction;
+				int energyLeft = (int)(ConfigHandler.chargeFocusProduction * Math.pow(1.1, getUpgradeLevel(itemstack, FocusUpgradeType.potency)));
 				for (int i = 0; i < player.inventory.armorInventory.length; i++) {
 					if (energyLeft > 0) {
 						if ((player.inventory.armorInventory[i] != null) && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {

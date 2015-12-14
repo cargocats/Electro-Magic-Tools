@@ -83,6 +83,11 @@ public class EntityShield extends Entity implements IProjectile {
 			}
 		}
 	}
+	
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float p_70070_1_){
+        return 240;
+    }
 
 	public void applyEntityCollision(Entity entity) {
 		if (entity.riddenByEntity != this && entity.ridingEntity != this) {

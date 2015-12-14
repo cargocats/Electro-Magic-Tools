@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.common.entities.EntityLaser;
+import tombenpotter.emt.common.entity.EntityLaser;
 
 public class RenderLaser extends Render {
 

@@ -5,9 +5,9 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EntityLiving;
 import tombenpotter.emt.ElectroMagicTools;
-import tombenpotter.emt.common.entities.EntityArcher;
-import tombenpotter.emt.common.entities.EntityLaser;
-import tombenpotter.emt.common.entities.EntityShield;
+import tombenpotter.emt.common.entity.EntityArcher;
+import tombenpotter.emt.common.entity.EntityLaser;
+import tombenpotter.emt.common.entity.EntityShield;
 
 public class EntityRegistry {
 

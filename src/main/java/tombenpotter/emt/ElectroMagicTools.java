@@ -20,12 +20,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import tombenpotter.emt.common.commands.CommandOutputs;
+import tombenpotter.emt.common.command.CommandOutputs;
 import tombenpotter.emt.common.init.EntityRegistry;
 import tombenpotter.emt.common.init.Registry;
 import tombenpotter.emt.common.network.PacketEMTKeys;
 import tombenpotter.emt.common.util.*;
-import tombenpotter.emt.proxies.CommonProxy;
+import tombenpotter.emt.proxy.CommonProxy;
 
 @Mod(modid = ModInformation.modid, name = ModInformation.name, version = ModInformation.version, guiFactory = ModInformation.guiFactory, dependencies = ModInformation.depend)
 public class ElectroMagicTools {
@@ -35,7 +35,7 @@ public class ElectroMagicTools {
 	@SidedProxy(clientSide = ModInformation.clientProxy, serverSide = ModInformation.commonProxy)
 	public static CommonProxy proxy;
 
-	public static CreativeTabs tabEMT = new CreativeTab(ModInformation.modid + ".creativeTab");
+	public static CreativeTabs tabEMT = new EMTCreativeTab(ModInformation.modid + ".creativeTab");
 	public static Logger logger = LogManager.getLogger(ModInformation.name);
 
 	@Instance(ModInformation.modid)
@@ -45,11 +45,11 @@ public class ElectroMagicTools {
 	public void preInit(FMLPreInitializationEvent event) {
 		ElectroMagicTools.logger.info("Starting planning the world domination");
 
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		EMTConfigHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new EMTEventHandler());
 		Registry.register();
-		EssentiasOutputs.addPrimalOutputs();
-		EssentiasOutputs.addOutputs();
+		EMTEssentiasOutputs.addPrimalOutputs();
+		EMTEssentiasOutputs.addOutputs();
 		registerPackets();
 
 		ElectroMagicTools.logger.info("Planning complete");
@@ -64,7 +64,7 @@ public class ElectroMagicTools {
 		ElectroMagicTools.logger.info("Making mobs drop additional items");
 		MinecraftForge.EVENT_BUS.register(new EMTEventHandler());
 		ElectroMagicTools.logger.info("Adding dungeon loot");
-		DungeonChestGenerator.generateLoot();
+		EMTDungeonChestGenerator.generateLoot();
 
 		ElectroMagicTools.logger.info("Registering entities");
 		EntityRegistry.registerEMTEntities();

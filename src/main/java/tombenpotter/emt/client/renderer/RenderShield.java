@@ -10,12 +10,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.common.entities.EntityLaser;
+import tombenpotter.emt.common.entity.EntityLaser;
 
 public class RenderShield extends Render {
 	private static final ResourceLocation shieldTexture = new ResourceLocation(ModInformation.texturePath, "textures/models/shield.png");
 	
-	private static float[] values = new float[6912];
+	private static final float[] values = new float[6912];
 	
 	static{
 		float sin1;

@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.gui.container.ContainerIndustrialWandRecharge;
 import tombenpotter.emt.common.tile.TileEntityIndustrialWandRecharge;
-import tombenpotter.emt.common.util.TextHelper;
+import tombenpotter.emt.common.util.EMTTextHelper;
 
 public class GuiIndustrialWandRecharger extends GuiContainer {
 
@@ -28,7 +28,7 @@ public class GuiIndustrialWandRecharger extends GuiContainer {
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		this.fontRendererObj.drawString(TextHelper.localize("gui.EMT.wandRecharge.title"), 6, 6, 4210752);
-		this.fontRendererObj.drawString(TextHelper.localize("gui.EMT.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(EMTTextHelper.localize("gui.EMT.wandRecharge.title"), 6, 6, 4210752);
+		this.fontRendererObj.drawString(EMTTextHelper.localize("gui.EMT.inventory"), 8, this.ySize - 96 + 2, 4210752);
 	}
 }

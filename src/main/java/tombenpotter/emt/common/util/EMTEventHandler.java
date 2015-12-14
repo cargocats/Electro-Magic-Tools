@@ -18,7 +18,7 @@ import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.client.EMTKeys;
 import tombenpotter.emt.common.init.ItemRegistry;
 import tombenpotter.emt.common.network.PacketEMTKeys;
-import tombenpotter.emt.proxies.ClientProxy;
+import tombenpotter.emt.proxy.ClientProxy;
 
 public class EMTEventHandler {
 	Random rnd = new Random();
@@ -39,7 +39,7 @@ public class EMTEventHandler {
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (event.modID.equals(ModInformation.modid)) {
-			ConfigHandler.syncConfig();
+			EMTConfigHandler.syncConfig();
 			ElectroMagicTools.logger.info("Refreshing configuration file.");
 		}
 	}

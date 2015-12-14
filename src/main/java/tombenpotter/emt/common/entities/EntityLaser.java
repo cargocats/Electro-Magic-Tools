@@ -30,6 +30,8 @@ public class EntityLaser extends Entity implements IProjectile {
 	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir;
+	
+	private float explosionStrengthMod = 1.f;
 
 	public EntityLaser(World par1World) {
 		super(par1World);
@@ -84,6 +86,11 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
+	}
+	
+	public void setExplosionStrengthModifier(float f)
+	{
+		explosionStrengthMod = f;
 	}
 
 	protected void entityInit() {
@@ -164,7 +171,7 @@ public class EntityLaser extends Entity implements IProjectile {
 			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 			if (!this.worldObj.isRemote) {
-				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, 3, true);
+				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, 3 * explosionStrengthMod, true);
 				this.setDead();
 			}
 
@@ -318,6 +325,7 @@ public class EntityLaser extends Entity implements IProjectile {
 		nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.inTile));
 		nbt.setByte("inData", (byte) this.inData);
 		nbt.setBoolean("inGround", this.inGround);
+		nbt.setFloat("explosionStrengthMod", this.explosionStrengthMod);
 	}
 
 	public void readEntityFromNBT(NBTTagCompound nbt) {
@@ -327,13 +335,14 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.inTile = Block.getBlockById(nbt.getByte("inTile") & 255);
 		this.inData = nbt.getByte("inData") & 255;
 		this.inGround = nbt.getBoolean("inGround");
+		this.explosionStrengthMod = nbt.getFloat("explosionStrengthMod");
 	}
 
 	public void onCollide(Entity par1Entity) {
 		if (!this.worldObj.isRemote)
 			;
 		{
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 3, true);
+			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 3*explosionStrengthMod, true);
 		}
 	}
 

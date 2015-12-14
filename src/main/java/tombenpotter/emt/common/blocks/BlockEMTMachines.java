@@ -1,7 +1,10 @@
 package tombenpotter.emt.common.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.item.IC2Items;
+
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,9 +21,8 @@ import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.tile.TileEntityEtherealMacerator;
 import tombenpotter.emt.common.tile.TileEntityIndustrialWandRecharge;
-
-import java.util.List;
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEMTMachines extends BlockEMT {
 
@@ -77,7 +79,13 @@ public class BlockEMTMachines extends BlockEMT {
 		return true;
 	}
 
-	@Override
+    @Override
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
+        return IC2Items.getItem("machine").getItem();
+    }
+
+    @Override
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
 		dropItems(world, x, y, z);
 		world.removeTileEntity(x, y, z);

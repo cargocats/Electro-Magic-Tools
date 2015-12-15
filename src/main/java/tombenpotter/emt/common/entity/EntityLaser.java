@@ -31,7 +31,7 @@ public class EntityLaser extends Entity implements IProjectile {
 	private int ticksInGround;
 	private int ticksInAir;
 	
-	private float explosionStrengthMod = 1.f;
+	private float explosionStrength = 2f;
 
 	public EntityLaser(World par1World) {
 		super(par1World);
@@ -90,7 +90,7 @@ public class EntityLaser extends Entity implements IProjectile {
 	
 	public void setExplosionStrengthModifier(float f)
 	{
-		explosionStrengthMod = f;
+		explosionStrength = f;
 	}
 
 	protected void entityInit() {
@@ -171,7 +171,7 @@ public class EntityLaser extends Entity implements IProjectile {
 			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 			if (!this.worldObj.isRemote) {
-				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, 3 * explosionStrengthMod, true);
+				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
 				this.setDead();
 			}
 
@@ -246,14 +246,9 @@ public class EntityLaser extends Entity implements IProjectile {
 			if (movingobjectposition != null) {
 				if (movingobjectposition.entityHit != null) {
 					f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-
-					{
-						this.motionX *= -0.10000000149011612D;
-						this.motionY *= -0.10000000149011612D;
-						this.motionZ *= -0.10000000149011612D;
-						this.rotationYaw += 180.0F;
-						this.prevRotationYaw += 180.0F;
-						this.ticksInAir = 0;
+					if (!this.worldObj.isRemote) {
+						this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
+						this.setDead();
 					}
 				}
 				else {
@@ -269,7 +264,6 @@ public class EntityLaser extends Entity implements IProjectile {
 					this.posX -= this.motionX / (double) f2 * 0.05000000074505806D;
 					this.posY -= this.motionY / (double) f2 * 0.05000000074505806D;
 					this.posZ -= this.motionZ / (double) f2 * 0.05000000074505806D;
-					this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 					this.inGround = true;
 				}
 			}
@@ -280,9 +274,7 @@ public class EntityLaser extends Entity implements IProjectile {
 			f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-				;
-			}
+			for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 				this.prevRotationPitch += 360.0F;
@@ -325,7 +317,7 @@ public class EntityLaser extends Entity implements IProjectile {
 		nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.inTile));
 		nbt.setByte("inData", (byte) this.inData);
 		nbt.setBoolean("inGround", this.inGround);
-		nbt.setFloat("explosionStrengthMod", this.explosionStrengthMod);
+		nbt.setFloat("explosionStrength", this.explosionStrength);
 	}
 
 	public void readEntityFromNBT(NBTTagCompound nbt) {
@@ -335,14 +327,13 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.inTile = Block.getBlockById(nbt.getByte("inTile") & 255);
 		this.inData = nbt.getByte("inData") & 255;
 		this.inGround = nbt.getBoolean("inGround");
-		this.explosionStrengthMod = nbt.getFloat("explosionStrengthMod");
+		this.explosionStrength = nbt.getFloat("explosionStrength");
 	}
 
 	public void onCollide(Entity par1Entity) {
 		if (!this.worldObj.isRemote)
-			;
 		{
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 3*explosionStrengthMod, true);
+			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, explosionStrength, true);
 		}
 	}
 

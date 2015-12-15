@@ -109,8 +109,8 @@ public class EntityShield extends Entity implements IProjectile {
 			ePosZ *= 0.05000000074505806D;
 			ePosX *= (double) (1.0F - this.entityCollisionReduction);
 			ePosZ *= (double) (1.0F - this.entityCollisionReduction);
-			this.addVelocity(-ePosX * 100, 0.0D, -ePosZ * 100);
-			entity.addVelocity(ePosX * 100, 0.0D, ePosZ * 100);
+			this.addVelocity(-ePosX * 100, 0.0D, -ePosZ * 10);
+			entity.addVelocity(ePosX * 100, 0.0D, ePosZ * 10);
 
 		}
 	}

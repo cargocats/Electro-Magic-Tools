@@ -42,7 +42,7 @@ public class BlockRegistry {
 		emtSolars2 = new BlockEMTSolars2().setBlockName(ModInformation.modid + ".emtsolars2");
 		GameRegistry.registerBlock(emtSolars2, ItemBlockEMTSolars2.class, "EMTSolars2");
 
-		emtMachines = new BlockEMTMachines().setBlockName(ModInformation.modid + ".emtmachines");
+		emtMachines = new BlockEMTMachines().setBlockName(ModInformation.modid + ".emtmachines").setHardness(2.F);
 		GameRegistry.registerBlock(emtMachines, ItemBlockEMTMachines.class, "EMTMachines");
 
 		essentiaGens = new BlockEssentiaGenerators().setBlockName(ModInformation.modid + ".essentiaGens");

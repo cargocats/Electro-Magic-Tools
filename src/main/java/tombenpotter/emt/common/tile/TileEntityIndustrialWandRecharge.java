@@ -1,6 +1,7 @@
 package tombenpotter.emt.common.tile;
 
 import ic2.api.energy.prefab.BasicSink;
+import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,10 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.items.wands.ItemWandCasting;
-import tombenpotter.emt.common.tile.TileEntityEMT;
+import tombenpotter.emt.common.init.BlockRegistry;
 import tombenpotter.emt.common.util.EMTConfigHandler;
 
-public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements IInventory {
+public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements IInventory, IWrenchable {
 
 	private BasicSink ic2EnergySink = new BasicSink(this, 100000, 4);
 
@@ -176,5 +177,35 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
 
 	@Override
 	public void closeInventory() {
+	}
+
+	@Override
+	public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+		return false;
+	}
+
+	@Override
+	public short getFacing() {
+		return 0;
+	}
+
+	@Override
+	public void setFacing(short facing) {
+		
+	}
+
+	@Override
+	public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+		return true;
+	}
+
+	@Override
+	public float getWrenchDropRate() {
+		return 0.8f;
+	}
+
+	@Override
+	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+		 return new ItemStack(BlockRegistry.emtMachines, 1, 0);
 	}
 }

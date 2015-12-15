@@ -2,11 +2,13 @@ package tombenpotter.emt.common.item.focus;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import tombenpotter.emt.common.entity.EntityLaser;
 
@@ -40,9 +42,26 @@ public class ItemExplosionFocus extends ItemBaseFocus {
 			if (!world.isRemote) {
 				EntityLaser laser;
 				laser = new EntityLaser(world, player, 2);
+				laser.setExplosionStrengthModifier(getUpgradeLevel(itemstack, FocusUpgradeType.potency) * 0.5f + 1);
 				world.spawnEntityInWorld(laser);
 			}
 		}
 		return itemstack;
 	}
+	
+	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) 
+	{
+	  return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
+	}
+		
+	/**
+	 * Use this method to define custom logic about which upgrades can be applied. This can be used to set up upgrade "trees" 
+	 * that make certain upgrades available only when others are unlocked first, when certain research is completed, or similar logic.
+	 * 
+	 */
+	public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
+		return true;
+	}
+
+
 }

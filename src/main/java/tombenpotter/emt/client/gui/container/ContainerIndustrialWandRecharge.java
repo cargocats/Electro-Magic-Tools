@@ -42,29 +42,14 @@ public class ContainerIndustrialWandRecharge extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 == 1) {
-				if (!this.mergeItemStack(itemstack1, 2, 38, true)) {
+			if (par2 == 36) {
+				if (!this.mergeItemStack(itemstack1, 0, 35, false)) {
 					return null;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if (par2 != 0) {
-				if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null) {
-					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-						return null;
-					}
-				}
-				else if (par2 >= 2 && par2 < 29) {
-					if (!this.mergeItemStack(itemstack1, 29, 38, false)) {
-						return null;
-					}
-				}
-				else if (par2 >= 29 && par2 < 38 && !this.mergeItemStack(itemstack1, 2, 29, false)) {
-					return null;
-				}
-			}
-			else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
+			else if (!charger.isItemValidForSlot(0, itemstack1) || !this.mergeItemStack(itemstack1, 36, 37, false)) {
 				return null;
 			}
 

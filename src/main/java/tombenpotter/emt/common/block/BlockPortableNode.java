@@ -24,8 +24,9 @@ public class BlockPortableNode extends BlockAiry {
 
     public IIcon[] texture = new IIcon[1];
 
-    public BlockPortableNode() {
+    public BlockPortableNode(String name) {
         this.setCreativeTab(ElectroMagicTools.tabEMT);
+        setBlockName(ModInformation.modid + "." + name);
         setBlockUnbreakable();
     }
 

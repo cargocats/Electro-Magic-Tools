@@ -24,10 +24,10 @@ import tombenpotter.emt.common.tile.TileEntityIndustrialWandRecharge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEMTMachines extends BlockEMT {
+public class BlockEMTMachines extends BlockBaseContainer {
 
-	public BlockEMTMachines() {
-		super(Material.iron);
+	public BlockEMTMachines(String name) {
+		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 
 	@Override
@@ -80,8 +80,7 @@ public class BlockEMTMachines extends BlockEMT {
 	}
 
     @Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
-    {
+	public Item getItemDropped(int meta, Random random, int fortune){
         return IC2Items.getItem("machine").getItem();
     }
 

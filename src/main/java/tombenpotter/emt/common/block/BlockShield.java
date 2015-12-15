@@ -17,8 +17,9 @@ import java.util.Random;
 
 public class BlockShield extends Block {
 
-	public BlockShield() {
+	public BlockShield(String name) {
 		super(Material.rock);
+		setBlockName(ModInformation.modid + "." + name);
 		this.setCreativeTab(ElectroMagicTools.tabEMT);
 		this.setHardness(1F);
 		this.setResistance(10000000000000000000000000000000000000F);

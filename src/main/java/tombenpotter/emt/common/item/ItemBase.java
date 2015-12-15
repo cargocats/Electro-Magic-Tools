@@ -22,8 +22,7 @@ public class ItemBase extends Item {
 		setCreativeTab(ElectroMagicTools.tabEMT);
 	}
 	
-    public String getItemStackDisplayName(ItemStack stack)
-    {
+    public String getItemStackDisplayName(ItemStack stack){
         return (EMTTextHelper.GREEN + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 }

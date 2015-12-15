@@ -30,22 +30,22 @@ public class BlockRegistry {
 	public static Block emtSolars2;
 
 	public static void registerBlocks() {
-		portableNode = new BlockPortableNode().setBlockName(ModInformation.modid + ".portablenode");
+		portableNode = new BlockPortableNode("portablenode");
 		GameRegistry.registerBlock(portableNode, "PortableNode");
 
-		shield = new BlockShield().setBlockName(ModInformation.modid + ".shield");
+		shield = new BlockShield("shield");
 		GameRegistry.registerBlock(shield, "ShieldBlock");
 
-		emtSolars = new BlockEMTSolars().setBlockName(ModInformation.modid + ".emtsolars");
+		emtSolars = new BlockEMTSolars("solar");
 		GameRegistry.registerBlock(emtSolars, ItemBlockEMTSolars.class, "EMTSolars");
 
-		emtSolars2 = new BlockEMTSolars2().setBlockName(ModInformation.modid + ".emtsolars2");
+		emtSolars2 = new BlockEMTSolars2("solar2");
 		GameRegistry.registerBlock(emtSolars2, ItemBlockEMTSolars2.class, "EMTSolars2");
 
-		emtMachines = new BlockEMTMachines().setBlockName(ModInformation.modid + ".emtmachines").setHardness(2.F);
+		emtMachines = new BlockEMTMachines("machine");
 		GameRegistry.registerBlock(emtMachines, ItemBlockEMTMachines.class, "EMTMachines");
 
-		essentiaGens = new BlockEssentiaGenerators().setBlockName(ModInformation.modid + ".essentiaGens");
+		essentiaGens = new BlockEssentiaGenerators("essentia");
 		GameRegistry.registerBlock(essentiaGens, ItemBlockEssentiaGenerators.class, "EssentiaGenerators");
 	}
 

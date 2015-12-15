@@ -25,8 +25,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
 
 	public BlockBaseContainer(String unlocName, Material material, SoundType soundType, float hardness) {
 		super(material);
-
-		setBlockName(ModInformation.modid + ".module.base." + unlocName);
+		setBlockName(ModInformation.modid + "." + unlocName);
 		setCreativeTab(ElectroMagicTools.tabEMT);
 		setStepSound(soundType);
 		setHardness(hardness);

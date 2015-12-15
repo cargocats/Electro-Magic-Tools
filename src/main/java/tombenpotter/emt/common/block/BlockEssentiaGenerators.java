@@ -21,8 +21,8 @@ import org.lwjgl.opengl.GL11;
 
 public class BlockEssentiaGenerators extends BlockBaseContainer {
 
-	public BlockEssentiaGenerators() {
-		super("generator.essentia.2", Material.iron, soundTypeMetal, 4.0F);
+	public BlockEssentiaGenerators(String name) {
+		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 
 	@Override

@@ -32,8 +32,8 @@ import java.util.List;
 
 public class BlockEMTSolars extends BlockBaseContainer {
 
-	public BlockEMTSolars() {
-		super("solars", Material.iron, soundTypeMetal, 4.0F);
+	public BlockEMTSolars(String name) {
+		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 
 	@Override
@@ -109,7 +109,6 @@ public class BlockEMTSolars extends BlockBaseContainer {
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i <= 15; i++) {
 			list.add(new ItemStack(id, 1, i));

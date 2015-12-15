@@ -21,8 +21,8 @@ import java.util.List;
 
 public class BlockEMTSolars2 extends BlockBaseContainer {
 
-	public BlockEMTSolars2() {
-		super("solars.2", Material.iron, soundTypeMetal, 4.0F);
+	public BlockEMTSolars2(String name) {
+		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 
 	@Override

@@ -152,21 +152,23 @@ public class ItemMaterials extends Item {
 			float d3 = 5000;
 			Vec3 vec3d1 = playerLoc.addVector(f7 * d3, f8 * d3, f9 * d3);
 			MovingObjectPosition movingobjectposition = player.worldObj.rayTraceBlocks(playerLoc, vec3d1, true);
-			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
-				int x2 = movingobjectposition.blockX;
-				int y2 = movingobjectposition.blockY;
-				int z2 = movingobjectposition.blockZ;
-				world.spawnEntityInWorld(new EntityLightningBolt(world, x2, y2, z2));
-			}
-			else if (movingobjectposition.typeOfHit == MovingObjectType.ENTITY) {
-				Entity entityhit = movingobjectposition.entityHit;
-				double x = entityhit.posX;
-				double y = entityhit.posY;
-				double z = entityhit.posZ;
-				world.spawnEntityInWorld(new EntityLightningBolt(world, x, y, z));
-			}
-			if (!player.capabilities.isCreativeMode) {
-				player.inventory.consumeInventoryItem(this);
+			if (movingobjectposition != null) {
+				if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
+					int x2 = movingobjectposition.blockX;
+					int y2 = movingobjectposition.blockY;
+					int z2 = movingobjectposition.blockZ;
+					world.spawnEntityInWorld(new EntityLightningBolt(world, x2, y2, z2));
+				}
+				else if (movingobjectposition.typeOfHit == MovingObjectType.ENTITY) {
+					Entity entityhit = movingobjectposition.entityHit;
+					double x = entityhit.posX;
+					double y = entityhit.posY;
+					double z = entityhit.posZ;
+					world.spawnEntityInWorld(new EntityLightningBolt(world, x, y, z));
+				}
+				if (!player.capabilities.isCreativeMode) {
+					player.inventory.consumeInventoryItem(this);
+				}
 			}
 			player.stopUsingItem();
 		}

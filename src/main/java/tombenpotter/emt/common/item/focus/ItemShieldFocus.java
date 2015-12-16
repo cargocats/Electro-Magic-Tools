@@ -7,6 +7,7 @@ import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -52,9 +53,7 @@ public class ItemShieldFocus extends ItemBaseFocus {
 		for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {
 			IC2.platform.removePotion(player, effect.getPotionID());
 		}
-		if (player.capabilities.isCreativeMode)
-			return;
-		if (!wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+		if (!player.capabilities.isCreativeMode && !wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
 			player.stopUsingItem();
 		}
 	}

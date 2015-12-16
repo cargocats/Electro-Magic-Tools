@@ -33,8 +33,10 @@ public class EntityRegistry {
 	public static void registerEMTEntities() {
 
 		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		
 		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
+		
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 	}
 }

@@ -19,14 +19,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityShield extends Entity implements IProjectile {
-	EntityPlayer owner;
+	public EntityPlayer owner;
 
 	public EntityShield(World world) {
-		super(world);
-		this.setSize(4, 4);
-		this.ignoreFrustumCheck = true;
-		owner = Minecraft.getMinecraft().thePlayer;
-		this.setPosition(owner.posX, owner.posY, owner.posZ);
+		this(world, Minecraft.getMinecraft().thePlayer);
 	}
 
 	public EntityShield(World world, EntityPlayer player) {
@@ -76,7 +72,7 @@ public class EntityShield extends Entity implements IProjectile {
 
 	public void onUpdate() {
 		super.onUpdate();
-		if (!owner.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			this.setPosition(owner.posX, owner.posY, owner.posZ);
 			if (!owner.isUsingItem()) {
 				this.setDead();

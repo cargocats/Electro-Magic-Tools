@@ -19,9 +19,9 @@ import tombenpotter.emt.common.tile.solar.earth.TileEntityTripleEarthSolar;
 
 import java.util.List;
 
-public class BlockEMTSolars2 extends BlockBaseContainer {
+public class BlockSolars2 extends BlockBaseContainer {
 
-	public BlockEMTSolars2(String name) {
+	public BlockSolars2(String name) {
 		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 

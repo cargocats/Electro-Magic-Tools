@@ -24,9 +24,9 @@ import tombenpotter.emt.common.tile.TileEntityIndustrialWandRecharge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEMTMachines extends BlockBaseContainer {
+public class BlockMachines extends BlockBaseContainer {
 
-	public BlockEMTMachines(String name) {
+	public BlockMachines(String name) {
 		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 

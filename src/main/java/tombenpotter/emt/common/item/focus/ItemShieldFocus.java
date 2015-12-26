@@ -3,8 +3,11 @@ package tombenpotter.emt.common.item.focus;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

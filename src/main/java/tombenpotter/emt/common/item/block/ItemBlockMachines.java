@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockEMTMachines extends ItemBlock {
+public class ItemBlockMachines extends ItemBlock {
 
-	public ItemBlockEMTMachines(Block id) {
+	public ItemBlockMachines(Block id) {
 		super(id);
 		setHasSubtypes(true);
 	}

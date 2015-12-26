@@ -94,7 +94,6 @@ public class EntityLaser extends Entity implements IProjectile {
 	}
 
 	protected void entityInit() {
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
 
 	public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8) {

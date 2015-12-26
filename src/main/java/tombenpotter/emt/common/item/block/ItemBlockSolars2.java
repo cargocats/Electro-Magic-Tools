@@ -11,9 +11,9 @@ import java.util.List;
 
 import static tombenpotter.emt.common.util.EMTTextHelper.localize;
 
-public class ItemBlockEMTSolars2 extends ItemBlock {
+public class ItemBlockSolars2 extends ItemBlock {
 
-	public ItemBlockEMTSolars2(Block id) {
+	public ItemBlockSolars2(Block id) {
 		super(id);
 		setHasSubtypes(true);
 	}

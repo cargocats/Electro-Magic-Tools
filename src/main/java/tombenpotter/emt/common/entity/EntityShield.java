@@ -1,9 +1,7 @@
 package tombenpotter.emt.common.entity;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.IC2;
@@ -18,38 +16,35 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityShield extends Entity implements IProjectile {
+public class EntityShield extends Entity {
 	public EntityPlayer owner;
+	public boolean needCheck = true;
 
 	public EntityShield(World world) {
-		this(world, Minecraft.getMinecraft().thePlayer);
+		super(world);
+		this.ignoreFrustumCheck = true;
 	}
 
 	public EntityShield(World world, EntityPlayer player) {
 		super(world);
 		this.setSize(4, 4);
 		owner = player;
+		this.dataWatcher.updateObject(11, owner.getDisplayName());
 		this.setPosition(player.posX, player.posY, player.posZ);
 		this.ignoreFrustumCheck = true;
 	}
 
 	@Override
 	protected void entityInit() {
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		this.setPosition(par1, par3, par5);
-		this.setRotation(par7, par8);
+		this.dataWatcher.addObject(11, "");
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {
+	protected void writeEntityToNBT(NBTTagCompound nbt) {
 	}
 
 	public AxisAlignedBB getBoundingBox() {
@@ -72,7 +67,17 @@ public class EntityShield extends Entity implements IProjectile {
 
 	public void onUpdate() {
 		super.onUpdate();
-		if (!this.worldObj.isRemote) {
+		
+		if(needCheck && owner == null) {
+			owner = this.worldObj.getPlayerEntityByName(dataWatcher.getWatchableObjectString(11));
+			needCheck = false;
+		}
+		else if(!needCheck && owner == null){
+			this.setDead();
+			return;
+		}
+		
+		if (!this.worldObj.isRemote && owner != null) {
 			this.setPosition(owner.posX, owner.posY, owner.posZ);
 			if (!owner.isUsingItem()) {
 				this.setDead();
@@ -105,9 +110,7 @@ public class EntityShield extends Entity implements IProjectile {
 			ePosZ *= 0.05000000074505806D;
 			ePosX *= (double) (1.0F - this.entityCollisionReduction);
 			ePosZ *= (double) (1.0F - this.entityCollisionReduction);
-			this.addVelocity(-ePosX * 100, 0.0D, -ePosZ * 10);
-			entity.addVelocity(ePosX * 100, 0.0D, ePosZ * 10);
-
+			entity.addVelocity(ePosX * 10, 0.0D, ePosZ * 10);
 		}
 	}
 
@@ -115,9 +118,5 @@ public class EntityShield extends Entity implements IProjectile {
 	@Override
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
-	}
-
-	@Override
-	public void setThrowableHeading(double p_70186_1_, double p_70186_3_, double p_70186_5_, float p_70186_7_, float p_70186_8_) {
 	}
 }

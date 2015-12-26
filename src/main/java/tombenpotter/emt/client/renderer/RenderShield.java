@@ -80,7 +80,7 @@ public class RenderShield extends Render {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glPushAttrib(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		if(!Minecraft.getMinecraft().thePlayer.getDisplayName().equals( ((EntityShield)entityShield).owner.getDisplayName() ))
+		if(((EntityShield)entityShield).owner != null && !Minecraft.getMinecraft().thePlayer.getDisplayName().equals(((EntityShield)entityShield).owner.getDisplayName() ))
 			GL11.glTranslated(x, y, z);
 
 		for (int v = 0; v < values.length; v += 12) {

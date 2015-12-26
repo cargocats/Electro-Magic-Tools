@@ -30,9 +30,9 @@ import tombenpotter.emt.common.tile.solar.water.TileEntityWaterSolar;
 
 import java.util.List;
 
-public class BlockEMTSolars extends BlockBaseContainer {
+public class BlockSolars extends BlockBaseContainer {
 
-	public BlockEMTSolars(String name) {
+	public BlockSolars(String name) {
 		super(name, Material.iron, soundTypeMetal, 4.0F);
 	}
 

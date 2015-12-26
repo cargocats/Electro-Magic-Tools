@@ -8,15 +8,15 @@ import static thaumcraft.api.ThaumcraftApi.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.common.block.BlockEMTMachines;
-import tombenpotter.emt.common.block.BlockEMTSolars;
-import tombenpotter.emt.common.block.BlockEMTSolars2;
+import tombenpotter.emt.common.block.BlockMachines;
+import tombenpotter.emt.common.block.BlockSolars;
+import tombenpotter.emt.common.block.BlockSolars2;
 import tombenpotter.emt.common.block.BlockEssentiaGenerators;
 import tombenpotter.emt.common.block.BlockPortableNode;
 import tombenpotter.emt.common.block.BlockShield;
-import tombenpotter.emt.common.item.block.ItemBlockEMTMachines;
-import tombenpotter.emt.common.item.block.ItemBlockEMTSolars;
-import tombenpotter.emt.common.item.block.ItemBlockEMTSolars2;
+import tombenpotter.emt.common.item.block.ItemBlockMachines;
+import tombenpotter.emt.common.item.block.ItemBlockSolars;
+import tombenpotter.emt.common.item.block.ItemBlockSolars2;
 import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerator;
 import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerators;
 
@@ -36,14 +36,14 @@ public class BlockRegistry {
 		shield = new BlockShield("shield");
 		GameRegistry.registerBlock(shield, "ShieldBlock");
 
-		emtSolars = new BlockEMTSolars("solar");
-		GameRegistry.registerBlock(emtSolars, ItemBlockEMTSolars.class, "EMTSolars");
+		emtSolars = new BlockSolars("solar");
+		GameRegistry.registerBlock(emtSolars, ItemBlockSolars.class, "EMTSolars");
 
-		emtSolars2 = new BlockEMTSolars2("solar2");
-		GameRegistry.registerBlock(emtSolars2, ItemBlockEMTSolars2.class, "EMTSolars2");
+		emtSolars2 = new BlockSolars2("solar2");
+		GameRegistry.registerBlock(emtSolars2, ItemBlockSolars2.class, "EMTSolars2");
 
-		emtMachines = new BlockEMTMachines("machine");
-		GameRegistry.registerBlock(emtMachines, ItemBlockEMTMachines.class, "EMTMachines");
+		emtMachines = new BlockMachines("machine");
+		GameRegistry.registerBlock(emtMachines, ItemBlockMachines.class, "EMTMachines");
 
 		essentiaGens = new BlockEssentiaGenerators("essentia");
 		GameRegistry.registerBlock(essentiaGens, ItemBlockEssentiaGenerators.class, "EssentiaGenerators");

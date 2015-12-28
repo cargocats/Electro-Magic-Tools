@@ -72,7 +72,7 @@ public class EntityShield extends Entity {
 			owner = this.worldObj.getPlayerEntityByName(dataWatcher.getWatchableObjectString(11));
 			needCheck = false;
 		}
-		else if(!needCheck && owner == null){
+		if(!needCheck && owner == null){
 			this.setDead();
 			return;
 		}
@@ -94,23 +94,7 @@ public class EntityShield extends Entity {
 		if (entity.riddenByEntity != this && entity.ridingEntity != this) {
 			double ePosX = entity.posX - this.posX;
 			double ePosZ = entity.posZ - this.posZ;
-			double d2 = MathHelper.abs_max(ePosX, ePosZ);
-			d2 = (double) MathHelper.sqrt_double(d2);
-			ePosX /= d2;
-			ePosZ /= d2;
-			double d3 = 1.0D / d2;
-
-			if (d3 > 1.0D) {
-				d3 = 1.0D;
-			}
-
-			ePosX *= d3;
-			ePosZ *= d3;
-			ePosX *= 0.05000000074505806D;
-			ePosZ *= 0.05000000074505806D;
-			ePosX *= (double) (1.0F - this.entityCollisionReduction);
-			ePosZ *= (double) (1.0F - this.entityCollisionReduction);
-			entity.addVelocity(ePosX * 10, 0.0D, ePosZ * 10);
+			entity.addVelocity(ePosX / 5D, 0.0D, ePosZ / 5D);
 		}
 	}
 

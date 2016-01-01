@@ -55,6 +55,11 @@ public class EntityShield extends Entity {
 	public boolean canBePushed() {
 		return true;
 	}
+	
+	@Override
+	public boolean canBeCollidedWith() {
+		return true;
+	}
 
 	public void setPosition(double x, double y, double z) {
 		this.posX = x;

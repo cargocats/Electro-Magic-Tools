@@ -11,7 +11,7 @@ gui.EMT.wandRecharge.title=工业法杖充能站
 gui.EMT.inventory=物品栏
 gui.EMT.book.aspect.output.eu.title=源质发电机
 gui.EMT.book.aspect.output.essentia.eu=源质发电功率
-gui.EMT.key.unequip=Unequip
+gui.EMT.key.unequip=卸下装备
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
@@ -39,6 +39,7 @@ tooltip.EMT.output.double.half.low=处于10层以下发电量
 #=============Entity Names=============
 entity.EMT.laser.name=镭射器
 entity.EMT.archer.name=雪人守卫
+entity.EMT.shield.name=护盾
 
 #=============Item Names=============
 item.EMT.oreClusterUranium=铀矿簇
@@ -95,34 +96,34 @@ item.EMT.focus.charge.wand.name=法杖核心:化魔
 #=============Block Names=============
 tile.EMT.shield.name=护盾方块
 tile.EMT.portablenode.name=便携式节点
-tile.EMT.essentiaGens.potentia.name=能量源质发电机
-tile.EMT.essentiaGens.ignis.name=火之源质发电机
-tile.EMT.essentiaGens.auram.name=灵气源质发电机
-tile.EMT.essentiaGens.arbor.name=木之源质发电机
-tile.EMT.essentiaGens.aer.name=风之源质发电机
-tile.EMT.emtmachines.wandrecharge.name=工业法杖充能站
-tile.EMT.emtmachines.etheralprocessor.name=天域加工机
-tile.EMT.emtsolars.compressed.name=压缩太阳能
-tile.EMT.emtsolars.doublecompressed.name=双重压缩太阳能
-tile.EMT.emtsolars.triplecompressed.name=三重压缩太阳能
-tile.EMT.emtsolars.water.name=水注魔太阳能(1级)
-tile.EMT.emtsolars.doublewater.name=水注魔太阳能(2级)
-tile.EMT.emtsolars.triplewater.name=水注魔太阳能(3级)
-tile.EMT.emtsolars.dark.name=混沌注魔太阳能(1级)
-tile.EMT.emtsolars.doubledark.name=混沌注魔太阳能(2级)
-tile.EMT.emtsolars.tripledark.name=混沌压缩太阳能(3级)
-tile.EMT.emtsolars.order.name=秩序注魔太阳能(1级)
-tile.EMT.emtsolars.doubleorder.name=秩序注魔太阳能(2级)
-tile.EMT.emtsolars.tripleorder.name=秩序注魔太阳能(3级)
-tile.EMT.emtsolars.fire.name=火注魔太阳能(1级)
-tile.EMT.emtsolars.doublefire.name=火注魔太阳能(2级)
-tile.EMT.emtsolars.triplefire.name=火注魔太阳能(3级)
-tile.EMT.emtsolars.air.name=风注魔太阳能(1级)
-tile.EMT.emtsolars2.doubleair.name=风注魔太阳能(2级)
-tile.EMT.emtsolars2.tripleair.name=风注魔太阳能(3级)
-tile.EMT.emtsolars2.earth.name=地注魔太阳能(1级)
-tile.EMT.emtsolars2.doubleearth.name=地注魔太阳能(2级)
-tile.EMT.emtsolars2.tripleearth.name=地注魔太阳能(3级)
+tile.EMT.essentia.potentia.name=能量源质发电机
+tile.EMT.essentia.ignis.name=火之源质发电机
+tile.EMT.essentia.auram.name=灵气源质发电机
+tile.EMT.essentia.arbor.name=木之源质发电机
+tile.EMT.essentia.aer.name=风之源质发电机
+tile.EMT.machine.wandrecharge.name=工业法杖充能站
+tile.EMT.machine.etheralprocessor.name=天域加工机
+tile.EMT.solar.compressed.name=压缩太阳能
+tile.EMT.solar.doublecompressed.name=双重压缩太阳能
+tile.EMT.solar.triplecompressed.name=三重压缩太阳能
+tile.EMT.solar.water.name=水注魔太阳能(1级)
+tile.EMT.solar.doublewater.name=水注魔太阳能(2级)
+tile.EMT.solar.triplewater.name=水注魔太阳能(3级)
+tile.EMT.solar.dark.name=混沌注魔太阳能(1级)
+tile.EMT.solar.doubledark.name=混沌注魔太阳能(2级)
+tile.EMT.solar.tripledark.name=混沌压缩太阳能(3级)
+tile.EMT.solar.order.name=秩序注魔太阳能(1级)
+tile.EMT.solar.doubleorder.name=秩序注魔太阳能(2级)
+tile.EMT.solar.tripleorder.name=秩序注魔太阳能(3级)
+tile.EMT.solar.fire.name=火注魔太阳能(1级)
+tile.EMT.solar.doublefire.name=火注魔太阳能(2级)
+tile.EMT.solar.triplefire.name=火注魔太阳能(3级)
+tile.EMT.solar.air.name=风注魔太阳能(1级)
+tile.EMT.solar2.doubleair.name=风注魔太阳能(2级)
+tile.EMT.solar2.tripleair.name=风注魔太阳能(3级)
+tile.EMT.solar2.earth.name=地注魔太阳能(1级)
+tile.EMT.solar2.doubleearth.name=地注魔太阳能(2级)
+tile.EMT.solar2.tripleearth.name=地注魔太阳能(3级)
 tile.EMT.essentiaGenerator.name=源质发电机
 
 #=============Thaumonomicon Flavor Text=============
@@ -346,4 +347,4 @@ emt.rsname.Quantum Wings=量子羽翼
 emt.text.Quantum Wings=在探索完纳米科技所有的可能性后,你决定做最后一搏,量子.你可以在空中再跳几格的高度, 极好的防护,并且的下降的过程极大减缓了.然而,量子的不可预测又一次发生了.同时按住潜行键和空格键时你的下降会完全停止.你不知道为何会这样,但它就是这样.摔落伤害减免:100%.
 
 emt.rsname.Infused Quantum Armor=注魔量子胸甲
-emt.text.Infused Quantum Armor=你已经无事可做,但是你决定做一些有用的东西.你的脑海中浮现出一个想法,在制作盔甲时可以把羽翼或者背包系在一起以保证飞行的安全.持有羽翼或者背包时在潜行状态下右击可以将它们系在盔甲上.要将它们拿下来时只需要按住Shift + Ctrl.
+emt.text.Infused Quantum Armor=你已经无事可做,但是你决定做一些有用的东西.你的脑海中浮现出一个想法,在制作盔甲时可以把羽翼或者背包系在一起以保证飞行的安全.持有羽翼或者背包时在潜行状态下右击可以将它们系在盔甲上.要将它们拿下来时只需要按住Shift + [卸下装备]键(详见[选项]-[控制]).

@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.util.MathHelper;
@@ -193,7 +194,7 @@ public class ModelCpecialArmor extends ModelBiped {
 		this.bipedRightArm.rotateAngleX += MathHelper.sin(p_78087_3_ * 0.067F) * 0.05F;
 		this.bipedLeftArm.rotateAngleX -= MathHelper.sin(p_78087_3_ * 0.067F) * 0.05F;
 
-		if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemBow && player.isUsingItem()) {
+		if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem().getItemUseAction(player.inventory.getCurrentItem()) == EnumAction.bow && player.isUsingItem()) {
 			f6 = 0.0F;
 			f7 = 0.0F;
 			this.bipedRightArm.rotateAngleZ = 0.0F;

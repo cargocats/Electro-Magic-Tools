@@ -45,13 +45,10 @@ public class ItemThorHammerBroken extends ItemSword implements IRepairable {
 		world.spawnEntityInWorld(new EntityAlumentum(world, player.posX, player.posY + 4, player.posZ));
 		world.spawnEntityInWorld(new EntityAlumentum(world, player.posX, player.posY + 8, player.posZ));
 
-		if (player.capabilities.isCreativeMode) {
-			return itemstack;
-		}
-		else {
+		if (!player.capabilities.isCreativeMode) {
 			itemstack.damageItem(20, player);
-			return itemstack;
 		}
+		return itemstack;
 	}
 
 	@Override

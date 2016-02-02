@@ -19,8 +19,4 @@ public class EMTKeys {
 		keyUnequip = new KeyBinding(EMTTextHelper.localize("gui.EMT.key.unequip"), Keyboard.KEY_Z, "EMT");
 		ClientRegistry.registerKeyBinding(keyUnequip);
 	}
-
-	public static boolean keyUnequipPressed() {
-		return keyUnequip.getIsKeyPressed();
-	}
 }

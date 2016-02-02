@@ -32,7 +32,7 @@ import java.util.Random;
 
 import tombenpotter.emt.ElectroMagicTools;
 import tombenpotter.emt.ModInformation;
-import tombenpotter.emt.client.model.ModelCpecialArmor;
+import tombenpotter.emt.client.model.ModelSpecialArmor;
 import tombenpotter.emt.client.model.ModelWings;
 import tombenpotter.emt.common.init.ItemRegistry;
 import tombenpotter.emt.common.item.armor.wings.ItemNanoWing;
@@ -412,19 +412,19 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			if (entity instanceof EntityPlayer) {
 				byte wing = stack.stackTagCompound.getByte("wing");
 				if (wing == JETPACK) {
-					ModelCpecialArmor mbm = new ModelCpecialArmor(1, 1);
+					ModelSpecialArmor mbm = new ModelSpecialArmor(1, 1);
 					return mbm;
 				}
 				else if (wing != 0) {
-					ModelCpecialArmor mbm = new ModelCpecialArmor(1, 2);
+					ModelSpecialArmor mbm = new ModelSpecialArmor(1, 2);
 					mbm.isJumping = stack.stackTagCompound.getBoolean("isJumping");
 					return mbm;
 				}
 			}
 		} catch (NullPointerException e) {
-			new ModelCpecialArmor(1, 0);
+			new ModelSpecialArmor(1, 0);
 		}
-		return new ModelCpecialArmor(1, 0);
+		return new ModelSpecialArmor(1, 0);
 	}
 
 	@Override

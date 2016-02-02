@@ -77,15 +77,16 @@ public class BlockEssentiaGenerators extends BlockBaseContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-		int color = ((TileEntityBaseGenerator)world.getTileEntity(x, y, z)).aspect.getColor();
-        float r = (float)(color >> 16 & 0xff) / 255F;
-        float g = (float)(color >> 8 & 0xff) / 255F;
-        float b = (float)(color & 0xff) / 255F;
-        
-        for(int i = 0; i < 3; i++){
-        	EntitySmokeFX fx = new EntitySmokeFX(world, x + 0.5f, y + 1.1, z + 0.5f, 0, 0.1, 0, 3);
-        	fx.setRBGColorF(r, g, b); 
-     		Minecraft.getMinecraft().effectRenderer.addEffect(fx);
-        }
+		TileEntityBaseGenerator te = (TileEntityBaseGenerator)world.getTileEntity(x, y, z);
+		if(te.isActive){
+			int color = te.aspect.getColor();
+	        float r = (float)(color >> 16 & 0xff) / 255F;
+	        float g = (float)(color >> 8 & 0xff) / 255F;
+	        float b = (float)(color & 0xff) / 255F;
+	        
+	        EntitySmokeFX fx = new EntitySmokeFX(world, x + 0.5f, y + 1.1, z + 0.5f, 0, 0.1, 0, 3);
+	        fx.setRBGColorF(r, g, b); 
+	     	Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+		}
 	}
 }

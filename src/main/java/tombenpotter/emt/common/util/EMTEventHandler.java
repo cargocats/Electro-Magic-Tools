@@ -46,7 +46,7 @@ public class EMTEventHandler {
 
 	@SubscribeEvent
 	public void clientTick(ClientTickEvent e) {
-		if (EMTKeys.keyUnequipPressed()) {
+		if (EMTKeys.keyUnequip.getIsKeyPressed()) {
 			ElectroMagicTools.INSTANCE.sendToServer(new PacketEMTKeys());
 		}
 	}

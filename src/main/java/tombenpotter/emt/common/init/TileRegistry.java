@@ -1,5 +1,6 @@
 package tombenpotter.emt.common.init;
 
+import tombenpotter.emt.common.tile.TileElectricCloud;
 import tombenpotter.emt.common.tile.TileEntityEtherealMacerator;
 import tombenpotter.emt.common.tile.TileEntityIndustrialWandRecharge;
 import tombenpotter.emt.common.tile.TileEntityPortableNode;
@@ -63,5 +64,6 @@ public class TileRegistry {
 		GameRegistry.registerTileEntity(TileEntityEarthSolar.class, "tileentityearthsolar");
 		GameRegistry.registerTileEntity(TileEntityDoubleEarthSolar.class, "tileentitydoubleearthsolar");
 		GameRegistry.registerTileEntity(TileEntityTripleEarthSolar.class, "tileentitytripleearthsolar");
+		GameRegistry.registerTileEntity(TileElectricCloud.class, "tileEntityElectricCloud");
 	}
 }

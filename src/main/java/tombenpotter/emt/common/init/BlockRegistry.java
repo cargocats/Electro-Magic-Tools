@@ -3,6 +3,9 @@ package tombenpotter.emt.common.init;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
+import net.minecraft.block.Block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import static thaumcraft.api.ThaumcraftApi.*;
 import thaumcraft.api.aspects.Aspect;
@@ -11,23 +14,20 @@ import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.block.BlockMachines;
 import tombenpotter.emt.common.block.BlockSolars;
 import tombenpotter.emt.common.block.BlockSolars2;
+import tombenpotter.emt.common.block.BlockElectricCloud;
 import tombenpotter.emt.common.block.BlockEssentiaGenerators;
 import tombenpotter.emt.common.block.BlockPortableNode;
 import tombenpotter.emt.common.block.BlockShield;
 import tombenpotter.emt.common.item.block.ItemBlockMachines;
 import tombenpotter.emt.common.item.block.ItemBlockSolars;
 import tombenpotter.emt.common.item.block.ItemBlockSolars2;
+import tombenpotter.emt.common.item.block.ItemBlockElectricCloud;
 import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerator;
 import tombenpotter.emt.common.item.block.ItemBlockEssentiaGenerators;
 
 public class BlockRegistry {
 
-	public static Block portableNode;
-	public static Block essentiaGens;
-	public static Block shield;
-	public static Block emtSolars;
-	public static Block emtMachines;
-	public static Block emtSolars2;
+	public static Block portableNode, essentiaGens, shield, emtSolars, emtMachines, emtSolars2, electrum;
 
 	public static void registerBlocks() {
 		portableNode = new BlockPortableNode("portablenode");
@@ -47,6 +47,9 @@ public class BlockRegistry {
 
 		essentiaGens = new BlockEssentiaGenerators("essentia");
 		GameRegistry.registerBlock(essentiaGens, ItemBlockEssentiaGenerators.class, "EssentiaGenerators");
+
+		electrum = new BlockElectricCloud("electricCloud");
+		GameRegistry.registerBlock(electrum, ItemBlockElectricCloud.class, "electricCloud");
 	}
 
 	public static void addAspects() {

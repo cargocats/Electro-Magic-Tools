@@ -94,6 +94,7 @@ item.EMT.focus.charge.name=法杖核心:充电
 item.EMT.focus.charge.wand.name=法杖核心:化魔
 
 #=============Block Names=============
+tile.EMT.electricCloud.name=Electric Cloud
 tile.EMT.shield.name=护盾方块
 tile.EMT.portablenode.name=便携式节点
 tile.EMT.essentia.potentia.name=能量源质发电机

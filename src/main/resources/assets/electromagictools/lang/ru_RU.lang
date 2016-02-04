@@ -94,6 +94,7 @@ item.EMT.focus.charge.name=Набалдашник: Зарядка
 item.EMT.focus.charge.wand.name=Набалдашник: Зарядка жезла
 
 #=============Block Names=============
+tile.EMT.electricCloud.name=Электронное облако
 tile.EMT.shield.name=Щит-блок
 tile.EMT.portablenode.name=Переносной узел
 tile.EMT.essentia.potentia.name=Potentia генератор

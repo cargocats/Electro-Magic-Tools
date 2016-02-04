@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class BlockPortableNode extends BlockAiry {
 
-    public IIcon[] texture = new IIcon[1];
+    public IIcon texture;
 
     public BlockPortableNode(String name) {
         this.setCreativeTab(ElectroMagicTools.tabEMT);
@@ -65,17 +65,12 @@ public class BlockPortableNode extends BlockAiry {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister ri) {
-        this.texture[0] = ri.registerIcon(ModInformation.texturePath + ":portablenode");
+        texture = ri.registerIcon(ModInformation.texturePath + ":portablenode");
     }
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        return this.texture[0];
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-        list.add(new ItemStack(id, 1, 0));
+        return texture;
     }
 
     @Override

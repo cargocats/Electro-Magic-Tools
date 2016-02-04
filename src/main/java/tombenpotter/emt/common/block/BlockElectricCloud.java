@@ -1,12 +1,18 @@
 package tombenpotter.emt.common.block;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import thaumcraft.client.fx.ParticleEngine;
@@ -15,12 +21,15 @@ import thaumcraft.client.fx.particles.FXWisp;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 import thaumcraft.common.tiles.TileNitor;
+import tombenpotter.emt.ModInformation;
 import tombenpotter.emt.common.tile.TileElectricCloud;
 
 public class BlockElectricCloud extends BlockBase {
-
+	public IIcon icon;
+	
 	public BlockElectricCloud(String unlocName) {
 		super(unlocName, Material.cloth, soundTypeCloth, 1);
+		setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
 	}
 
 	@Override
@@ -33,6 +42,31 @@ public class BlockElectricCloud extends BlockBase {
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
 		return new TileElectricCloud();
+	}
+	
+	@Override
+	public String getUnlocalizedName() {
+		return "tile.EMT." + super.getUnlocalizedName().substring(15);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister ir) {
+		icon = ir.registerIcon(ModInformation.texturePath + ":empty");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return icon;
+	}
+	
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+    {
+        return null;
+    }
+	
+	@Override
+	public int getLightValue() {
+		return 15;
 	}
 
 	@Override

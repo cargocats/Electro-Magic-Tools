@@ -1,0 +1,42 @@
+package emt.init;
+
+import emt.ElectroMagicTools;
+import emt.entity.EntityArcher;
+import emt.entity.EntityLaser;
+import emt.entity.EntityShield;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityList.EntityEggInfo;
+import net.minecraft.entity.EntityLiving;
+
+public class EntityRegistry {
+
+	private static int startEID = 300;
+	private static int entityIDs = 0;
+
+	private static int getUniqueEntityID() {
+
+		do {
+			startEID++;
+		}
+		while (EntityList.getStringFromID(startEID) != null);
+		return startEID;
+	}
+
+	public static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec) {
+		int id = getUniqueEntityID();
+		EntityList.IDtoClassMapping.put(id, entity);
+		EntityList.entityEggs.put(id, new EntityEggInfo(id, colPrim, colSec));
+		return;
+	}
+
+	public static void registerEMTEntities() {
+
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
+		
+		cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+	}
+}

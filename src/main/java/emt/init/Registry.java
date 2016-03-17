@@ -2,15 +2,15 @@ package emt.init;
 
 public class Registry {
 	public static void register() {
-		BlockRegistry.registerBlocks();
-		ItemRegistry.registerItems();
-		TileRegistry.registerTiles();
-		RecipeRegistry.registerEarlyRecipes();
+		EMTBlocks.registerBlocks();
+		EMTItems.registerItems();
+		EMTTiles.registerTiles();
+		EMTRecipes.registerEarlyRecipes();
 	}
 
 	public static void registerLate() {
-		BlockRegistry.addAspects();
-		RecipeRegistry.registerLateRecipes();
-		RecipeRegistry.registerUUMInfusionRecipes();
+		EMTBlocks.addAspects();
+		EMTRecipes.registerLateRecipes();
+		EMTRecipes.registerUUMInfusionRecipes();
 	}
 }

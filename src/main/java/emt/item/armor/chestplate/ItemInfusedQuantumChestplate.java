@@ -8,7 +8,7 @@ import emt.ElectroMagicTools;
 import emt.ModInformation;
 import emt.client.model.ModelSpecialArmor;
 import emt.client.model.ModelWings;
-import emt.init.ItemRegistry;
+import emt.init.EMTItems;
 import emt.item.armor.wings.ItemNanoWing;
 import emt.item.armor.wings.ItemQuantumWing;
 import emt.util.EMTConfigHandler;
@@ -88,9 +88,6 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		super(internalName, InternalName.quantum, armorType, 2000000, 12000.0D, 4);
 		MinecraftForge.EVENT_BUS.register(this);
 		this.setCreativeTab(ElectroMagicTools.tabEMT);
-		potionRemovalCost.add(Potion.poison.id);
-		potionRemovalCost.add(IC2Potion.radiation.id);
-		potionRemovalCost.add(Potion.wither.id);
 		rnd = new Random();
 	}
 
@@ -111,7 +108,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+        return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 
 	@SubscribeEvent
@@ -158,11 +155,14 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 
 		if (!world.isRemote) {
 			
-			for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {
-				if(potionRemovalCost.contains(new Integer(effect.getPotionID()))){
-					 IC2.platform.removePotion(player, effect.getPotionID());
+			for (Object effect : player.getActivePotionEffects()) {
+				if(potionRemovalCost.contains(new Integer(((PotionEffect)effect).getPotionID()))){
+					 IC2.platform.removePotion(player, ((PotionEffect)effect).getPotionID());
 				}
 			}
+			
+			ItemStack currentStack = player.inventory.getCurrentItem();
+			Item currentItem = currentStack == null? null : player.inventory.getCurrentItem().getItem();
 			
 			if (nbt.hasKey("useother")) {
 				String useother = nbt.getString("useother");
@@ -200,49 +200,48 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				}
 			}
 
-			if (player.inventory.getCurrentItem() != null && player.isSneaking() && toggleTimer == 0 && wing == NONE) {
-				if (player.inventory.getCurrentItem().getItem() == IC2Items.getItem("electricJetpack").getItem()) {
+			if (currentStack != null && player.isSneaking() && toggleTimer == 0 && wing == NONE) {
+				if (currentItem == IC2Items.getItem("electricJetpack").getItem()) {
 					IC2.platform.messagePlayer(player, "Jetpack enabled.", new Object[0]);
 					nbt.setByte("wing", JETPACK);
 					int charge = (int) ElectricItem.manager.getCharge(itemStack);
 					if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000) {
-						ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
+						ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(currentStack), player);
 					}
-					nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
+					nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(currentStack) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
 				}
 
-				else if (player.inventory.getCurrentItem().getItem() == ItemRegistry.thaumiumWing) {
+				else if (currentItem == EMTItems.thaumiumWing) {
 					IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
 					nbt.setByte("wing", THAUMIUM);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 
-				else if (player.inventory.getCurrentItem().getItem() == ItemRegistry.nanoWing) {
+				else if (currentItem == EMTItems.nanoWing) {
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
 					nbt.setByte("wing", NANO);
 					int charge = (int) ElectricItem.manager.getCharge(itemStack);
-					if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemNanoWing.maxCharge) {
-						ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
+					if (ElectricItem.manager.getCharge(currentStack) < ItemNanoWing.maxCharge) {
+						ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
 					}
 					nbt.setInteger("NWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 
-				else if (player.inventory.getCurrentItem().getItem() == ItemRegistry.quantumWing) {
+				else if (currentItem == EMTItems.quantumWing) {
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
 					nbt.setByte("wing", QUANTUM);
 					int charge = (int) ElectricItem.manager.getCharge(itemStack);
-					if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < ItemQuantumWing.maxCharge) {
-						ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(player.inventory.getCurrentItem()), player);
+					if (ElectricItem.manager.getCharge(currentStack) < ItemQuantumWing.maxCharge) {
+						ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
 					}
-					nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
+					nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(currentStack) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			}
 
-			if (player.inventory.getCurrentItem() == null && nbt.getBoolean("unequip") && player.isSneaking() && toggleTimer == 0 && IC2.platform.isSimulating()) {
+			if (currentStack == null && nbt.getBoolean("unequip") && player.isSneaking()) {
 				toggleTimer = 30;
 
 				if (wing == JETPACK) {
@@ -259,13 +258,13 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				if (wing == THAUMIUM) {
 					IC2.platform.messagePlayer(player, "Thaumium wings disabled.", new Object[0]);
 					nbt.setByte("wing", NONE);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemRegistry.thaumiumWing));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(EMTItems.thaumiumWing));
 				}
 
 				if (wing == NANO) {
 					IC2.platform.messagePlayer(player, "Nano wings disabled.", new Object[0]);
 					nbt.setByte("wing", NONE);
-					ItemStack charged = new ItemStack(ItemRegistry.nanoWing);
+					ItemStack charged = new ItemStack(EMTItems.nanoWing);
 					if (nbt.getInteger("NWCharge") > 0)
 						ElectricItem.manager.charge(charged, nbt.getInteger("NWCharge"), 3, true, false);
 					else
@@ -276,17 +275,18 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				if (wing == QUANTUM) {
 					IC2.platform.messagePlayer(player, "Quantum wings disabled.", new Object[0]);
 					nbt.setByte("wing", NONE);
-					ItemStack charged = new ItemStack(ItemRegistry.quantumWing);
+					ItemStack charged = new ItemStack(EMTItems.quantumWing);
 					if (nbt.getInteger("QWCharge") > 0)
 						ElectricItem.manager.charge(charged, nbt.getInteger("QWCharge"), 3, true, false);
 					else
 						ElectricItem.manager.charge(charged, 0, 3, true, false);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, charged);
 				}
-
-				nbt.setBoolean("unequip", false);
 			}
+			
+			nbt.setBoolean("unequip", false);
 		}
+		
 
 		if ((IC2.keyboard.isJumpKeyDown(player) && wing == JETPACK) || (hoverMode && player.motionY < -0.029999999329447746D)) {
 			jetpackUsed = useJetpack(player, hoverMode, itemStack);

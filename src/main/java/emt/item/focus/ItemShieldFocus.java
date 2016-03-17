@@ -7,7 +7,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import emt.ElectroMagicTools;
 import emt.entity.EntityShield;
-import emt.init.BlockRegistry;
+import emt.init.EMTBlocks;
 import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

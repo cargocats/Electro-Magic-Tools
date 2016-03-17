@@ -1,6 +1,6 @@
 package emt.tile;
 
-import emt.init.BlockRegistry;
+import emt.init.EMTBlocks;
 import emt.tile.TileEntityEMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.IC2Items;
@@ -278,7 +278,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		return new ItemStack(BlockRegistry.emtMachines, 1, 1);
+		return new ItemStack(EMTBlocks.emtMachines, 1, 1);
 	}
 
 	@Override

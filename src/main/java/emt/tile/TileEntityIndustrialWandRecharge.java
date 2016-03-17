@@ -1,6 +1,6 @@
 package emt.tile;
 
-import emt.init.BlockRegistry;
+import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
 import ic2.api.energy.prefab.BasicSink;
 import ic2.api.tile.IWrenchable;
@@ -206,6 +206,6 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		 return new ItemStack(BlockRegistry.emtMachines, 1, 0);
+		 return new ItemStack(EMTBlocks.emtMachines, 1, 0);
 	}
 }

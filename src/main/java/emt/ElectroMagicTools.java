@@ -14,9 +14,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import emt.command.CommandOutputs;
-import emt.init.EntityRegistry;
+import emt.init.EMTEntities;
 import emt.init.Registry;
-import emt.init.Researches;
+import emt.init.EMTResearches;
 import emt.network.PacketEMTKeys;
 import emt.proxy.CommonProxy;
 import emt.util.*;
@@ -48,38 +48,38 @@ public class ElectroMagicTools {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ElectroMagicTools.logger.info("Starting planning the world domination");
+		logger.info("Starting planning the world domination");
 		EMTConfigHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new EMTEventHandler());
 		Registry.register();
 		EMTEssentiasOutputs.addPrimalOutputs();
 		EMTEssentiasOutputs.addOutputs();
 		registerPackets();
-		ElectroMagicTools.logger.info("Planning complete");
+		logger.info("Planning complete");
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		ElectroMagicTools.logger.info("Gathering allies");
-		ElectroMagicTools.logger.info("Loading the proxies");
+		logger.info("Gathering allies");
+		logger.info("Loading the proxies");
 		proxy.load();
-		ElectroMagicTools.logger.info("Making mobs drop additional items");
+		logger.info("Making mobs drop additional items");
 		MinecraftForge.EVENT_BUS.register(new EMTEventHandler());
-		ElectroMagicTools.logger.info("Adding dungeon loot");
+		logger.info("Adding dungeon loot");
 		EMTDungeonChestGenerator.generateLoot();
-		ElectroMagicTools.logger.info("Registering entities");
-		EntityRegistry.registerEMTEntities();
-		ElectroMagicTools.logger.info("Registering the GUI Handler");
+		logger.info("Registering entities");
+		EMTEntities.registerEMTEntities();
+		logger.info("Registering the GUI Handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		ElectroMagicTools.logger.info("Allies gathered.");
+		logger.info("Allies gathered.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		ElectroMagicTools.logger.info("Starting the world takeover");
+		logger.info("Starting the world takeover");
 		Registry.registerLate();
-		Researches.register();
-		ElectroMagicTools.logger.info("World takeover complete. Enjoy!");
+		EMTResearches.register();
+		logger.info("World takeover complete. Enjoy!");
 	}
 
 	@EventHandler

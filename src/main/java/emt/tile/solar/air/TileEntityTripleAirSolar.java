@@ -1,6 +1,6 @@
 package emt.tile.solar.air;
 
-import emt.init.BlockRegistry;
+import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
 import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +14,6 @@ public class TileEntityTripleAirSolar extends TileEntityAirSolar {
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		return new ItemStack(BlockRegistry.emtSolars2, 1, 1);
+		return new ItemStack(EMTBlocks.emtSolars2, 1, 1);
 	}
 }

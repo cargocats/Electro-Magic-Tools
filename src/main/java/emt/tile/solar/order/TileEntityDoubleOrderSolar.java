@@ -1,6 +1,6 @@
 package emt.tile.solar.order;
 
-import emt.init.BlockRegistry;
+import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +13,6 @@ public class TileEntityDoubleOrderSolar extends TileEntityOrderSolar {
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		return new ItemStack(BlockRegistry.emtSolars, 1, 10);
+		return new ItemStack(EMTBlocks.emtSolars, 1, 10);
 	}
 }

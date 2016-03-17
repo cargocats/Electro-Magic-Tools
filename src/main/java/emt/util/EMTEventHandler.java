@@ -10,7 +10,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import emt.ElectroMagicTools;
 import emt.ModInformation;
 import emt.client.EMTKeys;
-import emt.init.ItemRegistry;
+import emt.init.EMTItems;
 import emt.network.PacketEMTKeys;
 import emt.proxy.ClientProxy;
 import net.minecraft.entity.item.EntityItem;
@@ -28,11 +28,11 @@ public class EMTEventHandler {
 		if (event.entityLiving instanceof EntityCreeper) {
 			EntityCreeper creeper = (EntityCreeper) event.entityLiving;
 			if (creeper.getPowered()) {
-				event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, 1, 6), 1);
+				event.entityLiving.entityDropItem(new ItemStack(EMTItems.itemEMTItems, 1, 6), 1);
 			}
 		}
 		if (event.entityLiving instanceof EntityTaintChicken) {
-			event.entityLiving.entityDropItem(new ItemStack(ItemRegistry.itemEMTItems, rnd.nextInt(3), 13), 1);
+			event.entityLiving.entityDropItem(new ItemStack(EMTItems.itemEMTItems, rnd.nextInt(3), 13), 1);
 		}
 	}
 

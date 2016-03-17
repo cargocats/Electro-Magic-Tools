@@ -48,7 +48,7 @@ public class EMTResearchItem extends ResearchItem {
 		for (ResearchPage page : pages) {
 			
 			if (page.type == PageType.TEXT)
-				page.text = "emt.text." + key + "." + page.text;
+				page.text = "emt.text." + key + (page.text.equals("") ? "" : "." + page.text);
 
 			if (page.type == PageType.INFUSION_CRAFTING) {
 				if (parentsHidden == null || parentsHidden.length == 0)

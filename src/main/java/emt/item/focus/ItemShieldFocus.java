@@ -27,7 +27,7 @@ public class ItemShieldFocus extends ItemBaseFocus {
 	private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 5);
 
 	public ItemShieldFocus() {
-		super(".focus.shield", "focus_shield");
+		super("shield");
 	}
 
 	@Override

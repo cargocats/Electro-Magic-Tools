@@ -23,27 +23,22 @@ import emt.ModInformation;
 
 public abstract class ItemBaseFocus extends ItemFocusBasic {
 
-	private IIcon ornament, depth;
-	String textureName = null;
+	public IIcon ornament;
+	String textureName = "";
 
-	public ItemBaseFocus(String unlocName, String textureName) {
+	public ItemBaseFocus(String unlocName) {
 		super();
-
-		setUnlocalizedName(ModInformation.modid + unlocName);
+		setUnlocalizedName(ModInformation.modid + ".focus." + unlocName);
 		setCreativeTab(ElectroMagicTools.tabEMT);
 		setMaxDamage(1);
 		setNoRepair();
 		setMaxStackSize(1);
-		this.textureName = textureName;
-	}
-
-	boolean hasOrnament() {
-		return false;
+		this.textureName = unlocName;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir) {
-		this.icon = ir.registerIcon(ModInformation.texturePath + ":" + textureName);
+		this.icon = ir.registerIcon(ModInformation.texturePath + ":" + "focus_" + textureName);
 	}
 
 	boolean hasDepth() {
@@ -65,20 +60,14 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 		return EnumRarity.rare;
 	}
 
-	public IIcon getFocusDepthLayerIcon() {
-		return depth;
-	}
-
+	@Override
 	public IIcon getOrnament(ItemStack focusstack) {
 		return ornament;
 	}
 
-	public WandFocusAnimation getAnimation() {
-		return WandFocusAnimation.WAVE;
-	}
-
-	public AspectList getVisCost() {
-		return null;
+	@Override
+	public AspectList getVisCost(ItemStack focusstack) {
+		return new AspectList();
 	}
 
 	public boolean isUseItem(ItemStack stack) {
@@ -115,10 +104,6 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 		return false;
 	}
 
-	public boolean acceptsEnchant(int id) {
-		return false;
-	}
-
 	@Override
 	public int getItemEnchantability() {
 		return 5;
@@ -126,7 +111,7 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		AspectList cost = getVisCost();
+		AspectList cost = getVisCost(stack);
 		if (cost != null && cost.size() > 0) {
 			list.add(StatCollector.translateToLocal(isVisCostPerTick() ? "item.Focus.cost2" : "item.Focus.cost1"));
 			for (Aspect aspect : cost.getAspectsSorted()) {

@@ -21,7 +21,7 @@ public class ItemChristmasFocus extends ItemBaseFocus {
 	private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
 
 	public ItemChristmasFocus() {
-		super(".focus.christmas", "focus_christmas");
+		super("christmas");
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class EMTResearches {
 
 	public static void addResearchTab() {
 		ResourceLocation background = new ResourceLocation(ModInformation.texturePath, "textures/misc/background.png");
-		ResearchCategories.registerCategory("EMT", new ResourceLocation(ModInformation.texturePath, "textures/blocks/electricCloud.png"), background);
+		ResearchCategories.registerCategory("EMT", new ResourceLocation(ModInformation.texturePath, "textures/misc/emt.png"), background);
 	}
 
 	public static void addResearch() {
@@ -76,8 +76,7 @@ public class EMTResearches {
 
 		if (!EMTConfigHandler.thaumiumDrillResearch && !EMTConfigHandler.thaumiumChainsawResearch) {
 			if (!EMTConfigHandler.thaumiumOmnitoolResearch) {
-				new EMTResearchItem("Thaumium Omnitool", EMTResearchAspects.thaumiumOmnitoolResearch, -6, 0, 2, new ItemStack(EMTItems.thaumiumOmnitool)).setParentsHidden("Thaumium Drill", "Thaumium Chainsaw").setParents("Diamond Omnitool").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.thaumiumOmnitool),
-						new ResearchPage(EMTRecipes.diamondOmnitoolToThaumium));
+				new EMTResearchItem("Thaumium Omnitool", EMTResearchAspects.thaumiumOmnitoolResearch, -6, 0, 2, new ItemStack(EMTItems.thaumiumOmnitool)).setParentsHidden("Thaumium Drill", "Thaumium Chainsaw").setParents("Diamond Omnitool").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.thaumiumOmnitool), new ResearchPage(EMTRecipes.diamondOmnitoolToThaumium));
 			}
 		}
 
@@ -160,8 +159,7 @@ public class EMTResearches {
 		}
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
-			new EMTResearchItem("Compressed Solars", EMTResearchAspects.compressedSolars, -4, -5, 2, new ItemStack(EMTBlocks.emtSolars)).setParentsHidden("Potentia Generator").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.compressedSolar), new ResearchPage(EMTRecipes.doubleCompressedSolar),
-					new ResearchPage(EMTRecipes.tripleCompressedSolar));
+			new EMTResearchItem("Compressed Solars", EMTResearchAspects.compressedSolars, -4, -5, 2, new ItemStack(EMTBlocks.emtSolars)).setParentsHidden("Potentia Generator").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.compressedSolar), new ResearchPage(EMTRecipes.doubleCompressedSolar), new ResearchPage(EMTRecipes.tripleCompressedSolar));
 		}
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
@@ -198,29 +196,25 @@ public class EMTResearches {
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
 			if (!EMTConfigHandler.waterSolarsResearch) {
-				new EMTResearchItem("Water Infused Solar Panels", EMTResearchAspects.waterSolars, -7, -7, 1, new ItemStack(EMTBlocks.emtSolars, 1, 3)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.waterSolar), new ResearchPage(EMTRecipes.doubleWaterSolar),
-						new ResearchPage(EMTRecipes.tripleWaterSolar));
+				new EMTResearchItem("Water Infused Solar Panels", EMTResearchAspects.waterSolars, -7, -7, 1, new ItemStack(EMTBlocks.emtSolars, 1, 3)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.waterSolar), new ResearchPage(EMTRecipes.doubleWaterSolar), new ResearchPage(EMTRecipes.tripleWaterSolar));
 			}
 		}
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
 			if (!EMTConfigHandler.darkSolarsResearch) {
-				new EMTResearchItem("Entropy Infused Solar Panels", EMTResearchAspects.darkSolars, -8, -6, 1, new ItemStack(EMTBlocks.emtSolars, 1, 6)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.darkSolar), new ResearchPage(EMTRecipes.doubleDarkSolar),
-						new ResearchPage(EMTRecipes.tripleDarkSolar));
+				new EMTResearchItem("Entropy Infused Solar Panels", EMTResearchAspects.darkSolars, -8, -6, 1, new ItemStack(EMTBlocks.emtSolars, 1, 6)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.darkSolar), new ResearchPage(EMTRecipes.doubleDarkSolar), new ResearchPage(EMTRecipes.tripleDarkSolar));
 			}
 		}
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
 			if (!EMTConfigHandler.orderSolarsResearch) {
-				new EMTResearchItem("Order Infused Solar Panels", EMTResearchAspects.orderSolars, -6, -8, 1, new ItemStack(EMTBlocks.emtSolars, 1, 9)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.orderSolar), new ResearchPage(EMTRecipes.doubleOrderSolar),
-						new ResearchPage(EMTRecipes.tripleOrderSolar));
+				new EMTResearchItem("Order Infused Solar Panels", EMTResearchAspects.orderSolars, -6, -8, 1, new ItemStack(EMTBlocks.emtSolars, 1, 9)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.orderSolar), new ResearchPage(EMTRecipes.doubleOrderSolar), new ResearchPage(EMTRecipes.tripleOrderSolar));
 			}
 		}
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
 			if (!EMTConfigHandler.fireSolarsResearch) {
-				new EMTResearchItem("Fire Infused Solar Panels", EMTResearchAspects.fireSolars, -5, -7, 1, new ItemStack(EMTBlocks.emtSolars, 1, 12)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.fireSolar), new ResearchPage(EMTRecipes.doubleFireSolar),
-						new ResearchPage(EMTRecipes.tripleFireSolar));
+				new EMTResearchItem("Fire Infused Solar Panels", EMTResearchAspects.fireSolars, -5, -7, 1, new ItemStack(EMTBlocks.emtSolars, 1, 12)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.fireSolar), new ResearchPage(EMTRecipes.doubleFireSolar), new ResearchPage(EMTRecipes.tripleFireSolar));
 			}
 		}
 
@@ -232,15 +226,12 @@ public class EMTResearches {
 
 		if (!EMTConfigHandler.compressedSolarsResearch) {
 			if (!EMTConfigHandler.earthSolarsResearch) {
-				new EMTResearchItem("Earth Infused Solar Panels", EMTResearchAspects.earthSolars, -6, -7, 1, new ItemStack(EMTBlocks.emtSolars2, 1, 2)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.earthSolar), new ResearchPage(EMTRecipes.doubleEarthSolar),
-						new ResearchPage(EMTRecipes.tripleEarthSolar));
+				new EMTResearchItem("Earth Infused Solar Panels", EMTResearchAspects.earthSolars, -6, -7, 1, new ItemStack(EMTBlocks.emtSolars2, 1, 2)).setSecondary().setParents("Compressed Solars").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.earthSolar), new ResearchPage(EMTRecipes.doubleEarthSolar), new ResearchPage(EMTRecipes.tripleEarthSolar));
 			}
 		}
 
 		if (!EMTConfigHandler.uuMInfusionResearch) {
-			new EMTResearchItem("UU-Matter Infusion", EMTResearchAspects.uuMInfusion, 5, 5, 3, new ItemStack(EMTItems.itemEMTItems, 1, 15)).setParentsHidden("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.uuMCrystal), new ResearchPage(EMTRecipes.charcoalToCoal),
-					new ResearchPage(EMTRecipes.glowstoneDustToBlock), new ResearchPage(EMTRecipes.stoneBricksToIronOre), new ResearchPage(EMTRecipes.arcaneStoneToCopperOre), new ResearchPage(EMTRecipes.arcaneStoneBricksToTinOre), new ResearchPage(EMTRecipes.amberBlockToLeadOre), new ResearchPage(EMTRecipes.amberBricksToUraniumOre),
-					new ResearchPage(EMTRecipes.shardToResin), new ResearchPage(EMTRecipes.shardToRedstone), new ResearchPage(EMTRecipes.shardToLapis), new ResearchPage(EMTRecipes.ironToGold), new ResearchPage(EMTRecipes.goldToDiamond), new ResearchPage(EMTRecipes.diamondToUranium), new ResearchPage(EMTRecipes.uraniumToIridium));
+			new EMTResearchItem("UU-Matter Infusion", EMTResearchAspects.uuMInfusion, 5, 5, 3, new ItemStack(EMTItems.itemEMTItems, 1, 15)).setParentsHidden("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.uuMCrystal), new ResearchPage(EMTRecipes.charcoalToCoal), new ResearchPage(EMTRecipes.glowstoneDustToBlock), new ResearchPage(EMTRecipes.stoneBricksToIronOre), new ResearchPage(EMTRecipes.arcaneStoneToCopperOre), new ResearchPage(EMTRecipes.arcaneStoneBricksToTinOre), new ResearchPage(EMTRecipes.amberBlockToLeadOre), new ResearchPage(EMTRecipes.amberBricksToUraniumOre), new ResearchPage(EMTRecipes.shardToResin), new ResearchPage(EMTRecipes.shardToRedstone), new ResearchPage(EMTRecipes.shardToLapis), new ResearchPage(EMTRecipes.ironToGold), new ResearchPage(EMTRecipes.goldToDiamond), new ResearchPage(EMTRecipes.diamondToUranium), new ResearchPage(EMTRecipes.uraniumToIridium));
 		}
 
 		if (!EMTConfigHandler.portableNodeResarch) {

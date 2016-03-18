@@ -41,7 +41,7 @@ public class ElectroMagicTools {
 	public static CommonProxy proxy;
 	public static CreativeTabs tabEMT = new EMTCreativeTab(ModInformation.modid + ".creativeTab");
 	public static Logger logger = LogManager.getLogger(ModInformation.name);
-	public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("EMT");
+	public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModInformation.channel);
 
 	@Instance(ModInformation.modid)
 	public static ElectroMagicTools instance;

@@ -25,7 +25,7 @@ public class ItemBlockElectricCloud extends ItemBlock{
 	
 	@Override
 	public void registerIcons(IIconRegister ir) {
-		icon = ir.registerIcon(ModInformation.texturePath + ":" + "electricCloud");
+		icon = ir.registerIcon(ModInformation.texturePath + ":" + "electric_cloud");
 	}
 	
 	@Override

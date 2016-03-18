@@ -20,7 +20,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
 	private static final AspectList visCost = new AspectList().add(Aspect.FIRE, 10).add(Aspect.WATER, 10).add(Aspect.AIR, 10).add(Aspect.EARTH, 10).add(Aspect.ORDER, 10).add(Aspect.ENTROPY, 10);
 
 	public ItemChargeFocus() {
-		super(".focus.charge", "focus_charge");
+		super("charge");
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
 	public AspectList getVisCost(ItemStack stack) {
 		AspectList actualCost = new AspectList();
 		for (Entry<Aspect, Integer> e : visCost.aspects.entrySet())
-			actualCost.add(e.getKey(), (int)(e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
+			actualCost.add(e.getKey(), (int) (e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
 		return visCost;
 	}
 
@@ -41,16 +41,10 @@ public class ItemChargeFocus extends ItemBaseFocus {
 		return "WANDCHARGING";
 	}
 
-	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) 
-	{
-	  return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
+	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) {
+		return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
 	}
-		
-	/**
-	 * Use this method to define custom logic about which upgrades can be applied. This can be used to set up upgrade "trees" 
-	 * that make certain upgrades available only when others are unlocked first, when certain research is completed, or similar logic.
-	 * 
-	 */
+
 	public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
 		return true;
 	}
@@ -61,7 +55,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
 		if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
 			if (!world.isRemote) {
 
-				int energyLeft = (int)(EMTConfigHandler.chargeFocusProduction * Math.pow(1.1, getUpgradeLevel(itemstack, FocusUpgradeType.potency)));
+				int energyLeft = (int) (EMTConfigHandler.chargeFocusProduction * Math.pow(1.1, getUpgradeLevel(itemstack, FocusUpgradeType.potency)));
 				for (int i = 0; i < player.inventory.armorInventory.length; i++) {
 					if (energyLeft > 0) {
 						if ((player.inventory.armorInventory[i] != null) && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {

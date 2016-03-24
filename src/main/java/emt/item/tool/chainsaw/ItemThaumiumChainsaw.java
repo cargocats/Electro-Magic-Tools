@@ -18,7 +18,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
-	public static AudioSource audio;
 
 	public ItemThaumiumChainsaw() {
 		this.efficiencyOnProperMaterial = 21F;
@@ -28,40 +27,6 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 		maxCharge = 60000;
 		cost = 250;
 		hitCost = 350;
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
-		if (entity instanceof EntityLivingBase) {
-			if (IC2.platform.isRendering()) {
-				if (flag && !dropped) {
-					if (audio == null)
-						audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
-					if (audio != null) {
-						audio.updatePosition();
-						audio.play();
-					}
-				}
-				else if (!flag && audio != null && ((((EntityPlayer) entity).inventory.getCurrentItem() != null && ((EntityPlayer) entity).inventory.getCurrentItem().getItem() != this) || (((EntityPlayer) entity).inventory.getCurrentItem() == null))) {
-					audio.stop();
-					audio.remove();
-					audio = null;
-					IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
-				}
-				dropped = false;
-			}
-		}
-	}
-
-	@Override
-	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
-		if (audio != null) {
-			audio.stop();
-			audio.remove();
-			audio = null;
-			dropped = true;
-		}
-		return true;
 	}
 
 	@SideOnly(Side.CLIENT)

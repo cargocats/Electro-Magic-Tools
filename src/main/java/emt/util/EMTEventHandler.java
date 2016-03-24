@@ -43,11 +43,4 @@ public class EMTEventHandler {
 			ElectroMagicTools.logger.info("Refreshing configuration file.");
 		}
 	}
-
-	@SubscribeEvent
-	public void clientTick(ClientTickEvent e) {
-		if (EMTKeys.keyUnequip.getIsKeyPressed()) {
-			ElectroMagicTools.INSTANCE.sendToServer(new PacketEMTKeys());
-		}
-	}
 }

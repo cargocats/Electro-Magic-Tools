@@ -30,7 +30,6 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 	boolean alternateServer;
 	boolean alternateClient;
 	public static ArrayList oreDictLogs = new ArrayList();
-	public static AudioSource audio;
 
 	public ItemStreamChainsaw() {
 		this.efficiencyOnProperMaterial = 25F;
@@ -74,40 +73,6 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 			}
 		}
 		return super.onItemUse(itemstack, player, world, x, y, z, par7, par8, par9, par10);
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
-		if (entity instanceof EntityLivingBase) {
-			if (IC2.platform.isRendering()) {
-				if (flag && !dropped) {
-					if (audio == null)
-						audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
-					if (audio != null) {
-						audio.updatePosition();
-						audio.play();
-					}
-				}
-				else if (!flag && audio != null && ((((EntityPlayer) entity).inventory.getCurrentItem() != null && ((EntityPlayer) entity).inventory.getCurrentItem().getItem() != this) || (((EntityPlayer) entity).inventory.getCurrentItem() == null))) {
-					audio.stop();
-					audio.remove();
-					audio = null;
-					IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
-				}
-				dropped = false;
-			}
-		}
-	}
-
-	@Override
-	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
-		if (audio != null) {
-			audio.stop();
-			audio.remove();
-			audio = null;
-			dropped = true;
-		}
-		return true;
 	}
 
 	@Override

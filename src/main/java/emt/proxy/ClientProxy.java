@@ -8,6 +8,7 @@ import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import emt.client.EMTKeys;
+import emt.client.renderer.RenderElectroBall;
 import emt.client.renderer.RenderLaser;
 import emt.client.renderer.RenderShield;
 import emt.entity.EntityArcher;
@@ -27,6 +28,6 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 		RenderingRegistry.registerEntityRenderingHandler(EntityArcher.class, new RenderSnowMan());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShield.class, new RenderShield());
-		RenderingRegistry.registerEntityRenderingHandler(EntityElectroBall.class, new RenderFireball(2));
+		RenderingRegistry.registerEntityRenderingHandler(EntityElectroBall.class, new RenderElectroBall());
 	}
 }

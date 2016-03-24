@@ -51,6 +51,7 @@ public class ElectroMagicTools {
 		logger.info("Starting planning the world domination");
 		EMTConfigHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new EMTEventHandler());
+		FMLCommonHandler.instance().bus().register(new EMTClientEventHandler());
 		Registry.register();
 		EMTEssentiasOutputs.addPrimalOutputs();
 		EMTEssentiasOutputs.addOutputs();
@@ -65,6 +66,7 @@ public class ElectroMagicTools {
 		proxy.load();
 		logger.info("Making mobs drop additional items");
 		MinecraftForge.EVENT_BUS.register(new EMTEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EMTClientEventHandler());
 		logger.info("Adding dungeon loot");
 		EMTDungeonChestGenerator.generateLoot();
 		logger.info("Registering entities");

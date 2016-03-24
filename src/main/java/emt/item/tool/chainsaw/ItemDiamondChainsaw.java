@@ -10,24 +10,34 @@ import ic2.api.item.IElectricItem;
 import ic2.core.IC2;
 import ic2.core.audio.AudioSource;
 import ic2.core.audio.PositionSpec;
+import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTorch;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 
@@ -35,8 +45,6 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	public int cost = 200;
 	public int hitCost = 300;
 	public int tier = 2;
-	public static AudioSource audio;
-	boolean dropped = false;
 
 	public ItemDiamondChainsaw() {
 		super(ToolMaterial.EMERALD);
@@ -102,11 +110,14 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
 		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 			ItemStack torchStack = player.inventory.mainInventory[i];
-			if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
+			if (torchStack == null) {
 				continue;
 			}
 			Item item = torchStack.getItem();
 			if (!(item instanceof ItemBlock)) {
+				continue;
+			}
+			if (!(Block.getBlockFromItem(item) instanceof BlockTorch)) {
 				continue;
 			}
 			int oldMeta = torchStack.getItemDamage();
@@ -129,36 +140,71 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	}
 
 	@Override
-	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
-		if (audio != null) {
-			audio.stop();
-			audio.remove();
-			audio = null;
-			dropped = true;
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (!IC2.platform.isSimulating()) {
+			return super.onItemRightClick(stack, world, player);
 		}
-		return true;
+		if (IC2.keyboard.isModeSwitchKeyDown(player)) {
+			NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
+			if (!nbt.hasKey("shearsMode")) {
+				nbt.setBoolean("shearsMode", true);
+			}
+			
+			if (!nbt.getBoolean("shearsMode")) {
+				nbt.setBoolean("shearsMode", true);
+
+				IC2.platform.messagePlayer(player, "ic2.tooltip.mode", "ic2.tooltip.mode.normal");
+			}
+			else {
+				nbt.setBoolean("shearsMode", false);
+				IC2.platform.messagePlayer(player, "ic2.tooltip.mode", "ic2.tooltip.mode.noShear");
+			}
+		}
+		return super.onItemRightClick(stack, world, player);
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
-		if (entity instanceof EntityLivingBase) {
-			if (IC2.platform.isRendering()) {
-				if (flag && !dropped) {
-					if (audio == null)
-						audio = IC2.audioManager.createSource(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
-					if (audio != null) {
-						audio.updatePosition();
-						audio.play();
-					}
+	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
+		NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemstack);
+		if (!nbt.hasKey("shearsMode")) {
+			nbt.setBoolean("shearsMode", true);
+		}
+		if (!nbt.getBoolean("shearsMode") || player.worldObj.isRemote) {
+			return false;
+		}
+
+		Block block = player.worldObj.getBlock(x, y, z);
+		if (block instanceof IShearable) {
+			IShearable target = (IShearable) block;
+			if (target.isShearable(itemstack, player.worldObj, x, y, z)) {
+				ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+				Random rand = new Random();
+
+				for (ItemStack stack : drops) {
+					float f = 0.7F;
+					double xOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					double yOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					double zOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					EntityItem entityitem = new EntityItem(player.worldObj, (double) x + xOffset, (double) y + yOffset, (double) z + zOffset, stack);
+					entityitem.delayBeforeCanPickup = 10;
+					player.worldObj.spawnEntityInWorld(entityitem);
 				}
-				else if (!flag && audio != null && ((((EntityPlayer) entity).inventory.getCurrentItem() != null && ((EntityPlayer) entity).inventory.getCurrentItem().getItem() != this) || (((EntityPlayer) entity).inventory.getCurrentItem() == null))) {
-					audio.stop();
-					audio.remove();
-					audio = null;
-					IC2.audioManager.playOnce(entity, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
-				}
-				dropped = false;
+
+				player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(block)], 1);
 			}
+		}
+		return false;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int i, boolean flag) {
+		if (entity instanceof EntityLivingBase) {
+
+			NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
+			if (!nbt.hasKey("shearsMode")) {
+				nbt.setBoolean("shearsMode", true);
+			}
+
 		}
 	}
 

@@ -149,7 +149,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 			if (!nbt.hasKey("shearsMode")) {
 				nbt.setBoolean("shearsMode", true);
 			}
-			
+
 			if (!nbt.getBoolean("shearsMode")) {
 				nbt.setBoolean("shearsMode", true);
 
@@ -192,6 +192,34 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 
 				player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(block)], 1);
 			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity) {
+		NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemstack);
+		if (!nbt.hasKey("shearsMode")) {
+			nbt.setBoolean("shearsMode", true);
+		}
+		
+		if (!nbt.getBoolean("shearsMode") || entity.worldObj.isRemote) {
+			return false;
+		}
+		if (entity instanceof IShearable) {
+			IShearable target = (IShearable) entity;
+			if (target.isShearable(itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ)) {
+				ArrayList<ItemStack> drops = target.onSheared(itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+
+				Random rand = new Random();
+				for (ItemStack stack : drops) {
+					EntityItem ent = entity.entityDropItem(stack, 1.0F);
+					ent.motionY += rand.nextFloat() * 0.05F;
+					ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+					ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+				}
+			}
+			return true;
 		}
 		return false;
 	}

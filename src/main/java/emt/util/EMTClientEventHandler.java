@@ -51,13 +51,6 @@ public class EMTClientEventHandler {
 				audio = null;
 				IC2.audioManager.playOnce(player, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
 			}
-			
-			if (audio != null && curItem != lastItem) {
-				audio.stop();
-				audio.remove();
-				audio = null;
-				IC2.audioManager.playOnce(player, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
-			}
 
 			lastItem = curItem;
 		}

@@ -8,7 +8,7 @@ public class EMTConfigHandler {
 
 	public static Configuration config;
 
-	// sections
+	/** Sections */
 	public static String RANDOM = "Random Configs";
 	public static String RESEARCH = "Research";
 	public static String VALUES = "Numeric Values";
@@ -21,7 +21,7 @@ public class EMTConfigHandler {
 	public static int inventoryBaubleProdution;
 	public static int wandChargeFocusCost;
 
-	// values
+	/** Values */
 	public static double wandChargerConsumption;
 	public static double compressedSolarOutput;
 	public static double doubleCompressedSolarOutput;
@@ -31,7 +31,7 @@ public class EMTConfigHandler {
 	public static double quantumBootsJump;
 	public static double tripleCompressedSolarOutput;
 	
-    // essentias
+	/** Essentias */
     public static double fireOutput;
     public static double waterOutput;
     public static double airOutput;
@@ -40,7 +40,7 @@ public class EMTConfigHandler {
     public static double entropyOutput;
     public static double outputCap;
 
-	// random stuff
+    /** random stuff */
 	public static boolean impactOfRain;
 	public static boolean capesOn;
 	public static boolean toolsInBore;
@@ -50,11 +50,11 @@ public class EMTConfigHandler {
 	public static boolean oneRingSpawn;
 	public static boolean removeAmberAndCinnabarMacerating;
 
-	// loot chance
+	/** Loot chance */
 	public static int chanceOneRing;
 	public static int chanceTaintedMjolnir;
 
-	// research
+	/** Research */
 	public static boolean thaumiumDrillResearch;
 	public static boolean thaumiumChainsawResearch;
 	public static boolean thaumiumOmnitoolResearch;

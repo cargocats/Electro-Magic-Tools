@@ -94,11 +94,6 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
-        return EMTRandomHelper.placeTorch(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
-    }
-
-    @Override
     public boolean isRepairable() {
         return false;
     }
@@ -116,8 +111,6 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
         return EMTConfigHandler.enchanting;
     }
-
-    /* IC2 API METHODS */
 
     @Override
     public boolean canProvideEnergy(ItemStack itemStack) {

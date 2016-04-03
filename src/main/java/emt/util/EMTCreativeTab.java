@@ -13,14 +13,10 @@ public class EMTCreativeTab extends CreativeTabs {
 		setBackgroundImageName("emt.png");
 	}
 
-	@Override
-	public ItemStack getIconItemStack() {
-		return new ItemStack(EMTBlocks.electricCloud);
-	}
 
 	@Override
 	public Item getTabIconItem() {
-		return new Item();
+		return EMTItems.electricThorHammer;
 	}
 
 	@Override

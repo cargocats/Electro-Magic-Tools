@@ -34,7 +34,7 @@ public class ItemNoNameFocus extends ItemBaseFocus {
 			float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
 			float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
 			float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-			world.spawnEntityInWorld(new EntityElectroBall(world, player));
+			world.spawnEntityInWorld(new EntityElectroBall(world, player, rotX, rotY, rotZ));
 		}
 		return stack;
 	}

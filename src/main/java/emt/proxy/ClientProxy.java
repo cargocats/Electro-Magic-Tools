@@ -30,6 +30,5 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityArcher.class, new RenderSnowMan());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShield.class, new RenderShield());
 		RenderingRegistry.registerEntityRenderingHandler(EntityElectroBall.class, new RenderElectroBall());
-		RenderManager.instance.entityRenderMap.put(EntityElectroBall.class, new RenderElectroBall());
 	}
 }

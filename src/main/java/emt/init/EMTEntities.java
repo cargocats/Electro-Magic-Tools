@@ -36,6 +36,6 @@ public class EMTEntities {
 		EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
 		EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityElectroBall.class, "electroBall", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityElectroBall.class, "electroBall", entityIDs++, ElectroMagicTools.instance, 80, 60, true);
 	}
 }

@@ -3,6 +3,7 @@ package emt.proxy;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowMan;
 import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -29,5 +30,6 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityArcher.class, new RenderSnowMan());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShield.class, new RenderShield());
 		RenderingRegistry.registerEntityRenderingHandler(EntityElectroBall.class, new RenderElectroBall());
+		RenderManager.instance.entityRenderMap.put(EntityElectroBall.class, new RenderElectroBall());
 	}
 }

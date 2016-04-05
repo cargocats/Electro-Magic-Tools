@@ -25,22 +25,27 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-public class EntityElectroBall extends Entity implements IProjectile, IEntityAdditionalSpawnData {
+public class EntityEnergyBall extends Entity implements IProjectile, IEntityAdditionalSpawnData {
+	public static final int RADIUS = 8;
+	public static final float LENGTH = 16f;
+	public static final float DIST = 1f;
+	public static final float HEIGHT = 8f;
+	public static final int MAX_TICKS_IN_TILE = 60;
+	public static final int MAX_COUNT_OF_BOLTS = 25;
+	
 	public EntityLivingBase shootingEntity;
-	public Bolt[] bolts = new Bolt[25];
+	public Bolt[] bolts = new Bolt[MAX_COUNT_OF_BOLTS];
 	public Point[] entityPositions;
+	public Bolt[][] entityBolts;
+	
 	public boolean inTile = false;
-	private int ticksAlive;
-	private int ticksInAir;
-	public double accelerationX;
-	public double accelerationY;
-	public double accelerationZ;
-	public static final int radius = 8;
-	public static final float length = 16f;
-	public static final float dist = 1f;
-	public static final float height = 8f;
+	public int ticksAlive = 1; /** Pls, don't ask me why 1 =) **/
+	public int ticksInAir = 1;
+	public double accelerationX = 0;
+	public double accelerationY = 0;
+	public double accelerationZ = 0;
 
-	public EntityElectroBall(World world, EntityLivingBase shootingEntity, double rotX, double rotY, double rotZ) {
+	public EntityEnergyBall(World world, EntityLivingBase shootingEntity, double rotX, double rotY, double rotZ) {
 		this(world, shootingEntity);
 
 		rotX += this.rand.nextGaussian() * 0.4D;
@@ -52,14 +57,14 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 		this.accelerationZ = rotZ / len * 0.1D;
 	}
 
-	public EntityElectroBall(World world, EntityLivingBase shootingEntity) {
+	public EntityEnergyBall(World world, EntityLivingBase shootingEntity) {
 		this(world);
 
 		this.shootingEntity = shootingEntity;
-		this.setLocationAndAngles(shootingEntity.posX, shootingEntity.posY, shootingEntity.posZ, shootingEntity.rotationYaw, shootingEntity.rotationPitch);
+		this.setLocationAndAngles(shootingEntity.posX, shootingEntity.posY + shootingEntity.getEyeHeight(), shootingEntity.posZ, shootingEntity.rotationYaw, shootingEntity.rotationPitch);
 	}
 
-	public EntityElectroBall(World world) {
+	public EntityEnergyBall(World world) {
 		super(world);
 
 		this.setSize(1.0F, 1.0F);
@@ -69,7 +74,7 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 		this.motionX = this.motionY = this.motionZ = 0.0D;
 
 		for (int i = 0; i < bolts.length; i++) {
-			bolts[i] = new Bolt(dist, length, height);
+			bolts[i] = new Bolt(DIST, LENGTH, HEIGHT);
 		}
 	}
 
@@ -95,14 +100,14 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 		if (this.inTile) {
 			this.ticksAlive++;
 
-			if (this.ticksAlive >= 60) {
+			if (this.ticksAlive >= MAX_TICKS_IN_TILE) {
 				this.setDead();
 			}
 
 			/** Generating Coords for every Entity **/
 			ArrayList<Entity> entities = new ArrayList();
 
-			int chunkSize = ((radius - 1) >> 4) + 2;
+			int chunkSize = ((RADIUS - 1) >> 4) + 2;
 
 			for (int chX = -chunkSize; chX < chunkSize; chX++) {
 				for (int chZ = -chunkSize; chZ < chunkSize; chZ++) {
@@ -117,10 +122,10 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 								double length = entity.posZ - this.posZ;
 								double hyp = MathHelper.sqrt_double((width * width) + (length * length) + (height * height));
 
-								if (hyp <= radius) {
+								if (hyp <= RADIUS) {
 									entities.add(entity);
 									/** Closer - Harder */
-									entity.attackEntityFrom(DamageSource.magic, (float) (radius - hyp));
+									entity.attackEntityFrom(DamageSource.magic, (float) (RADIUS - hyp));
 									entity.performHurtAnimation();
 								}
 							}
@@ -128,11 +133,27 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 					}
 				}
 			}
-
+			
+			if(worldObj.isRemote) {
+				entityBolts = new Bolt[entities.size()][MAX_COUNT_OF_BOLTS];
+			}
+			
 			entityPositions = new Point[entities.size()];
+			
 			for (int i = 0; i < entities.size(); i++) {
 				Entity entity = entities.get(i);
 				entityPositions[i] = new Point(entity.posX, entity.posY, entity.posZ);
+				if (this.worldObj.isRemote) {
+					
+					for (int e = 0; e < bolts.length; e++) {
+						float h = entity.height;
+						if(h < 4) {
+							h = 4;
+						}
+						entityBolts[i][e] = new Bolt(h / 10, h, h / 2);
+					}
+
+				}
 			}
 
 			/************************************************************************/
@@ -195,7 +216,7 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 	}
 
 	protected float getMotionFactor() {
-		return 0.75F;
+		return 0.85F;
 	}
 
 	@Override
@@ -242,6 +263,6 @@ public class EntityElectroBall extends Entity implements IProjectile, IEntityAdd
 	}
 
 	@Override
-	public void setThrowableHeading(double x, double y, double z, float p1, float p2) {	
+	public void setThrowableHeading(double x, double y, double z, float p1, float p2) {
 	}
 }

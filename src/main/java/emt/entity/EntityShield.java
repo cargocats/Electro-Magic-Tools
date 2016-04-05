@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 
 public class EntityShield extends Entity {
 	public EntityPlayer owner;
+
 	public boolean needCheck = true;
 
 	public EntityShield(World world) {
@@ -46,6 +47,7 @@ public class EntityShield extends Entity {
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 	}
 
+	@Override
 	public AxisAlignedBB getBoundingBox() {
 		return this.boundingBox;
 	}
@@ -54,12 +56,13 @@ public class EntityShield extends Entity {
 	public boolean canBePushed() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean canBeCollidedWith() {
 		return true;
 	}
 
+	@Override
 	public void setPosition(double x, double y, double z) {
 		this.posX = x;
 		this.posY = y + 0.5f;
@@ -69,18 +72,19 @@ public class EntityShield extends Entity {
 		this.boundingBox.setBounds(x - (double) f, y - (double) this.yOffset - 2 + (double) this.ySize, z - (double) f, x + (double) f, y - (double) this.yOffset - 2 + (double) this.ySize + (double) f1, z + (double) f);
 	}
 
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		
-		if(needCheck && owner == null) {
+
+		if (needCheck && owner == null) {
 			owner = this.worldObj.getPlayerEntityByName(dataWatcher.getWatchableObjectString(11));
 			needCheck = false;
 		}
-		if(!needCheck && owner == null){
+		if (!needCheck && owner == null) {
 			this.setDead();
 			return;
 		}
-		
+
 		if (!this.worldObj.isRemote && owner != null) {
 			this.setPosition(owner.posX, owner.posY, owner.posZ);
 			if (!owner.isUsingItem()) {
@@ -88,11 +92,11 @@ public class EntityShield extends Entity {
 			}
 		}
 	}
-	
-    @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender(float p_70070_1_){
-        return 240;
-    }
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender(float p_70070_1_) {
+		return 240;
+	}
 
 	public void applyEntityCollision(Entity entity) {
 		if (entity.riddenByEntity != this && entity.ridingEntity != this) {

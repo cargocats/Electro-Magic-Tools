@@ -1,6 +1,5 @@
 package emt;
 
-import ic2.core.Ic2Items;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,12 +31,14 @@ import org.apache.logging.log4j.Logger;
 		name = ModInformation.name,
 		version = ModInformation.version,
 		guiFactory = ModInformation.guiFactory,
-		dependencies = ModInformation.depend)
+		dependencies = ModInformation.depend
+)
 public class ElectroMagicTools {
 
 	@SidedProxy(
 			clientSide = ModInformation.clientProxy,
-			serverSide = ModInformation.commonProxy)
+			serverSide = ModInformation.commonProxy
+	)
 	public static CommonProxy proxy;
 	public static CreativeTabs tabEMT = new EMTCreativeTab(ModInformation.modid + ".creativeTab");
 	public static Logger logger = LogManager.getLogger(ModInformation.name);

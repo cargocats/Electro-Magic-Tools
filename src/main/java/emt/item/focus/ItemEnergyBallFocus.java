@@ -1,6 +1,6 @@
 package emt.item.focus;
 
-import emt.entity.EntityElectroBall;
+import emt.entity.EntityEnergyBall;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -12,10 +12,10 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
 
-public class ItemNoNameFocus extends ItemBaseFocus {
+public class ItemEnergyBallFocus extends ItemBaseFocus {
 
-	public ItemNoNameFocus() {
-		super("noName");
+	public ItemEnergyBallFocus() {
+		super("energyBall");
 	}
 
 	@Override
@@ -25,16 +25,16 @@ public class ItemNoNameFocus extends ItemBaseFocus {
 
 	@Override
 	public String getSortingHelper(ItemStack itemstack) {
-		return "NONAME";
+		return "ENERGYBALL";
 	}
 
 	@Override
-	public ItemStack onFocusRightClick(ItemStack stack, World world, EntityPlayer player, MovingObjectPosition paramMovingObjectPosition) {
+	public ItemStack onFocusRightClick(ItemStack stack, World world, EntityPlayer player, MovingObjectPosition mop) {
 		if (!world.isRemote) {
 			float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
 			float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
 			float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-			world.spawnEntityInWorld(new EntityElectroBall(world, player, rotX, rotY, rotZ));
+			world.spawnEntityInWorld(new EntityEnergyBall(world, player, rotX, rotY, rotZ));
 		}
 		return stack;
 	}

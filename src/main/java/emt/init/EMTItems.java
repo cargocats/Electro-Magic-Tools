@@ -22,7 +22,7 @@ import emt.item.armor.wings.ItemThaumiumReinforcedWing;
 import emt.item.focus.ItemChargeFocus;
 import emt.item.focus.ItemChristmasFocus;
 import emt.item.focus.ItemExplosionFocus;
-import emt.item.focus.ItemNoNameFocus;
+import emt.item.focus.ItemEnergyBallFocus;
 import emt.item.focus.ItemShieldFocus;
 import emt.item.focus.ItemWandChargingFocus;
 import emt.item.tool.ItemElectricHoeGrowth;
@@ -188,7 +188,7 @@ public class EMTItems {
 		wandChargeFocus = new ItemWandChargingFocus();
 		GameRegistry.registerItem(wandChargeFocus, "WandChargingFocus");
 		
-		noNameFocus = new ItemNoNameFocus();
+		noNameFocus = new ItemEnergyBallFocus();
 		GameRegistry.registerItem(noNameFocus, "NoNameFocus");
 	}
 }

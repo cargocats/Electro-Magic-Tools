@@ -69,6 +69,7 @@ public class RenderShield extends Render {
 		GL11.glEndList();
 	}
 
+	@Override
 	public void doRender(Entity entityShield, double x, double y, double z, float par8, float par9) {
 		this.bindEntityTexture(entityShield);
 

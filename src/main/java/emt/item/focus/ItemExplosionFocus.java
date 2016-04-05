@@ -13,7 +13,6 @@ import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class ItemExplosionFocus extends ItemBaseFocus {
-
 	private static final AspectList visCost = new AspectList().add(Aspect.FIRE, 200).add(Aspect.ENTROPY, 200);
 
 	public ItemExplosionFocus() {

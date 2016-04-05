@@ -25,9 +25,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class EntityArcher extends EntitySnowman implements IExtendedEntityProperties {
 
-	public EntityArcher(World par1World) {
-		super(par1World);
-		this.isImmuneToFire = true;
+	public EntityArcher(World world) {
+		super(world);
+		
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, IMob.mobSelector));
@@ -37,13 +37,15 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 	}
 
 	@Override
-	public void onDeath(DamageSource par1DamageSource) {
-		super.onDeath(par1DamageSource);
+	public void onDeath(DamageSource damageSource) {
+		super.onDeath(damageSource);
+		
 		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 1, true);
 		this.setDead();
 	}
@@ -54,16 +56,16 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
+	protected void dropFewItems(boolean hitByPlayer, int levelOfLooting) {
 		int j;
 		int k;
 
-		j = this.rand.nextInt(3 + par2);
+		j = this.rand.nextInt(3 + levelOfLooting);
 
 		for (k = 0; k < j; ++k) {
 			this.dropItem(Items.arrow, 1);
 		}
-		j = this.rand.nextInt(3 + par2);
+		j = this.rand.nextInt(3 + levelOfLooting);
 
 		for (k = 0; k < j; ++k) {
 			this.dropItem(Items.bone, 1);
@@ -71,7 +73,7 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 	}
 
 	@Override
-	protected void dropRareDrop(int par1) {
+	protected void dropRareDrop(int ch) {
 		this.entityDropItem(new ItemStack(Items.snowball, 1, 1), 0.0F);
 	}
 
@@ -81,18 +83,18 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
-		EntityArrow entityarrow = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float) (14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
-		int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
-		int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
+	public void attackEntityWithRangedAttack(EntityLivingBase entity, float par2) {
+		EntityArrow entityarrow = new EntityArrow(this.worldObj, this, entity, 1.6F, (float) (14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+		int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
+		int punchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
 		entityarrow.setDamage((double) (par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double) ((float) this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
 
-		if (i > 0) {
-			entityarrow.setDamage(entityarrow.getDamage() + (double) i * 0.5D + 0.5D);
+		if (powerLevel > 0) {
+			entityarrow.setDamage(entityarrow.getDamage() + (double) powerLevel * 0.5D + 0.5D);
 		}
 
-		if (j > 0) {
-			entityarrow.setKnockbackStrength(j);
+		if (punchLevel > 0) {
+			entityarrow.setKnockbackStrength(punchLevel);
 		}
 
 		if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0) {

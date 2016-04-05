@@ -58,7 +58,8 @@ public class EMTRandomHelper {
 				float y = prevY + (rnd.nextInt((int) height) - (height / 2));
 				float z = prevZ + (rnd.nextInt((int) height) - (height / 2));
 
-				points.add(new Point(x, y, z));
+				byte color = (byte) ((198 / (length / dist)) * x);
+				points.add(new Point(x, y, z, (byte)(255 - color), (byte)(255 - color), (byte)255));
 			}
 		}
 	}
@@ -67,11 +68,23 @@ public class EMTRandomHelper {
 		public float x = 0;
 		public float y = 0;
 		public float z = 0;
+		public byte r = 0;
+		public byte g = 0;
+		public byte b = 0;
 
 		public Point(float x, float y, float z) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
+		}
+		
+		public Point(float x, float y, float z, byte r, byte g, byte b) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			this.r = r;
+			this.g = g;
+			this.b = b;
 		}
 
 		public Point(double x, double y, double z) {

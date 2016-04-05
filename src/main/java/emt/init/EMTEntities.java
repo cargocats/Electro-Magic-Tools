@@ -3,7 +3,7 @@ package emt.init;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import emt.ElectroMagicTools;
 import emt.entity.EntityArcher;
-import emt.entity.EntityElectroBall;
+import emt.entity.EntityEnergyBall;
 import emt.entity.EntityLaser;
 import emt.entity.EntityShield;
 import net.minecraft.entity.Entity;
@@ -36,6 +36,6 @@ public class EMTEntities {
 		EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
 		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
 		EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityElectroBall.class, "electroBall", entityIDs++, ElectroMagicTools.instance, 80, 60, true);
+		EntityRegistry.registerModEntity(EntityEnergyBall.class, "energyBall", entityIDs++, ElectroMagicTools.instance, 80, 60, true);
 	}
 }

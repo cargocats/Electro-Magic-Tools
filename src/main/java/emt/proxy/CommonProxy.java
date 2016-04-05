@@ -26,16 +26,16 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity entity = world.getTileEntity(x, y, z);
 
 		switch (ID) {
-		case 0:
-			if (entity != null && entity instanceof TileEntityIndustrialWandRecharge) {
-				return new ContainerIndustrialWandRecharge(player.inventory, (TileEntityIndustrialWandRecharge) entity);
-			}
-		case 1:
-			if (entity != null && entity instanceof TileEntityEtherealMacerator) {
-				return new ContainerEtheralMacerator(player.inventory, (TileEntityEtherealMacerator) entity);
-			}
-		default:
-			return null;
+			case 0:
+				if (entity != null && entity instanceof TileEntityIndustrialWandRecharge) {
+					return new ContainerIndustrialWandRecharge(player.inventory, (TileEntityIndustrialWandRecharge) entity);
+				}
+			case 1:
+				if (entity != null && entity instanceof TileEntityEtherealMacerator) {
+					return new ContainerEtheralMacerator(player.inventory, (TileEntityEtherealMacerator) entity);
+				}
+			default:
+				return null;
 		}
 	}
 
@@ -44,16 +44,16 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity entity = world.getTileEntity(x, y, z);
 
 		switch (ID) {
-		case 0:
-			if (entity != null && entity instanceof TileEntityIndustrialWandRecharge) {
-				return new GuiIndustrialWandRecharger(player.inventory, (TileEntityIndustrialWandRecharge) entity);
-			}
-		case 1:
-			if (entity != null && entity instanceof TileEntityEtherealMacerator) {
-				return new GuiEtherealMacerator(player.inventory, (TileEntityEtherealMacerator) entity);
-			}
-		default:
-			return null;
+			case 0:
+				if (entity != null && entity instanceof TileEntityIndustrialWandRecharge) {
+					return new GuiIndustrialWandRecharger(player.inventory, (TileEntityIndustrialWandRecharge) entity);
+				}
+			case 1:
+				if (entity != null && entity instanceof TileEntityEtherealMacerator) {
+					return new GuiEtherealMacerator(player.inventory, (TileEntityEtherealMacerator) entity);
+				}
+			default:
+				return null;
 		}
 	}
 }

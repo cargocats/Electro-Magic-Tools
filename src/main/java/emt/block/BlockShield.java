@@ -19,8 +19,8 @@ public class BlockShield extends Block {
 
 	public BlockShield(String name) {
 		super(Material.rock);
-		setBlockName(ModInformation.modid + "." + name);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		setBlockName(ModInformation.MODID + "." + name);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setHardness(1F);
 		this.setResistance(10000000000000000000000000000000000000F);
 	}
@@ -39,7 +39,7 @@ public class BlockShield extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(ModInformation.texturePath + ":shield");
+		this.blockIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":shield");
 	}
 
 	@Override

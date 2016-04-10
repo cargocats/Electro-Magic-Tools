@@ -33,7 +33,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 	public ItemOmnitoolIron() {
 		super(ToolMaterial.EMERALD);
 		this.efficiencyOnProperMaterial = 13F;
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxStackSize(1);
 		if (!EMTConfigHandler.toolsInBore) {
 			this.setMaxDamage(27);
@@ -46,7 +46,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/omnitool_iron");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/omnitool_iron");
 	}
 
 	@SideOnly(Side.CLIENT)

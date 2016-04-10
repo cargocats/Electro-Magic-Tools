@@ -44,7 +44,7 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
 	public ItemRockbreakerDrill() {
 		side = 0;
-		setCreativeTab(ElectroMagicTools.tabEMT);
+		setCreativeTab(ElectroMagicTools.TAB);
 		this.efficiencyOnProperMaterial = 25F;
 		this.setMaxStackSize(1);
 		if (EMTConfigHandler.toolsInBore == false) {
@@ -61,7 +61,7 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/drill_rockbreaker");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/drill_rockbreaker");
 	}
 
 	private boolean isEffectiveAgainst(Block block) {

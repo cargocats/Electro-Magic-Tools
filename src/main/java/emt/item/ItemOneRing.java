@@ -46,12 +46,12 @@ public class ItemOneRing extends ItemBase implements IBauble {
 			name = "nothing";
 			break;
 		}
-		return "item." + ModInformation.modid + ".bauble." + name;
+		return "item." + ModInformation.MODID + ".bauble." + name;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
-		this.icon[0] = ri.registerIcon(ModInformation.texturePath + ":onering");
+		this.icon[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":onering");
 	}
 
 	@SideOnly(Side.CLIENT)

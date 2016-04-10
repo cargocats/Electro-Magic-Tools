@@ -31,7 +31,7 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     public ItemThaumiumDrill() {
         super(ToolMaterial.EMERALD);
         this.efficiencyOnProperMaterial = 20F;
-        this.setCreativeTab(ElectroMagicTools.tabEMT);
+        this.setCreativeTab(ElectroMagicTools.TAB);
         this.setMaxStackSize(1);
         if (EMTConfigHandler.toolsInBore == false) {
             this.setMaxDamage(27);
@@ -43,7 +43,7 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/drill_thaumium");
+        this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/drill_thaumium");
     }
 
     @SideOnly(Side.CLIENT)

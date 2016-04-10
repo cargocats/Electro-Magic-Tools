@@ -31,7 +31,7 @@ public class ItemFeatherWing extends ItemArmor {
 		super(material, par3, par4);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(120);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.isDamageable();
 		rnd = new Random();
 	}
@@ -39,13 +39,13 @@ public class ItemFeatherWing extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/wing_feather");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/wing_feather");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/featherwing.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/featherwing.png";
 	}
 
 	@Override

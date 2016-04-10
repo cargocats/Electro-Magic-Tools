@@ -11,15 +11,15 @@ public class ItemBase extends Item {
 
 	public ItemBase(String unlocName, String textureName) {
 		super();
-		setUnlocalizedName(ModInformation.modid + unlocName);
-		setTextureName(ModInformation.texturePath + ":" + textureName);
-		setCreativeTab(ElectroMagicTools.tabEMT);
+		setUnlocalizedName(ModInformation.MODID + unlocName);
+		setTextureName(ModInformation.TEXTURE_PATH + ":" + textureName);
+		setCreativeTab(ElectroMagicTools.TAB);
 	}
 
 	public ItemBase(String unlocName) {
 		super();
-		setUnlocalizedName(ModInformation.modid + ".item." + unlocName);
-		setCreativeTab(ElectroMagicTools.tabEMT);
+		setUnlocalizedName(ModInformation.MODID + ".item." + unlocName);
+		setCreativeTab(ElectroMagicTools.TAB);
 	}
 
 	public String getItemStackDisplayName(ItemStack stack) {

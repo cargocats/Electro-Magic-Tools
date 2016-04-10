@@ -23,11 +23,11 @@ public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/boots_quantum");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/boots_quantum");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/quantumbootstravel.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/quantumbootstravel.png";
 	}
 }

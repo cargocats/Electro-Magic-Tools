@@ -27,7 +27,7 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 
 	public ItemQuantumGoggles(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 10000000;
@@ -44,12 +44,12 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/goggles_quantum");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/goggles_quantum");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/thaumicquantumhelmet.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
 	}
 
 	@Override

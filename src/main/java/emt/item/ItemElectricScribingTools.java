@@ -18,7 +18,7 @@ public class ItemElectricScribingTools extends ItemInkwell implements IElectricI
 	public static int maxCharge = 400;
 
 	public ItemElectricScribingTools() {
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxDamage(400);
 		this.setMaxStackSize(1);
 	}

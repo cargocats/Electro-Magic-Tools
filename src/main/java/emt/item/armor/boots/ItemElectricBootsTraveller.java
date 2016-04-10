@@ -45,7 +45,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 		super(ArmorMaterial.DIAMOND, par3, par4);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -65,7 +65,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/boots_electric");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/boots_electric");
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/electricboots.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/electricboots.png";
 	}
 
 	@Override

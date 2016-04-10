@@ -35,7 +35,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 		this.efficiencyOnProperMaterial = 25F;
 		alternateServer = false;
 		alternateClient = false;
-		setCreativeTab(ElectroMagicTools.tabEMT);
+		setCreativeTab(ElectroMagicTools.TAB);
 		this.maxStackSize = 1;
 		this.setMaxDamage(27);
 		maxCharge = 900000;
@@ -47,7 +47,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/chainsaw_stream");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_stream");
 	}
 
 	@Override

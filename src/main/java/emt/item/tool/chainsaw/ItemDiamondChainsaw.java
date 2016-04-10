@@ -49,7 +49,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	public ItemDiamondChainsaw() {
 		super(ToolMaterial.EMERALD);
 		this.efficiencyOnProperMaterial = 16F;
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 	}
@@ -57,7 +57,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/chainsaw_diamond");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_diamond");
 	}
 
 	@Override

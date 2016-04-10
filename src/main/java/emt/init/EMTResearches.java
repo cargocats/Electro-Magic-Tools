@@ -20,13 +20,13 @@ public class EMTResearches {
 	}
 
 	public static void addResearchTab() {
-		ResourceLocation background = new ResourceLocation(ModInformation.texturePath, "textures/misc/background.png");
-		ResearchCategories.registerCategory("EMT", new ResourceLocation(ModInformation.texturePath, "textures/misc/emt.png"), background);
+		ResourceLocation background = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/misc/background.png");
+		ResearchCategories.registerCategory("EMT", new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/misc/emt.png"), background);
 	}
 
 	public static void addResearch() {
 		/** Research that can't be disabled **/
-		new EMTResearchItem("Electric Magic Tools", 0, 0, 0, new ResourceLocation(ModInformation.texturePath, "textures/misc/emt.png")).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""));
+		new EMTResearchItem("Electric Magic Tools", 0, 0, 0, new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/misc/emt.png")).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""));
 		new EMTResearchItem("Diamond Chainsaw", 5, -6, 0, new ItemStack(EMTItems.diamondChainsaw)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.diamondChainsaw));
 		new EMTResearchItem("Thaumium Plate", 6, -6, 0, new ItemStack(EMTItems.itemEMTItems, 1, 5)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.thaumiumPlate));
 		new EMTResearchItem("Macerating Native Ore Clusters", 5, -7, 0, IC2Items.getItem("smallGoldDust")).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""));

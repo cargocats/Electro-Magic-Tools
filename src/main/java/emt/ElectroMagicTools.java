@@ -27,29 +27,29 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
-		modid = ModInformation.modid,
-		name = ModInformation.name,
-		version = ModInformation.version,
-		guiFactory = ModInformation.guiFactory,
-		dependencies = ModInformation.depend
+		modid = ModInformation.MODID,
+		name = ModInformation.NAME,
+		version = ModInformation.VERSION,
+		guiFactory = ModInformation.GUI_FACTORY,
+		dependencies = ModInformation.DEPEND
 )
 public class ElectroMagicTools {
 
 	@SidedProxy(
-			clientSide = ModInformation.clientProxy,
-			serverSide = ModInformation.commonProxy
+			clientSide = ModInformation.CLIENT_PROXY,
+			serverSide = ModInformation.COMMON_PROXY
 	)
 	public static CommonProxy proxy;
-	public static CreativeTabs tabEMT = new EMTCreativeTab(ModInformation.modid + ".creativeTab");
-	public static Logger logger = LogManager.getLogger(ModInformation.name);
-	public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModInformation.channel);
+	public static final CreativeTabs TAB = new EMTCreativeTab(ModInformation.MODID + ".creativeTab");
+	public static final Logger LOGGER = LogManager.getLogger(ModInformation.NAME);
+	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModInformation.CHANNEL);
 
-	@Instance(ModInformation.modid)
+	@Instance(ModInformation.MODID)
 	public static ElectroMagicTools instance;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		logger.info("Starting planning the world domination");
+		LOGGER.info("Starting planning the world domination");
 		EMTConfigHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new EMTEventHandler());
 		FMLCommonHandler.instance().bus().register(new EMTClientEventHandler());
@@ -57,32 +57,32 @@ public class ElectroMagicTools {
 		EMTEssentiasOutputs.addPrimalOutputs();
 		EMTEssentiasOutputs.addOutputs();
 		registerPackets();
-		logger.info("Planning complete");
+		LOGGER.info("Planning complete");
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		logger.info("Gathering allies");
-		logger.info("Loading the proxies");
+		LOGGER.info("Gathering allies");
+		LOGGER.info("Loading the proxies");
 		proxy.load();
-		logger.info("Making mobs drop additional items");
+		LOGGER.info("Making mobs drop additional items");
 		MinecraftForge.EVENT_BUS.register(new EMTEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EMTClientEventHandler());
-		logger.info("Adding dungeon loot");
+		LOGGER.info("Adding dungeon loot");
 		EMTDungeonChestGenerator.generateLoot();
-		logger.info("Registering entities");
+		LOGGER.info("Registering entities");
 		EMTEntities.registerEMTEntities();
-		logger.info("Registering the GUI Handler");
+		LOGGER.info("Registering the GUI Handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		logger.info("Allies gathered.");
+		LOGGER.info("Allies gathered.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		logger.info("Starting the world takeover");
+		LOGGER.info("Starting the world takeover");
 		Registry.registerLate();
 		EMTResearches.register();
-		logger.info("World takeover complete. Enjoy!");
+		LOGGER.info("World takeover complete. Enjoy!");
 	}
 
 	@EventHandler

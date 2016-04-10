@@ -19,7 +19,7 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 	public ItemOmnitoolDiamond() {
 		super();
 		this.efficiencyOnProperMaterial = 16F;
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxStackSize(1);
 		if (!EMTConfigHandler.toolsInBore) {
 			this.setMaxDamage(27);
@@ -34,7 +34,7 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/omnitool_diamond");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/omnitool_diamond");
 	}
 
 	@Override

@@ -362,7 +362,7 @@ public class EMTRecipes {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
 					it.remove();
-					ElectroMagicTools.logger.info("Removing conflicting amber macerating recipe(s)");
+					ElectroMagicTools.LOGGER.info("Removing conflicting amber macerating recipe(s)");
 				}
 			}
 
@@ -370,7 +370,7 @@ public class EMTRecipes {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
 					it.remove();
-					ElectroMagicTools.logger.info("Removing Conflicting cinnabar macerating recipe(s)");
+					ElectroMagicTools.LOGGER.info("Removing Conflicting cinnabar macerating recipe(s)");
 				}
 			}
 		}

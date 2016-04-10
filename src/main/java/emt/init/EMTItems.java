@@ -93,84 +93,84 @@ public class EMTItems {
 		OreDictionary.registerOre("plateThaumium", new ItemStack(itemEMTItems, 1, 5));
 		OreDictionary.registerOre("slimeball", new ItemStack(itemEMTItems, 1, 8));
 
-		emtBauble = new ItemIC2Baubles().setUnlocalizedName(ModInformation.modid + ".bauble");
+		emtBauble = new ItemIC2Baubles().setUnlocalizedName(ModInformation.MODID + ".bauble");
 		GameRegistry.registerItem(emtBauble, "EMTBaubles");
 
 		onering = new ItemOneRing();
 		GameRegistry.registerItem(onering, "BaseBaubles");
 
-		quantumArmor = new ItemInfusedQuantumChestplate(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.modid + ".quantum");
+		quantumArmor = new ItemInfusedQuantumChestplate(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(ModInformation.MODID + ".quantum");
 
-		electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.electric");
+		electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(ModInformation.MODID + ".goggles.electric");
 		GameRegistry.registerItem(electricGoggles, "ElectricGogglesRevealing");
 
-		nanoThaumicHelmet = new ItemNanoGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.nano");
+		nanoThaumicHelmet = new ItemNanoGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.MODID + ".goggles.nano");
 		GameRegistry.registerItem(nanoThaumicHelmet, "NanosuitGogglesRevealing");
 
-		quantumThaumicHelmet = new ItemQuantumGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.quantum");
+		quantumThaumicHelmet = new ItemQuantumGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.MODID + ".goggles.quantum");
 		GameRegistry.registerItem(quantumThaumicHelmet, "QuantumGogglesRevealing");
 
-		solarHelmetRevealing = new ItemSolarHelmetRevealing(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.modid + ".goggles.solar");
+		solarHelmetRevealing = new ItemSolarHelmetRevealing(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(ModInformation.MODID + ".goggles.solar");
 		GameRegistry.registerItem(solarHelmetRevealing, "SolarHelmetRevealing");
 
-		electricBootsTraveller = new ItemElectricBootsTraveller(3, 3).setUnlocalizedName(ModInformation.modid + ".boots.traveller.electric");
+		electricBootsTraveller = new ItemElectricBootsTraveller(3, 3).setUnlocalizedName(ModInformation.MODID + ".boots.traveller.electric");
 		GameRegistry.registerItem(electricBootsTraveller, "ElectricBootsTraveller");
 
-		nanoBootsTraveller = new ItemNanoBootsTraveller(3, 3).setUnlocalizedName(ModInformation.modid + ".boots.traveller.nano");
+		nanoBootsTraveller = new ItemNanoBootsTraveller(3, 3).setUnlocalizedName(ModInformation.MODID + ".boots.traveller.nano");
 		GameRegistry.registerItem(nanoBootsTraveller, "NanoBootsTraveller");
 
-		quantumBootsTraveller = new ItemQuantumBootsTraveller(3, 3).setUnlocalizedName(ModInformation.modid + ".boots.traveller.quantum");
+		quantumBootsTraveller = new ItemQuantumBootsTraveller(3, 3).setUnlocalizedName(ModInformation.MODID + ".boots.traveller.quantum");
 		GameRegistry.registerItem(quantumBootsTraveller, "QuantumBootsTraveller");
 
-		electricScribingTools = new ItemElectricScribingTools().setUnlocalizedName(ModInformation.modid + ".scribingtools.electric");
+		electricScribingTools = new ItemElectricScribingTools().setUnlocalizedName(ModInformation.MODID + ".scribingtools.electric");
 		GameRegistry.registerItem(electricScribingTools, "ElectricScribingTools");
 
-		featherWing = new ItemFeatherWing(featherWingMaterial, 7, 1).setUnlocalizedName(ModInformation.modid + ".wing.feather");
+		featherWing = new ItemFeatherWing(featherWingMaterial, 7, 1).setUnlocalizedName(ModInformation.MODID + ".wing.feather");
 		GameRegistry.registerItem(featherWing, "FeatherWing");
 
-		thaumiumWing = new ItemThaumiumReinforcedWing(ThaumcraftApi.armorMatThaumium, 7, 1).setUnlocalizedName(ModInformation.modid + ".wing.thaumium");
+		thaumiumWing = new ItemThaumiumReinforcedWing(ThaumcraftApi.armorMatThaumium, 7, 1).setUnlocalizedName(ModInformation.MODID + ".wing.thaumium");
 		GameRegistry.registerItem(thaumiumWing, "ThaumiumWing");
 
-		nanoWing = new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(ModInformation.modid + ".wing.nano");
+		nanoWing = new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(ModInformation.MODID + ".wing.nano");
 		GameRegistry.registerItem(nanoWing, "NanosuitWing");
 
-		quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(ModInformation.modid + ".wing.quantum");
+		quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(ModInformation.MODID + ".wing.quantum");
 		GameRegistry.registerItem(quantumWing, "QuantumWing");
 
-		thorHammer = new ItemThorHammer().setUnlocalizedName(ModInformation.modid + ".hammer");
+		thorHammer = new ItemThorHammer().setUnlocalizedName(ModInformation.MODID + ".hammer");
 		GameRegistry.registerItem(thorHammer, "Mjolnir");
 
-		taintedThorHammer = new ItemThorHammerBroken().setUnlocalizedName(ModInformation.modid + ".hammer.broken");
+		taintedThorHammer = new ItemThorHammerBroken().setUnlocalizedName(ModInformation.MODID + ".hammer.broken");
 		GameRegistry.registerItem(taintedThorHammer, "TaintedMjolnir");
 
-		electricThorHammer = new ItemElectricThorHammer().setUnlocalizedName(ModInformation.modid + ".hammer.electric");
+		electricThorHammer = new ItemElectricThorHammer().setUnlocalizedName(ModInformation.MODID + ".hammer.electric");
 		GameRegistry.registerItem(electricThorHammer, "SuperchargedMjolnir");
 
-		thaumiumDrill = new ItemThaumiumDrill().setUnlocalizedName(ModInformation.modid + ".drill.thaumium");
+		thaumiumDrill = new ItemThaumiumDrill().setUnlocalizedName(ModInformation.MODID + ".drill.thaumium");
 		GameRegistry.registerItem(thaumiumDrill, "ThaumiumDrill");
 
-		diamondChainsaw = new ItemDiamondChainsaw().setUnlocalizedName(ModInformation.modid + ".chainsaw.diamond");
+		diamondChainsaw = new ItemDiamondChainsaw().setUnlocalizedName(ModInformation.MODID + ".chainsaw.diamond");
 		GameRegistry.registerItem(diamondChainsaw, "DiamondChainsaw");
 
-		thaumiumChainsaw = new ItemThaumiumChainsaw().setUnlocalizedName(ModInformation.modid + ".chainsaw.thaumium");
+		thaumiumChainsaw = new ItemThaumiumChainsaw().setUnlocalizedName(ModInformation.MODID + ".chainsaw.thaumium");
 		GameRegistry.registerItem(thaumiumChainsaw, "ThaumiumChainsaw");
 
-		ironOmnitool = new ItemOmnitoolIron().setUnlocalizedName(ModInformation.modid + ".omnitool.iron");
+		ironOmnitool = new ItemOmnitoolIron().setUnlocalizedName(ModInformation.MODID + ".omnitool.iron");
 		GameRegistry.registerItem(ironOmnitool, "Omnitool");
 
-		diamondOmnitool = new ItemOmnitoolDiamond().setUnlocalizedName(ModInformation.modid + ".omnitool.diamond");
+		diamondOmnitool = new ItemOmnitoolDiamond().setUnlocalizedName(ModInformation.MODID + ".omnitool.diamond");
 		GameRegistry.registerItem(diamondOmnitool, "Diamond Omnitool");
 
-		thaumiumOmnitool = new ItemOmnitoolThaumium().setUnlocalizedName(ModInformation.modid + ".omnitool.thaumium");
+		thaumiumOmnitool = new ItemOmnitoolThaumium().setUnlocalizedName(ModInformation.MODID + ".omnitool.thaumium");
 		GameRegistry.registerItem(thaumiumOmnitool, "ThaumiumOmnitool");
 
-		streamChainsaw = new ItemStreamChainsaw().setUnlocalizedName(ModInformation.modid + ".chainsaw.stream");
+		streamChainsaw = new ItemStreamChainsaw().setUnlocalizedName(ModInformation.MODID + ".chainsaw.stream");
 		GameRegistry.registerItem(streamChainsaw, "ChainsawStream");
 
-		rockbreakerDrill = new ItemRockbreakerDrill().setUnlocalizedName(ModInformation.modid + ".drill.rockbreaker");
+		rockbreakerDrill = new ItemRockbreakerDrill().setUnlocalizedName(ModInformation.MODID + ".drill.rockbreaker");
 		GameRegistry.registerItem(rockbreakerDrill, "DrillRockbreaker");
 
-		electricHoeGrowth = new ItemElectricHoeGrowth().setUnlocalizedName(ModInformation.modid + ".hoeofgrowth.electric");
+		electricHoeGrowth = new ItemElectricHoeGrowth().setUnlocalizedName(ModInformation.MODID + ".hoeofgrowth.electric");
 		GameRegistry.registerItem(electricHoeGrowth, "ElectricHoeGrowth");
 
 		explosionFocus = new ItemExplosionFocus();

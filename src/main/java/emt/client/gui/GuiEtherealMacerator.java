@@ -19,7 +19,7 @@ public class GuiEtherealMacerator extends GuiContainer {
 		ySize = 165;
 	}
 
-	public static final ResourceLocation texture = new ResourceLocation(ModInformation.texturePath, "textures/guis/etherealmacerator.png");
+	public static final ResourceLocation texture = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/guis/etherealmacerator.png");
 
 	@Override
 	public void drawGuiContainerBackgroundLayer(float f, int j, int i) {

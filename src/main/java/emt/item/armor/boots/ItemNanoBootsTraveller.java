@@ -23,11 +23,11 @@ public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/boots_nano");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/boots_nano");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/nanobootstravel.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/nanobootstravel.png";
 	}
 }

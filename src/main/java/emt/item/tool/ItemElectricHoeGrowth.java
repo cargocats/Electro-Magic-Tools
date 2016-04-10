@@ -33,14 +33,14 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
 	public ItemElectricHoeGrowth() {
 		super(ToolMaterial.EMERALD);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxStackSize(1);
 		this.growthCost = 10000;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/hoe_growth");
+		this.icon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/hoe_growth");
 	}
 
 	@SideOnly(Side.CLIENT)

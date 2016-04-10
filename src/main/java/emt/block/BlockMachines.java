@@ -33,22 +33,22 @@ public class BlockMachines extends BlockBaseContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
-		this.blockIcon = ir.registerIcon(ModInformation.texturePath + ":machines/top");
+		this.blockIcon = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/top");
 
-		this.top[0] = ir.registerIcon(ModInformation.texturePath + ":machines/top");
-		this.top[1] = ir.registerIcon(ModInformation.texturePath + ":machines/etherealmaceratortop");
+		this.top[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/top");
+		this.top[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		this.bottom[0] = ir.registerIcon(ModInformation.texturePath + ":machines/side");
-		this.bottom[1] = ir.registerIcon(ModInformation.texturePath + ":machines/etherealmacerator");
+		this.bottom[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/side");
+		this.bottom[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.side[0] = ir.registerIcon(ModInformation.texturePath + ":machines/side");
-		this.side[1] = ir.registerIcon(ModInformation.texturePath + ":machines/etherealmacerator");
+		this.side[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/side");
+		this.side[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.frontOff[0] = ir.registerIcon(ModInformation.texturePath + ":machines/wandcharger");
-		this.frontOff[1] = ir.registerIcon(ModInformation.texturePath + ":machines/etherealmaceratorfront");
+		this.frontOff[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/wandcharger");
+		this.frontOff[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratorfront");
 
-		this.frontOn[0] = ir.registerIcon(ModInformation.texturePath + ":machines/wandcharger");
-		this.frontOn[1] = ir.registerIcon(ModInformation.texturePath + ":machines/etherealmaceratorfrontactive");
+		this.frontOn[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/wandcharger");
+		this.frontOn[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -11,11 +11,11 @@ public abstract class BlockBase extends Block {
 	public BlockBase(String unlocName, Material material, String textureName, SoundType soundType, float hardness) {
 		super(material);
 		name = unlocName;
-		setBlockName(ModInformation.modid + ".block." + unlocName);
+		setBlockName(ModInformation.MODID + ".block." + unlocName);
 		if (textureName != null) {
-			setBlockTextureName(ModInformation.texturePath + ":" + textureName);
+			setBlockTextureName(ModInformation.TEXTURE_PATH + ":" + textureName);
 		}
-		setCreativeTab(ElectroMagicTools.tabEMT);
+		setCreativeTab(ElectroMagicTools.TAB);
 		setStepSound(soundType);
 		setHardness(hardness);
 	}

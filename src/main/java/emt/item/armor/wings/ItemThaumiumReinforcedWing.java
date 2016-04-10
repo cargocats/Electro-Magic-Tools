@@ -27,7 +27,7 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 		super(material, par3, par4);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(250);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.isDamageable();
 		visDiscount = 4;
 	}
@@ -40,13 +40,13 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/wing_thaumium");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/wing_thaumium");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/thaumiumwing.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/thaumiumwing.png";
 	}
 
 	@Override

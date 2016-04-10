@@ -17,7 +17,7 @@ import java.util.Locale;
 public class EMTGuiConfig extends GuiConfig {
 
 	public EMTGuiConfig(GuiScreen parentScreen) {
-		super(parentScreen, getConfigElements(parentScreen), ModInformation.modid, false, false, StatCollector.translateToLocal("gui." + ModInformation.modid + ".config.title"));
+		super(parentScreen, getConfigElements(parentScreen), ModInformation.MODID, false, false, StatCollector.translateToLocal("gui." + ModInformation.MODID + ".config.title"));
 	}
 
 	@SuppressWarnings("rawtypes")

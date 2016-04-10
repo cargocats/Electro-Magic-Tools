@@ -40,7 +40,7 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 		super(material, par3, par4);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.maxCharge = 1000000;
 		this.genDay = 256;
 		this.genNight = 128;
@@ -58,12 +58,12 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/goggles_solar");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/goggles_solar");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layerType) {
-		return ModInformation.texturePath + ":textures/models/solarrevealinghelmet.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/solarrevealinghelmet.png";
 	}
 
 	@SuppressWarnings("unchecked")

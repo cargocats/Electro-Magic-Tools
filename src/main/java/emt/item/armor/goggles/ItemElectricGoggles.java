@@ -37,18 +37,18 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 
 	public ItemElectricGoggles(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":armor/goggles_electric");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/goggles_electric");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.texturePath + ":textures/models/electricgoggles.png";
+		return ModInformation.TEXTURE_PATH + ":textures/models/electricgoggles.png";
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class ItemEnergyBallFocus extends ItemBaseFocus {
 
 	@Override
 	public int getFocusColor(ItemStack stack) {
-		return 0xFFFF00;
+		return 0x0000FF;
 	}
 
 	@Override

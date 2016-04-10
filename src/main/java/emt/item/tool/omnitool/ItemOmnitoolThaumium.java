@@ -19,7 +19,7 @@ public class ItemOmnitoolThaumium extends ItemOmnitoolDiamond {
 	public ItemOmnitoolThaumium() {
 		super();
 		this.efficiencyOnProperMaterial = 21F;
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxStackSize(1);
 		if (!EMTConfigHandler.toolsInBore) {
 			this.setMaxDamage(27);
@@ -34,7 +34,7 @@ public class ItemOmnitoolThaumium extends ItemOmnitoolDiamond {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/omnitool_thaumium");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/omnitool_thaumium");
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 
 	public ItemThaumiumChainsaw() {
 		this.efficiencyOnProperMaterial = 21F;
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 60000;
@@ -32,7 +32,7 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":tools/chainsaw_thaumium");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_thaumium");
 	}
 
 	@Override

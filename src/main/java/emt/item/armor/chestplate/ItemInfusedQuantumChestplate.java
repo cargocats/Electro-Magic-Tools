@@ -87,23 +87,23 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	public ItemInfusedQuantumChestplate(InternalName internalName, int armorType) {
 		super(internalName, InternalName.quantum, armorType, 2000000, 12000.0D, 4);
 		MinecraftForge.EVENT_BUS.register(this);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		rnd = new Random();
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		iconNONE = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest");
-		iconJETPACK = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_jetpack");
-		iconTHAUMIUM = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_t");
-		iconNANO = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_n");
-		iconQUANTUM = iconRegister.registerIcon(ModInformation.texturePath + ":armor/armor_quantum_chest_wing_q");
+		iconNONE = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest");
+		iconJETPACK = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_jetpack");
+		iconTHAUMIUM = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_t");
+		iconNANO = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_n");
+		iconQUANTUM = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_q");
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return "item." + ModInformation.modid + ".chestplates.infusedQuantum";
+		return "item." + ModInformation.MODID + ".chestplates.infusedQuantum";
 	}
 	
     public String getItemStackDisplayName(ItemStack stack)
@@ -393,15 +393,15 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 
 		switch (wing) {
 		case JETPACK:
-			return ModInformation.texturePath + ":textures/models/quantum_jetpack.png";
+			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_jetpack.png";
 		case THAUMIUM:
-			return ModInformation.texturePath + ":textures/models/quantum_wings_t.png";
+			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_t.png";
 		case NANO:
-			return ModInformation.texturePath + ":textures/models/quantum_wings_n.png";
+			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_n.png";
 		case QUANTUM:
-			return ModInformation.texturePath + ":textures/models/quantum_wings_q.png";
+			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_q.png";
 		default:
-			return ModInformation.texturePath + ":textures/models/quantum.png";
+			return ModInformation.TEXTURE_PATH + ":textures/models/quantum.png";
 		}
 	}
 

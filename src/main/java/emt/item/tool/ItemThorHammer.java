@@ -26,14 +26,14 @@ public class ItemThorHammer extends ItemSword implements IRepairable {
 
 	public ItemThorHammer() {
 		super(ToolMaterial.EMERALD);
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
+		this.setCreativeTab(ElectroMagicTools.TAB);
 		this.setMaxDamage(2000);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":hammer/thorhammer");
+		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":hammer/thorhammer");
 	}
 
 	@Override

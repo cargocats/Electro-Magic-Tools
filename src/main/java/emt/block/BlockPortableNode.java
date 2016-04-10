@@ -25,8 +25,8 @@ public class BlockPortableNode extends BlockAiry {
 	public IIcon texture;
 
 	public BlockPortableNode(String name) {
-		this.setCreativeTab(ElectroMagicTools.tabEMT);
-		setBlockName(ModInformation.modid + "." + name);
+		this.setCreativeTab(ElectroMagicTools.TAB);
+		setBlockName(ModInformation.MODID + "." + name);
 		setBlockUnbreakable();
 	}
 
@@ -65,7 +65,7 @@ public class BlockPortableNode extends BlockAiry {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister ri) {
-		texture = ri.registerIcon(ModInformation.texturePath + ":portablenode");
+		texture = ri.registerIcon(ModInformation.TEXTURE_PATH + ":portablenode");
 	}
 
 	@SideOnly(Side.CLIENT)

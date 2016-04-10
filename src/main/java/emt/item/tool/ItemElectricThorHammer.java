@@ -32,7 +32,7 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
 
     public ItemElectricThorHammer() {
         super(ToolMaterial.EMERALD);
-        this.setCreativeTab(ElectroMagicTools.tabEMT);
+        this.setCreativeTab(ElectroMagicTools.TAB);
         this.setMaxDamage(27);
         this.setMaxStackSize(1);
     }
@@ -40,7 +40,7 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ModInformation.texturePath + ":hammer/electricthorhammer");
+        this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":hammer/electricthorhammer");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})

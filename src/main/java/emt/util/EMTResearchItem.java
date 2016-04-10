@@ -15,20 +15,20 @@ public class EMTResearchItem extends ResearchItem {
 		super(par1, "EMT");
 	}
 
-	public EMTResearchItem(String rsName, AspectList tags, int x, int y, int z, ItemStack icon) {
-		super(rsName, "EMT", tags, x, y, z, icon);
+	public EMTResearchItem(String researchName, AspectList tags, int x, int y, int z, ItemStack icon) {
+		super(researchName, "EMT", tags, x, y, z, icon);
 	}
 	
-	public EMTResearchItem(String rsName, int x, int y, int z, ItemStack icon) {
-		super(rsName, "EMT", new AspectList(), x, y, z, icon);
+	public EMTResearchItem(String researchName, int x, int y, int z, ItemStack icon) {
+		super(researchName, "EMT", new AspectList(), x, y, z, icon);
 	}
 
-	public EMTResearchItem(String rsName, AspectList tags, int x, int y, int z, ResourceLocation icon) {
-		super(rsName, "EMT", tags, x, y, z, icon);
+	public EMTResearchItem(String researchName, AspectList tags, int x, int y, int z, ResourceLocation icon) {
+		super(researchName, "EMT", tags, x, y, z, icon);
 	}
 	
-	public EMTResearchItem(String rsName, int x, int y, int z, ResourceLocation icon) {
-		super(rsName, "EMT", new AspectList(), x, y, z, icon);
+	public EMTResearchItem(String researchName, int x, int y, int z, ResourceLocation icon) {
+		super(researchName, "EMT", new AspectList(), x, y, z, icon);
 	}
 
 	@Override

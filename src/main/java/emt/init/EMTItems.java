@@ -63,7 +63,7 @@ public class EMTItems {
 	public static Item explosionFocus;
 	public static Item christmasFocus;
 	public static Item shieldFocus;
-	public static Item noNameFocus;
+	public static Item energyBallFocus;
 	public static Item electricGoggles;
 	public static Item streamChainsaw;
 	public static Item rockbreakerDrill;
@@ -188,7 +188,7 @@ public class EMTItems {
 		wandChargeFocus = new ItemWandChargingFocus();
 		GameRegistry.registerItem(wandChargeFocus, "WandChargingFocus");
 		
-		noNameFocus = new ItemEnergyBallFocus();
-		GameRegistry.registerItem(noNameFocus, "NoNameFocus");
+		energyBallFocus = new ItemEnergyBallFocus();
+		GameRegistry.registerItem(energyBallFocus, "EnergyBallFocus");
 	}
 }

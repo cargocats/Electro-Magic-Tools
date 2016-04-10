@@ -35,6 +35,7 @@ public class EMTResearches {
 		new EMTResearchItem("The One Ring", 6, -7, 0, new ItemStack(EMTItems.onering)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""));
 		new EMTResearchItem("Electric Cloud", 4, -7, 0, new ItemStack(EMTBlocks.electricCloud)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage("1"), new ResearchPage("2"));
 		new EMTResearchItem("Feather Wings", 0, 2, 0, new ItemStack(EMTItems.featherWing)).setParents("Electric Magic Tools").setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(EMTRecipes.cardboard), new ResearchPage(EMTRecipes.featherWing), new ResearchPage(EMTRecipes.featherWings));
+		/*************************************/
 
 		/** Research that can be disabled **/
 		if (!EMTConfigHandler.thaumiumDrillResearch) {
@@ -90,6 +91,10 @@ public class EMTResearches {
 
 		if (!EMTConfigHandler.shieldFocusResearch) {
 			new EMTResearchItem("Shield Focus", EMTResearchAspects.shieldFocusResearch, 4, 3, 2, new ItemStack(EMTItems.shieldFocus)).setParents("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.shieldFocus));
+		}
+
+		if (!EMTConfigHandler.energyBallFocusResearch) {
+			new EMTResearchItem("EnergyBall Focus", EMTResearchAspects.energyBallFocusResearch, 1, 3, 2, new ItemStack(EMTItems.energyBallFocus)).setParents("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""));
 		}
 
 		if (!EMTConfigHandler.shieldFocusResearch) {
@@ -273,5 +278,6 @@ public class EMTResearches {
 		if (!EMTConfigHandler.infusedQuantumChestplate && !EMTConfigHandler.thaumiumWingResearch && !EMTConfigHandler.nanoWingResearch && !EMTConfigHandler.quantumWingsResearch) {
 			new EMTResearchItem("Infused Quantum Armor", EMTResearchAspects.quantumWing, 0, 10, 4, new ItemStack(EMTItems.quantumArmor)).setParents("Quantum Wings").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.infusedQuantumArmor));
 		}
+		/***********************************/
 	}
 }

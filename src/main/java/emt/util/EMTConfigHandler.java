@@ -4,15 +4,16 @@ import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
+/** TODO: Need to rewrite... **/
 public class EMTConfigHandler {
 
 	public static Configuration config;
 
-	/** Sections */
-	public static String RANDOM = "Random Configs";
-	public static String RESEARCH = "Research";
-	public static String VALUES = "Numeric Values";
-	public static String OUTPUTS = "Essentia Generator Outputs";
+	/** Sections **/
+	public static final String RANDOM = "Random Configs";
+	public static final String RESEARCH = "Research";
+	public static final String VALUES = "Numeric Values";
+	public static final String OUTPUTS = "Essentia Generator Outputs";
 
 	public static int etherealProcessorBaseSpeed;
 	public static int etherealProcessorBonus;
@@ -21,7 +22,7 @@ public class EMTConfigHandler {
 	public static int inventoryBaubleProdution;
 	public static int wandChargeFocusCost;
 
-	/** Values */
+	/** Values **/
 	public static double wandChargerConsumption;
 	public static double compressedSolarOutput;
 	public static double doubleCompressedSolarOutput;
@@ -31,7 +32,7 @@ public class EMTConfigHandler {
 	public static double quantumBootsJump;
 	public static double tripleCompressedSolarOutput;
 	
-	/** Essentias */
+	/** Essentias **/
     public static double fireOutput;
     public static double waterOutput;
     public static double airOutput;
@@ -40,7 +41,7 @@ public class EMTConfigHandler {
     public static double entropyOutput;
     public static double outputCap;
 
-    /** random stuff */
+    /** random stuff **/
 	public static boolean impactOfRain;
 	public static boolean capesOn;
 	public static boolean toolsInBore;
@@ -50,11 +51,11 @@ public class EMTConfigHandler {
 	public static boolean oneRingSpawn;
 	public static boolean removeAmberAndCinnabarMacerating;
 
-	/** Loot chance */
+	/** Loot chance **/
 	public static int chanceOneRing;
 	public static int chanceTaintedMjolnir;
 
-	/** Research */
+	/** Researches **/
 	public static boolean thaumiumDrillResearch;
 	public static boolean thaumiumChainsawResearch;
 	public static boolean thaumiumOmnitoolResearch;
@@ -67,6 +68,7 @@ public class EMTConfigHandler {
 	public static boolean diamondOmnitoolResearch;
 	public static boolean explosionFocusResearch;
 	public static boolean christmasFocusResearch;
+	public static boolean energyBallFocusResearch;
 	public static boolean shieldFocusResearch;
 	public static boolean shieldBlockResearch;
 	public static boolean potentiaGeneratorResearch;
@@ -163,6 +165,7 @@ public class EMTConfigHandler {
 		diamondOmnitoolResearch = config.get(RESEARCH, "Diamond Omnitool", false).getBoolean(diamondOmnitoolResearch);
 		explosionFocusResearch = config.get(RESEARCH, "Explosion Focus", false).getBoolean(explosionFocusResearch);
 		christmasFocusResearch = config.get(RESEARCH, "Kris-tmas Focus", false).getBoolean(christmasFocusResearch);
+		energyBallFocusResearch = config.get(RESEARCH, "EnergyBall Focus", false).getBoolean(christmasFocusResearch);
 		shieldFocusResearch = config.get(RESEARCH, "Shield Focus", false).getBoolean(shieldFocusResearch);
 		shieldBlockResearch = config.get(RESEARCH, "Shield Block", false).getBoolean(shieldBlockResearch);
 		potentiaGeneratorResearch = config.get(RESEARCH, "Potentia Generator", false).getBoolean(potentiaGeneratorResearch);

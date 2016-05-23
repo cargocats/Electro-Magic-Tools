@@ -11,6 +11,7 @@ import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import ic2.core.BasicMachineRecipeManager;
 import ic2.core.Ic2Items;
 import ic2.core.item.ItemFluidCell;
 import net.minecraft.init.Blocks;
@@ -328,27 +329,27 @@ public class EMTRecipes {
 		/* Ore Clusters Macerator Recipes */
 		ItemStack ironClusterRecipe = IC2Items.getItem("smallIronDust").copy();
 		ironClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)), null, ironClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)), null, true, ironClusterRecipe);
 
 		ItemStack goldClusterRecipe = IC2Items.getItem("smallGoldDust").copy();
 		goldClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)), null, goldClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)), null, true, goldClusterRecipe);
 
 		ItemStack copperClusterRecipe = IC2Items.getItem("smallCopperDust").copy();
 		copperClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)), null, copperClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)), null, true, copperClusterRecipe);
 
 		ItemStack tinClusterRecipe = IC2Items.getItem("smallTinDust").copy();
 		tinClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)), null, tinClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)), null, true, tinClusterRecipe);
 
 		ItemStack silverClusterRecipe = IC2Items.getItem("smallSilverDust").copy();
 		silverClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)), null, silverClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)), null, true, silverClusterRecipe);
 
 		ItemStack leadClusterRecipe = IC2Items.getItem("smallLeadDust").copy();
 		leadClusterRecipe.stackSize = 22;
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)), null, leadClusterRecipe);
+		((BasicMachineRecipeManager)Recipes.macerator).addRecipe(new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)), null, true, leadClusterRecipe);
 
 		/* Thaumium Plates Recipes */
 		thaumiumPlate = GameRegistry.addShapedRecipe(new ItemStack(EMTItems.itemEMTItems, 1, 5), "X", "Y", "Z", 'Y', new ItemStack(ConfigItems.itemResource, 1, 2), 'X', new ItemStack(IC2Items.getItem("ForgeHammer").getItem(), 1, OreDictionary.WILDCARD_VALUE), 'Z', new ItemStack(Blocks.obsidian));

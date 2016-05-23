@@ -2,8 +2,7 @@ package emt.item.tool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import net.minecraft.block.Block;
@@ -33,14 +32,14 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
 	public ItemElectricHoeGrowth() {
 		super(ToolMaterial.EMERALD);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxStackSize(1);
 		this.growthCost = 10000;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		this.icon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/hoe_growth");
+		this.icon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/hoe_growth");
 	}
 
 	@SideOnly(Side.CLIENT)

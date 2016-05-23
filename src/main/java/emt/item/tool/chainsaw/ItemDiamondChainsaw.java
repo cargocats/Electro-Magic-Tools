@@ -2,8 +2,7 @@ package emt.item.tool.chainsaw;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
@@ -49,7 +48,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	public ItemDiamondChainsaw() {
 		super(ToolMaterial.EMERALD);
 		this.efficiencyOnProperMaterial = 16F;
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 	}
@@ -57,7 +56,7 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_diamond");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/chainsaw_diamond");
 	}
 
 	@Override

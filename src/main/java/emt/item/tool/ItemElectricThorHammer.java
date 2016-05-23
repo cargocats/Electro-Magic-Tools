@@ -2,8 +2,7 @@ package emt.item.tool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.entity.EntityArcher;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
@@ -32,7 +31,7 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
 
     public ItemElectricThorHammer() {
         super(ToolMaterial.EMERALD);
-        this.setCreativeTab(ElectroMagicTools.TAB);
+        this.setCreativeTab(EMT.TAB);
         this.setMaxDamage(27);
         this.setMaxStackSize(1);
     }
@@ -40,7 +39,7 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":hammer/electricthorhammer");
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":hammer/electricthorhammer");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})

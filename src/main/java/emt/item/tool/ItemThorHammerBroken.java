@@ -2,8 +2,7 @@ package emt.item.tool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTTextHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,14 +24,14 @@ public class ItemThorHammerBroken extends ItemSword implements IRepairable {
 
 	public ItemThorHammerBroken() {
 		super(ToolMaterial.EMERALD);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(1000);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":hammer/taintedthorhammer");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":hammer/taintedthorhammer");
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.client.gui.container.ContainerIndustrialWandRecharge;
 import emt.tile.TileEntityIndustrialWandRecharge;
 import emt.util.EMTTextHelper;
@@ -19,7 +19,7 @@ public class GuiIndustrialWandRecharger extends GuiContainer {
 		ySize = 165;
 	}
 
-	public static final ResourceLocation texture = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/guis/wandcharger.png");
+	public static final ResourceLocation texture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/wandcharger.png");
 
 	@Override
 	public void drawGuiContainerBackgroundLayer(float f, int j, int i) {

@@ -2,7 +2,7 @@ package emt.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
+import emt.EMT;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +18,7 @@ public class ItemElectricScribingTools extends ItemInkwell implements IElectricI
 	public static int maxCharge = 400;
 
 	public ItemElectricScribingTools() {
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(400);
 		this.setMaxStackSize(1);
 	}

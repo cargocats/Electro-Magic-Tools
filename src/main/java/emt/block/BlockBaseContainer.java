@@ -2,8 +2,7 @@ package emt.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.TileEntityEMT;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -25,8 +24,8 @@ public abstract class BlockBaseContainer extends BlockContainer {
 
 	public BlockBaseContainer(String unlocName, Material material, SoundType soundType, float hardness) {
 		super(material);
-		setBlockName(ModInformation.MODID + "." + unlocName);
-		setCreativeTab(ElectroMagicTools.TAB);
+		setBlockName(EMT.MOD_ID + "." + unlocName);
+		setCreativeTab(EMT.TAB);
 		setStepSound(soundType);
 		setHardness(hardness);
 	}

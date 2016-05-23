@@ -1,7 +1,7 @@
 package emt.item;
 
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.util.EMTTextHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,15 +11,15 @@ public class ItemBase extends Item {
 
 	public ItemBase(String unlocName, String textureName) {
 		super();
-		setUnlocalizedName(ModInformation.MODID + unlocName);
-		setTextureName(ModInformation.TEXTURE_PATH + ":" + textureName);
-		setCreativeTab(ElectroMagicTools.TAB);
+		setUnlocalizedName(EMT.MOD_ID + unlocName);
+		setTextureName(EMT.TEXTURE_PATH + ":" + textureName);
+		setCreativeTab(EMT.TAB);
 	}
 
 	public ItemBase(String unlocName) {
 		super();
-		setUnlocalizedName(ModInformation.MODID + ".item." + unlocName);
-		setCreativeTab(ElectroMagicTools.TAB);
+		setUnlocalizedName(EMT.MOD_ID + ".item." + unlocName);
+		setCreativeTab(EMT.TAB);
 	}
 
 	public String getItemStackDisplayName(ItemStack stack) {

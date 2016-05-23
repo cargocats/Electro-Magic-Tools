@@ -6,7 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.client.gui.container.ContainerEtheralMacerator;
 import emt.tile.TileEntityEtherealMacerator;
 import emt.util.EMTTextHelper;
@@ -19,7 +19,7 @@ public class GuiEtherealMacerator extends GuiContainer {
 		ySize = 165;
 	}
 
-	public static final ResourceLocation texture = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/guis/etherealmacerator.png");
+	public static final ResourceLocation texture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/etherealmacerator.png");
 
 	@Override
 	public void drawGuiContainerBackgroundLayer(float f, int j, int i) {

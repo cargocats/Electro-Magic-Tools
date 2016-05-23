@@ -27,25 +27,34 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
-		modid = ModInformation.MODID,
-		name = ModInformation.NAME,
-		version = ModInformation.VERSION,
-		guiFactory = ModInformation.GUI_FACTORY,
-		dependencies = ModInformation.DEPEND
+		modid = EMT.MOD_ID,
+		name = EMT.NAME,
+		version = EMT.VERSION,
+		guiFactory = EMT.GUI_FACTORY,
+		dependencies = EMT.DEPENDS
 )
-public class ElectroMagicTools {
-
+public class EMT {
+	public static final String NAME = "Electro-Magic Tools";
+	public static final String MOD_ID = "EMT";
+	public static final String VERSION = "1.2.6";
+	public static final String TEXTURE_PATH = "emt";
+	public static final String GUI_FACTORY = "emt.client.gui.config.EMTGuiFactory";
+	public static final String CLIENT_PROXY = "emt.proxy.ClientProxy";
+	public static final String COMMON_PROXY = "emt.proxy.CommonProxy";
+	public static final String CHANNEL = "EMT";
+	public static final String DEPENDS = "required-after:Thaumcraft ; required-after:IC2";
+	
 	@SidedProxy(
-			clientSide = ModInformation.CLIENT_PROXY,
-			serverSide = ModInformation.COMMON_PROXY
+			clientSide = CLIENT_PROXY,
+			serverSide = COMMON_PROXY
 	)
 	public static CommonProxy proxy;
-	public static final CreativeTabs TAB = new EMTCreativeTab(ModInformation.MODID + ".creativeTab");
-	public static final Logger LOGGER = LogManager.getLogger(ModInformation.NAME);
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModInformation.CHANNEL);
+	public static final CreativeTabs TAB = new EMTCreativeTab(MOD_ID + ".creativeTab");
+	public static final Logger LOGGER = LogManager.getLogger(NAME);
+	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
 
-	@Instance(ModInformation.MODID)
-	public static ElectroMagicTools instance;
+	@Instance(MOD_ID)
+	public static EMT instance;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

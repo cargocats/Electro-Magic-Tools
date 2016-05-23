@@ -131,10 +131,14 @@ emt.rsname.Electric Magic Tools=Electric Magic Tools
 emt.tag.Electric Magic Tools=Кто сказал что магия и технология не дружат вместе?
 emt.text.Electric Magic Tools=Кто сказал, что магия не может дружить с технологией? Наши исследователи сотрудничали с лучшими магами школы тауматургов, чтобы приподнести Вам эффективность магии, в сочетании с удобством электроинструментов.
 
+emt.rsname.Energy Ball Focus=Energy Ball Focus
+emt.tag.Energy Ball Focus=notag
+emt.text.Energy Ball Focus=notext
+
 emt.rsname.Electric Cloud=Наэлектризованное облако
 emt.tag.Electric Cloud=Всё тот же Нитор
 emt.text.Electric Cloud.1=Наверное, каждому Тауматургу нравится пламя, которое ещё называют Нитором. Вы, решив сделать его более "живым", сумели наэлектризовать его.<BR><BR>Теперь, это всё тот же Нитор, но от него ещё и исходят электрические искровые разряды.
-emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electricCloud.png:0:0:255:255:0.6</IMG>
+emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electric_cloud.png:0:0:255:255:0.6</IMG>
 
 emt.rsname.Thaumium Drill=Таум-бур
 emt.tag.Thaumium Drill=Магическая добыча

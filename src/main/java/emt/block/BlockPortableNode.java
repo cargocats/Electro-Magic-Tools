@@ -2,8 +2,7 @@ package emt.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.TileEntityPortableNode;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,8 +24,8 @@ public class BlockPortableNode extends BlockAiry {
 	public IIcon texture;
 
 	public BlockPortableNode(String name) {
-		this.setCreativeTab(ElectroMagicTools.TAB);
-		setBlockName(ModInformation.MODID + "." + name);
+		this.setCreativeTab(EMT.TAB);
+		setBlockName(EMT.MOD_ID + "." + name);
 		setBlockUnbreakable();
 	}
 
@@ -65,7 +64,7 @@ public class BlockPortableNode extends BlockAiry {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister ri) {
-		texture = ri.registerIcon(ModInformation.TEXTURE_PATH + ":portablenode");
+		texture = ri.registerIcon(EMT.TEXTURE_PATH + ":portablenode");
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -18,8 +18,7 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 
 public abstract class ItemBaseFocus extends ItemFocusBasic {
 
@@ -28,8 +27,8 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 
 	public ItemBaseFocus(String unlocName) {
 		super();
-		setUnlocalizedName(ModInformation.MODID + ".focus." + unlocName);
-		setCreativeTab(ElectroMagicTools.TAB);
+		setUnlocalizedName(EMT.MOD_ID + ".focus." + unlocName);
+		setCreativeTab(EMT.TAB);
 		setMaxDamage(1);
 		setNoRepair();
 		setMaxStackSize(1);
@@ -38,7 +37,7 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir) {
-		this.icon = ir.registerIcon(ModInformation.TEXTURE_PATH + ":" + "focus_" + textureName);
+		this.icon = ir.registerIcon(EMT.TEXTURE_PATH + ":" + "focus_" + textureName);
 	}
 
 	boolean hasDepth() {

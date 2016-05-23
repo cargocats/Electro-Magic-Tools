@@ -4,7 +4,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
-import emt.ElectroMagicTools;
+import emt.EMT;
 import emt.client.EMTKeys;
 import emt.init.EMTItems;
 import emt.network.PacketEMTKeys;
@@ -25,7 +25,7 @@ public class EMTClientEventHandler {
 	@SubscribeEvent
 	public void clientTick(ClientTickEvent e) {
 		if (EMTKeys.keyUnequip.getIsKeyPressed()) {
-			ElectroMagicTools.INSTANCE.sendToServer(new PacketEMTKeys());
+			EMT.INSTANCE.sendToServer(new PacketEMTKeys());
 		}
 	}
 

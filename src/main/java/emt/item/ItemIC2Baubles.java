@@ -4,7 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
@@ -55,8 +55,8 @@ public class ItemIC2Baubles extends ItemBase implements IBauble {
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
-		this.icon[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":armoreumaker");
-		this.icon[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":inventoryeumaker");
+		this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":armoreumaker");
+		this.icon[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":inventoryeumaker");
 	}
 
 	@SideOnly(Side.CLIENT)

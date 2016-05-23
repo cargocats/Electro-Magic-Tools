@@ -1,6 +1,6 @@
 package emt.item.block;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTTextHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,7 +25,7 @@ public class ItemBlockElectricCloud extends ItemBlock{
 	
 	@Override
 	public void registerIcons(IIconRegister ir) {
-		icon = ir.registerIcon(ModInformation.TEXTURE_PATH + ":" + "electric_cloud");
+		icon = ir.registerIcon(EMT.TEXTURE_PATH + ":" + "electric_cloud");
 	}
 	
 	@Override

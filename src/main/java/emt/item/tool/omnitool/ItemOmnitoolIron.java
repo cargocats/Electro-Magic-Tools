@@ -2,8 +2,7 @@ package emt.item.tool.omnitool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
@@ -33,7 +32,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 	public ItemOmnitoolIron() {
 		super(ToolMaterial.EMERALD);
 		this.efficiencyOnProperMaterial = 13F;
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxStackSize(1);
 		if (!EMTConfigHandler.toolsInBore) {
 			this.setMaxDamage(27);
@@ -46,7 +45,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/omnitool_iron");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/omnitool_iron");
 	}
 
 	@SideOnly(Side.CLIENT)

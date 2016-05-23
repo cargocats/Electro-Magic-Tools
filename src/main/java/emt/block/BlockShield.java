@@ -2,8 +2,7 @@ package emt.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,8 +18,8 @@ public class BlockShield extends Block {
 
 	public BlockShield(String name) {
 		super(Material.rock);
-		setBlockName(ModInformation.MODID + "." + name);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		setBlockName(EMT.MOD_ID + "." + name);
+		this.setCreativeTab(EMT.TAB);
 		this.setHardness(1F);
 		this.setResistance(10000000000000000000000000000000000000F);
 	}
@@ -39,7 +38,7 @@ public class BlockShield extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":shield");
+		this.blockIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":shield");
 	}
 
 	@Override

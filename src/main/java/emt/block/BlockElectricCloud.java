@@ -3,7 +3,7 @@ package emt.block;
 import java.util.List;
 import java.util.Random;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.TileElectricCloud;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -51,7 +51,7 @@ public class BlockElectricCloud extends BlockBase {
 
 	@Override
 	public void registerBlockIcons(IIconRegister ir) {
-		icon = ir.registerIcon(ModInformation.TEXTURE_PATH + ":empty");
+		icon = ir.registerIcon(EMT.TEXTURE_PATH + ":empty");
 	}
 
 	@Override

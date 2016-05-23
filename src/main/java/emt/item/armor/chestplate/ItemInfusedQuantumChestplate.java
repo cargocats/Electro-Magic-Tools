@@ -4,8 +4,8 @@ import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.client.model.ModelSpecialArmor;
 import emt.client.model.ModelWings;
 import emt.init.EMTItems;
@@ -87,23 +87,23 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	public ItemInfusedQuantumChestplate(InternalName internalName, int armorType) {
 		super(internalName, InternalName.quantum, armorType, 2000000, 12000.0D, 4);
 		MinecraftForge.EVENT_BUS.register(this);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		rnd = new Random();
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		iconNONE = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest");
-		iconJETPACK = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_jetpack");
-		iconTHAUMIUM = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_t");
-		iconNANO = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_n");
-		iconQUANTUM = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_q");
+		iconNONE = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/armor_quantum_chest");
+		iconJETPACK = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/armor_quantum_chest_jetpack");
+		iconTHAUMIUM = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_t");
+		iconNANO = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_n");
+		iconQUANTUM = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/armor_quantum_chest_wing_q");
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return "item." + ModInformation.MODID + ".chestplates.infusedQuantum";
+		return "item." + EMT.MOD_ID + ".chestplates.infusedQuantum";
 	}
 	
     public String getItemStackDisplayName(ItemStack stack)
@@ -393,15 +393,15 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 
 		switch (wing) {
 		case JETPACK:
-			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_jetpack.png";
+			return EMT.TEXTURE_PATH + ":textures/models/quantum_jetpack.png";
 		case THAUMIUM:
-			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_t.png";
+			return EMT.TEXTURE_PATH + ":textures/models/quantum_wings_t.png";
 		case NANO:
-			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_n.png";
+			return EMT.TEXTURE_PATH + ":textures/models/quantum_wings_n.png";
 		case QUANTUM:
-			return ModInformation.TEXTURE_PATH + ":textures/models/quantum_wings_q.png";
+			return EMT.TEXTURE_PATH + ":textures/models/quantum_wings_q.png";
 		default:
-			return ModInformation.TEXTURE_PATH + ":textures/models/quantum.png";
+			return EMT.TEXTURE_PATH + ":textures/models/quantum.png";
 		}
 	}
 

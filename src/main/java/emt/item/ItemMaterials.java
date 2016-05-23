@@ -2,8 +2,8 @@ package emt.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -34,7 +34,7 @@ public class ItemMaterials extends Item {
 	public IIcon[] icon = new IIcon[25];
 
 	public ItemMaterials() {
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(0);
 		this.setMaxStackSize(64);
 		setHasSubtypes(true);
@@ -96,27 +96,27 @@ public class ItemMaterials extends Item {
 			name = "nothing";
 			break;
 		}
-		return "item." + ModInformation.MODID + "." + name;
+		return "item." + EMT.MOD_ID + "." + name;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
-		this.icon[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/clusteruranium");
-		this.icon[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/crushedamber");
-		this.icon[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/purifiedamber");
-		this.icon[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/crushedcinnabar");
-		this.icon[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/purifiedcinnabar");
-		this.icon[5] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/thaumiumplate");
-		this.icon[6] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/lightningsummoner");
-		this.icon[7] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/feathermesh");
-		this.icon[8] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/glue");
-		this.icon[9] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/ducttape");
-		this.icon[10] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/rubberball");
-		this.icon[11] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/cardboard");
-		this.icon[12] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/cardboardsheet");
-		this.icon[13] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/taintedfeather");
-		this.icon[14] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/thaumiumWing");
-		this.icon[15] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":materials/uumatterdrop");
+		this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/clusteruranium");
+		this.icon[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/crushedamber");
+		this.icon[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/purifiedamber");
+		this.icon[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/crushedcinnabar");
+		this.icon[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/purifiedcinnabar");
+		this.icon[5] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/thaumiumplate");
+		this.icon[6] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/lightningsummoner");
+		this.icon[7] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/feathermesh");
+		this.icon[8] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/glue");
+		this.icon[9] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/ducttape");
+		this.icon[10] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/rubberball");
+		this.icon[11] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/cardboard");
+		this.icon[12] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/cardboardsheet");
+		this.icon[13] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/taintedfeather");
+		this.icon[14] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/thaumiumWing");
+		this.icon[15] = ri.registerIcon(EMT.TEXTURE_PATH + ":materials/uumatterdrop");
 	}
 
 	@SideOnly(Side.CLIENT)

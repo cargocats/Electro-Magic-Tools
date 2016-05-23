@@ -1,7 +1,6 @@
 package emt.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import emt.ModInformation;
 import emt.block.BlockElectricCloud;
 import emt.block.BlockEssentiaGenerators;
 import emt.block.BlockMachines;

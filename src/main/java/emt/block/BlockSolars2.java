@@ -2,7 +2,7 @@ package emt.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.solar.air.TileEntityDoubleAirSolar;
 import emt.tile.solar.air.TileEntityTripleAirSolar;
 import emt.tile.solar.earth.TileEntityDoubleEarthSolar;
@@ -28,29 +28,29 @@ public class BlockSolars2 extends BlockBaseContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ri) {
-		this.top[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/solartop");
-		this.top[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/solartop");
-		this.top[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/solartop");
-		this.top[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/doublesolartop");
-		this.top[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/triplesolartop");
+		this.top[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/solartop");
+		this.top[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/solartop");
+		this.top[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/solartop");
+		this.top[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/doublesolartop");
+		this.top[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/triplesolartop");
 
-		this.bottom[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/bottom");
-		this.bottom[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/bottom");
-		this.bottom[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/bottom");
-		this.bottom[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/bottom");
-		this.bottom[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/bottom");
+		this.bottom[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/bottom");
+		this.bottom[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/bottom");
+		this.bottom[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/bottom");
+		this.bottom[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/bottom");
+		this.bottom[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/bottom");
 
-		this.frontOff[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/air/airside");
-		this.frontOff[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/air/airside");
-		this.frontOff[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
-		this.frontOff[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
-		this.frontOff[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
+		this.frontOff[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/air/airside");
+		this.frontOff[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/air/airside");
+		this.frontOff[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
+		this.frontOff[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
+		this.frontOff[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
 
-		this.side[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/air/airside");
-		this.side[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/air/airside");
-		this.side[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
-		this.side[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
-		this.side[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":solars/earth/earthside");
+		this.side[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/air/airside");
+		this.side[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/air/airside");
+		this.side[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
+		this.side[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
+		this.side[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
 	}
 
 	@SideOnly(Side.CLIENT)

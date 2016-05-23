@@ -2,7 +2,7 @@ package emt.client.gui.config;
 
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
-import emt.ModInformation;
+import emt.EMT;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -17,7 +17,7 @@ import java.util.Locale;
 public class EMTGuiConfig extends GuiConfig {
 
 	public EMTGuiConfig(GuiScreen parentScreen) {
-		super(parentScreen, getConfigElements(parentScreen), ModInformation.MODID, false, false, StatCollector.translateToLocal("gui." + ModInformation.MODID + ".config.title"));
+		super(parentScreen, getConfigElements(parentScreen), EMT.MOD_ID, false, false, StatCollector.translateToLocal("gui." + EMT.MOD_ID + ".config.title"));
 	}
 
 	@SuppressWarnings("rawtypes")

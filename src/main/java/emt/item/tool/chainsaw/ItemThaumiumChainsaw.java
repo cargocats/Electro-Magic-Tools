@@ -2,8 +2,7 @@ package emt.item.tool.chainsaw;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.audio.AudioSource;
@@ -21,7 +20,7 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 
 	public ItemThaumiumChainsaw() {
 		this.efficiencyOnProperMaterial = 21F;
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 60000;
@@ -32,7 +31,7 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_thaumium");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/chainsaw_thaumium");
 	}
 
 	@Override
@@ -49,7 +48,6 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 		return false;
 	}
 
-	/* IC2 API METHODS */
 	@Override
 	public double getTransferLimit(ItemStack itemStack) {
 		return 600;

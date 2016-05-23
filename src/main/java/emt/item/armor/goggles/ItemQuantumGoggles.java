@@ -2,8 +2,8 @@ package emt.item.armor.goggles;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,9 +25,9 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 
 	private static final Map<Integer, Integer> potionCost = new HashMap();
 
-	public ItemQuantumGoggles(ArmorMaterial material, int par3, int par4) {
-		super(material, par3, par4);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+	public ItemQuantumGoggles(ArmorMaterial material, int renderIndex, int armorType) {
+		super(material, renderIndex, armorType);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 10000000;
@@ -44,12 +44,12 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/goggles_quantum");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/goggles_quantum");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
+		return EMT.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
 	}
 
 	@Override

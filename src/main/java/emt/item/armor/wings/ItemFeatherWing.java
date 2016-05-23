@@ -7,8 +7,8 @@ import ic2.core.IC2;
 import ic2.core.util.StackUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.client.model.ModelWings;
 import emt.util.EMTConfigHandler;
 import net.minecraft.client.Minecraft;
@@ -31,7 +31,7 @@ public class ItemFeatherWing extends ItemArmor {
 		super(material, par3, par4);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(120);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.isDamageable();
 		rnd = new Random();
 	}
@@ -39,13 +39,13 @@ public class ItemFeatherWing extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/wing_feather");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_feather");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.TEXTURE_PATH + ":textures/models/featherwing.png";
+		return EMT.TEXTURE_PATH + ":textures/models/featherwing.png";
 	}
 
 	@Override

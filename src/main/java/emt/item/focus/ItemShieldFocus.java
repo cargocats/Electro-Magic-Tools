@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
-import emt.ElectroMagicTools;
+import emt.EMT;
 import emt.entity.EntityShield;
 import emt.init.EMTBlocks;
 import ic2.core.IC2;

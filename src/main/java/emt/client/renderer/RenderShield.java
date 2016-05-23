@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.entity.EntityLaser;
 import emt.entity.EntityShield;
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderShield extends Render {
-	private static final ResourceLocation shieldTexture = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/models/shield.png");
+	private static final ResourceLocation shieldTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/shield.png");
 	static int glCallList;
 
 	static {

@@ -1,7 +1,6 @@
 package emt.block;
 
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -11,11 +10,11 @@ public abstract class BlockBase extends Block {
 	public BlockBase(String unlocName, Material material, String textureName, SoundType soundType, float hardness) {
 		super(material);
 		name = unlocName;
-		setBlockName(ModInformation.MODID + ".block." + unlocName);
+		setBlockName(EMT.MOD_ID + ".block." + unlocName);
 		if (textureName != null) {
-			setBlockTextureName(ModInformation.TEXTURE_PATH + ":" + textureName);
+			setBlockTextureName(EMT.TEXTURE_PATH + ":" + textureName);
 		}
-		setCreativeTab(ElectroMagicTools.TAB);
+		setCreativeTab(EMT.TAB);
 		setStepSound(soundType);
 		setHardness(hardness);
 	}

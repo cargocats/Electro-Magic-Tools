@@ -2,8 +2,7 @@ package emt.item.tool.omnitool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
@@ -19,7 +18,7 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 	public ItemOmnitoolDiamond() {
 		super();
 		this.efficiencyOnProperMaterial = 16F;
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		this.setMaxStackSize(1);
 		if (!EMTConfigHandler.toolsInBore) {
 			this.setMaxDamage(27);
@@ -34,7 +33,7 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/omnitool_diamond");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/omnitool_diamond");
 	}
 
 	@Override

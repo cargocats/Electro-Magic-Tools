@@ -2,8 +2,7 @@ package emt.item.armor.wings;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,7 +18,7 @@ public class ItemQuantumWing extends ItemNanoWing {
         super(material, par3, par4);
         this.setMaxStackSize(1);
         this.setMaxDamage(27);
-        this.setCreativeTab(ElectroMagicTools.TAB);
+        this.setCreativeTab(EMT.TAB);
         visDiscount = 6;
         transferLimit = 10000;
         energyPerDamage = 1000;
@@ -28,13 +27,13 @@ public class ItemQuantumWing extends ItemNanoWing {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/wing_quantum");
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_quantum");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return ModInformation.TEXTURE_PATH + ":textures/models/quantumwing.png";
+        return EMT.TEXTURE_PATH + ":textures/models/quantumwing.png";
     }
 
     @Override

@@ -2,8 +2,8 @@ package emt.item.armor.wings;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.item.armor.wings.ItemThaumiumReinforcedWing;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
@@ -34,14 +34,14 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 		super(material, par3, par4);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(27);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		visDiscount = 5;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/wing_nano");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_nano");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -60,7 +60,7 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.TEXTURE_PATH + ":textures/models/nanowing.png";
+		return EMT.TEXTURE_PATH + ":textures/models/nanowing.png";
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ModInformation;
+import emt.EMT;
 import emt.util.EMTTextHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -46,12 +46,12 @@ public class ItemOneRing extends ItemBase implements IBauble {
 			name = "nothing";
 			break;
 		}
-		return "item." + ModInformation.MODID + ".bauble." + name;
+		return "item." + EMT.MOD_ID + ".bauble." + name;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ri) {
-		this.icon[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":onering");
+		this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":onering");
 	}
 
 	@SideOnly(Side.CLIENT)

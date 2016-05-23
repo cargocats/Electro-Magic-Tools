@@ -3,8 +3,7 @@ package emt.item.tool.chainsaw;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.audio.AudioSource;
@@ -35,7 +34,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 		this.efficiencyOnProperMaterial = 25F;
 		alternateServer = false;
 		alternateClient = false;
-		setCreativeTab(ElectroMagicTools.TAB);
+		setCreativeTab(EMT.TAB);
 		this.maxStackSize = 1;
 		this.setMaxDamage(27);
 		maxCharge = 900000;
@@ -47,7 +46,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":tools/chainsaw_stream");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":tools/chainsaw_stream");
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package emt.init;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import emt.ElectroMagicTools;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTCraftingAspects;
 import static emt.util.EMTRandomHelper.*;
@@ -360,7 +360,7 @@ public class EMTRecipes {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
 					it.remove();
-					ElectroMagicTools.LOGGER.info("Removing conflicting amber macerating recipe(s)");
+					EMT.LOGGER.info("Removing conflicting amber macerating recipe(s)");
 				}
 			}
 
@@ -368,7 +368,7 @@ public class EMTRecipes {
 				IRecipeInput input = it.next();
 				if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
 					it.remove();
-					ElectroMagicTools.LOGGER.info("Removing Conflicting cinnabar macerating recipe(s)");
+					EMT.LOGGER.info("Removing Conflicting cinnabar macerating recipe(s)");
 				}
 			}
 		}

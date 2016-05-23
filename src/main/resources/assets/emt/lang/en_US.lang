@@ -131,10 +131,14 @@ emt.rsname.Electric Magic Tools=Electric Magic Tools
 emt.tag.Electric Magic Tools=Who says magic and technology can't go together?
 emt.text.Electric Magic Tools=Who says magic can't work with technology? Our researchers have collaborated with the top mages of the school of Thaumaturgy to bring you the effectiveness of magic coupled with the convenience of electric tools.
 
+emt.rsname.Energy Ball Focus=Energy Ball Focus
+emt.tag.Energy Ball Focus=notag
+emt.text.Energy Ball Focus=notext
+
 emt.rsname.Electric Cloud=Electric Cloud
 emt.tag.Electric Cloud=Still the same Nitor
 emt.text.Electric Cloud.1=All thaumaturges (except Crimson ones, I guess) enjoy the shine and heat of the magic flame called Nitor, aren't they? You desided to make it more... energetic. Well, you did it.<BR><BR>You have created a new kind of magic flame — the Electric Cloud. It behaves and looks like normal Nitor, but it has purple colour and creates light-purple lightning charges around itself.
-emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electricCloud.png:0:0:255:255:0.6</IMG>
+emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electric_cloud.png:0:0:255:255:0.6</IMG>
 
 emt.rsname.Thaumium Drill=Thaumium Drill
 emt.tag.Thaumium Drill=Magical mining

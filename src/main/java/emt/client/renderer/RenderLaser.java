@@ -7,12 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import emt.ModInformation;
+import emt.EMT;
 import emt.entity.EntityLaser;
 
 public class RenderLaser extends Render {
 
-	private static final ResourceLocation laserTexture = new ResourceLocation(ModInformation.TEXTURE_PATH, "textures/models/lasermodel.png");
+	private static final ResourceLocation laserTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/lasermodel.png");
 
 	@Override
 	public void doRender(Entity entityLaser, double x, double y, double z, float par8, float par9) {

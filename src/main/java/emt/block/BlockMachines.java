@@ -19,8 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.TileEntityEtherealMacerator;
 import emt.tile.TileEntityIndustrialWandRecharge;
 
@@ -33,22 +32,22 @@ public class BlockMachines extends BlockBaseContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
-		this.blockIcon = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/top");
+		this.blockIcon = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
 
-		this.top[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/top");
-		this.top[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratortop");
+		this.top[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
+		this.top[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		this.bottom[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/side");
-		this.bottom[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmacerator");
+		this.bottom[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+		this.bottom[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.side[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/side");
-		this.side[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmacerator");
+		this.side[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+		this.side[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.frontOff[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/wandcharger");
-		this.frontOff[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratorfront");
+		this.frontOff[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+		this.frontOff[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
 
-		this.frontOn[0] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/wandcharger");
-		this.frontOn[1] = ir.registerIcon(ModInformation.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
+		this.frontOn[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+		this.frontOn[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -71,10 +70,10 @@ public class BlockMachines extends BlockBaseContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityIndustrialWandRecharge) {
-			player.openGui(ElectroMagicTools.instance, 0, world, x, y, z);
+			player.openGui(EMT.instance, 0, world, x, y, z);
 		}
 		else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityEtherealMacerator) {
-			player.openGui(ElectroMagicTools.instance, 1, world, x, y, z);
+			player.openGui(EMT.instance, 1, world, x, y, z);
 		}
 		return true;
 	}

@@ -3,8 +3,8 @@ package emt.item.armor.boots;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ElectroMagicTools;
-import emt.ModInformation;
+import emt.EMT;
+import emt.EMT;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
@@ -45,7 +45,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 		super(ArmorMaterial.DIAMOND, par3, par4);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(ElectroMagicTools.TAB);
+		this.setCreativeTab(EMT.TAB);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -65,7 +65,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(ModInformation.TEXTURE_PATH + ":armor/boots_electric");
+		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/boots_electric");
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return ModInformation.TEXTURE_PATH + ":textures/models/electricboots.png";
+		return EMT.TEXTURE_PATH + ":textures/models/electricboots.png";
 	}
 
 	@Override

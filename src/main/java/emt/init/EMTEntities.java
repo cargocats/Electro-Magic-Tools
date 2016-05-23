@@ -1,7 +1,7 @@
 package emt.init;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
-import emt.ElectroMagicTools;
+import emt.EMT;
 import emt.entity.EntityArcher;
 import emt.entity.EntityEnergyBall;
 import emt.entity.EntityLaser;
@@ -32,10 +32,10 @@ public class EMTEntities {
 	}
 
 	public static void registerEMTEntities() {
-		EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityLaser.class, "laser", entityIDs++, EMT.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityArcher.class, "archer", entityIDs++, EMT.instance, 80, 3, true);
 		registerEntityEgg(EntityArcher.class, 0x99111F, 0xE5685);
-		EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, ElectroMagicTools.instance, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityEnergyBall.class, "energyBall", entityIDs++, ElectroMagicTools.instance, 80, 60, true);
+		EntityRegistry.registerModEntity(EntityShield.class, "shield", entityIDs++, EMT.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityEnergyBall.class, "energyBall", entityIDs++, EMT.instance, 80, 60, true);
 	}
 }

@@ -2,7 +2,7 @@ package emt.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import emt.ModInformation;
+import emt.EMT;
 import emt.tile.generator.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -28,25 +28,25 @@ public class BlockEssentiaGenerators extends BlockBaseContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ri) {
-		this.blockIcon = ri.registerIcon(ModInformation.TEXTURE_PATH + ":machines/top");
+		this.blockIcon = ri.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
 
 		for (int i = 0; i <= 5; i++) {
-			this.top[i] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/top");
+			this.top[i] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/top");
 		}
 
 		for (int i = 0; i <= 5; i++) {
-			this.bottom[i] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/top");
+			this.bottom[i] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/top");
 		}
 
 		for (int i = 0; i <= 5; i++) {
-			this.side[i] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/side");
+			this.side[i] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/side");
 		}
 
-		this.frontOff[0] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/potentiafront");
-		this.frontOff[1] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/ignisfront");
-		this.frontOff[2] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/auramfront");
-		this.frontOff[3] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/arborfront");
-		this.frontOff[4] = ri.registerIcon(ModInformation.TEXTURE_PATH + ":essentiagenerator/aerfront");
+		this.frontOff[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/potentiafront");
+		this.frontOff[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/ignisfront");
+		this.frontOff[2] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/auramfront");
+		this.frontOff[3] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/arborfront");
+		this.frontOff[4] = ri.registerIcon(EMT.TEXTURE_PATH + ":essentiagenerator/aerfront");
 	}
 
 	@SideOnly(Side.CLIENT)

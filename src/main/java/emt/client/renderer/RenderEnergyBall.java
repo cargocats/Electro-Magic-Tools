@@ -63,8 +63,9 @@ public class RenderEnergyBall extends Render {
 
 						tess.startDrawing(GL_LINE_STRIP);
 						tess.setColorRGBA(255, 255, 255, 255);
+						float lenRat = ball.ticksAlive <= 40 ? ball.ticksAlive / 40f : (60 - ball.ticksAlive) / 20f;
 						for (Point point : bolt.points) {
-							tess.addVertex(point.x / (60 / ball.ticksAlive), point.y / 4, point.z / (60 / ball.ticksAlive));
+							tess.addVertex(point.x * lenRat, (point.y / 3f) * (ball.ticksAlive / 60f), point.z * lenRat);
 						}
 						tess.draw();
 

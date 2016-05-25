@@ -31,7 +31,7 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-	public IIcon[] icon = new IIcon[25];
+	public IIcon[] icon = new IIcon[16];
 
 	public ItemMaterials() {
 		this.setCreativeTab(EMT.TAB);

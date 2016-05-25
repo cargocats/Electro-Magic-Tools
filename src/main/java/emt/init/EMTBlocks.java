@@ -7,13 +7,11 @@ import emt.block.BlockMachines;
 import emt.block.BlockPortableNode;
 import emt.block.BlockShield;
 import emt.block.BlockSolars;
-import emt.block.BlockSolars2;
 import emt.item.block.ItemBlockElectricCloud;
 import emt.item.block.ItemBlockEssentiaGenerator;
 import emt.item.block.ItemBlockEssentiaGenerators;
 import emt.item.block.ItemBlockMachines;
 import emt.item.block.ItemBlockSolars;
-import emt.item.block.ItemBlockSolars2;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.SoundType;
@@ -35,11 +33,11 @@ public class EMTBlocks {
 		shield = new BlockShield("shield");
 		GameRegistry.registerBlock(shield, "ShieldBlock");
 
-		emtSolars = new BlockSolars("solar");
+		emtSolars = new BlockSolars("solar", 16, 0);
 		GameRegistry.registerBlock(emtSolars, ItemBlockSolars.class, "EMTSolars");
 
-		emtSolars2 = new BlockSolars2("solar2");
-		GameRegistry.registerBlock(emtSolars2, ItemBlockSolars2.class, "EMTSolars2");
+		emtSolars2 = new BlockSolars("solar2", 5, 1);
+		GameRegistry.registerBlock(emtSolars2, ItemBlockSolars.class, "EMTSolars2");
 
 		emtMachines = new BlockMachines("machine");
 		GameRegistry.registerBlock(emtMachines, ItemBlockMachines.class, "EMTMachines");

@@ -65,10 +65,10 @@ public class ItemFeatherWing extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		useWing(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
+		useWings(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
 	}
 
-	public void useWing(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
+	public void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
 		NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 		boolean isJmuping = nbtData.getBoolean("isJumping");
 		boolean isHolding = nbtData.getBoolean("isHolding");

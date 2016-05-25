@@ -26,28 +26,30 @@ import emt.tile.TileEntityIndustrialWandRecharge;
 public class BlockMachines extends BlockBaseContainer {
 
 	public BlockMachines(String name) {
-		super(name, Material.iron, soundTypeMetal, 4.0F);
+		super(name, Material.iron, soundTypeMetal, 2, 4.0F);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
+		super.registerBlockIcons(ir);
+		
 		this.blockIcon = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
 
-		this.top[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
-		this.top[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+		iconSets[0].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
+		iconSets[1].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		this.bottom[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
-		this.bottom[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+		iconSets[0].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+		iconSets[1].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.side[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
-		this.side[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+		iconSets[0].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+		iconSets[1].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
 
-		this.frontOff[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
-		this.frontOff[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
+		iconSets[0].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+		iconSets[1].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
 
-		this.frontOn[0] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
-		this.frontOn[1] = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
+		iconSets[0].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+		iconSets[1].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -84,15 +86,15 @@ public class BlockMachines extends BlockBaseContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		dropItems(world, x, y, z);
 		world.removeTileEntity(x, y, z);
-		super.breakBlock(world, x, y, z, par5, par6);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	private void dropItems(World world, int x, int y, int z) {
-		Random rand = new Random();
-
+		Random rand = world.rand;
+		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (!(tileEntity instanceof IInventory)) {
 			return;

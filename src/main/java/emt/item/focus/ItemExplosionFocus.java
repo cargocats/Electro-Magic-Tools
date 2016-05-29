@@ -40,7 +40,7 @@ public class ItemExplosionFocus extends ItemBaseFocus {
 		if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
 			if (!world.isRemote) {
 				EntityLaser laser;
-				laser = new EntityLaser(world, player, 2);
+				laser = new EntityLaser(world, player, 1);
 				laser.setExplosionStrengthModifier(getUpgradeLevel(itemstack, FocusUpgradeType.potency) * 0.5f + 1);
 				world.spawnEntityInWorld(laser);
 			}

@@ -1,7 +1,10 @@
 package emt.entity;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.common.registry.IThrowableEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -18,15 +21,15 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityLaser extends Entity implements IProjectile {
+public class EntityLaser extends Entity implements IThrowableEntity, IProjectile {
 	private Block inTile;
 	public Entity shootingEntity;
 	
-	private int xTile = -1;
-	private int yTile = -1;
-	private int zTile = -1;
-	private int inData;
-	private boolean inGround;
+	private int xTile;
+	private int yTile;
+	private int zTile;
+	private int meta;
+	private boolean inGround = false;
 	private int ticksInGround;
 	private int ticksInAir;
 	private float explosionStrength = 2f;
@@ -36,15 +39,6 @@ public class EntityLaser extends Entity implements IProjectile {
 
 		this.renderDistanceWeight = 10.0D;
 		this.setSize(0.5F, 0.5F);
-	}
-
-	public EntityLaser(World world, double x, double y, double z) {
-		super(world);
-
-		this.renderDistanceWeight = 10.0D;
-		this.setSize(0.5F, 0.5F);
-		this.setPosition(x, y, z);
-		this.yOffset = 0.0F;
 	}
 
 	public EntityLaser(World world, EntityLivingBase entity, float speed) {
@@ -57,14 +51,15 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
+		
 		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
+		
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed, 1.0F);
 	}
-
+	
 	public void setExplosionStrengthModifier(float f) {
 		explosionStrength = f;
 	}
@@ -75,22 +70,9 @@ public class EntityLaser extends Entity implements IProjectile {
 
 	@Override
 	public void setThrowableHeading(double x, double y, double z, float speed, float scale) {
-		float len = MathHelper.sqrt_double(x * x + y * y + z * z);
-		x /= (double) len;
-		y /= (double) len;
-		z /= (double) len;
-		x += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) scale;
-		y += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) scale;
-		z += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) scale;
-		x *= (double) speed;
-		y *= (double) speed;
-		z *= (double) speed;
-		this.motionX = x;
-		this.motionY = y;
-		this.motionZ = z;
-		float f3 = MathHelper.sqrt_double(x * x + z * z);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, (double) f3) * 180.0D / Math.PI);
+		this.motionX = x * speed;
+		this.motionY = y * speed;
+		this.motionZ = z * speed;
 		this.ticksInGround = 0;
 	}
 
@@ -101,33 +83,20 @@ public class EntityLaser extends Entity implements IProjectile {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void setVelocity(double velX, double velY, double velZ) {
 		this.motionX = velX;
 		this.motionY = velY;
 		this.motionZ = velZ;
 
-		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-			float f = MathHelper.sqrt_double(velX + velZ);
-			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(velX, velZ) / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(velY, (double) f) / Math.PI);
-			this.prevRotationPitch = this.rotationPitch;
-			this.prevRotationYaw = this.rotationYaw;
-			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			this.ticksInGround = 0;
-		}
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 
-		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-			float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f) * 180.0D / Math.PI);
-		}
-
 		Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+		
 		if (block.getMaterial() != Material.air) {
 			block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 			AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
@@ -136,24 +105,22 @@ public class EntityLaser extends Entity implements IProjectile {
 				this.inGround = true;
 			}
 		}
-		Block tile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-		tile.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-		AxisAlignedBB axisalignedbb = tile.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+		block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
+		AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
 		if (axisalignedbb != null && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
 			this.inGround = true;
 		}
 
 		if (this.inGround) {
-			Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 			int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 			if (!this.worldObj.isRemote) {
 				this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
 				this.setDead();
 			}
 
-			if (j == this.inTile && k == this.inData) {
+			if (block == this.inTile && k == this.meta) {
 				++this.ticksInGround;
 
 				if (this.ticksInGround == 1200) {
@@ -185,14 +152,14 @@ public class EntityLaser extends Entity implements IProjectile {
 			List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 			int l;
-			float f1;
+			float down;
 
 			for (l = 0; l < list.size(); ++l) {
 				Entity entity1 = (Entity) list.get(l);
 
 				if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5)) {
-					f1 = 0.3F;
-					AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand((double) f1, (double) f1, (double) f1);
+					down = 0.3F;
+					AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand((double) down, (double) down, (double) down);
 					MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec3next, vec3);
 
 					if (movingobjectposition1 != null) {
@@ -234,7 +201,7 @@ public class EntityLaser extends Entity implements IProjectile {
 					this.yTile = movingobjectposition.blockY;
 					this.zTile = movingobjectposition.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
-					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
+					this.meta = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 					this.motionX = movingobjectposition.hitVec.xCoord - this.posX;
 					this.motionY = movingobjectposition.hitVec.yCoord - this.posY;
 					this.motionZ = movingobjectposition.hitVec.zCoord - this.posZ;
@@ -266,10 +233,6 @@ public class EntityLaser extends Entity implements IProjectile {
 				this.prevRotationYaw += 360.0F;
 			}
 
-			this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-			this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-			float f4 = 0.99F;
-			f1 = 0.05F;
 
 			if (this.isInWater()) {
 				for (int j1 = 0; j1 < 4; ++j1) {
@@ -277,13 +240,7 @@ public class EntityLaser extends Entity implements IProjectile {
 					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double) f3, this.posY - this.motionY * (double) f3, this.posZ - this.motionZ * (double) f3, this.motionX, this.motionY, this.motionZ);
 				}
 
-				f4 = 0.8F;
 			}
-
-			this.motionX *= (double) f4;
-			this.motionY *= (double) f4;
-			this.motionZ *= (double) f4;
-			this.motionY -= (double) f1;
 			this.setPosition(this.posX, this.posY, this.posZ);
 		}
 	}
@@ -294,7 +251,7 @@ public class EntityLaser extends Entity implements IProjectile {
 		nbt.setShort("yTile", (short) this.yTile);
 		nbt.setShort("zTile", (short) this.zTile);
 		nbt.setShort("inTile", (short) Block.getIdFromBlock(this.inTile));
-		nbt.setByte("inData", (byte) this.inData);
+		nbt.setByte("inData", (byte) this.meta);
 		nbt.setBoolean("inGround", this.inGround);
 		nbt.setFloat("explosionStrength", this.explosionStrength);
 	}
@@ -305,12 +262,12 @@ public class EntityLaser extends Entity implements IProjectile {
 		this.yTile = nbt.getShort("yTile");
 		this.zTile = nbt.getShort("zTile");
 		this.inTile = Block.getBlockById(nbt.getShort("inTile"));
-		this.inData = nbt.getByte("inData") & 255;
+		this.meta = nbt.getByte("inData") & 255;
 		this.inGround = nbt.getBoolean("inGround");
 		this.explosionStrength = nbt.getFloat("explosionStrength");
 	}
 
-	public void onCollide(Entity par1Entity) {
+	public void onCollide(Entity entity) {
 		if (!this.worldObj.isRemote) {
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, explosionStrength, true);
 		}
@@ -320,5 +277,15 @@ public class EntityLaser extends Entity implements IProjectile {
 	@Override
 	public float getShadowSize() {
 		return 0.0F;
+	}
+
+	@Override
+	public Entity getThrower() {
+		return shootingEntity;
+	}
+
+	@Override
+	public void setThrower(Entity entity) {
+		shootingEntity = entity;
 	}
 }

@@ -15,12 +15,12 @@ public class RenderLaser extends Render {
 	private static final ResourceLocation laserTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/lasermodel.png");
 
 	@Override
-	public void doRender(Entity entityLaser, double x, double y, double z, float par8, float par9) {
+	public void doRender(Entity entityLaser, double x, double y, double z, float par8, float pTick) {
 		this.bindEntityTexture(entityLaser);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(entityLaser.prevRotationYaw + (entityLaser.rotationYaw - entityLaser.prevRotationYaw) * par9 - 90, 0, 1, 0);
-		GL11.glRotatef(entityLaser.prevRotationPitch + (entityLaser.rotationPitch - entityLaser.prevRotationPitch) * par9, 0, 0, 1);
+		GL11.glRotatef(entityLaser.rotationYaw - 90, 0, 1, 0);
+		GL11.glRotatef(entityLaser.rotationPitch, 0, 0, 1);
 		Tessellator tess = Tessellator.instance;
 		byte b0 = 0;
 		float f2 = 0.4f;

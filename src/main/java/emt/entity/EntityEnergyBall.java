@@ -24,19 +24,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import thaumcraft.common.Thaumcraft;
 
 public class EntityEnergyBall extends Entity implements IProjectile, IEntityAdditionalSpawnData {
 	public static final int RADIUS = 8;
-	public static final float LENGTH = 16f;
-	public static final float DIST = 1f;
-	public static final float HEIGHT = 8f;
 	public static final int MAX_TICKS_IN_TILE = 60;
-	public static final int MAX_COUNT_OF_BOLTS = 25;
 	
 	public EntityLivingBase shootingEntity;
-	public Bolt[] bolts = new Bolt[MAX_COUNT_OF_BOLTS];
-	public Point[] entityPositions;
-	public Bolt[][] entityBolts;
 	
 	public boolean inTile = false;
 	public int ticksAlive = 1; /** Pls, don't ask me why 1 =) **/
@@ -72,10 +66,6 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
 		this.motionX = this.motionY = this.motionZ = 0.0D;
-
-		for (int i = 0; i < bolts.length; i++) {
-			bolts[i] = new Bolt(DIST, LENGTH, HEIGHT);
-		}
 	}
 
 	@Override
@@ -127,35 +117,16 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
 									/** Closer - Harder */
 									entity.attackEntityFrom(DamageSource.magic, (float) (RADIUS - hyp));
 									entity.performHurtAnimation();
+									
+									if(worldObj.isRemote)
+										Thaumcraft.proxy.bolt(worldObj, this, entity);
+									
 								}
 							}
 						}
 					}
 				}
 			}
-			
-			if(worldObj.isRemote) {
-				entityBolts = new Bolt[entities.size()][MAX_COUNT_OF_BOLTS];
-			}
-			
-			entityPositions = new Point[entities.size()];
-			
-			for (int i = 0; i < entities.size(); i++) {
-				Entity entity = entities.get(i);
-				entityPositions[i] = new Point(entity.posX, entity.posY, entity.posZ);
-				if (this.worldObj.isRemote) {
-					
-					for (int e = 0; e < bolts.length; e++) {
-						float h = entity.height;
-						if(h < 4) {
-							h = 4;
-						}
-						entityBolts[i][e] = new Bolt(h / 10, h, h / 2);
-					}
-
-				}
-			}
-
 			/************************************************************************/
 		}
 		/** If not in Tile **/
@@ -207,12 +178,12 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
 			/************************************************************************/
 		}
 
-		if (this.worldObj.isRemote) {
-			for (int i = 0; i < bolts.length; i++) {
-				bolts[i].regenerate();
-			}
+		for(int i = 0; i < 3 && worldObj.isRemote; i ++) {
+			float rndX = (float) ((((worldObj.rand.nextFloat() - 0.5f) * 2) * (RADIUS - 4)) + posX);
+			float rndY = (float) ((((worldObj.rand.nextFloat() - 0.5f) * 2) * (RADIUS - 4)) + posY);
+			float rndZ = (float) ((((worldObj.rand.nextFloat() - 0.5f) * 2) * (RADIUS - 4)) + posZ);
+			Thaumcraft.proxy.nodeBolt(worldObj, (float)posX, (float)posY, (float)posZ, rndX, rndY, rndZ);
 		}
-
 	}
 
 	protected float getMotionFactor() {

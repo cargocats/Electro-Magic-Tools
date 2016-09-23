@@ -94,7 +94,7 @@ public class EMTResearches {
 		}
 
 		if (!EMTConfigHandler.energyBallFocusResearch) {
-			new EMTResearchItem("Energy Ball Focus", EMTResearchAspects.energyBallFocusResearch, 1, 3, 2, new ItemStack(EMTItems.energyBallFocus)).setParents("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""));
+			new EMTResearchItem("Energy Ball Focus", EMTResearchAspects.energyBallFocusResearch, 1, 3, 2, new ItemStack(EMTItems.energyBallFocus)).setParents("Electric Magic Tools").setConcealed().registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.energyBallFocus));
 		}
 
 		if (!EMTConfigHandler.shieldFocusResearch) {

@@ -13,7 +13,7 @@ public class EMTResearchAspects {
 	public static AspectList thaumicNanoHelmet = new AspectList().add(Aspect.ENERGY, 5).add(Aspect.SENSES, 8).add(Aspect.ARMOR, 6);
 	public static AspectList laserFocusResearch = new AspectList().add(Aspect.FIRE, 3).add(Aspect.DEATH, 2).add(Aspect.WEAPON, 3);
 	public static AspectList christmasFocusResearch = new AspectList().add(Aspect.COLD, 2).add(Aspect.BEAST, 5).add(Aspect.LIFE, 6).add(Aspect.DEATH, 2);
-	public static AspectList energyBallFocusResearch = new AspectList().add(Aspect.ENERGY, 5).add(Aspect.BEAST, 5).add(Aspect.LIFE, 6);
+	public static AspectList energyBallFocusResearch = new AspectList().add(Aspect.ENERGY, 10).add(Aspect.MAGIC, 5).add(Aspect.LIFE, 6);
 	public static AspectList shieldFocusResearch = new AspectList().add(Aspect.ARMOR, 5).add(Aspect.AIR, 2).add(Aspect.CRYSTAL, 3).add(Aspect.TRAP, 2);
 	public static AspectList electricGogglesResearch = new AspectList().add(Aspect.ARMOR, 8).add(Aspect.ENERGY, 5).add(Aspect.SENSES, 6);
 	public static AspectList potentiaGeneratorResearch = new AspectList().add(Aspect.ENERGY, 4).add(Aspect.EXCHANGE, 4).add(Aspect.METAL, 3);

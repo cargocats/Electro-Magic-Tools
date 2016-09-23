@@ -37,6 +37,7 @@ public class EntityShield extends Entity {
 
 	@Override
 	protected void entityInit() {
+		this.dataWatcher.addObject(11, "");
 	}
 
 	@Override

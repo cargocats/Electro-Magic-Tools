@@ -136,7 +136,7 @@ emt.tag.Energy Ball Focus=notag
 emt.text.Energy Ball Focus=notext
 
 emt.rsname.Electric Cloud=Electric Cloud
-emt.tag.Electric Cloud=Still the same Nitor
+emt.tag.Electric Cloud=Still the same Nitor (or better?)
 emt.text.Electric Cloud.1=All thaumaturges (except Crimson ones, I guess) enjoy the shine and heat of the magic flame called Nitor, aren't they? You desided to make it more... energetic. Well, you did it.<BR><BR>You have created a new kind of magic flame — the Electric Cloud. It behaves and looks like normal Nitor, but it has purple colour and creates light-purple lightning charges around itself.
 emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electric_cloud.png:0:0:255:255:0.6</IMG>
 

@@ -5,6 +5,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTCraftingAspects;
+import emt.util.EMTResearchAspects;
+
 import static emt.util.EMTRandomHelper.*;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IC2Items;
@@ -227,6 +229,9 @@ public class EMTRecipes {
 
 		wandChargeFocus = addInfusionCraftingRecipe("Wand Focus: Wand Charging", new ItemStack(EMTItems.wandChargeFocus), 5, EMTCraftingAspects.wandChargeFocus, new ItemStack(EMTBlocks.emtMachines, 1, 0),
 				new ItemStack[] { new ItemStack(EMTItems.chargeFocus), new ItemStack(IC2Items.getItem("energyPack").getItem(), 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate") });
+		
+		energyBallFocus = addInfusionCraftingRecipe("Wand Focus: Energy Ball", new ItemStack(EMTItems.energyBallFocus), 4, EMTResearchAspects.energyBallFocusResearch, new ItemStack(ConfigItems.itemFocusShock), 
+				new ItemStack[] { new ItemStack(Blocks.tnt), new ItemStack(IC2Items.getItem("advBattery").getItem()), new ItemStack(IC2Items.getItem("advBattery").getItem()), new ItemStack(IC2Items.getItem("advBattery").getItem())});
 
 		inventoryChargingRing = addInfusionCraftingRecipe("Inventory Charging Ring", new ItemStack(EMTItems.emtBauble, 1, 1), 6, EMTCraftingAspects.inventoryChargingRing, new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
 				new ItemStack[] { new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE), IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"), IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator, ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
@@ -448,6 +453,7 @@ public class EMTRecipes {
 	public static InfusionRecipe electricHoeGrowth;
 	public static InfusionRecipe chargeFocus;
 	public static InfusionRecipe wandChargeFocus;
+	public static InfusionRecipe energyBallFocus;
 	public static InfusionRecipe inventoryChargingRing;
 	public static InfusionRecipe armorChargingRing;
 	public static InfusionRecipe nanoWings;

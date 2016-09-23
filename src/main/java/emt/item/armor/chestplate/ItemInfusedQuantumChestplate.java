@@ -111,7 +111,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 
 	@SubscribeEvent
 	public void onEntityLivingFallEvent(LivingFallEvent event) {
-		if ((IC2.platform.isSimulating()) && ((event.entity instanceof EntityLivingBase))) {
+		if (IC2.platform.isSimulating() && (event.entity instanceof EntityLivingBase)) {
 			EntityLivingBase entity = (EntityLivingBase) event.entity;
 			ItemStack armor = entity.getEquipmentInSlot(1);
 
@@ -162,7 +162,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 			}
 
 			ItemStack currentStack = player.inventory.getCurrentItem();
-			Item currentItem = currentStack == null ? null : player.inventory.getCurrentItem().getItem();
+			Item currentItem = currentStack == null ? null : currentStack.getItem();
 
 			if (nbt.hasKey("useother")) {
 				String useother = nbt.getString("useother");
@@ -182,11 +182,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				nbt.removeTag("useother");
 			}
 
-			if (wing == 0) {
+			if (wing == NONE) {
 				nbt.setByte("wing", NONE);
 			}
 
-			if ((IC2.keyboard.isJumpKeyDown(player)) && (IC2.keyboard.isModeSwitchKeyDown(player)) && (toggleTimer == 0)) {
+			if (IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
 				toggleTimer = 30;
 				hoverMode = !hoverMode;
 				if (IC2.platform.isSimulating()) {
@@ -204,11 +204,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				if (currentItem == IC2Items.getItem("electricJetpack").getItem()) {
 					IC2.platform.messagePlayer(player, "Jetpack enabled.", new Object[0]);
 					nbt.setByte("wing", JETPACK);
-					int charge = (int) ElectricItem.manager.getCharge(itemStack);
-					if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000) {
-						ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(currentStack), player);
-					}
-					nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(currentStack) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
+					//int charge = (int) ElectricItem.manager.getCharge(itemStack);
+					//if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000) {
+					//	ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(currentStack), player);
+					//}
+					nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(currentStack)/* + charge - (int) ElectricItem.manager.getCharge(itemStack))*/));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 
@@ -221,22 +221,22 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 				else if (currentItem == EMTItems.nanoWing) {
 					IC2.platform.messagePlayer(player, "Nano wings enabled.", new Object[0]);
 					nbt.setByte("wing", NANO);
-					int charge = (int) ElectricItem.manager.getCharge(itemStack);
-					if (ElectricItem.manager.getCharge(currentStack) < ItemNanoWing.maxCharge) {
-						ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
-					}
-					nbt.setInteger("NWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
+					//int charge = (int) ElectricItem.manager.getCharge(itemStack);
+					//if (ElectricItem.manager.getCharge(currentStack) < ItemNanoWing.maxCharge) {
+					//	ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
+					//}
+					nbt.setInteger("NWCharge", (int) (ElectricItem.manager.getCharge(player.inventory.getCurrentItem())/* + charge - (int) ElectricItem.manager.getCharge(itemStack)*/));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 
 				else if (currentItem == EMTItems.quantumWing) {
 					IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
 					nbt.setByte("wing", QUANTUM);
-					int charge = (int) ElectricItem.manager.getCharge(itemStack);
-					if (ElectricItem.manager.getCharge(currentStack) < ItemQuantumWing.maxCharge) {
-						ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
-					}
-					nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(currentStack) + charge - (int) ElectricItem.manager.getCharge(itemStack)));
+					//int charge = (int) ElectricItem.manager.getCharge(itemStack);
+					//if (ElectricItem.manager.getCharge(currentStack) < ItemQuantumWing.maxCharge) {
+					//	ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge - ElectricItem.manager.getCharge(currentStack), player);
+					//}
+					nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(currentStack)/* + charge - (int) ElectricItem.manager.getCharge(itemStack)*/));
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			}
@@ -298,11 +298,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		if (wing == QUANTUM)
 			useWings(player, itemStack, world, 0.33f, 0.5f, 0.2f, 7, true);
 
-		if ((IC2.platform.isSimulating()) && (toggleTimer > 0)) {
+		if (IC2.platform.isSimulating() && toggleTimer > 0) {
 			toggleTimer = (byte) (toggleTimer - 1);
 			nbt.setByte("toggleTimer", toggleTimer);
 		}
-		if ((IC2.platform.isRendering()) && (player == IC2.platform.getPlayerInstance())) {
+		if (IC2.platform.isRendering() && player == IC2.platform.getPlayerInstance()) {
 			if (lastJetpackUsed != jetpackUsed) {
 				if (jetpackUsed) {
 					if (audioSource == null) {

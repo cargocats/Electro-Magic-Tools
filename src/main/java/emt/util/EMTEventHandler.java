@@ -10,18 +10,25 @@ import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import emt.EMT;
 import emt.client.EMTKeys;
+import emt.init.EMTBlocks;
 import emt.init.EMTItems;
 import emt.network.PacketEMTKeys;
 import emt.proxy.ClientProxy;
+import ic2.api.item.ElectricItem;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.entities.monster.EntityTaintChicken;
 
 public class EMTEventHandler {
@@ -62,5 +69,31 @@ public class EMTEventHandler {
 			}
 
 		}
+	}
+	
+	@SubscribeEvent
+	public void createCloud(PlayerInteractEvent e) {
+		if(e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || e.world.isRemote) {
+			return;
+		}
+		
+		Block block = e.world.getBlock(e.x, e.y, e.z);
+		int meta = e.world.getBlockMetadata(e.x, e.y, e.z);
+		
+		if(block != ConfigBlocks.blockAiry || meta != 1) {
+			return;
+		}
+		
+		ItemStack currentStack = e.entityPlayer.inventory.getCurrentItem();
+		if(currentStack == null) {
+			return;
+		}
+		
+		double val = ElectricItem.manager.discharge(currentStack, 256, 4, false, true, false);
+		if(val < 256) {
+			return;
+		}
+		
+		e.world.setBlock(e.x, e.y, e.z, EMTBlocks.electricCloud);
 	}
 }

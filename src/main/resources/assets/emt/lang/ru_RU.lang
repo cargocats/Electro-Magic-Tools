@@ -91,7 +91,7 @@ item.EMT.focus.explosion.name=Набалдашник: Взрыв
 item.EMT.focus.christmas.name=Набалдашник: Рождество
 item.EMT.focus.shield.name=Набалдашник: Щит
 item.EMT.focus.charge.name=Набалдашник: Зарядка
-item.EMT.focus.charge_wand.name=Набалдашник: Зарядка жезла
+item.EMT.focus.chargeWand.name=Набалдашник: Зарядка жезла
 item.EMT.focus.energyBall.name=Набалдашник: Наэлектризованное облако
 
 #=============Block Names=============

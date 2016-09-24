@@ -116,10 +116,10 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
 									entities.add(entity);
 									/** Closer - Harder */
 									entity.attackEntityFrom(DamageSource.magic, (float) (RADIUS - hyp));
-									entity.performHurtAnimation();
 									
-									if(worldObj.isRemote)
+									if(worldObj.isRemote) {
 										Thaumcraft.proxy.bolt(worldObj, this, entity);
+									}
 									
 								}
 							}

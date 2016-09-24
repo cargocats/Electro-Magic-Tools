@@ -91,7 +91,7 @@ item.EMT.focus.explosion.name=Wand Focus: Explosion
 item.EMT.focus.christmas.name=Wand Focus: Kris-tmas
 item.EMT.focus.shield.name=Wand Focus: Shield
 item.EMT.focus.charge.name=Wand Focus: Charging
-item.EMT.focus.charge_wand.name=Wand Focus: Wand Charging
+item.EMT.focus.chargeWand.name=Wand Focus: Wand Charging
 item.EMT.focus.electricCloud.name=Electric Cloud
 
 #=============Block Names=============

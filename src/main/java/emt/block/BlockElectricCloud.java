@@ -3,6 +3,8 @@ package emt.block;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.tile.TileElectricCloud;
 import net.minecraft.block.material.Material;
@@ -32,6 +34,7 @@ public class BlockElectricCloud extends BlockBase {
 		setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rnd) {
 		FXSparkle ef = new FXSparkle(world, x + 0.5F, y + 0.5F, z + 0.5F, x + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, y + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, z + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, 1.0F, 6, 3);

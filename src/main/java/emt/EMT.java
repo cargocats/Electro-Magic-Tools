@@ -36,7 +36,7 @@ import org.apache.logging.log4j.Logger;
 public class EMT {
 	public static final String NAME = "Electro-Magic Tools";
 	public static final String MOD_ID = "EMT";
-	public static final String VERSION = "1.2.6";
+	public static final String VERSION = "1.2.6.1";
 	public static final String TEXTURE_PATH = "emt";
 	public static final String GUI_FACTORY = "emt.client.gui.config.EMTGuiFactory";
 	public static final String CLIENT_PROXY = "emt.proxy.ClientProxy";
@@ -61,7 +61,8 @@ public class EMT {
 		LOGGER.info("Starting planning the world domination");
 		EMTConfigHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new EMTEventHandler());
-		FMLCommonHandler.instance().bus().register(new EMTClientEventHandler());
+		if(FMLCommonHandler.instance().getSide().isClient())
+			FMLCommonHandler.instance().bus().register(new EMTClientEventHandler());
 		Registry.register();
 		EMTEssentiasOutputs.addPrimalOutputs();
 		EMTEssentiasOutputs.addOutputs();
@@ -76,7 +77,8 @@ public class EMT {
 		proxy.load();
 		LOGGER.info("Making mobs drop additional items");
 		MinecraftForge.EVENT_BUS.register(new EMTEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EMTClientEventHandler());
+		if(FMLCommonHandler.instance().getSide().isClient())
+			MinecraftForge.EVENT_BUS.register(new EMTClientEventHandler());
 		LOGGER.info("Adding dungeon loot");
 		EMTDungeonChestGenerator.generateLoot();
 		LOGGER.info("Registering entities");

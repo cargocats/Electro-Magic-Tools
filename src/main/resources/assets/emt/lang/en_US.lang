@@ -93,6 +93,7 @@ item.EMT.focus.shield.name=Wand Focus: Shield
 item.EMT.focus.charge.name=Wand Focus: Charging
 item.EMT.focus.chargeWand.name=Wand Focus: Wand Charging
 item.EMT.focus.electricCloud.name=Electric Cloud
+item.EMT.focus.energyBall.name=Energy Ball Focus
 
 #=============Block Names=============
 tile.EMT.electricCloud.name=Electric Cloud

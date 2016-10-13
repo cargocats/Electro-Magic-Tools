@@ -37,6 +37,11 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 		this.setCreativeTab(EMT.TAB);
 		visDiscount = 5;
 	}
+	
+	@Override
+	public float getFallDamageMult() {
+		return 0.2F;
+	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -66,9 +71,6 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
 		this.useWings(player, stack, world, 0.25f, 0.6f, 0.3f, 5);
-		if (player.fallDistance > 0.0F) {
-				player.fallDistance-= player.fallDistance/8;
-		}
 	}
 
 	@Override

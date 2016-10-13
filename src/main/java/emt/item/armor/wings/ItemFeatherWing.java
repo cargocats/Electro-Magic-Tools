@@ -20,12 +20,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemFeatherWing extends ItemArmor {
-
 	public int visDiscount = 0;
-	Random rnd;
 
 	public ItemFeatherWing(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);
@@ -33,9 +32,12 @@ public class ItemFeatherWing extends ItemArmor {
 		this.setMaxDamage(120);
 		this.setCreativeTab(EMT.TAB);
 		this.isDamageable();
-		rnd = new Random();
 	}
 
+	public float getFallDamageMult() {
+		return 0.6F;
+	}
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
@@ -70,6 +72,7 @@ public class ItemFeatherWing extends ItemArmor {
 
 	public void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
 		NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
+		
 		boolean isJmuping = nbtData.getBoolean("isJumping");
 		boolean isHolding = nbtData.getBoolean("isHolding");
 
@@ -93,7 +96,7 @@ public class ItemFeatherWing extends ItemArmor {
 			}
 			world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
 			for (int i = 0; i < 4; i++) {
-				world.spawnParticle("cloud", player.posX - 1 + (rnd.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (rnd.nextInt(100) / 50d), 0, -0.5, 0);
+				world.spawnParticle("cloud", player.posX - 1 + (world.rand.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (world.rand.nextInt(100) / 50d), 0, -0.5, 0);
 			}
 			nbtData.setByte("f", (byte) 0);
 		}

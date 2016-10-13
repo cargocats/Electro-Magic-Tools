@@ -31,6 +31,11 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 		this.isDamageable();
 		visDiscount = 4;
 	}
+	
+	@Override
+	public float getFallDamageMult() {
+		return 0.4F;
+	}
 
 	@Override
 	public int getVisDiscount(ItemStack stack, EntityPlayer player, Aspect aspect) {

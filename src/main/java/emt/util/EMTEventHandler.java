@@ -6,12 +6,15 @@ import baubles.api.BaublesApi;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import emt.EMT;
 import emt.client.EMTKeys;
 import emt.init.EMTBlocks;
 import emt.init.EMTItems;
+import emt.item.armor.wings.ItemFeatherWing;
 import emt.network.PacketEMTKeys;
 import emt.proxy.ClientProxy;
 import ic2.api.item.ElectricItem;
@@ -24,7 +27,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import thaumcraft.common.config.ConfigBlocks;
@@ -32,8 +39,36 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.entities.monster.EntityTaintChicken;
 
 public class EMTEventHandler {
-	Random rnd = new Random();
-
+	
+	@SubscribeEvent
+	public void onLivingHurt(LivingHurtEvent e) {
+		if(!(e.entityLiving instanceof EntityPlayer) || e.source != DamageSource.fall)
+			return;
+		
+		ItemStack s = ((EntityPlayer)e.entityLiving).inventory.armorInventory[2];
+		
+		if(s == null || !(s.getItem() instanceof ItemFeatherWing)) {
+			return;
+		}
+		
+		e.ammount *= ((ItemFeatherWing)s.getItem()).getFallDamageMult();
+	}
+	
+	@SubscribeEvent
+	public void onPlayerTickEvent(TickEvent.PlayerTickEvent e) {
+		
+		ItemStack s = e.player.inventory.armorInventory[2];
+		
+		if(s == null || !(s.getItem() instanceof ItemFeatherWing) || e.phase == Phase.START) {
+			return;
+		}
+		
+		if(e.player.motionY > 0) {
+			if(e.player.fallDistance > 0)
+				e.player.fallDistance -= e.player.motionY;
+		}
+	}
+	
 	@SubscribeEvent
 	public void onEntityLivingDrops(LivingDropsEvent event) {
 		if (event.entityLiving instanceof EntityCreeper) {
@@ -43,7 +78,7 @@ public class EMTEventHandler {
 			}
 		}
 		if (event.entityLiving instanceof EntityTaintChicken) {
-			event.entityLiving.entityDropItem(new ItemStack(EMTItems.itemEMTItems, rnd.nextInt(3), 13), 1);
+			event.entityLiving.entityDropItem(new ItemStack(EMTItems.itemEMTItems, event.entityLiving.worldObj.rand.nextInt(3), 13), 1);
 		}
 	}
 
@@ -96,4 +131,5 @@ public class EMTEventHandler {
 		
 		e.world.setBlock(e.x, e.y, e.z, EMTBlocks.electricCloud);
 	}
+	
 }

@@ -66,6 +66,9 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
 		this.useWings(player, stack, world, 0.25f, 0.6f, 0.3f, 5);
+		if (player.fallDistance > 0.0F) {
+			player.fallDistance = 0;
+		}
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class BlockElectricCloud extends BlockBase {
 
 	public BlockElectricCloud(String unlocName) {
 		super(unlocName, Material.cloth, soundTypeCloth, 0.1f);
-		setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
+		//setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
 	}
 
 	@SideOnly(Side.CLIENT)

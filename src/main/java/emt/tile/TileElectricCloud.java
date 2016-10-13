@@ -1,5 +1,6 @@
 package emt.tile;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +18,7 @@ public class TileElectricCloud extends TileEntity {
 
 	@Override
 	public void updateEntity() {
-		if(FMLCommonHandler.instance().getSide().isClient())
+		if(worldObj.isRemote && FMLCommonHandler.instance().getSide().isClient() && FMLClientHandler.instance().getClient().renderViewEntity != null)
 			fx();
 	}
 	
@@ -37,7 +38,7 @@ public class TileElectricCloud extends TileEntity {
 			}
 		}
 
-		if (worldObj.rand.nextInt(3) == 0) {
+		if (worldObj.rand.nextInt(5) == 0) {
 			FXWisp wisp = new FXWisp(worldObj, xCoord + 0.5 + ((worldObj.rand.nextInt(40) / 160f) - 0.125f), yCoord + 0.5, zCoord + 0.5 + ((worldObj.rand.nextInt(40) / 160f) - 0.125f), 0.4f + worldObj.rand.nextInt(40) / 100f, 1);
 			wisp.setGravity(-0.02F);
 			wisp.setRBGColorF(worldObj.rand.nextInt(40) / 100f, 0, 1);

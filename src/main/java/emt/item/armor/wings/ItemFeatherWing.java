@@ -115,5 +115,8 @@ public class ItemFeatherWing extends ItemArmor {
 		if (player.isSneaking() && !player.onGround && player.motionY < 0) {
 			player.motionY *= 0.6;
 		}
+		if (player.fallDistance > 0.0F) {
+			player.fallDistance-= player.fallDistance/40;
+		}
 	}
 }

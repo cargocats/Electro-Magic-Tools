@@ -57,5 +57,8 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
 		this.useWings(player, stack, world, 0.15f, 0.7f, 0.5f, 0);
+		if (player.fallDistance > 0.0F) {
+			player.fallDistance -= player.fallDistance /25;
+		}
 	}
 }

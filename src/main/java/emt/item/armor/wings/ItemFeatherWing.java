@@ -65,7 +65,7 @@ public class ItemFeatherWing extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		useWings(player, stack, world, 0.09f, 0.9f, 0.9f, 0);
+		useWings(player, stack, world, 0.11f, 0.9f, 0.9f, 0);
 	}
 
 	public void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
@@ -114,10 +114,6 @@ public class ItemFeatherWing extends ItemArmor {
 
 		if (player.isSneaking() && !player.onGround && player.motionY < 0) {
 			player.motionY *= 0.6;
-		}
-
-		if (player.fallDistance > 0.0F) {
-			player.fallDistance = 0;
 		}
 	}
 }

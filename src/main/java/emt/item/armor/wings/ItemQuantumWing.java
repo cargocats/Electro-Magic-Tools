@@ -39,6 +39,9 @@ public class ItemQuantumWing extends ItemNanoWing {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
     	this.useWings(player, stack, world, 0.33f, 0.5f, 0.2f, 7);
+    	if (player.fallDistance > 0.0F) {
+			player.fallDistance = 0;
+		}
     }
     
     @Override

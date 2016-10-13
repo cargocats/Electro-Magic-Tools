@@ -34,7 +34,7 @@ public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisD
 	
 	@Override
 	public float getFallDamageMult() {
-		return 0.4F;
+		return 0.5F;
 	}
 
 	@Override

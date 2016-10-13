@@ -35,7 +35,7 @@ public class ItemFeatherWing extends ItemArmor {
 	}
 
 	public float getFallDamageMult() {
-		return 0.6F;
+		return 0.75F;
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemQuantumWing extends ItemNanoWing {
-	public static int maxCharge = 1000000;
+	public static int maxCharge = 10000000;
 
     public ItemQuantumWing(ArmorMaterial material, int par3, int par4) {
         super(material, par3, par4);
@@ -20,7 +20,7 @@ public class ItemQuantumWing extends ItemNanoWing {
         this.setMaxDamage(27);
         this.setCreativeTab(EMT.TAB);
         visDiscount = 6;
-        transferLimit = 10000;
+        transferLimit = 100000;
         energyPerDamage = 1000;
     }
     

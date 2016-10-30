@@ -25,9 +25,9 @@ import java.util.List;
 
 public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectricItem, ISpecialArmor, IMetalArmor {
 
-	public static int maxCharge = 100000;
+	public static int maxCharge = 1000000;
 	public int tier = 3;
-	public double transferLimit = 1000;
+	public double transferLimit = 10000;
 	public int energyPerDamage = 100;
 
 	public ItemNanoWing(ArmorMaterial material, int par3, int par4) {

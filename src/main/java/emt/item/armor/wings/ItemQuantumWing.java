@@ -20,7 +20,7 @@ public class ItemQuantumWing extends ItemNanoWing {
         this.setMaxDamage(27);
         this.setCreativeTab(EMT.TAB);
         visDiscount = 6;
-        transferLimit = 100000;
+        transferLimit = 10000;
         energyPerDamage = 1000;
     }
     

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
 
-	public int maxCharge = 60000;
+	public int maxCharge = 100000;
 	public int cost;
 	public int tier = 2;
 	public double transferLimit = 100;

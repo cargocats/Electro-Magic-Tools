@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 public class ItemQuantumWing extends ItemNanoWing {
 	public static int maxCharge = 10000000;
+    public int tier = 4;
 
     public ItemQuantumWing(ArmorMaterial material, int par3, int par4) {
         super(material, par3, par4);

@@ -44,10 +44,10 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 		this.maxCharge = 1000000;
 		this.genDay = 256;
 		this.genNight = 128;
-		maxCharge = 10000000;
+		maxCharge = 20000000;
 		visDiscount = 7;
-		tier = 3;
-		transferLimit = 10000;
+		tier = 4;
+		transferLimit = 20000;
 		energyPerDamage = 10000;
 
 		potionCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));

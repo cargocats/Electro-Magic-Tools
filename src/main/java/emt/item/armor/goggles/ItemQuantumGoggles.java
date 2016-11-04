@@ -31,7 +31,7 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 10000000;
-		tier = 3;
+		tier = 4;
 		visDiscount = 8;
 		transferLimit = 10000;
 		energyPerDamage = 1000;

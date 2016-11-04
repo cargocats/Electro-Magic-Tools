@@ -26,7 +26,7 @@ import java.util.List;
 public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
 	public IIcon icon;
-	public int maxCharge = 20000;
+	public int maxCharge = 200000;
 	public int growthCost = 500;
 	public int tillCost = 100;
 

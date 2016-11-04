@@ -40,7 +40,7 @@ import java.util.Random;
 
 public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 
-	public int maxCharge = 40000;
+	public int maxCharge = 50000;
 	public int cost = 200;
 	public int hitCost = 300;
 	public int tier = 2;

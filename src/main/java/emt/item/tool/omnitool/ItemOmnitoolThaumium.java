@@ -26,7 +26,7 @@ public class ItemOmnitoolThaumium extends ItemOmnitoolDiamond {
 		else {
 			this.setMaxDamage(467);
 		}
-		maxCharge = 140000;
+		maxCharge = 200000;
 		hitCost = 650;
 	}
 

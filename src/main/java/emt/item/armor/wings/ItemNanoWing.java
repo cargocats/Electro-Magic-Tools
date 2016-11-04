@@ -136,11 +136,11 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 1.5999999999999991D;
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.17999999999999999D;
 	}
 
 	/* IC2 API METHODS */

@@ -29,8 +29,8 @@ import java.util.List;
 
 public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVisDiscountGear, IGoggles, IRevealer, IMetalArmor, ISpecialArmor {
 
-	public double maxCharge = 10000;
-	public double transferLimit = 10;
+	public double maxCharge = 100000;
+	public double transferLimit = 100;
 	public int tier = 2;
 	public int energyPerDamage = 100;
 	public int visDiscount = 5;

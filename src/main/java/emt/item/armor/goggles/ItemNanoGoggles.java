@@ -24,7 +24,7 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 		this.setMaxStackSize(1);
 		visDiscount = 6;
 		tier = 3;
-		maxCharge = 100000;
+		maxCharge = 1000000;
 		energyPerDamage = 1000;
 		transferLimit = 100;
 	}

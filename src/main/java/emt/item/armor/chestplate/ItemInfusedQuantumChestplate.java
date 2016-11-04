@@ -85,7 +85,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	private static boolean lastJetpackUsed = false;
 
 	public ItemInfusedQuantumChestplate(InternalName internalName, int armorType) {
-		super(internalName, InternalName.quantum, armorType, 2000000, 12000.0D, 4);
+		super(internalName, InternalName.quantum, armorType, 20000000, 12000.0D, 4);
 		MinecraftForge.EVENT_BUS.register(this);
 		this.setCreativeTab(EMT.TAB);
 	}

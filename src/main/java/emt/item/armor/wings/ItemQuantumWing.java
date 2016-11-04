@@ -4,11 +4,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ItemQuantumWing extends ItemNanoWing {
@@ -49,5 +52,30 @@ public class ItemQuantumWing extends ItemNanoWing {
     @Override
     public double getMaxCharge(ItemStack itemStack) {
         return maxCharge;
+    }
+
+    @Override
+    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+        ElectricItem.manager.discharge(stack, damage * getEnergyPerDamage(), 0x7fffffff, true, false, false);
+    }
+
+    public double getDamageAbsorptionRatio() {
+        return 2.099990000000001D;
+    }
+
+    private double getBaseAbsorptionRatio() {
+        return 0.20999999999999999D;
+    }
+    @Override
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+        if (source.isUnblockable()) {
+            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
+        } else {
+            double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
+            int energyPerDamage = getEnergyPerDamage();
+            double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
+        }
+
     }
 }

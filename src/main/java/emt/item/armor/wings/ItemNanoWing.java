@@ -157,7 +157,7 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 
 	@Override
 	public int getTier(ItemStack itemStack) {
-		return 2;
+		return 3;
 	}
 
 	@Override

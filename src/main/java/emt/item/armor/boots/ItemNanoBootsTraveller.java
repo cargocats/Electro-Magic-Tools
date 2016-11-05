@@ -25,6 +25,11 @@ public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 		return 0.9D;
 	}
 
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 3;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {

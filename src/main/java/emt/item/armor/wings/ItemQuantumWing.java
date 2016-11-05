@@ -55,6 +55,10 @@ public class ItemQuantumWing extends ItemNanoWing {
         return maxCharge;
     }
 
+    @Override
+    public int getTier(ItemStack itemStack) {
+        return 4;
+    }
 
     public double getDamageAbsorptionRatio() {
         return 1D;

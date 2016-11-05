@@ -126,7 +126,7 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
 	@Override
 	public int getTier(ItemStack itemStack) {
-		return 1;
+		return 2;
 	}
 
 	@Override

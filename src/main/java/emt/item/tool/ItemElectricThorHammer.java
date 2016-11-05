@@ -180,7 +180,7 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
 
     @Override
     public int getTier(ItemStack itemStack) {
-        return 2;
+        return 4;
     }
 
     @Override

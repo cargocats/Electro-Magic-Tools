@@ -71,6 +71,11 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 		return 1D;
 	}
 
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 4;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onArmorTick(World worldObj, EntityPlayer player, ItemStack itemStack) {

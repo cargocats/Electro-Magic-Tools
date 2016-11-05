@@ -405,6 +405,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 	}
 
 	@Override
+	public int getTier(ItemStack itemStack) {
+		return 4;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, int armorSlot) {
 		try {

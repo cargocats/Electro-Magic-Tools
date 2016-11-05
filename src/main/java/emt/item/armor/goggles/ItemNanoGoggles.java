@@ -46,6 +46,11 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 	}
 
 	@Override
+	public int getTier(ItemStack itemStack) {
+		return 3;
+	}
+
+	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		if (EMTConfigHandler.nightVisionOff == false) {
 			if (ElectricItem.manager.canUse(itemStack, 1 / 1000)) {

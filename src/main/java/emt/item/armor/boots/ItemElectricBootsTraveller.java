@@ -77,7 +77,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 			double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
 			int energyPerDamage = getEnergyPerDamage();
 			double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
+			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, absorptionRatio, (int) damageLimit);
 		}
 	}
 

@@ -41,8 +41,8 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	public double transferLimit = 100;
 	public boolean speedBoostActive = false;
 
-	public ItemElectricBootsTraveller(int par3, int par4) {
-		super(ArmorMaterial.DIAMOND, par3, par4);
+	public ItemElectricBootsTraveller(ArmorMaterial material, int par3, int par4) {
+		super(material, par3, par4);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		this.setCreativeTab(EMT.TAB);
@@ -71,7 +71,7 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
 		if (source.isUnblockable()) {
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
+			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 0);
 		}
 		else {
 			double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();

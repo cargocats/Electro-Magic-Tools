@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 
-	public ItemQuantumBootsTraveller(int par3, int par4) {
-		super(par3, par4);
+	public ItemQuantumBootsTraveller(ArmorMaterial material, int par3, int par4) {
+		super(material, par3, par4);
 		maxCharge = 10000000;
 		speedBonus = (float) EMTConfigHandler.quantumBootsSpeed;
 		jumpBonus = (float) EMTConfigHandler.quantumBootsJump;

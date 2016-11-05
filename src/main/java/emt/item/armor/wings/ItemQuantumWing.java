@@ -63,8 +63,4 @@ public class ItemQuantumWing extends ItemNanoWing {
     public double getDamageAbsorptionRatio() {
         return 1D;
     }
-
-    private double getBaseAbsorptionRatio() {
-        return 0.25D;
-    }
 }

@@ -55,28 +55,12 @@ public class ItemQuantumWing extends ItemNanoWing {
         return maxCharge;
     }
 
-    @Override
-    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-        ElectricItem.manager.discharge(stack, damage * getEnergyPerDamage(), 0x7fffffff, true, false, false);
-    }
 
     public double getDamageAbsorptionRatio() {
-        return 2.099990000000001D;
+        return 1D;
     }
 
     private double getBaseAbsorptionRatio() {
-        return 0.20999999999999999D;
-    }
-    @Override
-    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-        if (source.isUnblockable()) {
-            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
-        } else {
-            double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
-            int energyPerDamage = getEnergyPerDamage();
-            double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
-            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
-        }
-
+        return 0.25D;
     }
 }

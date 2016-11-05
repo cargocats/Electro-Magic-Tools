@@ -148,7 +148,7 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 0.5D;
 	}
 
 	public int getEnergyPerDamage() {
@@ -156,7 +156,7 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.15D;
 	}
 
 	/* IC2 API METHODS */

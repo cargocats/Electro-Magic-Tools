@@ -20,6 +20,11 @@ public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 		energyPerDamage = 20000;
 	}
 
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 1D;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {

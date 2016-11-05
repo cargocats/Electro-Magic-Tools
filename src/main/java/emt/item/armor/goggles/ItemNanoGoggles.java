@@ -41,6 +41,11 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 	}
 
 	@Override
+	public double getDamageAbsorptionRatio() {
+		return 0.9D;
+	}
+
+	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		if (EMTConfigHandler.nightVisionOff == false) {
 			if (ElectricItem.manager.canUse(itemStack, 1 / 1000)) {

@@ -97,11 +97,11 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 0.5D;
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.15D;
 	}
 
 	@Override

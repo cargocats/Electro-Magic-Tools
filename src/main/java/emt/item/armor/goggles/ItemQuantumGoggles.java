@@ -53,6 +53,11 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 	}
 
 	@Override
+	public double getDamageAbsorptionRatio() {
+		return 1D;
+	}
+
+	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		int refill = player.getAir();
 		if (ElectricItem.manager.canUse(itemStack, 1000) && refill < 100) {

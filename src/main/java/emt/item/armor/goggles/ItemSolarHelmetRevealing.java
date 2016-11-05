@@ -66,6 +66,11 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 		return EMT.TEXTURE_PATH + ":textures/models/solarrevealinghelmet.png";
 	}
 
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 1D;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onArmorTick(World worldObj, EntityPlayer player, ItemStack itemStack) {

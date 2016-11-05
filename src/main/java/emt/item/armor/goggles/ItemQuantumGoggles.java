@@ -33,8 +33,8 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 		maxCharge = 10000000;
 		tier = 4;
 		visDiscount = 8;
-		transferLimit = 10000;
-		energyPerDamage = 1000;
+		transferLimit = 12000;
+		energyPerDamage = 20000;
 
 		potionCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));
 		potionCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(15000));

@@ -2,12 +2,15 @@ package emt.tile.solar.water;
 
 import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
+import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class TileEntityDoubleWaterSolar extends TileEntityWaterSolar {
 
 	public TileEntityDoubleWaterSolar() {
+		super();
+		energySource = new BasicSource(this, 10000, 4);
 		output = EMTConfigHandler.doubleCompressedSolarOutput;
 	}
 

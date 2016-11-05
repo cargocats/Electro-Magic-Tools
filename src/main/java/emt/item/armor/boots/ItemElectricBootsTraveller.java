@@ -34,7 +34,7 @@ import java.util.List;
 public class ItemElectricBootsTraveller extends ItemArmor implements IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
 
 	public int maxCharge = 100000;
-	public int energyPerDamage = 100;
+	public int energyPerDamage = 1000;
 	public int visDiscount = 2;
 	public float speedBonus = 0.055F;
 	public float jumpBonus = 0.3F;

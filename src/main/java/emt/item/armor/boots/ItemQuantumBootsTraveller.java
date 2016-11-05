@@ -16,8 +16,8 @@ public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 		speedBonus = (float) EMTConfigHandler.quantumBootsSpeed;
 		jumpBonus = (float) EMTConfigHandler.quantumBootsJump;
 		visDiscount = 5;
-		transferLimit = 10000;
-		energyPerDamage = 1000;
+		transferLimit = 12000;
+		energyPerDamage = 20000;
 	}
 
 	@SideOnly(Side.CLIENT)

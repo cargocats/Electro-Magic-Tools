@@ -25,8 +25,8 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 		visDiscount = 6;
 		tier = 3;
 		maxCharge = 1000000;
-		energyPerDamage = 1000;
-		transferLimit = 100;
+		energyPerDamage = 5000;
+		transferLimit = 1600;
 	}
 
 	@SideOnly(Side.CLIENT)

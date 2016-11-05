@@ -16,8 +16,8 @@ public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 		speedBonus = (float) EMTConfigHandler.nanoBootsSpeed;
 		jumpBonus = (float) EMTConfigHandler.nanoBootsJump;
 		visDiscount = 4;
-		transferLimit = 1000;
-		energyPerDamage = 500;
+		transferLimit = 1600;
+		energyPerDamage = 5000;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 public class TileEntityDoubleAirSolar extends TileEntityAirSolar {
 
 	public TileEntityDoubleAirSolar() {
+		super();
+		energySource = new BasicSource(this, 10000, 4);
 		output = EMTConfigHandler.doubleCompressedSolarOutput;
 	}
 

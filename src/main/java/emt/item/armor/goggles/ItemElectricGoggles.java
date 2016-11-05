@@ -32,7 +32,7 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	public double maxCharge = 100000;
 	public double transferLimit = 100;
 	public int tier = 2;
-	public int energyPerDamage = 100;
+	public int energyPerDamage = 1000;
 	public int visDiscount = 5;
 
 	public ItemElectricGoggles(ArmorMaterial material, int par3, int par4) {

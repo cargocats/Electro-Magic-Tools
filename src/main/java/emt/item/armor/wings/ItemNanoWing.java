@@ -27,8 +27,8 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 
 	public static int maxCharge = 1000000;
 	public int tier = 3;
-	public double transferLimit = 1000;
-	public int energyPerDamage = 100;
+	public double transferLimit = 1600;
+	public int energyPerDamage = 5000;
 
 	public ItemNanoWing(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);

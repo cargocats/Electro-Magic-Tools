@@ -1,17 +1,13 @@
 package emt.item.armor.wings;
 
-import java.util.Random;
-
-import ic2.api.item.ElectricItem;
-import ic2.core.IC2;
-import ic2.core.util.StackUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
-import emt.EMT;
 import emt.client.model.ModelWings;
 import emt.util.EMTConfigHandler;
-import net.minecraft.client.Minecraft;
+import ic2.api.item.ElectricItem;
+import ic2.core.IC2;
+import ic2.core.util.StackUtil;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -20,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemFeatherWing extends ItemArmor {

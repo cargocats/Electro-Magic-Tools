@@ -1,12 +1,11 @@
 package ic2.api;
 
-import java.util.EnumSet;
-import java.util.Set;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Represents the 6 possible directions along the axis of a block.

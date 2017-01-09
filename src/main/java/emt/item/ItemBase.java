@@ -1,7 +1,6 @@
 package emt.item;
 
 import emt.EMT;
-import emt.EMT;
 import emt.util.EMTTextHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

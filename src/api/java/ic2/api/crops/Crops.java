@@ -1,15 +1,13 @@
 package ic2.api.crops;
 
-import java.util.Collection;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.Collection;
 
 /**
  * General management of the crop system.

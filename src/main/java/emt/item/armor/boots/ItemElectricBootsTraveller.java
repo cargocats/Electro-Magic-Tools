@@ -4,7 +4,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
-import emt.EMT;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;

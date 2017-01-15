@@ -2,11 +2,18 @@ package emt.item.focus;
 
 import emt.entity.EntityEnergyBall;
 import ic2.api.item.ElectricItem;
+import ic2.core.item.armor.ItemArmorElectric;
+import ic2.core.item.armor.ItemArmorIC2;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.ItemFocusBasic;
 
 public class ItemEnergyBallFocus extends ItemBaseFocus {
 

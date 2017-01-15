@@ -20,3 +20,9 @@ Before posting to the issue tracker, make sure you meet the following criteria:
 - You've gone through the effort to find what conditions are necessary to reproduce the issue.
 - The issue is subtle enough and has been around long enough that you think we might have missed it.
 - You speak English or Russian well enough to explain yourself without wondering whether you will be understood. 
+
+
+# Fork
+This mod was forked by the GT:NH Team to continue the development of the 1.7.10 Branch.
+The up-to-date Master branch can be found on our Jenkins:
+http://jenkins.usrv.de

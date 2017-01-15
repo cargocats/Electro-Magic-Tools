@@ -1,14 +1,15 @@
 package emt.client.gui;
 
-import emt.EMT;
-import emt.client.gui.container.ContainerIndustrialWandRecharge;
-import emt.tile.TileEntityIndustrialWandRecharge;
-import emt.util.EMTTextHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import emt.EMT;
+import emt.client.gui.container.ContainerIndustrialWandRecharge;
+import emt.tile.TileEntityIndustrialWandRecharge;
+import emt.util.EMTTextHelper;
 
 public class GuiIndustrialWandRecharger extends GuiContainer {
 

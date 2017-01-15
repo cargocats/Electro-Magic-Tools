@@ -1,13 +1,16 @@
 package emt.init;
 
 import emt.EMT;
+import emt.client.EMTKeys;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTResearchAspects;
 import emt.util.EMTResearchItem;
 import ic2.api.item.IC2Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 
 public class EMTResearches {

@@ -1,21 +1,18 @@
 package emt.client.renderer;
 
-import static org.lwjgl.opengl.GL11.*;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import emt.EMT;
-import emt.entity.EntityLaser;
 import emt.entity.EntityShield;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderShield extends Render {
 	private static final ResourceLocation shieldTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/shield.png");

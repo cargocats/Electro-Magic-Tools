@@ -41,7 +41,7 @@ public class TileElectricCloud extends TileEntity {
 		if (worldObj.rand.nextInt(3) == 0) {
 			FXWisp wisp = new FXWisp(worldObj, xCoord + 0.5 + ((worldObj.rand.nextInt(40) / 160f) - 0.125f), yCoord + 0.5, zCoord + 0.5 + ((worldObj.rand.nextInt(40) / 160f) - 0.125f), 0.4f + worldObj.rand.nextInt(40) / 100f, 1);
 			wisp.setGravity(-0.02F);
-			wisp.setRBGColorF(worldObj.rand.nextInt(40) / 100f, 0, 1);
+			wisp.setRBGColorF(worldObj.rand.nextInt(20) / 100f, worldObj.rand.nextInt(20) / 100f, 1);
 			wisp.setAlphaF(1);
 			ParticleEngine.instance.addEffect(worldObj, wisp);
 		}

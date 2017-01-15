@@ -8,7 +8,6 @@ import ic2.api.item.IElectricItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemHoe;
@@ -18,7 +17,6 @@ import net.minecraft.world.World;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.blocks.BlockCustomPlant;
 import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.items.equipment.ItemElementalHoe;
 import thaumcraft.common.lib.utils.Utils;
 
 import java.util.List;

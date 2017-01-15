@@ -1,26 +1,17 @@
 package emt.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import emt.block.BlockElectricCloud;
-import emt.block.BlockEssentiaGenerators;
-import emt.block.BlockMachines;
-import emt.block.BlockPortableNode;
-import emt.block.BlockShield;
-import emt.block.BlockSolars;
+import emt.block.*;
 import emt.item.block.ItemBlockElectricCloud;
-import emt.item.block.ItemBlockEssentiaGenerator;
 import emt.item.block.ItemBlockEssentiaGenerators;
 import emt.item.block.ItemBlockMachines;
 import emt.item.block.ItemBlockSolars;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
-import net.minecraft.block.Block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import static thaumcraft.api.ThaumcraftApi.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+
+import static thaumcraft.api.ThaumcraftApi.registerObjectTag;
 
 public class EMTBlocks {
 

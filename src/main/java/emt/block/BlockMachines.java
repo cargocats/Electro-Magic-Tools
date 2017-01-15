@@ -1,10 +1,11 @@
 package emt.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.tile.TileEntityEtherealMacerator;
+import emt.tile.TileEntityIndustrialWandRecharge;
 import ic2.api.item.IC2Items;
-
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,11 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.TileEntityEtherealMacerator;
-import emt.tile.TileEntityIndustrialWandRecharge;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockMachines extends BlockBaseContainer {
 

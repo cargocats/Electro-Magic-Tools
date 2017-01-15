@@ -1,44 +1,35 @@
 package emt.init;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTCraftingAspects;
 import emt.util.EMTResearchAspects;
-
-import static emt.util.EMTRandomHelper.*;
-import ic2.api.item.ElectricItem;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 import ic2.core.BasicMachineRecipeManager;
 import ic2.core.Ic2Items;
-import ic2.core.item.ItemFluidCell;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import static thaumcraft.api.ThaumcraftApi.*;
-import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.crafting.ShapelessArcaneRecipe;
-import thaumcraft.common.blocks.ItemJarFilled;
 import thaumcraft.common.blocks.ItemJarNode;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 import java.util.Iterator;
+
+import static emt.util.EMTRandomHelper.getChargedItem;
+import static thaumcraft.api.ThaumcraftApi.*;
 
 public class EMTRecipes {
 

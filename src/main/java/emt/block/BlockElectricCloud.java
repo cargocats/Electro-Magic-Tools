@@ -1,19 +1,11 @@
 package emt.block;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.tile.TileElectricCloud;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -21,10 +13,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXSparkle;
-import thaumcraft.client.fx.particles.FXWisp;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
-import thaumcraft.common.tiles.TileNitor;
+
+import java.util.Random;
 
 public class BlockElectricCloud extends BlockBase {
 	public IIcon icon;

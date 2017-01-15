@@ -14,15 +14,13 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import emt.command.CommandOutputs;
 import emt.init.EMTEntities;
-import emt.init.Registry;
 import emt.init.EMTResearches;
+import emt.init.Registry;
 import emt.network.PacketEMTKeys;
 import emt.proxy.CommonProxy;
 import emt.util.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

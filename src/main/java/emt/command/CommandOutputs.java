@@ -1,7 +1,5 @@
 package emt.command;
 
-import emt.util.EMTEssentiasOutputs;
-import emt.util.EMTTextHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -14,6 +12,9 @@ import thaumcraft.api.aspects.Aspect;
 
 import java.util.Collection;
 import java.util.List;
+
+import emt.util.EMTEssentiasOutputs;
+import emt.util.EMTTextHelper;
 
 public class CommandOutputs extends CommandBase {
 

@@ -1,12 +1,14 @@
 package thaumcraft.api.research;
 
-import cpw.mods.fml.common.FMLLog;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.apache.logging.log4j.Level;
-
 import java.util.Collection;
 import java.util.LinkedHashMap;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
+import org.apache.logging.log4j.Level;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class ResearchCategories {
 	

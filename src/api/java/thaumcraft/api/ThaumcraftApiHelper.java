@@ -1,5 +1,8 @@
 package thaumcraft.api;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,9 +18,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaTransport;
-
-import java.util.HashMap;
-import java.util.Iterator;
 
 public class ThaumcraftApiHelper {
 	

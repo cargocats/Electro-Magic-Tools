@@ -1,6 +1,7 @@
 package emt.tile;
 
 import emt.init.EMTBlocks;
+import emt.tile.TileEntityEMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.IC2Items;
 import ic2.api.tile.IWrenchable;

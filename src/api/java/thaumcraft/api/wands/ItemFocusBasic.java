@@ -1,7 +1,9 @@
 package thaumcraft.api.wands;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.text.DecimalFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -16,10 +18,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-
-import java.text.DecimalFormat;
-import java.util.LinkedHashMap;
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFocusBasic extends Item {
 	

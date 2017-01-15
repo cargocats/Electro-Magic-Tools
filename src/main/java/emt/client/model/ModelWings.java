@@ -1,8 +1,10 @@
 package emt.client.model;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelWings extends ModelBiped {
 

@@ -1,16 +1,18 @@
 package emt.item.block;
 
-import emt.block.BlockBaseContainer;
-import emt.util.EMTConfigHandler;
-import emt.util.EMTTextHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import static emt.util.EMTTextHelper.localize;
+
 import java.util.List;
 
-import static emt.util.EMTTextHelper.localize;
+import emt.block.BlockBaseContainer;
+import emt.block.BlockSolars;
+import emt.util.EMTConfigHandler;
+import emt.util.EMTTextHelper;
 
 public class ItemBlockSolars extends ItemBlock {
 

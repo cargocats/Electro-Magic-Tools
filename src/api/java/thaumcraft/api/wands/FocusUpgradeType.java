@@ -2,7 +2,9 @@ package thaumcraft.api.wands;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.apache.logging.log4j.LogManager;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 

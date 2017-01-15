@@ -8,11 +8,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
 
+import static emt.util.EMTConfigHandler.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import static emt.util.EMTConfigHandler.*;
 
 public class EMTGuiConfig extends GuiConfig {
 

@@ -1,9 +1,10 @@
 package ic2.api.recipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import java.util.Map;
+
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.fluids.FluidStack;
 
 public interface ICannerEnrichRecipeManager {
 	/**

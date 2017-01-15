@@ -1,12 +1,13 @@
 package emt.tile.solar;
 
-import emt.tile.TileEntityEMT;
 import ic2.api.energy.prefab.BasicSource;
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Random;
+
+import emt.tile.TileEntityEMT;
 
 public abstract class TileEntitySolarBase extends TileEntityEMT implements IWrenchable {
 

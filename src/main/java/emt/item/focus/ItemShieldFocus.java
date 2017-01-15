@@ -1,17 +1,27 @@
 package emt.item.focus;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import emt.EMT;
 import emt.entity.EntityShield;
+import emt.init.EMTBlocks;
 import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.items.wands.ItemWandCasting;
-
-import java.util.LinkedList;
 
 public class ItemShieldFocus extends ItemBaseFocus {
 	private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 5);

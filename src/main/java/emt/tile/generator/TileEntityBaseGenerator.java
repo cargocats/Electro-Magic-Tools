@@ -1,15 +1,19 @@
 package emt.tile.generator;
 
+import java.util.Random;
+
 import emt.tile.TileEntityEMT;
+import emt.util.EMTConfigHandler;
 import ic2.api.energy.prefab.BasicSource;
+import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IAspectSource;
+import thaumcraft.common.lib.events.EssentiaHandler;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
-
-import java.util.Random;
 
 public abstract class TileEntityBaseGenerator extends TileEntityEMT {
 

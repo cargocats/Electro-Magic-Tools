@@ -3,15 +3,21 @@ package emt.item.armor.wings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
+import ic2.core.IC2;
+import ic2.core.util.StackUtil;
 
 import java.util.List;
 

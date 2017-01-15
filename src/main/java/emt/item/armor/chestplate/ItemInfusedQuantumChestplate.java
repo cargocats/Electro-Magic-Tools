@@ -1,40 +1,70 @@
 package emt.item.armor.chestplate;
 
+import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
+import emt.EMT;
 import emt.client.model.ModelSpecialArmor;
+import emt.client.model.ModelWings;
 import emt.init.EMTItems;
+import emt.item.armor.wings.ItemNanoWing;
+import emt.item.armor.wings.ItemQuantumWing;
 import emt.util.EMTConfigHandler;
+import emt.util.EMTRandomHelper;
+import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IC2Items;
+import ic2.api.item.IElectricItemManager;
 import ic2.core.IC2;
+import ic2.core.IC2Achievements;
+import ic2.core.IC2Potion;
+import ic2.core.Ic2Items;
+import ic2.core.Platform;
+import ic2.core.audio.AudioManager;
 import ic2.core.audio.AudioSource;
 import ic2.core.audio.PositionSpec;
 import ic2.core.init.InternalName;
+import ic2.core.init.MainConfig;
+import ic2.core.item.ItemTinCan;
 import ic2.core.item.armor.ItemArmorElectric;
+import ic2.core.util.ConfigUtil;
+import ic2.core.util.Keyboard;
 import ic2.core.util.StackUtil;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.FoodStats;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ISpecialArmor;
+import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 

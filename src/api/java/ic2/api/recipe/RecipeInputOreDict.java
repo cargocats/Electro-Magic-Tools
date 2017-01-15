@@ -1,12 +1,13 @@
 package ic2.api.recipe;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeInputOreDict implements IRecipeInput {
 	public RecipeInputOreDict(String input1) {

@@ -1,5 +1,8 @@
 package emt.item.focus;
 
+import java.util.Map.Entry;
+
+import emt.item.focus.ItemBaseFocus;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,8 +11,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
-
-import java.util.Map.Entry;
 
 public class ItemWandChargingFocus extends ItemBaseFocus {
 

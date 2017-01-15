@@ -1,8 +1,8 @@
 package ic2.api.recipe;
 
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
+
+import net.minecraft.item.ItemStack;
 
 /**
  * Recipe manager interface for basic lists.

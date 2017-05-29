@@ -105,7 +105,7 @@ public class ItemOneRing extends ItemBase implements IBauble {
 			else if (corruption >= 24000 && corruption < 72000 && random.nextInt(2000) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
 
-				player.attackEntityFrom(DamageSource.magic, 5);
+				player.addPotionEffect(new PotionEffect(Potion.poison.id, 500, 2, false));
 			}
 			else if (corruption >= 72000 && corruption < 120000 && random.nextInt(4000) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;

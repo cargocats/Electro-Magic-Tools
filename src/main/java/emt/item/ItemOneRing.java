@@ -117,7 +117,6 @@ public class ItemOneRing extends ItemBase implements IBauble {
 
 				player.addPotionEffect(new PotionEffect(Potion.wither.id, 5000, 4, false));
 			}
-			corruption+=100;
 			//else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
 			//	player.isDead = true;
 			//}

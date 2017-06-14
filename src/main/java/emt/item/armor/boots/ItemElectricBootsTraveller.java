@@ -39,7 +39,6 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	public float speedBonus = 0.055F;
 	public float jumpBonus = 0.3F;
 	public double transferLimit = 100;
-	public boolean speedBoostActive = false;
 
 	public ItemElectricBootsTraveller(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);
@@ -116,11 +115,6 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (Keys.instance.isBoostKeyDown(player) && Keys.instance.isModeSwitchKeyDown(player))
-		{
-			speedBoostActive = !speedBoostActive;
-		}
-		
 		if ((!player.capabilities.isFlying) && (player.moveForward > 0.0F)) {
 			if ((player.worldObj.isRemote) && (!player.isSneaking())) {
 				if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(Integer.valueOf(player.getEntityId()))) {
@@ -128,7 +122,8 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 				}
 				player.stepHeight = 1.0F;
 			}
-			if (speedBoostActive && ((player.onGround || player.capabilities.isFlying) && player.moveForward > 0F)) {
+			
+			if (((player.onGround || player.capabilities.isFlying) && player.moveForward > 0F)) {
 				player.moveFlying(0F, 1F, speedBonus);
 				player.jumpMovementFactor = jumpBonus;
 			}

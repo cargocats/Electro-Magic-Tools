@@ -156,11 +156,11 @@ emt.text.Electric Goggles=You have found a way to detect auras using purely elec
 
 emt.rsname.Nanosuit Goggles of Revealing=Nanosuit Goggles of Revealing
 emt.tag.Nanosuit Goggles of Revealing=Top-tier eye protection
-emt.text.Nanosuit Goggles of Revealing=You have discovered a way to incorporate your previous vis sensors to a Nanosuit Helmet without moving too much around. By infusing the nano helmet with magic, you will be able to use it to see Aura Nodes. During the magical process, the control circuits for the night vision feature are replaced with capacitors to absorb the excess magical energy and vis-sensing microchips. This will prevent you from turning off the night vision effect of the helmet.
+emt.text.Nanosuit Goggles of Revealing=You have discovered a way to incorporate your previous vis sensors to a Nanosuit Helmet without moving too much around. By infusing the nano helmet with magic, you will be able to use it to see Aura Nodes. During the magical process, the control circuits for the night vision feature are replaced with capacitors to absorb the excess magical energy and vis-sensing microchips.
 
 emt.rsname.Quantum Goggles of Revealing=Quantum Goggles of Revealing
 emt.tag.Quantum Goggles of Revealing=Protection coupled with utility
-emt.text.Quantum Goggles of Revealing=It took a lot of trial and error, but you have found a way to slip in vis detection sensors to a Quantum Helmet. By infusing the quantum helmet with magic, you will be able to use it to see Aura Nodes. During the design process, you had to replace several control circuits that involve night vision and automatic feeding with vis detecting circuitry and capacitors to absorb the excess magical energy. You find that using a Mining Laser to contain it can safely focus and direct the explosive pulse where the vision effect and the feeding unit of the helmet lie. Have fun getting force-fed energy. This will prevent you from turning off the night vision and feeding features.
+emt.text.Quantum Goggles of Revealing=It took a lot of trial and error, but you have found a way to slip in vis detection sensors to a Quantum Helmet. By infusing the quantum helmet with magic, you will be able to use it to see Aura Nodes. During the design process, you had to replace several control circuits that involve night vision and automatic feeding with vis detecting circuitry and capacitors to absorb the excess magical energy. You find that using a Mining Laser to contain it can safely focus and direct the explosive pulse where the vision effect and the feeding unit of the helmet lie. Have fun getting force-fed energy.
 
 emt.rsname.Iron Omnitool=Iron Omnitool
 emt.tag.Iron Omnitool=Changing tools is for peasants
@@ -248,7 +248,7 @@ emt.text.Compressed Solars=You have found a way to compress 9 mundane Solar Pane
 
 emt.rsname.Solar Helmet of Revealing=Solar Helmet of Revealing
 emt.tag.Solar Helmet of Revealing=The sunlight hurts my eyes
-emt.text.Solar Helmet of Revealing=You now have a helmet that acts exactly like your quantum goggles of revealing, but can also recharge your chest armor! It generates 128 EU/t during the day, and nothing at night.
+emt.text.Solar Helmet of Revealing=You now have a helmet that acts exactly like your quantum goggles of revealing, but can also recharge your chest armor! It generates 65536 EU during the day, and 4096 EU at night.
 
 emt.rsname.Diamond Chainsaw=Diamond Chainsaw
 emt.tag.Diamond Chainsaw=Harder, better, faster, stronger

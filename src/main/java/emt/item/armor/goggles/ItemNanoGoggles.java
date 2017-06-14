@@ -24,9 +24,9 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 		this.setMaxStackSize(1);
 		visDiscount = 6;
 		tier = 3;
-		maxCharge = 100000;
-		energyPerDamage = 1000;
-		transferLimit = 100;
+		maxCharge = 1000000;
+		energyPerDamage = 5000;
+		transferLimit = 1600;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -38,6 +38,16 @@ public class ItemNanoGoggles extends ItemElectricGoggles {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		return EMT.TEXTURE_PATH + ":textures/models/thaumicnanohelmet.png";
+	}
+
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 0.9D;
+	}
+
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 3;
 	}
 
 	@Override

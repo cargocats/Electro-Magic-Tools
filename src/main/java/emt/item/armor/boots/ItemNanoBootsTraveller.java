@@ -10,14 +10,24 @@ import net.minecraft.item.ItemStack;
 
 public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 
-	public ItemNanoBootsTraveller(int par3, int par4) {
-		super(par3, par4);
+	public ItemNanoBootsTraveller(ArmorMaterial material, int par3, int par4) {
+		super(material, par3, par4);
 		maxCharge = 1000000;
 		speedBonus = (float) EMTConfigHandler.nanoBootsSpeed;
 		jumpBonus = (float) EMTConfigHandler.nanoBootsJump;
 		visDiscount = 4;
-		transferLimit = 1000;
-		energyPerDamage = 500;
+		transferLimit = 1600;
+		energyPerDamage = 5000;
+	}
+
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 0.9D;
+	}
+
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 3;
 	}
 
 	@SideOnly(Side.CLIENT)

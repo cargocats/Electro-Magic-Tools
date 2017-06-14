@@ -4,15 +4,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ItemQuantumWing extends ItemNanoWing {
-	public static int maxCharge = 1000000;
+	public static int maxCharge = 10000000;
+    public int tier = 4;
 
     public ItemQuantumWing(ArmorMaterial material, int par3, int par4) {
         super(material, par3, par4);
@@ -20,8 +24,8 @@ public class ItemQuantumWing extends ItemNanoWing {
         this.setMaxDamage(27);
         this.setCreativeTab(EMT.TAB);
         visDiscount = 6;
-        transferLimit = 10000;
-        energyPerDamage = 1000;
+        transferLimit = 12000;
+        energyPerDamage = 20000;
     }
     
     @Override
@@ -49,5 +53,14 @@ public class ItemQuantumWing extends ItemNanoWing {
     @Override
     public double getMaxCharge(ItemStack itemStack) {
         return maxCharge;
+    }
+
+    @Override
+    public int getTier(ItemStack itemStack) {
+        return 4;
+    }
+
+    public double getDamageAbsorptionRatio() {
+        return 1D;
     }
 }

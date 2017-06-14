@@ -10,14 +10,24 @@ import net.minecraft.item.ItemStack;
 
 public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 
-	public ItemQuantumBootsTraveller(int par3, int par4) {
-		super(par3, par4);
+	public ItemQuantumBootsTraveller(ArmorMaterial material, int par3, int par4) {
+		super(material, par3, par4);
 		maxCharge = 10000000;
 		speedBonus = (float) EMTConfigHandler.quantumBootsSpeed;
 		jumpBonus = (float) EMTConfigHandler.quantumBootsJump;
 		visDiscount = 5;
-		transferLimit = 10000;
-		energyPerDamage = 1000;
+		transferLimit = 12000;
+		energyPerDamage = 20000;
+	}
+
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 1D;
+	}
+
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 4;
 	}
 
 	@SideOnly(Side.CLIENT)

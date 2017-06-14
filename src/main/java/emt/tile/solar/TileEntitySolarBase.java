@@ -11,7 +11,7 @@ import emt.tile.TileEntityEMT;
 
 public abstract class TileEntitySolarBase extends TileEntityEMT implements IWrenchable {
 
-	public BasicSource energySource = new BasicSource(this, 10000, 4);
+	public BasicSource energySource;
 	public static Random random = new Random();
 	public boolean initialized;
 	public boolean theSunIsVisible;

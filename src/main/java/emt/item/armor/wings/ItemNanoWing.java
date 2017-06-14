@@ -25,10 +25,10 @@ import java.util.List;
 
 public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectricItem, ISpecialArmor, IMetalArmor {
 
-	public static int maxCharge = 100000;
+	public static int maxCharge = 1000000;
 	public int tier = 3;
-	public double transferLimit = 1000;
-	public int energyPerDamage = 100;
+	public double transferLimit = 1600;
+	public int energyPerDamage = 5000;
 
 	public ItemNanoWing(ArmorMaterial material, int par3, int par4) {
 		super(material, par3, par4);
@@ -136,11 +136,11 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 0.9D;
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.25D;
 	}
 
 	/* IC2 API METHODS */
@@ -157,7 +157,7 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
 
 	@Override
 	public int getTier(ItemStack itemStack) {
-		return 2;
+		return 3;
 	}
 
 	@Override

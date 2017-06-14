@@ -90,7 +90,7 @@ public class ItemOneRing extends ItemBase implements IBauble {
 		else
 			forgeTag.setInteger("MindCorruption", 0);
 
-		((EntityPlayer) player).capabilities.disableDamage = true;
+		//((EntityPlayer) player).capabilities.disableDamage = true;
 
 		if (!player.worldObj.isRemote) {
 			if (corruption <= 0) {
@@ -105,7 +105,7 @@ public class ItemOneRing extends ItemBase implements IBauble {
 			else if (corruption >= 24000 && corruption < 72000 && random.nextInt(2000) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
 
-				player.attackEntityFrom(DamageSource.magic, 5);
+				player.addPotionEffect(new PotionEffect(Potion.poison.id, 500, 2, false));
 			}
 			else if (corruption >= 72000 && corruption < 120000 && random.nextInt(4000) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
@@ -117,9 +117,9 @@ public class ItemOneRing extends ItemBase implements IBauble {
 
 				player.addPotionEffect(new PotionEffect(Potion.wither.id, 5000, 4, false));
 			}
-			else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
-				player.isDead = true;
-			}
+			//else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
+			//	player.isDead = true;
+			//}
 		}
 		forgeTag.setInteger("MindCorruption", ++corruption);
 		tag.setTag("ForgeData", forgeTag);

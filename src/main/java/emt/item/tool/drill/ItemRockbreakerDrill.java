@@ -52,8 +52,8 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 		else {
 			this.setMaxDamage(2571);
 		}
-		maxCharge = 900000;
-		transferLimit = 900;
+		maxCharge = 1000000;
+		transferLimit = 1000;
 		tier = 3;
 	}
 

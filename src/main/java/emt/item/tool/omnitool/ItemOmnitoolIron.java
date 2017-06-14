@@ -25,7 +25,7 @@ import java.util.Locale;
 
 public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 
-	public int maxCharge = 20000;
+	public int maxCharge = 50000;
 	public int cost;
 	public int hitCost = 125;
 

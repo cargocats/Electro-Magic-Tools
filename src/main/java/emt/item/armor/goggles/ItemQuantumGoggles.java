@@ -31,10 +31,10 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		maxCharge = 10000000;
-		tier = 3;
+		tier = 4;
 		visDiscount = 8;
-		transferLimit = 10000;
-		energyPerDamage = 1000;
+		transferLimit = 12000;
+		energyPerDamage = 20000;
 
 		potionCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));
 		potionCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(15000));
@@ -50,6 +50,16 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		return EMT.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
+	}
+
+	@Override
+	public double getDamageAbsorptionRatio() {
+		return 1D;
+	}
+
+	@Override
+	public int getTier(ItemStack itemStack) {
+		return 4;
 	}
 
 	@Override

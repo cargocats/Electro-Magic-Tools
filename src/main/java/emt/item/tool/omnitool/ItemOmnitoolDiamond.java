@@ -26,7 +26,7 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 		else {
 			this.setMaxDamage(350);
 		}
-		maxCharge = 70000;
+		maxCharge = 100000;
 		hitCost = 250;
 	}
 

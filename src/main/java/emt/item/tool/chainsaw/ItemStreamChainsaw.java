@@ -37,7 +37,7 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 		setCreativeTab(EMT.TAB);
 		this.maxStackSize = 1;
 		this.setMaxDamage(27);
-		maxCharge = 900000;
+		maxCharge = 1000000;
 		cost = 400;
 		hitCost = 500;
 		tier = 3;

@@ -23,7 +23,7 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 		this.setCreativeTab(EMT.TAB);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
-		maxCharge = 60000;
+		maxCharge = 100000;
 		cost = 250;
 		hitCost = 350;
 	}

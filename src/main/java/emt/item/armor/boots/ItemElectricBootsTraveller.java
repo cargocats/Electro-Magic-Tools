@@ -34,15 +34,15 @@ import java.util.List;
 public class ItemElectricBootsTraveller extends ItemArmor implements IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
 
 	public int maxCharge = 100000;
-	public int energyPerDamage = 100;
+	public int energyPerDamage = 1000;
 	public int visDiscount = 2;
 	public float speedBonus = 0.055F;
 	public float jumpBonus = 0.3F;
 	public double transferLimit = 100;
 	public boolean speedBoostActive = false;
 
-	public ItemElectricBootsTraveller(int par3, int par4) {
-		super(ArmorMaterial.DIAMOND, par3, par4);
+	public ItemElectricBootsTraveller(ArmorMaterial material, int par3, int par4) {
+		super(material, par3, par4);
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		this.setCreativeTab(EMT.TAB);
@@ -71,13 +71,13 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
 		if (source.isUnblockable()) {
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
+			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 0);
 		}
 		else {
 			double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
 			int energyPerDamage = getEnergyPerDamage();
 			double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
+			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, absorptionRatio, (int) damageLimit);
 		}
 	}
 
@@ -97,11 +97,11 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 0.5D;
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.15D;
 	}
 
 	@Override

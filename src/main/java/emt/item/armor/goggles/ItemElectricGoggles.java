@@ -29,10 +29,10 @@ import java.util.List;
 
 public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVisDiscountGear, IGoggles, IRevealer, IMetalArmor, ISpecialArmor {
 
-	public double maxCharge = 10000;
-	public double transferLimit = 10;
+	public double maxCharge = 100000;
+	public double transferLimit = 100;
 	public int tier = 2;
-	public int energyPerDamage = 100;
+	public int energyPerDamage = 1000;
 	public int visDiscount = 5;
 
 	public ItemElectricGoggles(ArmorMaterial material, int par3, int par4) {
@@ -148,7 +148,7 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	}
 
 	public double getDamageAbsorptionRatio() {
-		return 1.1000000000000001D;
+		return 0.5D;
 	}
 
 	public int getEnergyPerDamage() {
@@ -156,7 +156,7 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	}
 
 	private double getBaseAbsorptionRatio() {
-		return 0.14999999999999999D;
+		return 0.15D;
 	}
 
 	/* IC2 API METHODS */

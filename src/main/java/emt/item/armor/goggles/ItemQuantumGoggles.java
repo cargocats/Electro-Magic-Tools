@@ -6,6 +6,9 @@ import emt.EMT;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IC2Items;
+import ic2.core.IC2;
+import ic2.core.util.Keyboard;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,10 +19,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class ItemQuantumGoggles extends ItemNanoGoggles {
 
@@ -62,48 +68,40 @@ public class ItemQuantumGoggles extends ItemNanoGoggles {
 		return 4;
 	}
 
+	// MUAHAHAHA
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		int refill = player.getAir();
-		if (ElectricItem.manager.canUse(itemStack, 1000) && refill < 100) {
-			player.setAir(refill + 200);
-			ElectricItem.manager.use(itemStack, 1000, null);
-		}
+		try {
+			Field f;
+			f = Keyboard.class.getDeclaredField("playerKeys");
+			f.setAccessible(true);
+			Map<EntityPlayer, Set<Enum>> playerKeys = (Map<EntityPlayer, Set<Enum>>) f.get(IC2.keyboard);
 
-		Iterator i$ = (new LinkedList(player.getActivePotionEffects())).iterator();
-		do {
-			if (!i$.hasNext()) {
-				break;
-			}
-			{
-				PotionEffect effect = (PotionEffect) i$.next();
-				int id = effect.getPotionID();
-				Integer cost = (Integer) potionCost.get(Integer.valueOf(id));
-				if (cost != null) {
-					cost = Integer.valueOf(cost.intValue() * (effect.getAmplifier() + 1));
-					if (ElectricItem.manager.canUse(itemStack, cost.intValue())) {
-						ElectricItem.manager.use(itemStack, cost.intValue(), null);
-						ItemStack milk = (new ItemStack(Items.milk_bucket));
-						player.curePotionEffects(milk);
+			Enum hub = null;
+			Set<Enum> set = playerKeys.get(player);
+			
+			if (set != null) {
+				for (Enum e : set) {
+					if (e.ordinal() == 6) {
+						hub = e;
 					}
 				}
+				set.remove(hub);
 			}
-		}
-		while (true);
 
-		if (EMTConfigHandler.nightVisionOff == false) {
-			if (ElectricItem.manager.canUse(itemStack, 1 / 1000)) {
-				int x = MathHelper.floor_double(player.posX);
-				int z = MathHelper.floor_double(player.posZ);
-				int y = MathHelper.floor_double(player.posY);
-				int lightlevel = player.worldObj.getBlockLightValue(x, y, z);
-				if (lightlevel >= 0)
-					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, -3));
-				ElectricItem.manager.use(itemStack, 1 / 1000, player);
+			IC2Items.getItem("quantumHelmet").getItem().onArmorTick(world, player, itemStack);
+
+			if (hub != null) {
+				set.add(hub);
 			}
-			else {
-				player.addPotionEffect(new PotionEffect(Potion.blindness.id, 300, 0, true));
-			}
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 	}
 }

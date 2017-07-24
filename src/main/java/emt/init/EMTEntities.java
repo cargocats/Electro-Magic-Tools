@@ -9,7 +9,6 @@ import emt.entity.EntityShield;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
-import net.minecraft.entity.EntityLiving;
 
 public class EMTEntities {
 

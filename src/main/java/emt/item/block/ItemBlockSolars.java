@@ -10,7 +10,6 @@ import static emt.util.EMTTextHelper.localize;
 import java.util.List;
 
 import emt.block.BlockBaseContainer;
-import emt.block.BlockSolars;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
 

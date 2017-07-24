@@ -17,8 +17,6 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
 public class BlockEssentiaGenerators extends BlockBaseContainer {
 
 	public BlockEssentiaGenerators(String name) {

@@ -1,11 +1,9 @@
 package emt.network;
 
 import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import emt.init.EMTItems;
 
 public class PacketEMTKeys implements IMessage, IMessageHandler<PacketEMTKeys, IMessage> {

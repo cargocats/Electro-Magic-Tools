@@ -37,8 +37,6 @@ import emt.item.tool.drill.ItemThaumiumDrill;
 import emt.item.tool.omnitool.ItemOmnitoolDiamond;
 import emt.item.tool.omnitool.ItemOmnitoolIron;
 import emt.item.tool.omnitool.ItemOmnitoolThaumium;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;

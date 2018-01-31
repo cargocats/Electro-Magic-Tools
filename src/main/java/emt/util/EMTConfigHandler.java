@@ -31,6 +31,10 @@ public class EMTConfigHandler {
 	public static double nanoBootsJump;
 	public static double quantumBootsJump;
 	public static double tripleCompressedSolarOutput;
+	public static double nanoBootsMinDrop;
+	public static double nanoBootsMaxDrop;
+	public static double quantumBootsMinDrop;
+	public static double quantumBootsMaxDrop;
 	
 	/** Essentias **/
     public static double fireOutput;
@@ -106,6 +110,8 @@ public class EMTConfigHandler {
 	public static boolean infusedQuantumChestplate;
 	public static boolean aerGeneratorResearch;
 
+
+
 	public static void init(File file) {
 		config = new Configuration(file);
 		syncConfig();
@@ -152,6 +158,12 @@ public class EMTConfigHandler {
 		armorBaubleProduction = config.get(VALUES, "Armor Charging Ring production", 32, "Default is 32").getInt();
 		inventoryBaubleProdution = config.get(VALUES, "Inventory Charging Ring production", 32, "Default is 32").getInt();
 		wandChargeFocusCost = config.get(VALUES, "Wand Focus: Wand Charging Cost", 40000, "Default is 40000").getInt();
+
+
+		nanoBootsMinDrop = config.get(VALUES, "Nano Boots of the Traveller minimum drop", 6.0, "The distance allowed to fall without any damage").getDouble(nanoBootsMinDrop);
+		nanoBootsMaxDrop = config.get(VALUES, "Nano Boots of the Traveller maximum healthy drop", 35.0, "Energy amount drained will tripled if player drops more than this amount of blocks").getDouble(nanoBootsMaxDrop);
+		quantumBootsMinDrop = config.get(VALUES, "Quantum Boots of the Traveller minimum drop", 10.0, "The distance allowed to fall without any damage").getDouble(quantumBootsMinDrop);
+  	quantumBootsMaxDrop = config.get(VALUES, "Quantum Boots of the Traveller maximum healthy drop", 100.0, "Energy amount drained will tripled if player drops more than this amount of blocks").getDouble(quantumBootsMaxDrop);
 
 		thaumiumDrillResearch = config.get(RESEARCH, "Thaumium Drill", false).getBoolean(thaumiumDrillResearch);
 		thaumiumChainsawResearch = config.get(RESEARCH, "Thaumium Chainsaw", false).getBoolean(thaumiumChainsawResearch);

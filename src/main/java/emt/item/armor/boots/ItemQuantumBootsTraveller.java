@@ -21,6 +21,18 @@ public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 	}
 
 	@Override
+  public float getMaxHealthyDropDist()
+	{
+		return (float) EMTConfigHandler.quantumBootsMaxDrop;
+	}
+
+  @Override
+  public float getMinimumDropDist()
+  {
+    return (float) EMTConfigHandler.quantumBootsMinDrop;
+  }
+
+	@Override
 	public double getDamageAbsorptionRatio() {
 		return 1D;
 	}

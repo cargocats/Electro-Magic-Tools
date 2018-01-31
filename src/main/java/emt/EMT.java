@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 public class EMT {
 	public static final String NAME = "Electro-Magic Tools";
 	public static final String MOD_ID = "EMT";
-	public static final String VERSION = "1.2.6.4";
+	public static final String VERSION = "1.2.6.6";
 	public static final String TEXTURE_PATH = "emt";
 	public static final String GUI_FACTORY = "emt.client.gui.config.EMTGuiFactory";
 	public static final String CLIENT_PROXY = "emt.proxy.ClientProxy";
@@ -51,6 +51,11 @@ public class EMT {
 	public static final CreativeTabs TAB = new EMTCreativeTab(MOD_ID + ".creativeTab");
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
+
+	public boolean isSimulating()
+	{
+		return !FMLCommonHandler.instance().getEffectiveSide().isClient();
+	}
 
 	@Instance(MOD_ID)
 	public static EMT instance;

@@ -20,6 +20,18 @@ public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 		energyPerDamage = 5000;
 	}
 
+  @Override
+  public float getMaxHealthyDropDist()
+  {
+    return (float) EMTConfigHandler.nanoBootsMaxDrop;
+  }
+
+  @Override
+  public float getMinimumDropDist()
+  {
+    return (float) EMTConfigHandler.nanoBootsMinDrop;
+  }
+
 	@Override
 	public double getDamageAbsorptionRatio() {
 		return 0.9D;

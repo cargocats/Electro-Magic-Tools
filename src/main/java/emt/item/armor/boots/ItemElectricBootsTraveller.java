@@ -9,6 +9,7 @@ import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.api.item.IMetalArmor;
+import ic2.core.item.ElectricItemManager;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -139,17 +140,49 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 		}
 	}
 
+	// make the boots worth upgrading
+  public float getMaxHealthyDropDist()
+  {
+    return 20.0F;
+  }
+
+  public float getMinimumDropDist()
+  {
+    return 4.0f;
+  }
+
 	@SubscribeEvent
-	public void onLivingFall(LivingFallEvent event) {
-		if (event.entity instanceof EntityPlayer) {
-			EntityPlayer entity = (EntityPlayer) event.entity;
-			if ((entity.inventory.armorInventory[0] != null) && (entity.inventory.armorInventory[0].getItem() instanceof ItemElectricBootsTraveller)) {
-				ItemStack stack = entity.inventory.armorInventory[0];
-				if (ElectricItem.manager.use(stack, energyPerDamage, entity))
-					event.setCanceled(true);
-			}
-		}
-	}
+	public void onLivingFall(LivingFallEvent event)
+  {
+    if( ( EMT.instance.isSimulating() ) && ( ( event.entity instanceof EntityLivingBase ) ) )
+    {
+      if( event.entity instanceof EntityPlayer )
+      {
+        EntityPlayer entity = (EntityPlayer) event.entity;
+        if( ( entity.inventory.armorInventory[0] != null ) && ( entity.inventory.armorInventory[0].getItem() instanceof ItemElectricBootsTraveller ) )
+        {
+          ItemElectricBootsTraveller tUsedBoots = (ItemElectricBootsTraveller)entity.inventory.armorInventory[0].getItem();
+          ItemStack stack = entity.inventory.armorInventory[0];
+
+          // Check if we dropped the minimum amount; To cover the jump-boost bonus without penalty
+          if ( tUsedBoots.getMinimumDropDist() > event.distance )
+          {
+            event.setCanceled( true );
+          }
+          else
+          {
+            float tEnergyDemand = tUsedBoots.energyPerDamage * (( ( event.distance > tUsedBoots.getMaxHealthyDropDist() ) ? event.distance * 3 : event.distance ) - 4.0F);
+            if( tEnergyDemand <= ElectricItem.manager.getCharge( stack ) )
+            {
+              //EMT.LOGGER.info( String.format("FD: %f DMG: %f EPD: %d HDD: %f", event.distance, tEnergyDemand, tUsedBoots.energyPerDamage, tUsedBoots.getMaxHealthyDropDist() ));
+              ElectricItem.manager.discharge( stack, tEnergyDemand, Integer.MAX_VALUE, true, false, false );
+              event.setCanceled( true );
+            }
+          }
+        }
+      }
+    }
+  }
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {

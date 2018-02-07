@@ -17,14 +17,23 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import thaumcraft.api.IWarpingGear;
 
 import java.util.List;
 import java.util.Random;
 
-public class ItemOneRing extends ItemBase implements IBauble {
-
-	public IIcon[] icon = new IIcon[16];
+public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear
+{
+  private static final String NBT_TAG_FORGE_DATA = "EMT";
+  private static final String NBT_TAG_MIND_CORRUPTION = "MindCorruption";
+  private static final String NBT_TAG_WARP = "warp";
+  public IIcon[] icon = new IIcon[16];
 	public Random random = new Random();
+
+  public int getWarp(ItemStack itemstack, EntityPlayer player)
+  {
+    return getItemWarpLevel(itemstack, false);
+  }
 
 	public ItemOneRing() {
 		super("bauble");
@@ -73,65 +82,122 @@ public class ItemOneRing extends ItemBase implements IBauble {
 		}
 	}
 
+	private NBTTagCompound getOrSetForgeTag(EntityPlayer pPlayer)
+  {
+    NBTTagCompound tPlayerNBT = pPlayer.getEntityData();
+    NBTTagCompound forgeTag = new NBTTagCompound();
+
+    // getCompoundTag already returns the contents of "ForgeData" TagCompound. Changed this to
+    // save our value in EMT Sub-Tag
+    if (tPlayerNBT.hasKey( NBT_TAG_FORGE_DATA ))
+      forgeTag = tPlayerNBT.getCompoundTag( NBT_TAG_FORGE_DATA );
+    else
+      tPlayerNBT.setTag( NBT_TAG_FORGE_DATA, forgeTag );
+
+    return forgeTag;
+  }
+
+  private int getItemWarpLevel(ItemStack stack, boolean increment)
+  {
+    NBTTagCompound tWarpTag = new NBTTagCompound();
+    int tWarpLevel = 0;
+    if (stack.hasTagCompound())
+    {
+      if (stack.getTagCompound().hasKey( NBT_TAG_WARP ))
+      {
+        tWarpLevel = stack.getTagCompound().getInteger( NBT_TAG_WARP );
+        if (increment)
+          stack.getTagCompound().setInteger( NBT_TAG_WARP , ++tWarpLevel);
+      }
+    }
+    else
+    {
+      tWarpTag.setInteger( NBT_TAG_WARP, 0 );
+      stack.setTagCompound( tWarpTag );
+    }
+
+    return tWarpLevel;
+  }
+
 	@Override
 	public void onWornTick(ItemStack stack, EntityLivingBase player) {
 		if (!player.isInvisible()) {
 			player.setInvisible(true);
+      ((EntityPlayer) player).capabilities.disableDamage = true;
 		}
+
+		// Stop doing this 20 times per second...
+    if ( random.nextInt(20) > 0)
+      return;
+
+		/* Why dump to a new tag when you can just grab the tag and work with it?
 		NBTTagCompound tag = new NBTTagCompound();
 		((EntityPlayer) player).writeToNBT(tag);
 		NBTTagCompound forgeTag = tag.getCompoundTag("ForgeData");
+*/
+
+		// Retrieve Players NBT Data
+
+    NBTTagCompound forgeTag = getOrSetForgeTag((EntityPlayer)player);
 
 		int corruption = 0;
 
-		if (forgeTag.hasKey("MindCorruption"))
-			corruption = forgeTag.getInteger("MindCorruption");
+		// get corruption levels, init to 0 if not existing yet
+		if (forgeTag.hasKey( NBT_TAG_MIND_CORRUPTION ))
+			corruption = forgeTag.getInteger( NBT_TAG_MIND_CORRUPTION );
 		else
-			forgeTag.setInteger("MindCorruption", 0);
-
-		//((EntityPlayer) player).capabilities.disableDamage = true;
+			forgeTag.setInteger( NBT_TAG_MIND_CORRUPTION, 0);
 
 		if (!player.worldObj.isRemote) {
-			if (corruption <= 0) {
+      //EMT.LOGGER.info( String.format( "Total Corruption: %d ItemWarpLevel: %d", corruption, getItemWarpLevel( stack, false ) ));
+
+			if (corruption == 0) {
 				((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "You have worn the Ring. Your soul has now been forever " + EMTTextHelper.PURPLE + "tainted. " + EMTTextHelper.RED + EMTTextHelper.ITALIC + "Beware of wearing the ring. The tainting will only " + EMTTextHelper.RED + EMTTextHelper.ITALIC + "increase, and strange things will start happening."));
 			}
-			else if (corruption > 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
-				player.addPotionEffect(new PotionEffect(Potion.blindness.id, 500, 2, false));
+			// First effect should become active after ~5 Minutes
+			else if (corruption > 300 && corruption < 1400 && random.nextInt(100) == 0) {
+        ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "The Ring somehow feels heavy"));
+			  if (random.nextBoolean())
+            player.addPotionEffect(new PotionEffect(Potion.blindness.id, 500, 2, false));
+			  else
+            player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
 			}
-			else if (corruption >= 6000 && corruption < 24000 && random.nextInt(2000) == 0) {
-				player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
-			}
-			else if (corruption >= 24000 && corruption < 72000 && random.nextInt(2000) == 0) {
+			else if (corruption >= 1400 && corruption < 3800 && random.nextInt(100) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
-
 				player.addPotionEffect(new PotionEffect(Potion.poison.id, 500, 2, false));
 			}
-			else if (corruption >= 72000 && corruption < 120000 && random.nextInt(4000) == 0) {
+			else if (corruption >= 3800 && corruption < 6500 && random.nextInt(100) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
-
 				player.motionY += 2d;
 			}
-			else if (corruption >= 120000 && random.nextInt(10000) == 0) {
+			else if (corruption >= 6500 && random.nextInt(10000) == 0) {
 				((EntityPlayer) player).capabilities.disableDamage = false;
-
-				player.addPotionEffect(new PotionEffect(Potion.wither.id, 5000, 4, false));
+				player.addPotionEffect(new PotionEffect(Potion.wither.id, 100, 4, false));
 			}
-			//else if (corruption + 100 >= Integer.MAX_VALUE) { // =3333333
-			//	player.isDead = true;
-			//}
+
+			if (corruption >= 300)
+      {
+        if ( random.nextInt( 100 ) == 0)
+        {
+          getItemWarpLevel( stack, true );
+          ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "The Ring suddenly starts to glow purple"));
+        }
+      }
 		}
-		forgeTag.setInteger("MindCorruption", ++corruption);
-		tag.setTag("ForgeData", forgeTag);
-		((EntityPlayer) player).readFromNBT(tag);
+		forgeTag.setInteger( NBT_TAG_MIND_CORRUPTION, ++corruption);
+		//tag.setTag( NBT_TAG_FORGE_DATA, forgeTag);
+		//((EntityPlayer) player).readFromNBT(tag);
 	}
 
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase player) {
+	  // This purges all corruption once the ring is put on / a second ring is equipped?
+/*
 		NBTTagCompound tag = new NBTTagCompound();
 		((EntityPlayer) player).writeToNBT(tag);
-		tag.getCompoundTag("ForgeData").setInteger("MindCorruption", 0);
+		tag.getCompoundTag( NBT_TAG_FORGE_DATA ).setInteger( NBT_TAG_MIND_CORRUPTION, 0);
 		((EntityPlayer) player).readFromNBT(tag);
-
+*/
 	}
 
 	@Override
@@ -139,11 +205,13 @@ public class ItemOneRing extends ItemBase implements IBauble {
 		player.setInvisible(false);
 		if (!((EntityPlayer) player).capabilities.isCreativeMode)
 			((EntityPlayer) player).capabilities.disableDamage = false;
-		NBTTagCompound tag = new NBTTagCompound();
+
+		/* Wtf? Remove ForgeData tag? There are more mods using this tag than just emt!
 		((EntityPlayer) player).writeToNBT(tag);
-		tag.removeTag("ForgeData");
+		tag.removeTag( NBT_TAG_FORGE_DATA );
 		((EntityPlayer) player).readFromNBT(tag);
-		player.addPotionEffect(new PotionEffect(Potion.confusion.id, 500, 2, false));
+		*/
+		player.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 1, false));
 	}
 
 	@Override
@@ -153,8 +221,22 @@ public class ItemOneRing extends ItemBase implements IBauble {
 
 	@Override
 	public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
-		NBTTagCompound tag = new NBTTagCompound();
-		((EntityPlayer) player).writeToNBT(tag);
-		return tag.getCompoundTag("ForgeData").getInteger("MindCorruption") > 600 ? true : false;
+	  // So, how this was written, you basically could not unequip the ring for 600 ticks after you equipped it, but afterwards you could?
+    // Let's make it a random chance to remove it instead...
+
+		// NBTTagCompound tag = getOrSetForgeTag((EntityPlayer) player);
+		// return (tag.getCompoundTag( NBT_TAG_FORGE_DATA ).getInteger( NBT_TAG_MIND_CORRUPTION ) > 600);
+    boolean tRet = false;
+    if (random.nextInt( 5 ) == 0)
+    {
+      tRet = true;
+      ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.GREEN + "You removed the Ring. Maybe you should think twice before using it next time?"));
+    }
+    else
+      ( (EntityPlayer) player ).addChatMessage( new ChatComponentText( EMTTextHelper.PURPLE + "Nooo, don't remove me! I give you great power!" ) );
+
+    return tRet;
 	}
+
+
 }

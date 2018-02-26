@@ -24,7 +24,9 @@ archivesBaseName = config.mod_name
 minecraft {
     version = config.mc_version + "-" + config.forge_version + "-" + config.mc_version
     runDir = "run"
-
+	replaceIn "EMT.java"
+    replace "@version@", config.mod_version
+	
     if (project.hasProperty('mappings_version'))
         mappings = project.mappings_version
 }

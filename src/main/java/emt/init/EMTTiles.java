@@ -43,7 +43,7 @@ public class EMTTiles {
 		GameRegistry.registerTileEntity(TileEntityAuramGenerator.class, "tileentityauramgenerator");
 		GameRegistry.registerTileEntity(TileEntityArborGenerator.class, "tileentityarborgenerator");
 		GameRegistry.registerTileEntity(TileEntityAerGenerator.class, "tileentityaergenerator");
-		GameRegistry.registerTileEntity(TileEntityLucrumGenerator.class, "tileentityperditiogenerator");
+		GameRegistry.registerTileEntity(TileEntityLucrumGenerator.class, "tileentitylucrumgenerator");
 		
 		//Machinery
 		GameRegistry.registerTileEntity(TileEntityIndustrialWandRecharge.class, "tileentityindustrialwandrecharge");

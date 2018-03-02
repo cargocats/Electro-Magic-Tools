@@ -31,15 +31,17 @@ tooltip.EMT.specialEffect=Special Effect
 tooltip.EMT.normalConditions=Normal Conditions
 tooltip.EMT.euPerTick=EU/t
 tooltip.EMT.night=at night
+tooltip.EMT.day=at day
 tooltip.EMT.forget=Didn't I forget a tooltip?
 tooltip.EMT.raining=while raining
-tooltip.EMT.output.triple=Output multiplied by 3
+tooltip.EMT.thunder=while in a thunderstorm
+tooltip.EMT.underwater=while under water
 tooltip.EMT.output.double=Output multiplied by 2
-tooltip.EMT.output.double.half=Output multiplied by 2.5
+tooltip.EMT.output.triple=Output multiplied by 3
 tooltip.EMT.output.double.nether=when located in the Nether
-tooltip.EMT.output.double.lava=when lava is on top
-tooltip.EMT.output.double.half.height=when the block is over Y = 160
-tooltip.EMT.output.double.half.low=when the block is under Y = 10
+tooltip.EMT.output.double.lava=when fed with Ignis Centivis
+tooltip.EMT.output.double.half.height=Higher output at heights (x1 at y = 5, x3 at y=220)
+tooltip.EMT.output.double.half.low=Higher output at depths (x1 at y = 220, x3 at y=5)
 
 #=============Entity Names=============
 entity.EMT.laser.name=Laser

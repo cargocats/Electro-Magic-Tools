@@ -1,25 +1,23 @@
 package emt.client.gui.container;
 
-import emt.tile.generator.TileEntityBaseGenerator;
+import emt.tile.solar.TileEntitySolarBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ConainerGenerator
+public class ContainerSolars
   extends Container
 {
-  private TileEntityBaseGenerator tileentity;
+  private TileEntitySolarBase tileentity;
   public int storage;
-  public int fuel;
-  public int generating;
   
-  public ConainerGenerator(InventoryPlayer inventoryplayer, TileEntityBaseGenerator tileentity)
+  public ContainerSolars(InventoryPlayer inventoryplayer, TileEntitySolarBase tileentity)
   {
     this.storage = 0;
-    this.fuel = 0;
     this.tileentity = tileentity;
    /* for (int j = 0; j < 4; j++) {
       addSlotToContainer(new Slot(this.tileentity, j, 17 + j * 18, 59));
@@ -42,38 +40,33 @@ public class ConainerGenerator
     super.addCraftingToCrafters(icrafting);
     icrafting.sendProgressBarUpdate(this, 0, (int) this.tileentity.generating);
     icrafting.sendProgressBarUpdate(this, 1, this.tileentity.storage);
-    icrafting.sendProgressBarUpdate(this, 2, this.tileentity.fuel);
   }
   
   public void detectAndSendChanges()
   {
     super.detectAndSendChanges();
+    float help = (float) (this.tileentity.generating*1000);
     for (int i = 0; i < this.crafters.size(); i++)
     {
       ICrafting icrafting = (ICrafting)this.crafters.get(i);
       
-      icrafting.sendProgressBarUpdate(this, 0, (int) this.tileentity.generating);
+      icrafting.sendProgressBarUpdate(this, 0, (int) help);
       icrafting.sendProgressBarUpdate(this, 1, this.tileentity.storage);
-      icrafting.sendProgressBarUpdate(this, 2, this.tileentity.fuel);
     }
-    
-    this.generating = (int) this.tileentity.generating;
     this.tileentity.storage = ((int)this.tileentity.energySource.getEnergyStored());
   }
   
   public void updateProgressBar(int i, int j)
   {
     if (i == 0) {
-      this.tileentity.generating = j;
+    	float help = (float)j;
+      this.tileentity.generating = help/1000;
     }
     if (i == 1) {
     	if (j<this.tileentity.maxstorage)
     		this.tileentity.storage = j;
     	else
-    		this.tileentity.storage=this.tileentity.maxstorage;
-    }
-    if (i == 2) {
-    	this.tileentity.fuel=j;
+    		this.tileentity.storage=(int) this.tileentity.maxstorage;
     }
   }
   
@@ -126,7 +119,7 @@ public class ConainerGenerator
   
   public boolean canInteractWith(EntityPlayer entityplayer)
   {
-	detectAndSendChanges();
-    return this.tileentity.isUseableByPlayer(entityplayer);
+	  detectAndSendChanges();
+	  return this.tileentity.isUseableByPlayer(entityplayer);
   }
 }

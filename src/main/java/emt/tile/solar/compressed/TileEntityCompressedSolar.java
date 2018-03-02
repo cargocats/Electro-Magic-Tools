@@ -13,10 +13,21 @@ public class TileEntityCompressedSolar extends TileEntitySolarBase {
 		super();
 		energySource = new BasicSource(this, 10000, 3);
 		output = EMTConfigHandler.compressedSolarOutput;
-	}
+		this.maxstorage=this.getEUCapacity();
+	};
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
 		return new ItemStack(EMTBlocks.emtSolars, 1, 0);
+	}
+	
+	@Override
+	public float calc_multi() {
+		return 1F;
+	}
+	
+	@Override
+	public String getInventoryName() {
+		return "Compressed Solar";
 	}
 }

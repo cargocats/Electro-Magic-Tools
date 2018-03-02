@@ -4,12 +4,15 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import emt.client.gui.GuiEtherealMacerator;
 import emt.client.gui.GuiGenerator;
 import emt.client.gui.GuiIndustrialWandRecharger;
+import emt.client.gui.GuiSolar;
 import emt.client.gui.container.ConainerGenerator;
 import emt.client.gui.container.ContainerEtheralMacerator;
 import emt.client.gui.container.ContainerIndustrialWandRecharge;
+import emt.client.gui.container.ContainerSolars;
 import emt.tile.TileEntityEtherealMacerator;
 import emt.tile.TileEntityIndustrialWandRecharge;
 import emt.tile.generator.TileEntityBaseGenerator;
+import emt.tile.solar.TileEntitySolarBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -40,6 +43,9 @@ public class CommonProxy implements IGuiHandler {
 				else if (entity != null && entity instanceof TileEntityBaseGenerator) {
 					return new ConainerGenerator(player.inventory, (TileEntityBaseGenerator) entity);
 				}
+				else if (entity != null && entity instanceof TileEntitySolarBase) {
+					return new ContainerSolars(player.inventory, (TileEntitySolarBase) entity);
+				}
 			default:
 				return null;
 		}
@@ -60,6 +66,9 @@ public class CommonProxy implements IGuiHandler {
 				}
 				else if (entity != null && entity instanceof TileEntityBaseGenerator) {
 					return new GuiGenerator(player.inventory, (TileEntityBaseGenerator) entity);
+				}
+				else if (entity != null && entity instanceof TileEntitySolarBase) {
+					return new GuiSolar(player.inventory, (TileEntitySolarBase) entity);
 				}
 			default:
 				return null;

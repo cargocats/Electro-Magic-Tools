@@ -28,6 +28,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -223,4 +224,20 @@ public class BlockSolars extends BlockBaseContainer {
 		world.removeTileEntity(x, y, z);
 		super.breakBlock(world, x, y, z, block, meta);
 	}
+	
+	@Override
+	 public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2, float f3)
+	  {
+	    if (player.isSneaking()) {
+	      return false;
+	    }
+	    if (world.isRemote) {
+	      return true;
+	    }
+	    TileEntity tileentity = world.getTileEntity(i, j, k);
+	    if (tileentity != null) {
+	      player.openGui(emt.EMT.instance, 1, world, i, j, k);
+	    }
+	    return true;
+	  }
 }

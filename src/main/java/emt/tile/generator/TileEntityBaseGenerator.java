@@ -54,21 +54,22 @@ public class TileEntityBaseGenerator
   
   public TileEntityBaseGenerator(Aspect aspect)
   {
-    this.energySource.setCapacity(EMTConfigHandler.EssentiaGeneratorStorage);
-    this.maxstorage = ((int)this.energySource.getCapacity());
-    this.maxfuel = 64;
-    this.fuel = 0;
-    this.storage = 0;
-    this.refuel = 1;
-    this.aspect = aspect;
-    this.generating = ((Double)EMTEssentiasOutputs.outputs.get(aspect.getTag())).doubleValue();
-    this.color = -1;
+	  super();
+	  this.energySource.setCapacity(EMTConfigHandler.EssentiaGeneratorStorage);
+	  this.maxstorage = ((int)this.energySource.getCapacity());
+	  this.maxfuel = 64;
+	  this.fuel = 0;
+	  this.storage = 0;
+	  this.refuel = 1;
+	  this.aspect = aspect;
+	  this.generating = ((Double)EMTEssentiasOutputs.outputs.get(aspect.getTag())).doubleValue();
+	  this.color = -1;
   }
   
   public void updateEntity()
   {
     this.dead = false;
-    this.timer = 1L;
+    this.timer =+ 1L;
     storeFuel();
     fillfrompipe();
     createEnergy();
@@ -76,20 +77,6 @@ public class TileEntityBaseGenerator
     this.energySource.updateEntity();
   }
   
-  public void inputintoGTnet()
-  {
-    for (byte i = 0; i < 6; i = (byte)(i + 1)) {
-      if (getIGregTechTileEntityAtSide(i) != null)
-      {
-        IGregTechTileEntity aBaseMetaTileEntity = getIGregTechTileEntityAtSide(i);
-        if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage()))
-        {
-          long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
-          drainEnergyUnits(i, getOutputVoltage(), tEU);
-        }
-      }
-    }
-  }
   
   public void storeFuel()
   {
@@ -384,7 +371,21 @@ public class TileEntityBaseGenerator
   {
     return true;
   }
-  
+  public void inputintoGTnet()
+  {
+    for (byte i = 0; i < 6; i = (byte)(i + 1)) {
+      if (getIGregTechTileEntityAtSide(i) != null)
+      {
+        IGregTechTileEntity aBaseMetaTileEntity = getIGregTechTileEntityAtSide(i);
+        if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage()))
+        {
+          long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
+          drainEnergyUnits(i, getOutputVoltage(), tEU);
+        }
+      }
+    }
+  }
+ 
   public byte getColorization()
   {
     return this.color;

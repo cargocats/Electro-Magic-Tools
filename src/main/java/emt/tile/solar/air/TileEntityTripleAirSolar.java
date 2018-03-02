@@ -11,11 +11,17 @@ public class TileEntityTripleAirSolar extends TileEntityAirSolar {
 	public TileEntityTripleAirSolar() {
 		super();
 		output = EMTConfigHandler.tripleCompressedSolarOutput;
-		energySource = new BasicSource(this, 40000, 5);
+		energySource = new BasicSource(this, 1000000, 5);
+		this.maxstorage=this.getEUCapacity();
 	}
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
 		return new ItemStack(EMTBlocks.emtSolars2, 1, 1);
+	}
+	
+	@Override
+	public String getInventoryName() {
+		return "Triple Compressed Aer Solar";
 	}
 }

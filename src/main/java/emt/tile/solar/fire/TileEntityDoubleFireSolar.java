@@ -10,12 +10,19 @@ public class TileEntityDoubleFireSolar extends TileEntityFireSolar {
 
 	public TileEntityDoubleFireSolar() {
 		super();
-		energySource = new BasicSource(this, 10000, 4);
+		energySource = new BasicSource(this, 1000000, 4);
 		output = EMTConfigHandler.doubleCompressedSolarOutput;
+		this.maxstorage=this.getEUCapacity();
 	}
 
 	@Override
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
 		return new ItemStack(EMTBlocks.emtSolars, 1, 13);
+	}
+	
+
+	@Override
+	public String getInventoryName() {
+		return "Double Compressed Ignis Solar";
 	}
 }

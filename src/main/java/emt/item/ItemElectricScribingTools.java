@@ -35,7 +35,7 @@ public class ItemElectricScribingTools extends ItemInkwell implements IElectricI
 
 	@Override
 	public int getTier(ItemStack itemStack) {
-		return 1;
+		return 3;
 	}
 
 	@Override

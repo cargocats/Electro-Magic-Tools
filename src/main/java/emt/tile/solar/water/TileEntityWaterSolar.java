@@ -20,9 +20,9 @@ public class TileEntityWaterSolar extends TileEntitySolarBase {
 
 	@Override
 	public void createEnergy() {
-		if (theSunIsVisible || (this.worldObj.isRaining() && this.worldObj.isDaytime()) || this.worldObj.isThundering()){
+		if (theSunIsVisible || this.calc_multi()>1F && this.worldObj.isDaytime() || this.calc_multi() == 6F ){
 			isActive = true;
-			if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+			if (super.side) {
 				this.generating=output*calc_multi();
 				energySource.addEnergy(output*calc_multi());
 			}

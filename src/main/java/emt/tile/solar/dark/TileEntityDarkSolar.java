@@ -21,11 +21,14 @@ public class TileEntityDarkSolar extends TileEntitySolarBase {
 	public void createEnergy() {
 	    if ((this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) && (!this.worldObj.isRaining()) && (!this.worldObj.isThundering())) {
 	    	isActive=true;
-	    	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+	    	if (side) {
 	    		this.generating=output*calc_multi();
 	    		this.energySource.addEnergy(this.output*calc_multi());
 	    	}
-	    } else isActive = false;
+	    }else {
+	    	isActive = false;
+	    	this.generating=0;
+	    }
 	}
 
 	@Override

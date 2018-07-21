@@ -37,11 +37,11 @@ public class GuiGenerator extends GuiContainer {
 	    if (this.tileentity.maxstorage<1000)
 	    this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + this.tileentity.maxstorage +"EU", 36, 22, 0);
 	    else if (10000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 10000000)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000) + "/" + (this.tileentity.maxstorage/1000) +"kEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mpshownstroage) + "/" + (this.tileentity.maxstorage/1000) +"kEU", 36, 22, 0);
 	    else if (10000000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 1000000000)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000000) + "/" + (this.tileentity.maxstorage/1000000) +"MEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mpshownstroage/1000) + "/" + (this.tileentity.maxstorage/1000000) +"MEU", 36, 22, 0);
 	    else if (1000000000 <= this.tileentity.maxstorage)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000000000) + "/" + (this.tileentity.maxstorage/1000000000) +"GEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mpshownstroage/1000000) + "/" + (this.tileentity.maxstorage/1000000000) +"GEU", 36, 22, 0);
 	    if(this.tileentity.isActive)
 	    	this.fontRendererObj.drawString(I18n.format("emt.Generating",new Object[0])+Double.toString(this.tileentity.generating/20/20)+" EU/t", 36, 35, 0);
 	    else

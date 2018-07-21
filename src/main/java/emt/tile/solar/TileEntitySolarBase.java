@@ -39,10 +39,12 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	public long timer = 0L;
 	public boolean dead = true;
 	public double generating;
+	public short mp_storage=0;
 	public byte color = (-1);
 	public int storage;
 	public long maxstorage=0;
 	public boolean isActive=false;
+	protected boolean side;
 
 	public TileEntitySolarBase() {
 		this.tick = 10;
@@ -51,6 +53,7 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 
 	@Override
 	public void updateEntity() {
+		this.side = !this.worldObj.isRemote ? FMLCommonHandler.instance().getEffectiveSide().isServer() : FMLCommonHandler.instance().getSide().isServer();
 		this.dead = false;
 		this.timer =+ 1L;
 		inputintoGTnet();
@@ -72,12 +75,15 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	public void createEnergy() {
 		if (theSunIsVisible) {
 			isActive=true;
-	    	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+	    	if (side) {
 	    		this.energySource.addEnergy(this.output*calc_multi());
 	    		this.generating=output*calc_multi();
 	    	}
 		}
-		else isActive=false;
+		else {
+			isActive=false;
+			this.generating=0;
+		}
 	}
 
 	public void updateSunState() {
@@ -148,7 +154,7 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	 public void closeInventory() {}
 	  
 	 public int gaugeEnergyScaled(int i){
-	    return (int) (this.storage * i / (int) this.maxstorage);
+	    return (int) (this.mp_storage*1000*i / (int) this.maxstorage);
 	 }
 	  
 	  
@@ -363,12 +369,12 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	  
 	  public boolean isServerSide()
 	  {
-	    return FMLCommonHandler.instance().getEffectiveSide().isServer();
+	    return side;
 	  }
 	  
 	  public boolean isClientSide()
 	  {
-	    return FMLCommonHandler.instance().getEffectiveSide().isClient();
+	    return side;
 	  }
 	  
 	  public int getRandomNumber(int aRange)

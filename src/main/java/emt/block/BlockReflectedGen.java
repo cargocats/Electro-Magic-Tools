@@ -17,23 +17,35 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class BlockReflectedGen
   extends BlockBaseContainer
 {
   private int subtypes;
+  private static int overalltypes = TileEntityReflexionGen.L.size();
   public static short Set;
+  private int[] posInList;
   
   public BlockReflectedGen(String name, short Set)
   {
     super(name, Material.iron, soundTypeMetal, 16, 4.0F);
     this.Set = Set;
-    if (Set * 16 < TileEntityReflexionGen.L.size()) {
-      this.subtypes = 16;
-    } else {
-      this.subtypes = (-(TileEntityReflexionGen.L.size() - Set * 16));
+    this.subtypes = 16;
+    
+    if ((Set*16) > overalltypes)
+    	subtypes= ((Set-1)*16)+overalltypes-((Set-1)*16);
+    
+    posInList= new int[subtypes];
+    if ((Set*16) < overalltypes)
+    for (int i=0; i<subtypes;++i) {
+    	posInList[i]=(Set*16)+i;
     }
+    else if ((Set*16) > overalltypes)
+    	for (int i=0; i<subtypes;++i) {
+        	posInList[i]=((Set-1)*16)+overalltypes-((Set-1)*16)+i;
+        }
   }
   
   @SideOnly(Side.CLIENT)
@@ -62,10 +74,7 @@ public class BlockReflectedGen
   
   public TileEntity createTileEntity(World world, int meta)
   {
-    if (meta + Set * 16 < TileEntityReflexionGen.L.size()) {
-      return TileEntityReflexionGen.Gens[(meta + 16 * Set)];
-    }
-    return TileEntityReflexionGen.Gens[(meta + 16 * (Set - 1))];
+    return TileEntityReflexionGen.Gens[posInList[meta]];
   }
   
   @SideOnly(Side.CLIENT)

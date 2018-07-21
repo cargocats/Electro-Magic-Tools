@@ -44,13 +44,15 @@ public class TileEntityBaseGenerator
   public boolean isActive = false;
   public int tier;
   public int storage;
+  public short mpshownstroage;
   public int maxstorage;
-  public int maxfuel;
-  public int fuel;
-  public int refuel;
+  public byte maxfuel;
+  public byte fuel;
+  public byte refuel;
   public long timer = 0L;
   public boolean dead = true;
   public byte color;
+  private boolean side;
   
   public TileEntityBaseGenerator(Aspect aspect)
   {
@@ -68,8 +70,12 @@ public class TileEntityBaseGenerator
   
   public void updateEntity()
   {
+	
+	this.side = !this.worldObj.isRemote ? FMLCommonHandler.instance().getEffectiveSide().isServer() : FMLCommonHandler.instance().getSide().isServer();
     this.dead = false;
-    this.timer =+ 1L;
+    this.timer += 1L;
+    if (this.timer <= Long.MAX_VALUE-1)
+    	this.timer = 0L;
     storeFuel();
     fillfrompipe();
     createEnergy();
@@ -133,7 +139,7 @@ public class TileEntityBaseGenerator
       if (this.storage + this.generating / 20.0D / 20.0D < this.maxstorage)
       {
         this.isActive = true;
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+        if (side)
         {
           this.energySource.addEnergy(this.generating / 20.0D / 20.0D);
           this.storage = ((int)this.energySource.getEnergyStored());
@@ -152,7 +158,7 @@ public class TileEntityBaseGenerator
       else if ((this.storage + this.generating / 20.0D / 20.0D > this.maxstorage) && (this.storage != this.maxstorage))
       {
         this.isActive = true;
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+        if (side)
         {
           this.energySource.setEnergyStored(this.maxstorage);
           this.storage = this.maxstorage;
@@ -189,8 +195,8 @@ public class TileEntityBaseGenerator
     if (tag.getInteger("storage") > this.storage) {
       this.storage = tag.getInteger("storage");
     }
-    if (tag.getInteger("fuel") > this.fuel) {
-      this.fuel = tag.getInteger("fuel");
+    if (tag.getByte("fuel") > this.fuel) {
+      this.fuel = tag.getByte("fuel");
     }
   }
   
@@ -245,7 +251,7 @@ public class TileEntityBaseGenerator
   
   public int gaugeEnergyScaled(int i)
   {
-    return this.storage * i / this.maxstorage;
+    return this.mpshownstroage * 1000 * i / this.maxstorage;
   }
   
   public int gaugeFuelScaled(int i)
@@ -536,12 +542,12 @@ public class TileEntityBaseGenerator
   
   public boolean isServerSide()
   {
-    return FMLCommonHandler.instance().getEffectiveSide().isServer();
+    return !worldObj.isRemote;
   }
   
   public boolean isClientSide()
   {
-    return FMLCommonHandler.instance().getEffectiveSide().isClient();
+    return worldObj.isRemote;
   }
   
   public int getRandomNumber(int aRange)

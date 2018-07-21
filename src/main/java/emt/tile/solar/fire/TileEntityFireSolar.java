@@ -24,12 +24,15 @@ public class TileEntityFireSolar extends TileEntitySolarBase {
 		boolean ignis = ((this.worldObj.provider.dimensionId == (-1)) || (theSunIsVisible));
 		if(ignis) {
 			this.isActive=true;
-	    	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+	    	if (side) {
 	    		this.generating=output*calc_multi();
 	    		this.energySource.addEnergy(this.output*calc_multi());
 	    	}
 		}
-		else this.isActive=false;
+		else {
+			isActive = false;
+			this.generating=0;
+		}
 		/*if (!ignis && VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, 10)>=10) {
 			if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
 				energySource.addEnergy(15F);

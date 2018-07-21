@@ -77,12 +77,12 @@ public class GuiSolar extends GuiContainer {
 	    int h = (this.width - this.xSize) / 2;
 	    int k = (this.height - this.ySize) / 2;
 	    drawTexturedModalRect(h, k, 0, 0, this.xSize, this.ySize);
-	    if (this.tileentity.storage > 0)
+	    if (this.tileentity.mp_storage > 0)
 	    {
 	      int l = this.tileentity.gaugeEnergyScaled(33);
 	      drawTexturedModalRect(h + 18, k + 23, 195, 0, l, 14);
 	    }
-	    if (this.tileentity.generating>0)
+	    if (this.tileentity.generating>9)
 	    	drawTexturedModalRect(h + 18, k + 42, 195, 20, 11, 14);
 	  }
 	
@@ -91,19 +91,22 @@ public class GuiSolar extends GuiContainer {
 	  {
 	    String formatPanelName = I18n.format(this.tileentity.getInventoryName(), new Object[0]);
 	    int nmPos = (this.xSize - this.fontRendererObj.getStringWidth(formatPanelName)) / 2;
+	   
 	    if(!color.equals("Terra"))
 	    	this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, 6618118);
 	    else
 	    	this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, cColor);
+	    
 	    String storageString = I18n.format("emt.Storage", new Object[0]);
+	    
 	    if (this.tileentity.maxstorage<1000)
 	    this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + this.tileentity.maxstorage +"EU", 36, 22, 0);
 	    else if (10000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 10000000)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000) + "/" + (this.tileentity.maxstorage/1000) +"kEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage) + "/" + (this.tileentity.maxstorage/1000) +"kEU", 36, 22, 0);
 	    else if (10000000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 1000000000)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000000) + "/" + (this.tileentity.maxstorage/1000000) +"MEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage/1000) + "/" + (this.tileentity.maxstorage/1000000) +"MEU", 36, 22, 0);
 	    else if (1000000000 <= this.tileentity.maxstorage)
-	    	this.fontRendererObj.drawString(storageString + (this.tileentity.storage/1000000000) + "/" + (this.tileentity.maxstorage/1000000000) +"GEU", 36, 22, 0);
+	    	this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage/1000000) + "/" + (this.tileentity.maxstorage/1000000000) +"GEU", 36, 22, 0);
 	    if(this.tileentity.isActive)
 	    	if (Double.toString(this.tileentity.generating).length()>5)
 	    		this.fontRendererObj.drawString(I18n.format("emt.Generating",new Object[0])+Double.toString(this.tileentity.generating).substring(0, 4)+" EU/t", 36, 35, 0);

@@ -273,10 +273,7 @@ public class TileEntityBaseGenerator
   
   public boolean doesContainerAccept(Aspect tag)
   {
-    if (!tag.equals(this.aspect)) {
-      return false;
-    }
-    return true;
+    return tag.equals(this.aspect);
   }
   
   public int addToContainer(Aspect tag, int amount)
@@ -846,6 +843,15 @@ public class TileEntityBaseGenerator
   
   public boolean openGUI(EntityPlayer aPlayer)
   {
+    return false;
+  }
+
+
+  public boolean outputsEnergyTo(byte b, boolean b1) {
+    return true;
+  }
+
+  public boolean inputEnergyFrom(byte b, boolean b1) {
     return false;
   }
 }

@@ -114,6 +114,7 @@ tile.EMT.essentia.aer.name=Aer Generator
 tile.EMT.essentia.lucrum.name=Lucrum Generator
 tile.EMT.machine.wandrecharge.name=Industrial Wand Charging Station
 tile.EMT.machine.etheralprocessor.name=Ethereal Processor
+tile.EMT.machine.essentiafiller.name=Essentia Filler
 tile.EMT.solar.compressed.name=Compressed Solar Panel
 tile.EMT.solar.doublecompressed.name=Double Compressed Solar Panel
 tile.EMT.solar.triplecompressed.name=Triple Compressed Solar Panel
@@ -135,6 +136,14 @@ tile.EMT.solar2.tripleair.name=Air Infused Triple Compressed Solar Panel
 tile.EMT.solar2.earth.name=Earth Infused Compressed Solar Panel
 tile.EMT.solar2.doubleearth.name=Earth Infused Double Compressed Solar Panel
 tile.EMT.solar2.tripleearth.name=Earth Infused Triple Compressed Solar Panel
+
+#===============Gregtech Compat===============
+EMT_GTBLOCK_CASEING.0.name=Magic Containing Casing
+EMT_GTBLOCK_CASEING.1.name=Essentia Diffusion Cell
+EMT_GTBLOCK_CASEING.2.name=Iridium Osmiridium Framebox
+EMT_GTBLOCK_CASEING.3.name=Indium Tungsten Framebox
+EMT_GTBLOCK_CASEING.4.name=Raw Essentia Diffusion Cell
+EMT_GTBLOCK_CASEING.5.name=Raw Magic Containing Casing
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=Electric Magic Tools

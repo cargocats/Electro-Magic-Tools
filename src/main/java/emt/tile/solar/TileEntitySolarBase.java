@@ -675,4 +675,12 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	  {
 	    return false;
 	  }
+
+	public boolean outputsEnergyTo(byte b, boolean b1) {
+		return true;
+	}
+
+	public boolean inputEnergyFrom(byte b, boolean b1) {
+		return false;
+	}
 }

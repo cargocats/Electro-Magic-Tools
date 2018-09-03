@@ -1,8 +1,11 @@
 package emt.item.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ItemBlockMachines extends ItemBlock {
 
@@ -23,7 +26,11 @@ public class ItemBlockMachines extends ItemBlock {
 			name = "etheralprocessor";
 			break;
 		}
-		case 2: {
+		case 2:{
+			name = "essentiafiller";
+			break;
+		}
+		case 3: {
 			name = "raindispeller";
 			break;
 		}
@@ -36,5 +43,17 @@ public class ItemBlockMachines extends ItemBlock {
 	@Override
 	public int getMetadata(int par1) {
 		return par1;
+	}
+
+	@Override
+	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_) {
+		switch (p_77624_1_.getItemDamage()) {
+			case 3: {
+				p_77624_3_.add("Connects between Essentia Hatches and the Pipe Network");
+				p_77624_3_.add("Looses its Essentia on Restart");
+				p_77624_3_.add("Added by bartimaeusnek");
+			}
+		}
+
 	}
 }

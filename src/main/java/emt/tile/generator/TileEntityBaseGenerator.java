@@ -379,7 +379,6 @@ public class TileEntityBaseGenerator
     for (byte i = 0; i < 6; i = (byte)(i + 1)) {
       if (getIGregTechTileEntityAtSide(i) != null)
       {
-        IGregTechTileEntity aBaseMetaTileEntity = getIGregTechTileEntityAtSide(i);
         if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage()))
         {
           long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);

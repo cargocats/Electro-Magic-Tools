@@ -1,13 +1,10 @@
 package emt.gthandler.common.implementations;
 
 import gregtech.api.enums.GT_Values;
-import gregtech.api.gui.GT_Container;
-import gregtech.api.gui.GT_GUIContainer;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input;
-import gregtech.api.util.GT_Utility;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

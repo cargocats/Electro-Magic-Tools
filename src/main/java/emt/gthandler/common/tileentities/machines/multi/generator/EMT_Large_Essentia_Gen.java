@@ -237,6 +237,7 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
 		if (this.mMaintenanceHatches.size() != 1)
 			return false;
 
+		/*
 		//repair shit debug shit
 		this.mWrench = true;
 		this.mScrewdriver = true;
@@ -244,7 +245,7 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
 		this.mHardHammer = true;
 		this.mSolderingTool = true;
 		this.mCrowbar = true;
-
+		*/
 		return true;
 	}
 
@@ -296,7 +297,7 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
 		}
 
 		//transfer energy into mEU
-		this.mEUt = (int) cached;
+		this.mEUt = (int) Math.ceil(cached);
 	}
 
 	@Override

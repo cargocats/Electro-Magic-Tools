@@ -1,7 +1,5 @@
 package emt.entity;
 
-import java.util.ArrayList;
-
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,6 +16,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import thaumcraft.common.Thaumcraft;
+
+import java.util.ArrayList;
 
 public class EntityEnergyBall extends Entity implements IProjectile, IEntityAdditionalSpawnData {
 	public static final int RADIUS = 8;

@@ -3,7 +3,6 @@ package emt.item.armor.wings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
-import emt.item.armor.wings.ItemThaumiumReinforcedWing;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;

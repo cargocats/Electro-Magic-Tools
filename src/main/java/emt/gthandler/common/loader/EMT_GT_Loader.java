@@ -11,8 +11,13 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
+
+import static emt.command.CommandOutputs.mkbook;
 
 public class EMT_GT_Loader implements Runnable {
 
@@ -39,5 +44,9 @@ public class EMT_GT_Loader implements Runnable {
 
         for (int i = 0; i < ItemList.HATCHES_INPUT.length; i++)
             GT_Values.RA.addAssemblerRecipe(new ItemStack[]{ItemList.HATCHES_INPUT[i].get(1L), new ItemStack(ConfigBlocks.blockTube,1,4)},Materials.Thaumium.getMolten(288L),EHatch[i],100,(int)(GT_Values.V[i]-(GT_Values.V[i]/10)));
+    }
+
+    public void runlate(){
+        GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(Items.book), GT_OreDictUnificator.get(OrePrefixes.circuit,Materials.Basic,1L), new ItemStack(ConfigItems.itemShard,1, OreDictionary.WILDCARD_VALUE)},GT_Values.NF,mkbook(),128,64);
     }
 }

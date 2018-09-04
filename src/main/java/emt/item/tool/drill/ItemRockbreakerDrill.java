@@ -27,7 +27,6 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.EntityFollowingItem;
 import thaumcraft.common.lib.utils.BlockUtils;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
@@ -36,7 +35,6 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
 	private static final Block[] isEffective = { Blocks.nether_brick, Blocks.netherrack, Blocks.glowstone, Blocks.iron_block, Blocks.gold_block, Blocks.diamond_block, Blocks.lapis_block, Blocks.redstone_block, Blocks.redstone_ore, Blocks.emerald_ore, Blocks.emerald_block, Blocks.stonebrick, Blocks.glass, Blocks.stone, Blocks.gold_ore, Blocks.iron_ore, Blocks.coal_ore, Blocks.cobblestone,
 			Blocks.diamond_ore, Blocks.lapis_ore, Blocks.dirt, Blocks.gravel, Blocks.sand, Blocks.sandstone, Blocks.soul_sand, Blocks.clay, Blocks.grass, Blocks.snow_layer, Blocks.snow, Blocks.farmland, Blocks.hardened_clay, Blocks.stained_hardened_clay, Blocks.mossy_cobblestone };
-	public Icon icon;
 	int side;
 	public int searchCost = 1000;
 	public int hitCost = 400;

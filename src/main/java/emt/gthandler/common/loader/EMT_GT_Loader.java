@@ -1,5 +1,6 @@
 package emt.gthandler.common.loader;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.gthandler.common.implementations.EssentiaHatch;
 import emt.gthandler.common.items.EMT_CasingBlock;
@@ -12,7 +13,6 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import net.minecraft.item.ItemStack;
 import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.config.ConfigItems;
 
 public class EMT_GT_Loader implements Runnable {
 
@@ -32,8 +32,12 @@ public class EMT_GT_Loader implements Runnable {
         GT_Values.RA.addAssemblerRecipe(new ItemStack[]{GT_OreDictUnificator.get(OrePrefixes.frameGt,Materials.Indium,1L),GT_OreDictUnificator.get(OrePrefixes.stickLong,Materials.Tungsten,4L)},Materials.SolderingAlloy.getMolten(576L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,3),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
         GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,3),GT_OreDictUnificator.get(OrePrefixes.plate,Materials.Iridium,8L)},Materials.Osmiridium.getMolten(576L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,5),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
         GT_Values.RA.addAssemblerRecipe(new ItemStack[]{GT_OreDictUnificator.get(OrePrefixes.frameGt,Materials.Iridium,1L),GT_OreDictUnificator.get(OrePrefixes.stickLong,Materials.Osmiridium,4L)},Materials.SolderingAlloy.getMolten(576L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,2),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
-        GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,2), GT_ModHandler.getModItem("ThaumicTinkerer","ichorium",2L)},Materials.Concrete.getMolten(2304L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,4),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
+        if (Loader.isModLoaded("ThaumicTinkerer"))
+            GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,2), GT_ModHandler.getModItem("ThaumicTinkerer","kamiResource",2L,2)},Materials.Concrete.getMolten(2304L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,4),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
+        else
+            GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,2), Materials.ElectrumFlux.getPlates(8)},Materials.Concrete.getMolten(2304L), new ItemStack(EMT_CasingBlock.EMT_GT_BLOCKS[0],1,4),100, (int)(GT_Values.V[5]-(GT_Values.V[5]/10)));
+
         for (int i = 0; i < ItemList.HATCHES_INPUT.length; i++)
-            GT_Values.RA.addAssemblerRecipe(new ItemStack[]{ItemList.HATCHES_INPUT[i].get(1L), new ItemStack(ConfigBlocks.blockTube,1,1)},Materials.Thaumium.getMolten(288L),EHatch[i],100,(int)(GT_Values.V[i]-(GT_Values.V[i]/10)));
+            GT_Values.RA.addAssemblerRecipe(new ItemStack[]{ItemList.HATCHES_INPUT[i].get(1L), new ItemStack(ConfigBlocks.blockTube,1,4)},Materials.Thaumium.getMolten(288L),EHatch[i],100,(int)(GT_Values.V[i]-(GT_Values.V[i]/10)));
     }
 }

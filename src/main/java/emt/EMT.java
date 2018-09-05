@@ -2,14 +2,11 @@ package emt;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -19,12 +16,7 @@ import emt.init.EMTResearches;
 import emt.init.Registry;
 import emt.network.PacketEMTKeys;
 import emt.proxy.CommonProxy;
-import emt.util.EMTClientEventHandler;
-import emt.util.EMTConfigHandler;
-import emt.util.EMTCreativeTab;
-import emt.util.EMTDungeonChestGenerator;
-import emt.util.EMTEssentiasOutputs;
-import emt.util.EMTEventHandler;
+import emt.util.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
@@ -47,7 +39,13 @@ public class EMT
   public static final String CLIENT_PROXY = "emt.proxy.ClientProxy";
   public static final String COMMON_PROXY = "emt.proxy.CommonProxy";
   public static final String CHANNEL = "EMT";
-  public static final String DEPENDS = "required-after:Thaumcraft ; required-after:IC2; required-after:gregtech";
+  public static final String DEPENDS =
+          "required-after:Thaumcraft;" +
+          "required-after:IC2;" +
+          "required-after:gregtech;"+
+          "after:Avaritia;"+
+          "after:MagicBees;"+
+          "after:ForbiddenMagic;";
   @SidedProxy(clientSide="emt.proxy.ClientProxy", serverSide="emt.proxy.CommonProxy")
   public static CommonProxy proxy;
   public static final CreativeTabs TAB = new EMTCreativeTab("EMT.creativeTab");
@@ -72,7 +70,7 @@ public class EMT
     }
     Registry.registerPreInit();
     EMTEssentiasOutputs.addPrimalOutputs();
-    EMTEssentiasOutputs.addOutputs();
+    //EMTEssentiasOutputs.addOutputs();
     registerPackets();
     LOGGER.info("Planning complete|end preinit");
   }
@@ -103,6 +101,7 @@ public class EMT
   public void postInit(FMLPostInitializationEvent event)
   {
     LOGGER.info("Starting the world takeover|start postinit");
+    EMTEssentiasOutputs.addOutputs();
     Registry.registerLate();
     EMTResearches.register();
     LOGGER.info("World takeover complete. Enjoy!|end postinit");

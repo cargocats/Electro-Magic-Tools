@@ -1,6 +1,5 @@
 package emt.tile.solar.fire;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import emt.init.EMTBlocks;
 import emt.tile.solar.TileEntitySolarBase;
 import emt.util.EMTConfigHandler;

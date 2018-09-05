@@ -1,5 +1,7 @@
 package emt.util;
 
+import emt.gthandler.common.loader.EMT_GT_Loader;
+import gregtech.api.enums.GT_Values;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
@@ -148,7 +150,7 @@ public class EMTConfigHandler {
         outputCap = config.get(OUTPUTS, "Output Cap", -1).getDouble(outputCap);
         
         EssentiaGeneratorStorage=config.get(VALUES,"Essentia Generator Storage",1000000,"This is the number you have to modify if you want to change the size of the "+"internal buffer of the Essentia Generator").getDouble(EssentiaGeneratorStorage);
-        
+		EMT_GT_Loader.aIDoffset=config.get(VALUES,"aID offset for Gregetch Machinery",(13000-GT_Values.VN.length-1),"This Mod will use "+Integer.toString(GT_Values.VN.length+1)+" IDs, do not change if you dont know what you are doing!").getInt(13000-GT_Values.VN.length-1);
 
 		wandChargerConsumption = config.get(VALUES, "Wand Charging Station Consumption", 50000, "This is the number you have to modify if you want to make the Industrial Wand Charging " + "Station use more or less EU to charge 1 unit of Vis on your wand.").getDouble(wandChargerConsumption);
 		compressedSolarOutput = config.get(VALUES, "Compressed Solar Panel Output", 10, "This is the number you have to modify if you want to make the Compressed Solar Panel yield " + "more or less EU per tick. Really, you shouldn't touch that, " + "since it's pretty balanced as it is.").getDouble(compressedSolarOutput);

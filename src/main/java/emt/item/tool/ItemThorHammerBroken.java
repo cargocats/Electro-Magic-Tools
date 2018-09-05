@@ -8,13 +8,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
 import org.lwjgl.input.Keyboard;
-
 import thaumcraft.api.IRepairable;
 import thaumcraft.common.entities.projectile.EntityAlumentum;
 

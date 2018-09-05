@@ -1,5 +1,6 @@
 package emt.block;
 
+import emt.gthandler.common.implementations.automation.EssentiaFiller;
 import ic2.api.item.IC2Items;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import emt.tile.TileEntityIndustrialWandRecharge;
 public class BlockMachines extends BlockBaseContainer {
 
 	public BlockMachines(String name) {
-		super(name, Material.iron, soundTypeMetal, 2, 4.0F);
+		super(name, Material.iron, soundTypeMetal, 3, 4.0F);
 	}
 
 	@Override
@@ -38,24 +39,30 @@ public class BlockMachines extends BlockBaseContainer {
 
 		iconSets[0].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
 		iconSets[1].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+		iconSets[2].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
 		iconSets[0].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
 		iconSets[1].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+		iconSets[2].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
 		iconSets[0].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
 		iconSets[1].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+		iconSets[2].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
 		iconSets[0].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
 		iconSets[1].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
+		iconSets[2].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
 		iconSets[0].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
 		iconSets[1].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
+		iconSets[2].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
+		list.add(new ItemStack(id, 1, 2));
 	}
 
 	@Override
@@ -63,8 +70,11 @@ public class BlockMachines extends BlockBaseContainer {
 		if (meta == 0) {
 			return new TileEntityIndustrialWandRecharge();
 		}
-		if (meta == 1) {
+		else if (meta == 1) {
 			return new TileEntityEtherealMacerator();
+		}
+		else if (meta == 2){
+			return new EssentiaFiller();
 		}
 		return super.createTileEntity(world, meta);
 	}

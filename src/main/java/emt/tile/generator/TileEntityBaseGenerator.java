@@ -273,10 +273,7 @@ public class TileEntityBaseGenerator
   
   public boolean doesContainerAccept(Aspect tag)
   {
-    if (!tag.equals(this.aspect)) {
-      return false;
-    }
-    return true;
+    return tag.equals(this.aspect);
   }
   
   public int addToContainer(Aspect tag, int amount)
@@ -382,7 +379,6 @@ public class TileEntityBaseGenerator
     for (byte i = 0; i < 6; i = (byte)(i + 1)) {
       if (getIGregTechTileEntityAtSide(i) != null)
       {
-        IGregTechTileEntity aBaseMetaTileEntity = getIGregTechTileEntityAtSide(i);
         if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage()))
         {
           long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
@@ -846,6 +842,15 @@ public class TileEntityBaseGenerator
   
   public boolean openGUI(EntityPlayer aPlayer)
   {
+    return false;
+  }
+
+
+  public boolean outputsEnergyTo(byte b, boolean b1) {
+    return true;
+  }
+
+  public boolean inputEnergyFrom(byte b, boolean b1) {
     return false;
   }
 }

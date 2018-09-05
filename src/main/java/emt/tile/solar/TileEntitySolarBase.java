@@ -1,7 +1,5 @@
 package emt.tile.solar;
 
-import java.util.Random;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import emt.tile.TileEntityEMT;
 import gregtech.api.enums.GT_Values;
@@ -29,11 +27,9 @@ import net.minecraftforge.fluids.IFluidHandler;
 public abstract class TileEntitySolarBase extends TileEntityEMT implements IInventory, IWrenchable, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
 
 	public BasicSource energySource;
-	public static Random random = new Random();
 	public boolean initialized;
 	public boolean theSunIsVisible;
 	public boolean canRain;
-	public boolean noSunlight;
 	public int tick;
 	public double output = 0;
 	public long timer = 0L;
@@ -192,7 +188,6 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	    for (byte i = 0; i < 6; i = (byte)(i + 1)) {
 	      if (getIGregTechTileEntityAtSide(i) != null)
 	      {
-	        IGregTechTileEntity aBaseMetaTileEntity = getIGregTechTileEntityAtSide(i);
 	        if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage()))
 	        {
 	          long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
@@ -675,4 +670,12 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 	  {
 	    return false;
 	  }
+
+	public boolean outputsEnergyTo(byte b, boolean b1) {
+		return true;
+	}
+
+	public boolean inputEnergyFrom(byte b, boolean b1) {
+		return false;
+	}
 }

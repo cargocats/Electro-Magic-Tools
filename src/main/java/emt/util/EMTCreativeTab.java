@@ -8,7 +8,7 @@ public class EMTCreativeTab extends CreativeTabs {
 
 	public EMTCreativeTab(String tabLabel) {
 		super(tabLabel);
-		setBackgroundImageName("emt.png");
+		//setBackgroundImageName("emt.png");
 	}
 
 
@@ -17,6 +17,7 @@ public class EMTCreativeTab extends CreativeTabs {
 		return EMTItems.electricThorHammer;
 	}
 
+	/*
 	@Override
 	public boolean hasSearchBar() {
 		return true;
@@ -25,5 +26,5 @@ public class EMTCreativeTab extends CreativeTabs {
 	@Override
 	public int getSearchbarWidth() {
 		return 60;
-	}
+	}*/
 }

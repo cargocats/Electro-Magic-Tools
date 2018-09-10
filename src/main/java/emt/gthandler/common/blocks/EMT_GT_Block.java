@@ -26,7 +26,7 @@ public class EMT_GT_Block extends Block {
 
     @SideOnly(Side.CLIENT)
     private IIcon[] texture;
-    @SideOnly(Side.CLIENT)
+    @SideOnly(Side.SERVER)
     private String[] textureNames;
     private String name;
 

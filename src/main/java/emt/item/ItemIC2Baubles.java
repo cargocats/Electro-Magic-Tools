@@ -15,11 +15,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import thaumcraft.api.IRunicArmor;
 
 import java.util.List;
 import java.util.Random;
 
-public class ItemIC2Baubles extends ItemBase implements IBauble {
+public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
 
 	public IIcon[] icon = new IIcon[16];
 	public static int wornTick;
@@ -132,5 +133,10 @@ public class ItemIC2Baubles extends ItemBase implements IBauble {
 	@Override
 	public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
 		return true;
+	}
+
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
 	}
 }

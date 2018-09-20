@@ -17,8 +17,9 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import thaumcraft.api.IRunicArmor;
 
-public class ItemFeatherWing extends ItemArmor {
+public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
 	public int visDiscount = 0;
 
 	public ItemFeatherWing(ArmorMaterial material, int par3, int par4) {
@@ -113,5 +114,10 @@ public class ItemFeatherWing extends ItemArmor {
 		if (player.isSneaking() && !player.onGround && player.motionY < 0) {
 			player.motionY *= 0.6;
 		}
+	}
+
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
 	}
 }

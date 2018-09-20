@@ -36,8 +36,9 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import thaumcraft.api.IRunicArmor;
 
-public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
+public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements IRunicArmor {
 
 	public final byte NONE = 0;
 	public final byte JETPACK = 1;
@@ -539,5 +540,10 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric {
 		if (player.fallDistance > 0.0F) {
 			player.fallDistance = 0;
 		}
+	}
+
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
 	}
 }

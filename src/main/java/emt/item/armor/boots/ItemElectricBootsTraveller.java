@@ -23,13 +23,14 @@ import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 
 import java.util.List;
 
-public class ItemElectricBootsTraveller extends ItemArmor implements IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
+public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor, IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
 
 	public int maxCharge = 100000;
 	public int energyPerDamage = 1000;
@@ -252,5 +253,10 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IElectricIt
 	@Override
 	public Item getEmptyItem(ItemStack itemStack) {
 		return this;
+	}
+
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
 	}
 }

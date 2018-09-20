@@ -20,13 +20,14 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import thaumcraft.api.IGoggles;
+import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 
 import java.util.List;
 
-public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVisDiscountGear, IGoggles, IRevealer, IMetalArmor, ISpecialArmor {
+public class ItemElectricGoggles extends ItemArmor implements IRunicArmor, IElectricItem, IVisDiscountGear, IGoggles, IRevealer, IMetalArmor, ISpecialArmor {
 
 	public double maxCharge = 100000;
 	public double transferLimit = 100;
@@ -188,5 +189,10 @@ public class ItemElectricGoggles extends ItemArmor implements IElectricItem, IVi
 	@Override
 	public Item getEmptyItem(ItemStack itemStack) {
 		return this;
+	}
+
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
 	}
 }

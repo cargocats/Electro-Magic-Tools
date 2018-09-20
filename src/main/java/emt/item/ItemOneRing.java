@@ -17,12 +17,13 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IWarpingGear;
 
 import java.util.List;
 import java.util.Random;
 
-public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear
+public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear, IRunicArmor
 {
   private static final String NBT_TAG_FORGE_DATA = "EMT";
   private static final String NBT_TAG_MIND_CORRUPTION = "MindCorruption";
@@ -238,5 +239,9 @@ public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear
     return tRet;
 	}
 
+	@Override
+	public int getRunicCharge(ItemStack itemStack) {
+		return 0;
+	}
 
 }

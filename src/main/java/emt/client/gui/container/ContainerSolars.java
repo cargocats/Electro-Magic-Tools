@@ -38,7 +38,7 @@ public class ContainerSolars
       ICrafting icrafting = (ICrafting)this.crafters.get(i);
       
       icrafting.sendProgressBarUpdate(this, 0, help);
-      icrafting.sendProgressBarUpdate(this, 1, (short) (this.tileentity.energySource.getEnergyStored()/1000));
+      icrafting.sendProgressBarUpdate(this, 1, (short) (this.tileentity.getSourceStored()/1000));
     }
   }
   

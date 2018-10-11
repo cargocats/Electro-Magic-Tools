@@ -1,8 +1,8 @@
 package emt.tile.solar.dark;
 
 import emt.init.EMTBlocks;
+import emt.tile.DefinitelyNotAIC2Source;
 import emt.util.EMTConfigHandler;
-import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -10,7 +10,7 @@ public class TileEntityDoubleDarkSolar extends TileEntityDarkSolar {
 
 	public TileEntityDoubleDarkSolar() {
 		super();
-		energySource = new BasicSource(this, 100000, 4);
+		energySource = new DefinitelyNotAIC2Source(this, 100000, 4);
 		output = EMTConfigHandler.doubleCompressedSolarOutput;
 		this.maxstorage=this.getEUCapacity();
 	}

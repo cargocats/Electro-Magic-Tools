@@ -1,9 +1,9 @@
 package emt.tile.solar.water;
 
 import emt.init.EMTBlocks;
+import emt.tile.DefinitelyNotAIC2Source;
 import emt.tile.solar.TileEntitySolarBase;
 import emt.util.EMTConfigHandler;
-import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ public class TileEntityWaterSolar extends TileEntitySolarBase {
 
 	public TileEntityWaterSolar() {
 		super();
-		energySource = new BasicSource(this, 10000, 3);
+		energySource = new DefinitelyNotAIC2Source(this, 10000, 3);
 		output = EMTConfigHandler.compressedSolarOutput;
 		this.maxstorage=this.getEUCapacity();
 	}

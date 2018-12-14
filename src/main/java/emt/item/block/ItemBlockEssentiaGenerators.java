@@ -2,6 +2,7 @@ package emt.item.block;
 
 import java.util.List;
 
+import gregtech.api.enums.GT_Values;
 import org.lwjgl.input.Keyboard;
 
 import emt.util.EMTConfigHandler;
@@ -54,38 +55,48 @@ public class ItemBlockEssentiaGenerators extends ItemBlock {
 		return meta;
 	}
 
+	private long getOutputAmperage(double EU) {
+		return (long) (1L + (EU / 20.0D / 20.0D / GT_Values.V[2]));
+	}
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
         	switch (is.getItemDamage()) {
         case 0:
             list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.ENERGY.getTag())/20/20)) +" EU/t");
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.ENERGY.getTag()))+" A");
         	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.ENERGY.getTag()))) +" EU");
         	break;
         	
         case 1:
         	list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag())/20/20)) +" EU/t");
-        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag()))) +" EU");
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag()))+" A");
+			list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag()))) +" EU");
         	break;
         	
         case 2:
         	list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.AURA.getTag())/20/20)) +" EU/t");
-        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.AURA.getTag()))) +" EU");       	
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.AURA.getTag()))+" A");
+			list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.AURA.getTag()))) +" EU");
         	break;
         	
         case 3:
         	list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.TREE.getTag())/20/20)) +" EU/t");
-        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag()))) +" EU");        	
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.TREE.getTag()))+" A");
+        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.FIRE.getTag()))) +" EU");
         	break;
         	
         case 4:
         	list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.AIR.getTag())/20/20)) +" EU/t");
-        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.AIR.getTag()))) +" EU");       	
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.AIR.getTag()))+" A");
+        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.AIR.getTag()))) +" EU");
         	break;
         	
         case 5:
         	list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Generating")+EMTTextHelper.LIGHT_GRAY+Integer.toString((int)(EMTEssentiasOutputs.outputs.get(Aspect.GREED.getTag())/20/20)) +" EU/t");
-        	list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.GREED.getTag()))) +" EU");        	
+			list.add(EMTTextHelper.BRIGHT_BLUE+StatCollector.translateToLocal("emt.Output")+EMTTextHelper.LIGHT_GRAY+"128 EU/t @ "+getOutputAmperage(EMTEssentiasOutputs.outputs.get(Aspect.GREED.getTag()))+" A");
+			list.add(EMTTextHelper.BRIGHT_GREEN+StatCollector.translateToLocal("gui.EMT.book.aspect.output.essentia.eu")+": "+EMTTextHelper.LIGHT_GRAY+Double.toString((EMTEssentiasOutputs.outputs.get(Aspect.GREED.getTag()))) +" EU");
         	break;
         	
         default:

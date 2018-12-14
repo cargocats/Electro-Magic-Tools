@@ -142,8 +142,8 @@ EMT_GTBLOCK_CASEING.0.name=魔法机械方块
 EMT_GTBLOCK_CASEING.1.name=源质扩散单元
 EMT_GTBLOCK_CASEING.2.name=铱锇魔法框架
 EMT_GTBLOCK_CASEING.3.name=铟钨魔法框架
-EMT_GTBLOCK_CASEING.4.name=源质扩散单元半成品
-EMT_GTBLOCK_CASEING.5.name=魔法机械方块半成品
+EMT_GTBLOCK_CASEING.4.name=魔法机械方块半成品
+EMT_GTBLOCK_CASEING.5.name=源质扩散单元半成品
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=电力魔法工具

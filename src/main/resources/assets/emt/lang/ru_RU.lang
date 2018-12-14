@@ -31,11 +31,13 @@ tooltip.EMT.specialEffect=Особый эффект
 tooltip.EMT.normalConditions=Нормальные условия
 tooltip.EMT.euPerTick=EU/тик
 tooltip.EMT.night=ночью
+tooltip.EMT.day=днём
 tooltip.EMT.forget=Я не забыл подсказку?
 tooltip.EMT.raining=во время дождя
+tooltip.EMT.thunder=во время грозы
+tooltip.EMT.underwater=под водой
 tooltip.EMT.output.triple=Выход увеличен на 3
 tooltip.EMT.output.double=Выход увеличен на 2,
-tooltip.EMT.output.double.half=Выход увеличен на 2.5,
 tooltip.EMT.output.double.nether=если она находится в Нижнем мире
 tooltip.EMT.output.double.lava=если над ней лава
 tooltip.EMT.output.double.half.height=если она находится выше Y = 160
@@ -112,6 +114,7 @@ tile.EMT.essentia.aer.name=Aer генератор
 tile.EMT.essentia.lucrum.name=Lucrum генератор
 tile.EMT.machine.wandrecharge.name=Промышленная станция зарядки жезлов
 tile.EMT.machine.etheralprocessor.name=Эфирный обработчик
+tile.EMT.machine.essentiafiller.name=Эфирный наполнитель
 tile.EMT.solar.compressed.name=Сжатая солнечная панель
 tile.EMT.solar.doublecompressed.name=Дважды сжатая солнечная панель
 tile.EMT.solar.triplecompressed.name=Трижды сжатая солнечная панель
@@ -133,6 +136,14 @@ tile.EMT.solar2.tripleair.name=Наполненная воздухом, триж
 tile.EMT.solar2.earth.name=Наполненная землёй, сжатая солнечная панель
 tile.EMT.solar2.doubleearth.name=Наполненная землёй, дважды сжатая солнечная панель
 tile.EMT.solar2.tripleearth.name=Наполненная землёй, трижды сжатая солнечная панель
+
+#===============Gregtech Compat===============
+EMT_GTBLOCK_CASEING.0.name=Магический Корпус
+EMT_GTBLOCK_CASEING.1.name=Эфирная Диффузионная Ячейка
+EMT_GTBLOCK_CASEING.2.name=Иридиево-Осмиридиевый Framebox
+EMT_GTBLOCK_CASEING.3.name=Иридиево-Вольфрамовый Framebox
+EMT_GTBLOCK_CASEING.4.name=Необработанный Магический Корпус
+EMT_GTBLOCK_CASEING.5.name=Необработанная Эфирная Диффузионная Ячейка
 
 #=============Thaumonomicon=============
 emt.rsname.Electric Magic Tools=Electric Magic Tools

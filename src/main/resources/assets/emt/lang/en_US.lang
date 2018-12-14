@@ -142,8 +142,8 @@ EMT_GTBLOCK_CASEING.0.name=Magic Containing Casing
 EMT_GTBLOCK_CASEING.1.name=Essentia Diffusion Cell
 EMT_GTBLOCK_CASEING.2.name=Iridium Osmiridium Framebox
 EMT_GTBLOCK_CASEING.3.name=Indium Tungsten Framebox
-EMT_GTBLOCK_CASEING.4.name=Raw Essentia Diffusion Cell
-EMT_GTBLOCK_CASEING.5.name=Raw Magic Containing Casing
+EMT_GTBLOCK_CASEING.4.name=Raw Magic Containing Casing
+EMT_GTBLOCK_CASEING.5.name=Raw Essentia Diffusion Cell
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=Electric Magic Tools

@@ -22,153 +22,149 @@ import java.util.List;
 
 public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectricItem, ISpecialArmor, IMetalArmor {
 
-	public static int maxCharge = 1000000;
-	public int tier = 3;
-	public double transferLimit = 1600;
-	public int energyPerDamage = 5000;
+    public static int maxCharge = 1000000;
+    public int tier = 3;
+    public double transferLimit = 1600;
+    public int energyPerDamage = 5000;
 
-	public ItemNanoWing(ArmorMaterial material, int par3, int par4) {
-		super(material, par3, par4);
-		this.setMaxStackSize(1);
-		this.setMaxDamage(27);
-		this.setCreativeTab(EMT.TAB);
-		visDiscount = 5;
-	}
-	
-	@Override
-	public float getFallDamageMult() {
-		return 0.2F;
-	}
+    public ItemNanoWing(ArmorMaterial material, int par3, int par4) {
+        super(material, par3, par4);
+        this.setMaxStackSize(1);
+        this.setMaxDamage(27);
+        this.setCreativeTab(EMT.TAB);
+        visDiscount = 5;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_nano");
-	}
+    @Override
+    public float getFallDamageMult() {
+        return 0.2F;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
-		ItemStack itemStack = new ItemStack(this, 1);
-		if (getChargedItem(itemStack) == this) {
-			ItemStack charged = new ItemStack(this, 1);
-			ElectricItem.manager.charge(charged, 2147483647, 2147483647, true, false);
-			itemList.add(charged);
-		}
-		if (getEmptyItem(itemStack) == this) {
-			itemList.add(new ItemStack(this, 1, getMaxDamage()));
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_nano");
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return EMT.TEXTURE_PATH + ":textures/models/nanowing.png";
-	}
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+        ItemStack itemStack = new ItemStack(this, 1);
+        if (getChargedItem(itemStack) == this) {
+            ItemStack charged = new ItemStack(this, 1);
+            ElectricItem.manager.charge(charged, 2147483647, 2147483647, true, false);
+            itemList.add(charged);
+        }
+        if (getEmptyItem(itemStack) == this) {
+            itemList.add(new ItemStack(this, 1, getMaxDamage()));
+        }
+    }
 
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		this.useWings(player, stack, world, 0.25f, 0.6f, 0.3f, 5);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return EMT.TEXTURE_PATH + ":textures/models/nanowing.png";
+    }
 
-	@Override
-	public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
-		return true;
-	}
+    @Override
+    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+        this.useWings(player, stack, world, 0.25f, 0.6f, 0.3f, 5);
+    }
 
-	@Override
-	public boolean isRepairable() {
-		return false;
-	}
+    @Override
+    public boolean isMetalArmor(ItemStack itemstack, EntityPlayer player) {
+        return true;
+    }
 
-	@Override
-	public int getItemEnchantability() {
-		if (EMTConfigHandler.enchanting == false) {
-			return 0;
-		}
-		else {
-			return 4;
-		}
-	}
+    @Override
+    public boolean isRepairable() {
+        return false;
+    }
 
-	@Override
-	public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
-		if (EMTConfigHandler.enchanting == false) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+    @Override
+    public int getItemEnchantability() {
+        if (EMTConfigHandler.enchanting == false) {
+            return 0;
+        } else {
+            return 4;
+        }
+    }
 
-	public int getEnergyPerDamage() {
-		return energyPerDamage;
-	}
+    @Override
+    public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2) {
+        if (EMTConfigHandler.enchanting == false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-		if (source.isUnblockable()) {
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
-		}
-		else {
-			double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
-			int energyPerDamage = getEnergyPerDamage();
-			double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
-			return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
-		}
-	}
+    public int getEnergyPerDamage() {
+        return energyPerDamage;
+    }
 
-	@Override
-	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		if (ElectricItem.manager.getCharge(armor) >= getEnergyPerDamage()) {
-			return (int) Math.round(20D * getBaseAbsorptionRatio() * getDamageAbsorptionRatio());
-		}
-		else {
-			return 0;
-		}
-	}
+    @Override
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+        if (source.isUnblockable()) {
+            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
+        } else {
+            double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
+            int energyPerDamage = getEnergyPerDamage();
+            double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
+        }
+    }
 
-	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-		ElectricItem.manager.discharge(stack, damage * getEnergyPerDamage(), 0x7fffffff, true, false, false);
-	}
+    @Override
+    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+        if (ElectricItem.manager.getCharge(armor) >= getEnergyPerDamage()) {
+            return (int) Math.round(20D * getBaseAbsorptionRatio() * getDamageAbsorptionRatio());
+        } else {
+            return 0;
+        }
+    }
 
-	public double getDamageAbsorptionRatio() {
-		return 0.9D;
-	}
+    @Override
+    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+        ElectricItem.manager.discharge(stack, damage * getEnergyPerDamage(), 0x7fffffff, true, false, false);
+    }
 
-	private double getBaseAbsorptionRatio() {
-		return 0.25D;
-	}
+    public double getDamageAbsorptionRatio() {
+        return 0.9D;
+    }
 
-	/* IC2 API METHODS */
+    private double getBaseAbsorptionRatio() {
+        return 0.25D;
+    }
 
-	@Override
-	public boolean canProvideEnergy(ItemStack itemStack) {
-		return false;
-	}
+    /* IC2 API METHODS */
 
-	@Override
-	public double getMaxCharge(ItemStack itemStack) {
-		return maxCharge;
-	}
+    @Override
+    public boolean canProvideEnergy(ItemStack itemStack) {
+        return false;
+    }
 
-	@Override
-	public int getTier(ItemStack itemStack) {
-		return 3;
-	}
+    @Override
+    public double getMaxCharge(ItemStack itemStack) {
+        return maxCharge;
+    }
 
-	@Override
-	public double getTransferLimit(ItemStack itemStack) {
-		return transferLimit;
-	}
+    @Override
+    public int getTier(ItemStack itemStack) {
+        return 3;
+    }
 
-	@Override
-	public Item getChargedItem(ItemStack itemStack) {
-		return this;
-	}
+    @Override
+    public double getTransferLimit(ItemStack itemStack) {
+        return transferLimit;
+    }
 
-	@Override
-	public Item getEmptyItem(ItemStack itemStack) {
-		return this;
-	}
+    @Override
+    public Item getChargedItem(ItemStack itemStack) {
+        return this;
+    }
+
+    @Override
+    public Item getEmptyItem(ItemStack itemStack) {
+        return this;
+    }
 }

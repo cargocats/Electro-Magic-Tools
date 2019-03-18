@@ -7,66 +7,53 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSolars
-  extends Container
-{
-  private TileEntitySolarBase tileentity;
-  
-  public ContainerSolars(InventoryPlayer inventoryplayer, TileEntitySolarBase tileentity)
-  {
-    this.tileentity = tileentity;
-  }
-  
-  public void addCraftingToCrafters(ICrafting icrafting)
-  { 
-	super.addCraftingToCrafters(icrafting);
-    icrafting.sendProgressBarUpdate(this, 0, (short) this.tileentity.generating);
-    icrafting.sendProgressBarUpdate(this, 1, (short) this.tileentity.mp_storage);
-  }
-  
-  public void detectAndSendChanges()
-  {
-	super.detectAndSendChanges();
-    short help = 0;
-    if (this.tileentity.generating < 326D && this.tileentity.generating > 9D)
-    	help = (short) (this.tileentity.generating*100*-1);
-    else
-    	help = (short) (this.tileentity.generating);
-    
-    for (int i = 0; i < this.crafters.size(); i++)
-    {
-      ICrafting icrafting = (ICrafting)this.crafters.get(i);
-      
-      icrafting.sendProgressBarUpdate(this, 0, help);
-      icrafting.sendProgressBarUpdate(this, 1, (short) (this.tileentity.getSourceStored()/1000));
-    }
-  }
-  
-  public void updateProgressBar(int i, int j)
-  {
+import java.nio.ByteBuffer;
 
-    if (i == 0) {
-    	if (j < 0) {
-    		double help= j;
-    		help=help/100*-1;
-    		this.tileentity.generating = help;
-    	}
-    	else
-    		 this.tileentity.generating=j;
+public class ContainerSolars
+        extends Container {
+    byte[] generating = new byte[8];
+    byte[] mpStorage = new byte[8];
+    private TileEntitySolarBase tileentity;
+
+    public ContainerSolars(InventoryPlayer inventoryplayer, TileEntitySolarBase tileentity) {
+        this.tileentity = tileentity;
     }
-    if (i == 1) {
-    	this.tileentity.mp_storage = (short) (j);
+
+    public void detectAndSendChanges() {
+        byte[] generating = ByteBuffer.allocate(8).putDouble(this.tileentity.generating).array();
+        byte[] mpStorage = ByteBuffer.allocate(8).putDouble(this.tileentity.getSourceStored() / 1000).array();
+        for (int i = 0; i < this.crafters.size(); i++) {
+            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+
+            for (int j = 0; j < generating.length; j++) {
+                icrafting.sendProgressBarUpdate(this, j, generating[j]);
+            }
+
+            for (int j = 0; j < mpStorage.length; j++) {
+                icrafting.sendProgressBarUpdate(this, 8 + j, mpStorage[j]);
+            }
+        }
     }
-  }
-  
-  public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-  {
-    return null;
-  }
-  
-  public boolean canInteractWith(EntityPlayer entityplayer)
-  {
-	  this.detectAndSendChanges();
-	  return this.tileentity.isUseableByPlayer(entityplayer);
-  }
+
+    public void updateProgressBar(int i, int j) {
+        if (i < 8) {
+            generating[i] = (byte) j;
+            if (i == 7)
+                this.tileentity.generating = ByteBuffer.wrap(generating).getDouble();
+        }
+        if (i > 7 && i < 16) {
+            mpStorage[i - 8] = (byte) j;
+            if (i == 15)
+                this.tileentity.mp_storage = (long) ByteBuffer.wrap(mpStorage).getDouble();
+        }
+    }
+
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+        return null;
+    }
+
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+        this.detectAndSendChanges();
+        return this.tileentity.isUseableByPlayer(entityplayer);
+    }
 }

@@ -1,6 +1,7 @@
 package emt.tile.solar;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import emt.init.EMTBlocks;
 import emt.tile.DefinitelyNotAIC2Source;
 import emt.tile.TileEntityEMT;
 import gregtech.api.enums.GT_Values;
@@ -18,33 +19,86 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.visnet.VisNetHandler;
 
-public abstract class TileEntitySolarBase extends TileEntityEMT implements IInventory, IWrenchable, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
+public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IWrenchable, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
 
+    private static final byte NOTHING = 0;
+    private static final byte ORDO = 1;
+    private static final byte PERDITIO = 2;
+    private static final byte AER = 3;
+    private static final byte TERRA = 4;
+    private static final byte AQUA = 5;
+    private static final byte IGNIS = 6;
+
+    public String guiname;
     public boolean initialized;
     public boolean theSunIsVisible;
-    public boolean canRain;
     public int tick;
     public double output = 0;
     public long timer = 0L;
     public boolean dead = true;
     public double generating;
-    public short mp_storage = 0;
+    public long mp_storage = 0;
     public byte color = (-1);
-    public int storage;
+    public long storage;
     public long maxstorage = 0;
     public boolean isActive = false;
-    protected DefinitelyNotAIC2Source energySource;
+    public DefinitelyNotAIC2Source energySource;
+    public byte aspect = 0;
     protected boolean side;
+    private int instance, meta;
 
-    public TileEntitySolarBase() {
+    public TileEntitySolarBase(double output, Aspect aspect, String guiname, int instance, int meta) {
         this.tick = 10;
         this.storage = 0;
+        long capacity = (long) (output * 1000);
+        this.output = output;
+        this.energySource = new DefinitelyNotAIC2Source(this, capacity, (int) getTierFromCapacity(capacity));
+        this.maxstorage = this.getEUCapacity();
+        this.aspect = getByteFromAspect(aspect);
+        this.guiname = guiname;
+        this.instance = instance;
+        this.meta = meta;
+    }
+
+
+    /**
+     * DO NOT CALL THIS ITS USED INTERNALLY ONLY
+     */
+    public TileEntitySolarBase() {
+        this.tick = 10;
+    }
+
+    private static byte getByteFromAspect(Aspect aspect) {
+        if (aspect == null)
+            return NOTHING;
+        if (aspect.equals(Aspect.ORDER))
+            return ORDO;
+        else if (aspect.equals(Aspect.ENTROPY))
+            return PERDITIO;
+        else if (aspect.equals(Aspect.AIR))
+            return AER;
+        else if (aspect.equals(Aspect.EARTH))
+            return TERRA;
+        else if (aspect.equals(Aspect.WATER))
+            return AQUA;
+        else if (aspect.equals(Aspect.FIRE))
+            return IGNIS;
+        return 0;
+    }
+
+    private int getTierFromCapacity(long capacity) {
+        for (int i = 0; i < GT_Values.V.length; i++) {
+            if (capacity / 1000 < GT_Values.V[i])
+                return i;
+        }
+        return GT_Values.V.length - 1;
     }
 
     @Override
@@ -53,68 +107,200 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
         this.dead = false;
         this.timer = +1L;
         inputintoGTnet();
-        energySource.updateEntity();
         checkConditions();
+        this.storage = this.energySource.getEnergyStored();
     }
 
-    public abstract float calc_multi();
+    private float getMaxMulti() {
+        switch (aspect) {
+            case ORDO:
+            case PERDITIO: {
+                return 2F;
+            }
+            case AER:
+            case TERRA:
+            case IGNIS: {
+                return 3F;
+            }
+            case AQUA: {
+                return 6F;
+            }
+            default:
+                return 1f;
+        }
+    }
+
+    public float calc_multi() {
+        switch (aspect) {
+            case ORDO: {
+                if (this.worldObj.isDaytime())
+                    return 2F;
+                else return 0.75F;
+            }
+            case PERDITIO: {
+                if (this.worldObj.isDaytime())
+                    return 0.75F;
+                else return 2F;
+            }
+            case AER: {
+                if (this.yCoord < 5)
+                    return 1F;
+                else if (this.yCoord > 220)
+                    return 3F;
+                else
+                    return (float) ((41D / 43D) + ((2D / 215D) * (double) this.yCoord));
+            }
+            case TERRA: {
+                if (this.yCoord < 5)
+                    return 3F;
+                else if (this.yCoord > 220)
+                    return 1F;
+                else
+                    return (float) ((-2D) / 215D * (double) this.yCoord + 131D / 43D);
+            }
+            case AQUA: {
+                if (worldObj.isThundering())
+                    return 6F;
+                else if (worldObj.isRaining())
+                    return 3F;
+                else if (!worldObj.isThundering() && !worldObj.isRaining() && worldObj.getBlock(xCoord, yCoord + 1, zCoord).equals(Blocks.water))
+                    return 2F;
+                else
+                    return 1F;
+            }
+            case IGNIS: {
+                if (VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, 10) >= 10)
+                    return 3F;
+                else if (this.worldObj.provider.dimensionId == (-1))
+                    return 2F;
+                else
+                    return 1F;
+            }
+            default:
+                return 1f;
+        }
+    }
 
     public double getSourceStored() {
         return this.energySource.getEnergyStored();
     }
 
     public void checkConditions() {
-        initialized = true;
-        if (tick-- == 0) {
-            updateSunState();
-            tick = 64;
+        switch (aspect) {
+            case IGNIS: {
+                initialized = true;
+                boolean ignis = ((this.worldObj.provider.dimensionId == (-1)) || (theSunIsVisible));
+                if (ignis) {
+                    this.isActive = true;
+                    if (side) {
+                        this.generating = output * calc_multi();
+                        this.energySource.addEnergy(this.output * calc_multi());
+                    }
+                } else {
+                    isActive = false;
+                    this.generating = 0;
+                }
+                if (--tick == 0) {
+                    updateSunState();
+                    tick = 64;
+                }
+                break;
+            }
+            default: {
+                initialized = true;
+                if (--tick == 0) {
+                    updateSunState();
+                    tick = 64;
+                }
+                createEnergy();
+            }
         }
-        createEnergy();
     }
 
     public void createEnergy() {
-        if (theSunIsVisible) {
-            isActive = true;
-            if (side) {
-                this.energySource.addEnergy(this.output * calc_multi());
-                this.generating = output * calc_multi();
+        switch (aspect) {
+            case ORDO:
+            case PERDITIO: {
+                if ((this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) && (!this.worldObj.isRaining()) && (!this.worldObj.isThundering())) {
+                    isActive = true;
+                    if (side) {
+                        this.energySource.addEnergy(this.output * calc_multi());
+                        this.generating = output * calc_multi();
+                    }
+                } else {
+                    isActive = false;
+                    this.generating = 0;
+                }
+                break;
             }
-        } else {
-            isActive = false;
-            this.generating = 0;
+            case AQUA: {
+                if (theSunIsVisible || this.calc_multi() > 1F && this.worldObj.isDaytime() || this.calc_multi() == 6F) {
+                    isActive = true;
+                    if (side) {
+                        this.generating = output * calc_multi();
+                        energySource.addEnergy(output * calc_multi());
+                    }
+                } else {
+                    isActive = false;
+                    this.generating = 0D;
+                }
+                break;
+            }
+            default: {
+                if (theSunIsVisible) {
+                    isActive = true;
+                    if (side) {
+                        this.energySource.addEnergy(this.output * calc_multi());
+                        this.generating = output * calc_multi();
+                    }
+                } else {
+                    isActive = false;
+                    this.generating = 0;
+                }
+            }
         }
     }
 
     public void updateSunState() {
-        boolean isRaining = canRain && (worldObj.isRaining() || worldObj.isThundering());
+        boolean isRaining = this.aspect != AQUA && (worldObj.isRaining() || worldObj.isThundering());
         theSunIsVisible = worldObj.isDaytime() && !isRaining && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord);
-    }
-
-    @Override
-    public void onChunkUnload() {
-        energySource.onChunkUnload();
-    }
-
-    @Override
-    public void invalidate() {
-        energySource.invalidate();
-        super.invalidate();
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
-        energySource.writeToNBT(nbttagcompound);
+        nbttagcompound.setLong("storage", this.energySource.getEnergyStored());
+
+        NBTTagCompound subtag = new NBTTagCompound();
+        subtag.setInteger("instance", this.instance);
+        subtag.setInteger("meta", this.meta);
+        subtag.setString("guiname", this.guiname);
+        subtag.setByte("aspect", this.aspect);
+        subtag.setDouble("Output", this.output);
+        nbttagcompound.setTag("solarstats", subtag);
+
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
-        energySource.readFromNBT(nbttagcompound);
+
+        NBTTagCompound subtag = nbttagcompound.getCompoundTag("solarstats");
+        this.instance = subtag.getInteger("instance");
+        this.meta = subtag.getInteger("meta");
+        this.guiname = subtag.getString("guiname");
+        this.aspect = subtag.getByte("aspect");
+        this.output = subtag.getDouble("Output");
+        long capacity = (long) (output * 1000);
+        this.energySource = new DefinitelyNotAIC2Source(this, capacity, (int) Math.floor(Math.log10(capacity) - 1D));
+        this.maxstorage = this.getEUCapacity();
+        this.energySource.setEnergyStored(nbttagcompound.getLong("storage"));
+        this.storage = this.energySource.getEnergyStored();
+        this.mp_storage = this.storage / 1000;
     }
 
     public int getSizeInventory() {
-        return 5;
+        return 0;
     }
 
     public ItemStack getStackInSlot(int i) {
@@ -137,7 +323,7 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
     }
 
     public String getInventoryName() {
-        return StatCollector.translateToLocal("tile.EMT.solar." + getInventoryName().replaceAll(" ", "").toLowerCase() + ".name");
+        return guiname;
     }
 
     public int getInventoryStackLimit() {
@@ -154,10 +340,9 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
     public void closeInventory() {
     }
 
-    public int gaugeEnergyScaled(int i) {
-        return (int) (this.mp_storage * 1000 * i / (int) this.maxstorage);
+    public int gaugeEnergyScaled(long i) {
+        return (int) ((this.mp_storage * 1000 * i) / this.maxstorage);
     }
-
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
@@ -185,7 +370,12 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
 
     @Override
     public float getWrenchDropRate() {
-        return 1;
+        return 1F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(EMTBlocks.solars[instance], 1, meta);
     }
 
     public void inputintoGTnet() {
@@ -220,6 +410,19 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
         return (long) this.energySource.getCapacity();
     }
 
+    public long[] calculateMaxVoltAmp() {
+        long[] voltAmp = new long[2];
+        voltAmp[0] = getOutputVoltage();
+        long generating = (long) Math.floor(output * getMaxMulti());
+        if (generating <= GT_Values.V[energySource.getSourceTier()]) {
+            voltAmp[1] = 1L;
+        } else if (generating % GT_Values.V[energySource.getSourceTier()] == 0.0D) {
+            voltAmp[1] = (generating / GT_Values.V[energySource.getSourceTier()]);
+        } else
+            voltAmp[1] = (1L + (generating / GT_Values.V[energySource.getSourceTier()]));
+        return voltAmp;
+    }
+
     public long getOutputAmperage() {
         long ret;
         if (this.energySource.getSourceTier() <= 4) {
@@ -240,14 +443,10 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
                 ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
         }
         return ret;
-
     }
 
     public long getOutputVoltage() {
-        if (this.energySource.getSourceTier() <= 4)
-            return GT_Values.V[(this.energySource.getSourceTier() - 2)];
-        else
-            return GT_Values.V[(this.energySource.getSourceTier() - 1)];
+        return GT_Values.V[this.energySource.getSourceTier()];
     }
 
     public long getInputAmperage() {
@@ -261,7 +460,7 @@ public abstract class TileEntitySolarBase extends TileEntityEMT implements IInve
     public boolean decreaseStoredEnergyUnits(long aEnergy, boolean aIgnoreTooLessEnergy) {
         if (this.energySource.getEnergyStored() > aEnergy) {
             this.energySource.drawEnergy(aEnergy);
-            this.storage = ((int) this.energySource.getEnergyStored());
+            this.storage = this.energySource.getEnergyStored();
             return true;
         }
         return false;

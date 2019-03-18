@@ -6,16 +6,16 @@ import net.minecraft.item.Item;
 
 public class EMTCreativeTab extends CreativeTabs {
 
-	public EMTCreativeTab(String tabLabel) {
-		super(tabLabel);
-		//setBackgroundImageName("emt.png");
-	}
+    public EMTCreativeTab(String tabLabel) {
+        super(tabLabel);
+        //setBackgroundImageName("emt.png");
+    }
 
 
-	@Override
-	public Item getTabIconItem() {
-		return EMTItems.electricThorHammer;
-	}
+    @Override
+    public Item getTabIconItem() {
+        return EMTItems.electricThorHammer;
+    }
 
 	/*
 	@Override

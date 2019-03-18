@@ -21,79 +21,79 @@ import java.util.Set;
 
 public class ItemQuantumGoggles extends ItemNanoGoggles {
 
-	private static final Map<Integer, Integer> potionCost = new HashMap();
+    private static final Map<Integer, Integer> potionCost = new HashMap();
 
-	public ItemQuantumGoggles(ArmorMaterial material, int renderIndex, int armorType) {
-		super(material, renderIndex, armorType);
-		this.setCreativeTab(EMT.TAB);
-		this.setMaxDamage(27);
-		this.setMaxStackSize(1);
-		maxCharge = 10000000;
-		tier = 4;
-		visDiscount = 8;
-		transferLimit = 12000;
-		energyPerDamage = 20000;
+    public ItemQuantumGoggles(ArmorMaterial material, int renderIndex, int armorType) {
+        super(material, renderIndex, armorType);
+        this.setCreativeTab(EMT.TAB);
+        this.setMaxDamage(27);
+        this.setMaxStackSize(1);
+        maxCharge = 10000000;
+        tier = 4;
+        visDiscount = 8;
+        transferLimit = 12000;
+        energyPerDamage = 20000;
 
-		potionCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));
-		potionCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(15000));
-		potionCost.put(Integer.valueOf(Potion.confusion.id), Integer.valueOf(5000));
-	}
+        potionCost.put(Integer.valueOf(Potion.poison.id), Integer.valueOf(10000));
+        potionCost.put(Integer.valueOf(Potion.wither.id), Integer.valueOf(15000));
+        potionCost.put(Integer.valueOf(Potion.confusion.id), Integer.valueOf(5000));
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/goggles_quantum");
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/goggles_quantum");
+    }
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return EMT.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
-	}
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return EMT.TEXTURE_PATH + ":textures/models/thaumicquantumhelmet.png";
+    }
 
-	@Override
-	public double getDamageAbsorptionRatio() {
-		return 1D;
-	}
+    @Override
+    public double getDamageAbsorptionRatio() {
+        return 1D;
+    }
 
-	@Override
-	public int getTier(ItemStack itemStack) {
-		return 4;
-	}
+    @Override
+    public int getTier(ItemStack itemStack) {
+        return 4;
+    }
 
-	// MUAHAHAHA
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		try {
-			Field f;
-			f = Keyboard.class.getDeclaredField("playerKeys");
-			f.setAccessible(true);
-			Map<EntityPlayer, Set<Enum>> playerKeys = (Map<EntityPlayer, Set<Enum>>) f.get(IC2.keyboard);
+    // MUAHAHAHA
+    @Override
+    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        try {
+            Field f;
+            f = Keyboard.class.getDeclaredField("playerKeys");
+            f.setAccessible(true);
+            Map<EntityPlayer, Set<Enum>> playerKeys = (Map<EntityPlayer, Set<Enum>>) f.get(IC2.keyboard);
 
-			Enum hub = null;
-			Set<Enum> set = playerKeys.get(player);
-			
-			if (set != null) {
-				for (Enum e : set) {
-					if (e.ordinal() == 6) {
-						hub = e;
-					}
-				}
-				set.remove(hub);
-			}
+            Enum hub = null;
+            Set<Enum> set = playerKeys.get(player);
 
-			IC2Items.getItem("quantumHelmet").getItem().onArmorTick(world, player, itemStack);
+            if (set != null) {
+                for (Enum e : set) {
+                    if (e.ordinal() == 6) {
+                        hub = e;
+                    }
+                }
+                set.remove(hub);
+            }
 
-			if (hub != null) {
-				set.add(hub);
-			}
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
+            IC2Items.getItem("quantumHelmet").getItem().onArmorTick(world, player, itemStack);
+
+            if (hub != null) {
+                set.add(hub);
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 }

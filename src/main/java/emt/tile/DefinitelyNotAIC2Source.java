@@ -2,62 +2,21 @@ package emt.tile;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import gregtech.api.enums.GT_Values;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class DefinitelyNotAIC2Source extends TileEntity {
+public class DefinitelyNotAIC2Source {
     public final TileEntity parent;
-    protected double capacity;
+    protected long capacity;
     protected byte tier;
-    protected double power;
-    protected double energyStored;
-    protected boolean addedToEnet;
+    protected long power;
+    protected long energyStored;
 
-    public DefinitelyNotAIC2Source(TileEntity parent1, double capacity1, int tier1) {
-        double power = (double) GT_Values.V[tier1];
+    public DefinitelyNotAIC2Source(TileEntity parent1, long capacity1, int tier1) {
+        long power = GT_Values.V[tier1];
         this.parent = parent1;
         this.capacity = capacity1 < power ? power : capacity1;
         this.tier = (byte) tier1;
         this.power = power;
-    }
-
-    public void updateEntity() {
-        if (!this.addedToEnet && !FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-                this.worldObj = this.parent.getWorldObj();
-                this.xCoord = this.parent.xCoord;
-                this.yCoord = this.parent.yCoord;
-                this.zCoord = this.parent.zCoord;
-                this.addedToEnet = true;
-            }
-    }
-
-    public void invalidate() {
-        super.invalidate();
-        this.onChunkUnload();
-    }
-
-    public void onChunkUnload() {
-        if (this.addedToEnet) {
-            this.addedToEnet = false;
-        }
-
-    }
-
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        NBTTagCompound data = tag.getCompoundTag("EMTGTSource");
-        this.energyStored = data.getDouble("energy");
-    }
-
-    public void writeToNBT(NBTTagCompound tag) {
-        try {
-            super.writeToNBT(tag);
-        } catch (RuntimeException var3) {
-        }
-
-        NBTTagCompound data = new NBTTagCompound();
-        data.setDouble("energy", this.energyStored);
-        tag.setTag("EMTGTSource", data);
     }
 
     public double getCapacity() {
@@ -69,14 +28,22 @@ public class DefinitelyNotAIC2Source extends TileEntity {
             capacity1 = this.power;
         }
 
+        this.capacity = (long) capacity1;
+    }
+
+    public void setCapacity(long capacity1) {
+        if (capacity1 < this.power) {
+            capacity1 = this.power;
+        }
+
         this.capacity = capacity1;
     }
 
-    public double getEnergyStored() {
+    public long getEnergyStored() {
         return this.energyStored;
     }
 
-    public void setEnergyStored(double amount) {
+    public void setEnergyStored(long amount) {
         this.energyStored = amount;
     }
 

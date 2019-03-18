@@ -17,24 +17,23 @@ public class EMT_CasingBlock extends ItemBlock {
 
     public static final Block[] EMT_GT_BLOCKS = {new EMT_GT_Block("EMT_GTBLOCK_CASEING", new String[]
             {
-                    EMT.TEXTURE_PATH+":machines/side",
-                    EMT.TEXTURE_PATH+":machines/GT/inner",
-                    EMT.TEXTURE_PATH+":machines/GT/siderawI",
-                    EMT.TEXTURE_PATH+":machines/GT/rawcoreI",
-                    EMT.TEXTURE_PATH+":machines/GT/siderawII",
-                    EMT.TEXTURE_PATH+":machines/GT/rawcoreII",
+                    EMT.TEXTURE_PATH + ":machines/side",
+                    EMT.TEXTURE_PATH + ":machines/GT/inner",
+                    EMT.TEXTURE_PATH + ":machines/GT/siderawI",
+                    EMT.TEXTURE_PATH + ":machines/GT/rawcoreI",
+                    EMT.TEXTURE_PATH + ":machines/GT/siderawII",
+                    EMT.TEXTURE_PATH + ":machines/GT/rawcoreII",
             }
     )};
+    protected final String mNoMobsToolTip = GT_LanguageManager.addStringLocalization("gt.nomobspawnsonthisblock", "Mobs cannot Spawn on this Block");
+    protected final String mNoTileEntityToolTip = GT_LanguageManager.addStringLocalization("gt.notileentityinthisblock", "This is NOT a TileEntity!");
 
-    public EMT_CasingBlock(final Block par1){
+    public EMT_CasingBlock(final Block par1) {
         super(par1);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setCreativeTab(EMT.TAB);
     }
-
-    protected final String mNoMobsToolTip = GT_LanguageManager.addStringLocalization("gt.nomobspawnsonthisblock", "Mobs cannot Spawn on this Block");
-    protected final String mNoTileEntityToolTip = GT_LanguageManager.addStringLocalization("gt.notileentityinthisblock", "This is NOT a TileEntity!");
 
     @Override
     public int getMetadata(final int aMeta) {
@@ -55,7 +54,7 @@ public class EMT_CasingBlock extends ItemBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(ItemStack stack, int pass) {
-        return this.field_150939_a.getIcon(0,stack.getItemDamage());
+        return this.field_150939_a.getIcon(0, stack.getItemDamage());
     }
 
     @Override
@@ -67,6 +66,6 @@ public class EMT_CasingBlock extends ItemBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_) {
-        return this.field_150939_a.getIcon(0,p_77618_2_);
+        return this.field_150939_a.getIcon(0, p_77618_2_);
     }
 }

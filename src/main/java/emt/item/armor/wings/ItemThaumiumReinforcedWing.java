@@ -17,44 +17,44 @@ import java.util.List;
 
 public class ItemThaumiumReinforcedWing extends ItemFeatherWing implements IVisDiscountGear, IRepairable {
 
-	public ItemThaumiumReinforcedWing(ArmorMaterial material, int par3, int par4) {
-		super(material, par3, par4);
-		this.setMaxStackSize(1);
-		this.setMaxDamage(250);
-		this.setCreativeTab(EMT.TAB);
-		this.isDamageable();
-		visDiscount = 4;
-	}
-	
-	@Override
-	public float getFallDamageMult() {
-		return 0.5F;
-	}
+    public ItemThaumiumReinforcedWing(ArmorMaterial material, int par3, int par4) {
+        super(material, par3, par4);
+        this.setMaxStackSize(1);
+        this.setMaxDamage(250);
+        this.setCreativeTab(EMT.TAB);
+        this.isDamageable();
+        visDiscount = 4;
+    }
 
-	@Override
-	public int getVisDiscount(ItemStack stack, EntityPlayer player, Aspect aspect) {
-		return visDiscount;
-	}
+    @Override
+    public float getFallDamageMult() {
+        return 0.5F;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_thaumium");
-	}
+    @Override
+    public int getVisDiscount(ItemStack stack, EntityPlayer player, Aspect aspect) {
+        return visDiscount;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return EMT.TEXTURE_PATH + ":textures/models/thaumiumwing.png";
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/wing_thaumium");
+    }
 
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-		list.add(EMTTextHelper.localize("tooltip.EMT.visDiscount") + ": " + String.valueOf(visDiscount) + "%");
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return EMT.TEXTURE_PATH + ":textures/models/thaumiumwing.png";
+    }
 
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		this.useWings(player, stack, world, 0.15f, 0.7f, 0.5f, 0);
-	}
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+        list.add(EMTTextHelper.localize("tooltip.EMT.visDiscount") + ": " + String.valueOf(visDiscount) + "%");
+    }
+
+    @Override
+    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+        this.useWings(player, stack, world, 0.15f, 0.7f, 0.5f, 0);
+    }
 }

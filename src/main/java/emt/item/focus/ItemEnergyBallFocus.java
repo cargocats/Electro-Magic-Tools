@@ -10,43 +10,43 @@ import net.minecraft.world.World;
 
 public class ItemEnergyBallFocus extends ItemBaseFocus {
 
-	public ItemEnergyBallFocus() {
-		super("energyBall");
-	}
+    public ItemEnergyBallFocus() {
+        super("energyBall");
+    }
 
-	@Override
-	public int getFocusColor(ItemStack stack) {
-		return 0x0000FF;
-	}
+    @Override
+    public int getFocusColor(ItemStack stack) {
+        return 0x0000FF;
+    }
 
-	@Override
-	public String getSortingHelper(ItemStack itemstack) {
-		return "ENERGYBALL";
-	}
+    @Override
+    public String getSortingHelper(ItemStack itemstack) {
+        return "ENERGYBALL";
+    }
 
-	@Override
-	public ItemStack onFocusRightClick(ItemStack stack, World world, EntityPlayer player, MovingObjectPosition mop) {
-		if (world.isRemote) {
-			return stack;
-		}
-		
-		ItemStack armor = player.inventory.armorInventory[2];
-		if (armor == null) {
-			return stack;
-		}
+    @Override
+    public ItemStack onFocusRightClick(ItemStack stack, World world, EntityPlayer player, MovingObjectPosition mop) {
+        if (world.isRemote) {
+            return stack;
+        }
 
-		double val = ElectricItem.manager.discharge(armor, 5120, 4, true, false, false);
+        ItemStack armor = player.inventory.armorInventory[2];
+        if (armor == null) {
+            return stack;
+        }
 
-		if (val < 5120) {
-			return stack;
-		}
+        double val = ElectricItem.manager.discharge(armor, 5120, 4, true, false, false);
 
-		float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-		float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-		float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-		world.spawnEntityInWorld(new EntityEnergyBall(world, player, rotX, rotY, rotZ));
+        if (val < 5120) {
+            return stack;
+        }
 
-		return stack;
-	}
+        float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
+        float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
+        float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
+        world.spawnEntityInWorld(new EntityEnergyBall(world, player, rotX, rotY, rotZ));
+
+        return stack;
+    }
 
 }

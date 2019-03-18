@@ -25,9 +25,9 @@ import java.util.List;
 
 public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
 
-    public int maxCharge = 2000000;
     private final int hitCost = 5000;
     private final int lightningCost = 75000;
+    public int maxCharge = 2000000;
 
     public ItemElectricThorHammer() {
         super(ToolMaterial.EMERALD);

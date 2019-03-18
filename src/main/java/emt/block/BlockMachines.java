@@ -1,11 +1,12 @@
 package emt.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
 import emt.gthandler.common.implementations.automation.EssentiaFiller;
+import emt.tile.TileEntityEtherealMacerator;
+import emt.tile.TileEntityIndustrialWandRecharge;
 import ic2.api.item.IC2Items;
-
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,120 +19,115 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.TileEntityEtherealMacerator;
-import emt.tile.TileEntityIndustrialWandRecharge;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockMachines extends BlockBaseContainer {
 
-	public BlockMachines(String name) {
-		super(name, Material.iron, soundTypeMetal, 3, 4.0F);
-	}
+    public BlockMachines(String name) {
+        super(name, Material.iron, soundTypeMetal, 3, 4.0F);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister ir) {
-		super.registerBlockIcons(ir);
-		
-		this.blockIcon = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister ir) {
+        super.registerBlockIcons(ir);
 
-		iconSets[0].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
-		iconSets[1].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
-		iconSets[2].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+        this.blockIcon = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
 
-		iconSets[0].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
-		iconSets[1].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
-		iconSets[2].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+        iconSets[0].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/top");
+        iconSets[1].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+        iconSets[2].top = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		iconSets[0].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
-		iconSets[1].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
-		iconSets[2].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+        iconSets[0].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+        iconSets[1].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+        iconSets[2].bottom = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		iconSets[0].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
-		iconSets[1].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
-		iconSets[2].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+        iconSets[0].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/side");
+        iconSets[1].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmacerator");
+        iconSets[2].side = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-		iconSets[0].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
-		iconSets[1].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
-		iconSets[2].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
-	}
+        iconSets[0].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+        iconSets[1].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfront");
+        iconSets[2].frontOff = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
 
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id, 1, 0));
-		list.add(new ItemStack(id, 1, 1));
-		list.add(new ItemStack(id, 1, 2));
-	}
+        iconSets[0].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/wandcharger");
+        iconSets[1].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratorfrontactive");
+        iconSets[2].frontOn = ir.registerIcon(EMT.TEXTURE_PATH + ":machines/etherealmaceratortop");
+    }
 
-	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		if (meta == 0) {
-			return new TileEntityIndustrialWandRecharge();
-		}
-		else if (meta == 1) {
-			return new TileEntityEtherealMacerator();
-		}
-		else if (meta == 2){
-			return new EssentiaFiller();
-		}
-		return super.createTileEntity(world, meta);
-	}
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item id, CreativeTabs tab, List list) {
+        list.add(new ItemStack(id, 1, 0));
+        list.add(new ItemStack(id, 1, 1));
+        list.add(new ItemStack(id, 1, 2));
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityIndustrialWandRecharge) {
-			player.openGui(EMT.instance, 0, world, x, y, z);
-		}
-		else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityEtherealMacerator) {
-			player.openGui(EMT.instance, 1, world, x, y, z);
-		}
-		return true;
-	}
+    @Override
+    public TileEntity createTileEntity(World world, int meta) {
+        if (meta == 0) {
+            return new TileEntityIndustrialWandRecharge();
+        } else if (meta == 1) {
+            return new TileEntityEtherealMacerator();
+        } else if (meta == 2) {
+            return new EssentiaFiller();
+        }
+        return super.createTileEntity(world, meta);
+    }
 
-	@Override
-	public Item getItemDropped(int meta, Random random, int fortune) {
-		return IC2Items.getItem("machine").getItem();
-	}
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityIndustrialWandRecharge) {
+            player.openGui(EMT.instance, 0, world, x, y, z);
+        } else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityEtherealMacerator) {
+            player.openGui(EMT.instance, 1, world, x, y, z);
+        }
+        return true;
+    }
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		dropItems(world, x, y, z);
-		world.removeTileEntity(x, y, z);
-		super.breakBlock(world, x, y, z, block, meta);
-	}
+    @Override
+    public Item getItemDropped(int meta, Random random, int fortune) {
+        return IC2Items.getItem("machine").getItem();
+    }
 
-	private void dropItems(World world, int x, int y, int z) {
-		Random rand = world.rand;
-		
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if (!(tileEntity instanceof IInventory)) {
-			return;
-		}
-		IInventory inventory = (IInventory) tileEntity;
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        dropItems(world, x, y, z);
+        world.removeTileEntity(x, y, z);
+        super.breakBlock(world, x, y, z, block, meta);
+    }
 
-		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			ItemStack item = inventory.getStackInSlot(i);
+    private void dropItems(World world, int x, int y, int z) {
+        Random rand = world.rand;
 
-			if (item != null && item.stackSize > 0) {
-				float rx = rand.nextFloat() * 0.8F + 0.1F;
-				float ry = rand.nextFloat() * 0.8F + 0.1F;
-				float rz = rand.nextFloat() * 0.8F + 0.1F;
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (!(tileEntity instanceof IInventory)) {
+            return;
+        }
+        IInventory inventory = (IInventory) tileEntity;
 
-				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+            ItemStack item = inventory.getStackInSlot(i);
 
-				if (item.hasTagCompound()) {
-					entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-				}
+            if (item != null && item.stackSize > 0) {
+                float rx = rand.nextFloat() * 0.8F + 0.1F;
+                float ry = rand.nextFloat() * 0.8F + 0.1F;
+                float rz = rand.nextFloat() * 0.8F + 0.1F;
 
-				float factor = 0.05F;
-				entityItem.motionX = rand.nextGaussian() * factor;
-				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-				entityItem.motionZ = rand.nextGaussian() * factor;
-				world.spawnEntityInWorld(entityItem);
-				item.stackSize = 0;
-			}
-		}
-	}
+                EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+
+                if (item.hasTagCompound()) {
+                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+                }
+
+                float factor = 0.05F;
+                entityItem.motionX = rand.nextGaussian() * factor;
+                entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+                entityItem.motionZ = rand.nextGaussian() * factor;
+                world.spawnEntityInWorld(entityItem);
+                item.stackSize = 0;
+            }
+        }
+    }
 }

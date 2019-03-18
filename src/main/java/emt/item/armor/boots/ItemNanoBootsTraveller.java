@@ -10,46 +10,44 @@ import net.minecraft.item.ItemStack;
 
 public class ItemNanoBootsTraveller extends ItemElectricBootsTraveller {
 
-	public ItemNanoBootsTraveller(ArmorMaterial material, int par3, int par4) {
-		super(material, par3, par4);
-		maxCharge = 1000000;
-		speedBonus = (float) EMTConfigHandler.nanoBootsSpeed;
-		jumpBonus = (float) EMTConfigHandler.nanoBootsJump;
-		visDiscount = 4;
-		transferLimit = 1600;
-		energyPerDamage = 5000;
-	}
+    public ItemNanoBootsTraveller(ArmorMaterial material, int par3, int par4) {
+        super(material, par3, par4);
+        maxCharge = 1000000;
+        speedBonus = (float) EMTConfigHandler.nanoBootsSpeed;
+        jumpBonus = (float) EMTConfigHandler.nanoBootsJump;
+        visDiscount = 4;
+        transferLimit = 1600;
+        energyPerDamage = 5000;
+    }
 
-  @Override
-  public float getMaxHealthyDropDist()
-  {
-    return (float) EMTConfigHandler.nanoBootsMaxDrop;
-  }
+    @Override
+    public float getMaxHealthyDropDist() {
+        return (float) EMTConfigHandler.nanoBootsMaxDrop;
+    }
 
-  @Override
-  public float getMinimumDropDist()
-  {
-    return (float) EMTConfigHandler.nanoBootsMinDrop;
-  }
+    @Override
+    public float getMinimumDropDist() {
+        return (float) EMTConfigHandler.nanoBootsMinDrop;
+    }
 
-	@Override
-	public double getDamageAbsorptionRatio() {
-		return 0.9D;
-	}
+    @Override
+    public double getDamageAbsorptionRatio() {
+        return 0.9D;
+    }
 
-	@Override
-	public int getTier(ItemStack itemStack) {
-		return 3;
-	}
+    @Override
+    public int getTier(ItemStack itemStack) {
+        return 3;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/boots_nano");
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(EMT.TEXTURE_PATH + ":armor/boots_nano");
+    }
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return EMT.TEXTURE_PATH + ":textures/models/nanobootstravel.png";
-	}
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return EMT.TEXTURE_PATH + ":textures/models/nanobootstravel.png";
+    }
 }

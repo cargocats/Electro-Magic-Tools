@@ -17,137 +17,142 @@ import net.minecraft.world.World;
 
 public abstract class BlockBaseContainer extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	IconSet[] iconSets;
+    public int instance;
+    public int countOfMetas;
+    @SideOnly(Side.CLIENT)
+    IconSet[] iconSets;
 
-	public int instance;
-	public int countOfMetas;
+    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, float hardness) {
+        this(unlocName, material, soundType, 1, hardness);
+    }
 
-	public BlockBaseContainer(String unlocName, Material material, SoundType soundType, float hardness) {
-		this(unlocName, material, soundType, 1, hardness);
-	}
+    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, float hardness) {
+        this(unlocName, material, soundType, countOfMetas, 0, hardness);
+    }
 
-	public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, float hardness) {
-		this(unlocName, material, soundType, countOfMetas, 0, hardness);
-	}
+    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, int curInstance, float hardness) {
+        super(material);
+        this.setBlockName(EMT.MOD_ID + "." + unlocName);
+        this.setCreativeTab(EMT.TAB);
+        this.setStepSound(soundType);
+        this.setHardness(hardness);
 
-	public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, int curInstance, float hardness) {
-		super(material);
-		this.setBlockName(EMT.MOD_ID + "." + unlocName);
-		this.setCreativeTab(EMT.TAB);
-		this.setStepSound(soundType);
-		this.setHardness(hardness);
+        this.countOfMetas = countOfMetas;
+        this.instance = curInstance;
 
-		this.countOfMetas = countOfMetas;
-		this.instance = curInstance;
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            iconSets = new IconSet[countOfMetas];
 
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-			iconSets = new IconSet[countOfMetas];
+            for (int meta = 0; meta < countOfMetas; meta++) {
+                iconSets[meta] = new IconSet();
+            }
+        }
+    }
 
-			for (int meta = 0; meta < countOfMetas; meta++) {
-				iconSets[meta] = new IconSet();
-			}
-		}
-	}
-	
-	public IconSet[] getIconSets() {
-		return iconSets;
-	}
+    public IconSet[] getIconSets() {
+        return iconSets;
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return null;
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return null;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
-		TileEntityEMT tile = (TileEntityEMT) access.getTileEntity(x, y, z);
-		int meta = access.getBlockMetadata(x, y, z);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
+        TileEntityEMT tile = (TileEntityEMT) access.getTileEntity(x, y, z);
+        int meta = access.getBlockMetadata(x, y, z);
 
-		IconSet set = iconSets[meta];
+        if (meta >= countOfMetas)
+            return null;
 
-		if (side == 0) {
-			return set.bottom;
-		}
-		else if (side == 1) {
-			return set.top;
-		}
-		else if (side != tile.facing) {
-			return set.side;
-		}
-		else if (tile.isOn) {
-			if (set.frontOn != null) {
-				return set.frontOn;
-			}
+        IconSet set = iconSets[meta];
 
-			if (set.frontOff != null) {
-				return set.frontOff;
-			}
+        if (side == 0) {
+            return set.bottom;
+        } else if (side == 1) {
+            return set.top;
+        } else if (side != tile.facing) {
+            return set.side;
+        } else if (tile.isOn) {
+            if (set.frontOn != null) {
+                return set.frontOn;
+            }
 
-			return set.side;
-		}
-		else {
-			if (set.frontOff != null) {
-				return set.frontOff;
-			}
+            if (set.frontOff != null) {
+                return set.frontOff;
+            }
 
-			return set.side;
-		}
-	}
+            return set.side;
+        } else {
+            if (set.frontOff != null) {
+                return set.frontOff;
+            }
 
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		IconSet set = iconSets[meta];
+            return set.side;
+        }
+    }
 
-		if (side < 1) {
-			return set.bottom;
-		}
-		if (side == 1) {
-			return set.top;
-		}
-		if (side == 3) {
-			return set.frontOff;
-		}
+    @Override
+    public IIcon getIcon(int side, int meta) {
 
-		return set.side;
-	}
+        if (meta >= countOfMetas)
+            return null;
 
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack) {
-		int facing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		TileEntityEMT tile = (TileEntityEMT) world.getTileEntity(x, y, z);
+        IconSet set = iconSets[meta];
 
-		switch (facing) {
-			case 0:
-				tile.facing = 2;
-				break;
+        if (side < 1) {
+            return set.bottom;
+        }
+        if (side == 1) {
+            return set.top;
+        }
+        if (side == 3) {
+            return set.frontOff;
+        }
 
-			case 1:
-				tile.facing = 5;
-				break;
+        return set.side;
+    }
 
-			case 2:
-				tile.facing = 3;
-				break;
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack) {
+        int facing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        TileEntityEMT tile = (TileEntityEMT) world.getTileEntity(x, y, z);
 
-			case 3:
-				tile.facing = 4;
-				break;
-		}
-	}
+        if (tile == null)
+            return;
 
-	@Override
-	public int damageDropped(int meta) {
-		return meta;
-	}
+        switch (facing) {
+            case 0:
+                tile.facing = 2;
+                break;
 
-	@SideOnly(Side.CLIENT)
-	public static class IconSet {
-		public IIcon top;
-		public IIcon bottom;
-		public IIcon side;
-		public IIcon frontOff;
-		public IIcon frontOn;
-	}
+            case 1:
+                tile.facing = 5;
+                break;
+
+            case 2:
+                tile.facing = 3;
+                break;
+
+            case 3:
+                tile.facing = 4;
+                break;
+        }
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return meta;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class IconSet {
+        public IIcon top;
+        public IIcon bottom;
+        public IIcon side;
+        public IIcon frontOff;
+        public IIcon frontOn;
+    }
 }

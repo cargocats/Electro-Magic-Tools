@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemQuantumWing extends ItemNanoWing {
-	public static int maxCharge = 10000000;
+    public static int maxCharge = 10000000;
     public int tier = 4;
 
     public ItemQuantumWing(ArmorMaterial material, int par3, int par4) {
@@ -22,10 +22,10 @@ public class ItemQuantumWing extends ItemNanoWing {
         transferLimit = 12000;
         energyPerDamage = 20000;
     }
-    
+
     @Override
     public float getFallDamageMult() {
-    	return 0.0F;
+        return 0.0F;
     }
 
     @SideOnly(Side.CLIENT)
@@ -42,9 +42,9 @@ public class ItemQuantumWing extends ItemNanoWing {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-    	this.useWings(player, stack, world, 0.33f, 0.5f, 0.2f, 7);
+        this.useWings(player, stack, world, 0.33f, 0.5f, 0.2f, 7);
     }
-    
+
     @Override
     public double getMaxCharge(ItemStack itemStack) {
         return maxCharge;

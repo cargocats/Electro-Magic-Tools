@@ -17,6 +17,7 @@ emt.Storage=Storage:
 emt.PressShift=<Press SHIFT>
 emt.Generating=Generating: 
 emt.Fuel=Fuel
+emt.OutputMax=Output at Max:
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.

@@ -4,6 +4,8 @@ import emt.gthandler.common.implementations.EssentiaHatch;
 import emt.tile.TileEntityEMT;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.ThaumcraftApiHelper;
@@ -20,73 +22,101 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
     private byte tick = 0;
 
     @Override
-    public void updateEntity(){
-        ++tick;
-        fillfrompipe();
-        if (tick %20 == 0){
-        TileEntity T = this.worldObj.getTileEntity(xCoord,yCoord+1,zCoord);
-        if (checkTE(T)){
-            tick = 0;
-            return;
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        NBTTagList tlist = new NBTTagList();
+        Aspect[] aspectA = current.getAspects();
+        for (int i = 0; i < aspectA.length; ++i) {
+            Aspect aspect = aspectA[i];
+            if (aspect != null) {
+                NBTTagCompound f = new NBTTagCompound();
+                f.setString("key", aspect.getTag());
+                f.setInteger("amount", current.getAmount(aspect));
+                tlist.appendTag(f);
+            }
         }
-        if (T == null)
-            T = this.worldObj.getTileEntity(xCoord+1,yCoord,zCoord);
-        if (checkTE(T)) {
-            tick = 0;
-            return;
-        }
-        if (T == null)
-            T = this.worldObj.getTileEntity(xCoord,yCoord,zCoord+1);
-        if (checkTE(T)) {
-            tick = 0;
-            return;
-        }
-        if (T == null)
-            T = this.worldObj.getTileEntity(xCoord,yCoord-1,zCoord);
-        if (checkTE(T)) {
-            tick = 0;
-            return;
-        }
-        if (T == null)
-            T = this.worldObj.getTileEntity(xCoord-1,yCoord,zCoord);
-        if (checkTE(T)) {
-            tick = 0;
-            return;
-        }
-        if (T == null)
-            T = this.worldObj.getTileEntity(xCoord,yCoord,zCoord-1);
-        if (checkTE(T)) {
-            tick = 0;
-            return;
-        }
+        tagCompound.setTag("Aspects", tlist);
+
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        current = new AspectList();
+        NBTTagList tlist = tagCompound.getTagList("Aspects", 10);
+        for (int j = 0; j < tlist.tagCount(); ++j) {
+            NBTTagCompound rs = tlist.getCompoundTagAt(j);
+            if (rs.hasKey("key")) {
+                current.add(Aspect.getAspect(rs.getString("key")), rs.getInteger("amount"));
+            }
         }
     }
 
-    private boolean checkTE(final TileEntity T){
+    @Override
+    public void updateEntity() {
+        ++tick;
+        fillfrompipe();
+        if (tick % 20 == 0) {
+            TileEntity T = this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+            if (T == null)
+                T = this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+            if (T == null)
+                T = this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+            if (T == null)
+                T = this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+            if (T == null)
+                T = this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+            if (T == null)
+                T = this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+            if (checkTE(T)) {
+                tick = 0;
+                return;
+            }
+        }
+    }
+
+    private boolean checkTE(final TileEntity T) {
         if (T == null)
             return false;
         if (this.current.visSize() > 0)
-        if (T instanceof IGregTechTileEntity) {
-            IMetaTileEntity M = ((IGregTechTileEntity) T).getMetaTileEntity();
-            if (M instanceof EssentiaHatch){
-                if (((EssentiaHatch)M).addAspectList(current))
-                this.current=new AspectList();
-                return true;
+            if (T instanceof IGregTechTileEntity) {
+                IMetaTileEntity M = ((IGregTechTileEntity) T).getMetaTileEntity();
+                if (M instanceof EssentiaHatch) {
+                    if (((EssentiaHatch) M).addAspectList(current))
+                        this.current = new AspectList();
+                    return true;
+                }
             }
-        }
 
         return false;
     }
 
-    public void fillfrompipe()
-    {
+    public void fillfrompipe() {
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
-        for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++)
-        {
+        for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
-            if (te[i] != null)
-            {
-                IEssentiaTransport pipe = (IEssentiaTransport)te[i];
+            if (te[i] != null) {
+                IEssentiaTransport pipe = (IEssentiaTransport) te[i];
                 if (!pipe.canOutputTo(ForgeDirection.VALID_DIRECTIONS[i])) {
                     return;
                 }
@@ -114,7 +144,7 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
 
     @Override
     public int addToContainer(Aspect aspect, int i) {
-        current.add(aspect,i);
+        current.add(aspect, i);
         return 0;
     }
 
@@ -139,14 +169,14 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
         for (Aspect a : aspectList.aspects.keySet())
             if (current.aspects.containsKey(a)) {
                 ret.add(true);
-            }else
+            } else
                 ret.add(false);
         return !ret.contains(false);
     }
 
     @Override
     public int containerContains(Aspect aspect) {
-            return current.aspects.containsKey(aspect) ? current.getAmount(aspect) : 0;
+        return current.aspects.containsKey(aspect) ? current.getAmount(aspect) : 0;
     }
 
     @Override
@@ -186,7 +216,7 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
 
     @Override
     public int addEssentia(Aspect aspect, int i, ForgeDirection forgeDirection) {
-        current.add(aspect,i);
+        current.add(aspect, i);
         return 0;
     }
 
@@ -198,7 +228,7 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
     @Override
     public int getEssentiaAmount(ForgeDirection forgeDirection) {
         int ret = 0;
-        for (final Aspect A : current.aspects.keySet()){
+        for (final Aspect A : current.aspects.keySet()) {
             ret += current.getAmount(A);
         }
         return ret;

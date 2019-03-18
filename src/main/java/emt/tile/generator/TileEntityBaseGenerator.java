@@ -1,10 +1,8 @@
 package emt.tile.generator;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import emt.tile.DefinitelyNotAIC2Source;
 import emt.tile.TileEntityEMT;
-import emt.tile.solar.TileEntitySolarBase;
 import emt.util.EMTConfigHandler;
 import emt.util.EMTEssentiasOutputs;
 import gregtech.api.enums.GT_Values;
@@ -13,7 +11,6 @@ import gregtech.api.interfaces.tileentity.IEnergyConnected;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
 import gregtech.api.net.GT_Packet_Block_Event;
-import ic2.api.energy.prefab.BasicSource;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -27,18 +24,14 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
 import thaumcraft.api.ThaumcraftApiHelper;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.IAspectContainer;
-import thaumcraft.api.aspects.IAspectSource;
-import thaumcraft.api.aspects.IEssentiaTransport;
+import thaumcraft.api.aspects.*;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
 
 public class TileEntityBaseGenerator
         extends TileEntityEMT
         implements IInventory, IAspectContainer, IEssentiaTransport, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
-    public DefinitelyNotAIC2Source energySource = new DefinitelyNotAIC2Source(this, 100000.0D, 2);
+    public DefinitelyNotAIC2Source energySource = new DefinitelyNotAIC2Source(this, 100000L, 2);
     public Aspect aspect;
     public double generating;
     public int tick = 0;
@@ -55,22 +48,42 @@ public class TileEntityBaseGenerator
     public byte color;
     private boolean side;
 
-    public TileEntityBaseGenerator(Aspect aspect) {
-        super();
+    public TileEntityBaseGenerator(int aspect) {
+        this();
+        switch (aspect) {
+            case 0:
+                this.aspect = Aspect.ENERGY;
+                break;
+            case 1:
+                this.aspect = Aspect.FIRE;
+                break;
+            case 2:
+                this.aspect = Aspect.AURA;
+                break;
+            case 3:
+                this.aspect = Aspect.TREE;
+                break;
+            case 4:
+                this.aspect = Aspect.AIR;
+                break;
+            case 5:
+                this.aspect = Aspect.GREED;
+                break;
+        }
+        this.generating = EMTEssentiasOutputs.outputs.get(this.aspect.getTag());
+    }
+
+    public TileEntityBaseGenerator() {
         this.energySource.setCapacity(EMTConfigHandler.EssentiaGeneratorStorage);
         this.maxstorage = ((int) this.energySource.getCapacity());
         this.maxfuel = 64;
         this.fuel = 0;
-        this.storage = 0;
         this.refuel = 1;
-        this.aspect = aspect;
-        this.generating = ((Double) EMTEssentiasOutputs.outputs.get(aspect.getTag())).doubleValue();
         this.color = -1;
     }
 
     public void updateEntity() {
-
-        this.side = !this.worldObj.isRemote ? FMLCommonHandler.instance().getEffectiveSide().isServer() : FMLCommonHandler.instance().getSide().isServer();
+        this.side = !this.worldObj.isRemote;
         this.dead = false;
         this.timer += 1L;
         if (this.timer <= Long.MAX_VALUE - 1)
@@ -79,7 +92,6 @@ public class TileEntityBaseGenerator
         fillfrompipe();
         createEnergy();
         inputintoGTnet();
-        this.energySource.updateEntity();
     }
 
 
@@ -89,7 +101,7 @@ public class TileEntityBaseGenerator
                 for (int y = this.yCoord - 4; y < this.yCoord + 4; y++) {
                     for (int z = this.zCoord - 4; z < this.zCoord + 4; z++) {
                         TileEntity tile = this.worldObj.getTileEntity(x, y, z);
-                        if ((tile != null) && ((tile instanceof IAspectSource))) {
+                        if (tile instanceof IAspectSource) {
                             IAspectSource as = (IAspectSource) tile;
                             if ((as.doesContainerContainAmount(this.aspect, this.refuel)) &&
                                     (as.takeFromContainer(this.aspect, this.refuel))) {
@@ -138,7 +150,7 @@ public class TileEntityBaseGenerator
                 }
             } else if (this.storage == this.maxstorage) {
                 this.isActive = false;
-            } else if ((this.storage + this.generating / 20.0D / 20.0D > this.maxstorage) && (this.storage != this.maxstorage)) {
+            } else if ((this.storage + this.generating / 20.0D / 20.0D > this.maxstorage)) {
                 this.isActive = true;
                 if (side) {
                     this.energySource.setEnergyStored(this.maxstorage);
@@ -156,31 +168,24 @@ public class TileEntityBaseGenerator
         }
     }
 
-    public void onChunkUnload() {
-        this.energySource.onChunkUnload();
-    }
-
-    public void invalidate() {
-        this.energySource.invalidate();
-        super.invalidate();
-    }
-
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
-        this.energySource.readFromNBT(tag);
-        if (tag.getInteger("storage") > this.storage) {
-            this.storage = tag.getInteger("storage");
-        }
+        this.energySource.setEnergyStored(tag.getLong("estore"));
         if (tag.getByte("fuel") > this.fuel) {
             this.fuel = tag.getByte("fuel");
+        }
+        if (!tag.getString("aspect").isEmpty()) {
+            this.aspect = Aspect.getAspect(tag.getString("aspect"));
+            this.generating = EMTEssentiasOutputs.outputs.get(this.aspect.getTag());
         }
     }
 
     public void writeToNBT(NBTTagCompound tag) {
-        tag.setInteger("storage", this.storage);
-        tag.setInteger("fuel", this.fuel);
         super.writeToNBT(tag);
-        this.energySource.writeToNBT(tag);
+        tag.setInteger("fuel", this.fuel);
+        tag.setLong("estore", this.energySource.getEnergyStored());
+        if (aspect != null)
+            tag.setString("aspect", this.aspect.getTag());
     }
 
     public int getSizeInventory() {
@@ -268,7 +273,7 @@ public class TileEntityBaseGenerator
     }
 
     public boolean doesContainerContain(AspectList ot) {
-        return ot.aspects.containsKey(this.aspect);
+        return ot.aspects.containsKey(this.aspect) && ot.aspects.get(this.aspect) == this.fuel;
     }
 
     public int containerContains(Aspect tag) {

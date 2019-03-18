@@ -18,19 +18,8 @@ import java.util.ArrayList;
 
 public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
 
+    private static int ApTe = (int) Math.ceil(Aspect.aspects.size() / GT_Values.V.length);
     private AspectList current = new AspectList();
-    private static int ApTe = (int) Math.ceil(Aspect.aspects.size()/GT_Values.V.length);
-
-    public boolean addAspectList(final AspectList A){
-
-        if ((this.mTier+1)*ApTe > A.size()+current.size()){
-            if (current.visSize() + A.visSize() < (this.mTier+1)*ApTe*64)
-            current.add(A);
-            return true;
-        }else
-            return false;
-
-    }
 
     public EssentiaHatch(int aID, String aName, String aNameRegional, int aTier) {
         super(aID, aName, aNameRegional, aTier);
@@ -44,7 +33,18 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
         super(aName, aTier, aDescription, aTextures);
     }
 
-    public void setCurrent(AspectList List){
+    public boolean addAspectList(final AspectList A) {
+
+        if ((this.mTier + 1) * ApTe > A.size() + current.size()) {
+            if (current.visSize() + A.visSize() < (this.mTier + 1) * ApTe * 64)
+                current.add(A);
+            return true;
+        } else
+            return false;
+
+    }
+
+    public void setCurrent(AspectList List) {
         this.current = List;
     }
 
@@ -53,7 +53,7 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     }
 
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new EssentiaHatch("Essentia Hatch "+ GT_Values.VN[this.mTier],this.mTier,this.getDescription(),this.mTextures);
+        return new EssentiaHatch("Essentia Hatch " + GT_Values.VN[this.mTier], this.mTier, this.getDescription(), this.mTextures);
     }
 
 
@@ -74,11 +74,11 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
         ArrayList<String> list = new ArrayList<String>();
         list.add("This Essentia-Hatch contains:");
         for (final Aspect A : this.current.aspects.keySet())
-            list.add(A.getName()+": "+Integer.toString(current.getAmount(A)));
+            list.add(A.getName() + ": " + Integer.toString(current.getAmount(A)));
 
         String[] ret = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            ret[i]=list.get(i);
+            ret[i] = list.get(i);
         }
 
         return ret;
@@ -96,12 +96,12 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     }
 
     @Override
-    public String[] getDescription(){ //this is the fucking tooltip -_-'
-        return new String[] {
+    public String[] getDescription() { //this is the fucking tooltip -_-'
+        return new String[]{
                 "Essentia Hatch for usage in Multiblocks",
                 "Can only be filled with the Essentia Filler",
-                "Can hold "+Integer.toString((ApTe*(mTier+1)))+" Different Essentia Types",
-                "Can hold "+Integer.toString((64*ApTe*(mTier+1)))+" Essentia in total"
+                "Can hold " + Integer.toString((ApTe * (mTier + 1))) + " Different Essentia Types",
+                "Can hold " + Integer.toString((64 * ApTe * (mTier + 1))) + " Essentia in total"
         };
     }
 
@@ -111,13 +111,11 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     }
 
     @Override
-    public void saveNBTData(NBTTagCompound var1){
+    public void saveNBTData(NBTTagCompound var1) {
 
         NBTTagList tlist = new NBTTagList();
-        var1.setTag("Aspects", tlist);
         Aspect[] aspectA = current.getAspects();
-
-        for(int i = 0; i < aspectA.length; ++i) {
+        for (int i = 0; i < aspectA.length; ++i) {
             Aspect aspect = aspectA[i];
             if (aspect != null) {
                 NBTTagCompound f = new NBTTagCompound();
@@ -126,16 +124,16 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
                 tlist.appendTag(f);
             }
         }
-
+        var1.setTag("Aspects", tlist);
         super.saveNBTData(var1);
     }
 
     @Override
-    public void loadNBTData(NBTTagCompound var1){
+    public void loadNBTData(NBTTagCompound var1) {
         current = new AspectList();
         NBTTagList tlist = var1.getTagList("Aspects", 10);
 
-        for(int j = 0; j < tlist.tagCount(); ++j) {
+        for (int j = 0; j < tlist.tagCount(); ++j) {
             NBTTagCompound rs = tlist.getCompoundTagAt(j);
             if (rs.hasKey("key")) {
                 current.add(Aspect.getAspect(rs.getString("key")), rs.getInteger("amount"));
@@ -147,7 +145,7 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
 
     public int fuelleft() {
         int ret = 0;
-        for (final Aspect A : current.aspects.keySet()){
+        for (final Aspect A : current.aspects.keySet()) {
             ret += current.getAmount(A);
         }
         return ret;

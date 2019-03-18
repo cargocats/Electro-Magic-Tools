@@ -22,121 +22,120 @@ import java.util.Random;
 
 public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
 
-	public IIcon[] icon = new IIcon[16];
-	public static int wornTick;
-	public Random random = new Random();
+    public static int wornTick;
+    public IIcon[] icon = new IIcon[16];
+    public Random random = new Random();
 
-	public ItemIC2Baubles() {
-		super("bauble");
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
-		this.setMaxStackSize(1);
+    public ItemIC2Baubles() {
+        super("bauble");
+        this.setHasSubtypes(true);
+        this.setMaxDamage(0);
+        this.setMaxStackSize(1);
 
-		wornTick = 0;
-	}
+        wornTick = 0;
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
-		String name = "";
-		switch (itemstack.getItemDamage()) {
-		case 0: {
-			name = "euMaker.armor";
-			break;
-		}
-		case 1: {
-			name = "euMaker.inventory";
-			break;
-		}
-		default:
-			name = "nothing";
-			break;
-		}
-		return getUnlocalizedName() + "." + name;
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack) {
+        String name = "";
+        switch (itemstack.getItemDamage()) {
+            case 0: {
+                name = "euMaker.armor";
+                break;
+            }
+            case 1: {
+                name = "euMaker.inventory";
+                break;
+            }
+            default:
+                name = "nothing";
+                break;
+        }
+        return getUnlocalizedName() + "." + name;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister ri) {
-		this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":armoreumaker");
-		this.icon[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":inventoryeumaker");
-	}
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister ri) {
+        this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":armoreumaker");
+        this.icon[1] = ri.registerIcon(EMT.TEXTURE_PATH + ":inventoryeumaker");
+    }
 
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		return this.icon[meta];
-	}
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta) {
+        return this.icon[meta];
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
-	}
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list) {
+        list.add(new ItemStack(this, 1, 0));
+        list.add(new ItemStack(this, 1, 1));
+    }
 
-	@Override
-	public BaubleType getBaubleType(ItemStack stack) {
-		if (stack.getItemDamage() <= 1) {
-			return BaubleType.RING;
-		}
-		else {
-			return null;
-		}
-	}
+    @Override
+    public BaubleType getBaubleType(ItemStack stack) {
+        if (stack.getItemDamage() <= 1) {
+            return BaubleType.RING;
+        } else {
+            return null;
+        }
+    }
 
-	@Override
-	public void onWornTick(ItemStack stack, EntityLivingBase player) {
-		if (!player.worldObj.isRemote) {
-			if (stack != null) {
-				if (stack.getItemDamage() == 0) {
-					if (player instanceof EntityPlayer) {
-						int energyLeft = EMTConfigHandler.armorBaubleProduction;
-						for (int i = 0; i < ((EntityPlayer) player).inventory.armorInventory.length; i++) {
-							if (energyLeft > 0) {
-								if ((((EntityPlayer) player).inventory.armorInventory[i] != null) && (((EntityPlayer) player).inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
-									double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.armorInventory[i], energyLeft, 4, false, false);
-									energyLeft -= sentPacket;
-								}
-							}
-						}
-					}
-				}
-			}
-			if (stack != null) {
-				if (stack.getItemDamage() == 1) {
-					if (player instanceof EntityPlayer) {
-						int energyLeft = EMTConfigHandler.inventoryBaubleProdution;
-						for (int i = 0; i < ((EntityPlayer) player).inventory.mainInventory.length; i++) {
-							if (energyLeft > 0) {
-								if ((((EntityPlayer) player).inventory.mainInventory[i] != null) && (((EntityPlayer) player).inventory.mainInventory[i].getItem() instanceof IElectricItem)) {
-									double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.mainInventory[i], energyLeft, 4, false, false);
-									energyLeft -= sentPacket;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    @Override
+    public void onWornTick(ItemStack stack, EntityLivingBase player) {
+        if (!player.worldObj.isRemote) {
+            if (stack != null) {
+                if (stack.getItemDamage() == 0) {
+                    if (player instanceof EntityPlayer) {
+                        int energyLeft = EMTConfigHandler.armorBaubleProduction;
+                        for (int i = 0; i < ((EntityPlayer) player).inventory.armorInventory.length; i++) {
+                            if (energyLeft > 0) {
+                                if ((((EntityPlayer) player).inventory.armorInventory[i] != null) && (((EntityPlayer) player).inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
+                                    double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.armorInventory[i], energyLeft, 4, false, false);
+                                    energyLeft -= sentPacket;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (stack != null) {
+                if (stack.getItemDamage() == 1) {
+                    if (player instanceof EntityPlayer) {
+                        int energyLeft = EMTConfigHandler.inventoryBaubleProdution;
+                        for (int i = 0; i < ((EntityPlayer) player).inventory.mainInventory.length; i++) {
+                            if (energyLeft > 0) {
+                                if ((((EntityPlayer) player).inventory.mainInventory[i] != null) && (((EntityPlayer) player).inventory.mainInventory[i].getItem() instanceof IElectricItem)) {
+                                    double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.mainInventory[i], energyLeft, 4, false, false);
+                                    energyLeft -= sentPacket;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	@Override
-	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-	}
+    @Override
+    public void onEquipped(ItemStack stack, EntityLivingBase player) {
+    }
 
-	@Override
-	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-	}
+    @Override
+    public void onUnequipped(ItemStack stack, EntityLivingBase player) {
+    }
 
-	@Override
-	public boolean canEquip(ItemStack stack, EntityLivingBase player) {
-		return true;
-	}
+    @Override
+    public boolean canEquip(ItemStack stack, EntityLivingBase player) {
+        return true;
+    }
 
-	@Override
-	public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
-		return true;
-	}
+    @Override
+    public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
+        return true;
+    }
 
-	@Override
-	public int getRunicCharge(ItemStack itemStack) {
-		return 0;
-	}
+    @Override
+    public int getRunicCharge(ItemStack itemStack) {
+        return 0;
+    }
 }

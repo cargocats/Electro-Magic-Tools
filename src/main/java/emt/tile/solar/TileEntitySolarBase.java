@@ -292,7 +292,7 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         this.aspect = subtag.getByte("aspect");
         this.output = subtag.getDouble("Output");
         long capacity = (long) (output * 1000);
-        this.energySource = new DefinitelyNotAIC2Source(this, capacity, (int) Math.floor(Math.log10(capacity) - 1D));
+        this.energySource = new DefinitelyNotAIC2Source(this, capacity, (int) getTierFromCapacity(capacity));
         this.maxstorage = this.getEUCapacity();
         this.energySource.setEnergyStored(nbttagcompound.getLong("storage"));
         this.storage = this.energySource.getEnergyStored();
@@ -424,25 +424,26 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     public long getOutputAmperage() {
-        long ret;
-        if (this.energySource.getSourceTier() <= 4) {
-            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
-                ret = 1L;
-            }
-            if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
-                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
-            } else
-                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
-        } else {
-            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
-                ret = 1L;
-            }
-            if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
-                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
-            } else
-                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
-        }
-        return ret;
+        return calculateMaxVoltAmp()[1];
+//        long ret;
+//        if (this.energySource.getSourceTier() <= 4) {
+//            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
+//                ret = 1L;
+//            }
+//            if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
+//                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
+//            } else
+//                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
+//        } else {
+//            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
+//                ret = 1L;
+//            }
+//            if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
+//                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
+//            } else
+//                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
+//        }
+//        return ret;
     }
 
     public long getOutputVoltage() {

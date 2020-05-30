@@ -17,6 +17,7 @@ emt.Storage=存储:
 emt.PressShift=<按下Shift>
 emt.Generating=发电: 
 emt.Fuel=燃料
+emt.OutputMax=最大输出: 
 
 #=============Tooltips=============
 #This comes after a player name. The 's is depicting ownership.
@@ -31,7 +32,7 @@ tooltip.EMT.specialEffect=特殊效果
 tooltip.EMT.normalConditions=普通状态
 tooltip.EMT.euPerTick=EU/t
 tooltip.EMT.night=夜晚时发电量
-tooltip.EMT.day=at day
+tooltip.EMT.day=白天时发电量
 tooltip.EMT.forget=我忘记写下提示信息了吗?
 tooltip.EMT.raining=降雨时发电量
 tooltip.EMT.thunder=雷雨时发电量
@@ -39,9 +40,9 @@ tooltip.EMT.underwater=水下发电量
 tooltip.EMT.output.double=输出2倍电量
 tooltip.EMT.output.triple=输出3倍电量
 tooltip.EMT.output.double.nether=处于下界时发电量
-tooltip.EMT.output.double.lava=处于岩浆中发电量
-tooltip.EMT.output.double.half.height=处于160层上方发电量
-tooltip.EMT.output.double.half.low=处于10层以下发电量
+tooltip.EMT.output.double.lava=每秒供给0.01vis火之要素时发电量
+tooltip.EMT.output.double.half.height=位置越高发电量越高(y=5时1倍，y=220时3倍)
+tooltip.EMT.output.double.half.low=位置越低发电量越高(y=220时1倍，y=5时3倍)
 
 #=============Entity Names=============
 entity.EMT.laser.name=镭射器
@@ -69,7 +70,7 @@ item.EMT.uumatterDrop.name=结晶UU物质液滴
 item.EMT.bauble.euMaker.armor.name=装备充电指环
 item.EMT.bauble.euMaker.inventory.name=物品充能指环
 item.EMT.bauble.oneRing.name=魔戒
-item.EMT.goggles.electric.name=电子护目镜
+item.EMT.goggles.electric.name=电子揭示护目镜
 item.EMT.goggles.nano.name=纳米揭示护目镜
 item.EMT.goggles.quantum.name=量子揭示护目镜
 item.EMT.goggles.solar.name=太阳能揭示护目镜
@@ -142,8 +143,8 @@ EMT_GTBLOCK_CASEING.0.name=魔法机械方块
 EMT_GTBLOCK_CASEING.1.name=源质扩散单元
 EMT_GTBLOCK_CASEING.2.name=铱锇魔法框架
 EMT_GTBLOCK_CASEING.3.name=铟钨魔法框架
-EMT_GTBLOCK_CASEING.4.name=魔法机械方块半成品
-EMT_GTBLOCK_CASEING.5.name=源质扩散单元半成品
+EMT_GTBLOCK_CASEING.4.name=源质扩散单元半成品
+EMT_GTBLOCK_CASEING.5.name=魔法机械方块半成品
 
 #=============Thaumonomicon Texts=============
 emt.rsname.Electric Magic Tools=电力魔法工具
@@ -152,11 +153,11 @@ emt.text.Electric Magic Tools=谁说魔法和科技不能共同工作?我们的�
 
 emt.rsname.Energy Ball Focus=法杖核心:能量球
 emt.tag.Energy Ball Focus=这可不是玩具
-emt.text.Energy Ball Focus=要使用此法杖核心必须装备电池背包或纳米/量子胸甲. 每制造一个能量球需要消耗5120EU. 请勿在密闭空间内使用此法杖核心!
+emt.text.Energy Ball Focus=要使用此法杖核心必须装备电池背包或纳米/量子胸甲.每制造一个能量球需要消耗5120EU.请勿在密闭空间内使用此法杖核心!
 
 emt.rsname.Electric Cloud=雷云之光
 emt.tag.Electric Cloud=闪耀之光?
-emt.text.Electric Cloud.1=所有神秘使(除了血腥邪徒, 我猜)享受着魔法火焰：闪耀之光的光明和温暖, 不是么? 你决定将其变得更... 有活力. 很好, 你成功了.<BR><BR>你创造了一种新的魔法火焰 — 雷云之光. 它与普通闪耀之光类似, 但它是紫色的并且在它周围生成淡紫色的闪电. 要使其电子化, 你需要手持强化充电电池(或更高级的)右键闪耀之光.
+emt.text.Electric Cloud.1=所有神秘使(除了血腥邪徒,我猜)享受着魔法火焰：闪耀之光的光明和温暖,不是么? 你决定将其变得更...有活力.很好,你成功了.<BR><BR>你创造了一种新的魔法火焰—雷云之光.它与普通闪耀之光类似,但它是紫色的并且在它周围生成淡紫色的闪电.要使其电子化,你需要手持强化充电电池(或更高级的)右键闪耀之光.
 emt.text.Electric Cloud.2=<IMG>emt:textures/researches/electric_cloud.png:0:0:255:255:0.6</IMG>
 
 emt.rsname.Thaumium Drill=神秘钻头
@@ -167,7 +168,7 @@ emt.rsname.Thaumium Chainsaw=神秘链锯
 emt.tag.Thaumium Chainsaw=以魔法之力来砍树木和御敌
 emt.text.Thaumium Chainsaw=你发现了一个将神秘力量融入钻石电锯的方法,使得它能更快的砍伐树并储存更多电力.然而这种改良并不是没有缺陷的:在加入这些材料的过程中,电锯失去了处理树叶,草堆和伤害动物的能力.<BR><BR>你觉得不远的未来你还能升级这个工具.
 
-emt.rsname.Electric Goggles=电子护目镜
+emt.rsname.Electric Goggles=电子揭示护目镜
 emt.tag.Electric Goggles=两侧的顶尖技术
 emt.text.Electric Goggles=你已发现了一种用纯电子设备观测灵气的方法,这意味着你不必再消耗神秘的能量.你现在可以制作出一副能被充电的揭示护目镜,你能像之前那样用它观测节点.为了给电路提供空间并保护敏感的魔力感知电路你需要一个钻石头盔,这也提供了额外的护甲保护.
 
@@ -209,7 +210,7 @@ emt.text.Potentia Generator=在许多的学习与研究后,你终于发现了如
 
 emt.rsname.Lucrum Generator=贪婪源质发电机
 emt.tag.Lucrum Generator=贪婪也是能量...?
-emt.text.Lucrum Generator=你的贪婪驱使你不断前进, 所以你找到了将贪婪要素源质转化为电力的方法.<BR><BR>通过向能量源质发电机中注入大量的金、交换要素和贪婪要素, 你成功地建造了一个强大的发电机.<BR><BR>但如你所料, 注魔并不稳定，若是没有准备完全那将很容易失败.
+emt.text.Lucrum Generator=你的贪婪驱使你不断前进,所以你找到了将贪婪要素源质转化为电力的方法.<BR><BR>通过向能量源质发电机中注入大量的金、交换要素和贪婪要素,你成功地建造了一个强大的发电机.<BR><BR>但如你所料,注魔并不稳定，若是没有准备完全那将很容易失败.
 
 emt.rsname.Ignis Generator=火之源质发电机
 emt.tag.Ignis Generator=如果你不能掌控那热量...
@@ -239,7 +240,7 @@ emt.rsname.Shield Block=护盾方块
 emt.tag.Shield Block=魔法保护
 emt.text.Shield Block=研究了盾牌核心制造出的方块后,你已发现了如何自己制作它们,再也不用需要核心来召唤.它们有很高的爆炸抗性,并且甚至能防止核弹的破坏.然而,在一次核爆炸试验中,尽管盾方块毫发无损,它周围的方块却不是.<BR><BR>这些方块不稳定并且破坏时不会掉落,就算你使用精准采集也是如此.
 
-emt.rsname.Tiny Uranium=小堆铀
+emt.rsname.Tiny Uranium=小撮铀
 emt.tag.Tiny Uranium=可能会有些缩减
 emt.text.Tiny Uranium=在你将自己所有的矿物都用在了核反应堆的材料上后,你终于用尽了用来做你所需燃料棒的铀.在很长时间的研究后,你试着将你剩下的铀转化为更有用的粒!<BR><BR>不幸的是,这个过程有些浪费,不过你相信它会有所值.
 
@@ -253,7 +254,7 @@ emt.text.The Legend=你总是听到关于那个锤子的传说.<BR><BR>传说有
 
 emt.rsname.Lightning Summoner=雷电碎片
 emt.tag.Lightning Summoner=从死敌那里所得
-emt.text.Lightning Summoner=这个物品是你的死敌:高压苦力怕所掉落的.你觉得它以后会派上用场.
+emt.text.Lightning Summoner=这个物品是你的死敌:高压爬行者所掉落的.你觉得它以后会派上用场.
 
 emt.rsname.Supercharged Mjolnir=高压雷神之锤
 emt.tag.Supercharged Mjolnir=将它据为己有
@@ -269,7 +270,7 @@ emt.text.Compressed Solars=你找到了一种将9普通太阳能压缩为1个魔
 
 emt.rsname.Solar Helmet of Revealing=太阳能揭示护目镜
 emt.tag.Solar Helmet of Revealing=阳光太刺眼了
-emt.text.Solar Helmet of Revealing=你现在有了一顶像你的量子揭示护目镜一样工作的头盔,也能给你背包黑穿着的装备充电!在白天以128EU/t功率发电, 夜晚不发电.
+emt.text.Solar Helmet of Revealing=你现在有了一顶像你的量子揭示护目镜一样工作的头盔,也能给你背包黑穿着的装备充电!在白天以128EU/t功率发电,夜晚不发电.
 
 emt.rsname.Diamond Chainsaw=钻石链锯
 emt.tag.Diamond Chainsaw=更硬,更好,更快,更强
@@ -357,7 +358,7 @@ emt.text.Armor Charging Ring=新指环低但稳定的充电率比预期的还要
 
 emt.rsname.The One Ring=魔戒
 emt.tag.The One Ring=在末日山的坑中所埋藏...
-emt.text.The One Ring=天下精灵铸三戒,地底矮人得七戒,寿定凡人持九戒,魔多妖境暗影伏,闇王坐拥至尊戒.至尊戒,驭众戒;至尊戒,寻众戒,魔戒至尊引众戒,禁锢众戒黑暗中,魔多妖境暗影伏.-J.R.R.Tolkien指环王题词.<BR>你梦想着从隐于众目,免于一切的攻击.你听说这个戒指在某处的遗迹中遗留着, 时间流逝恒久不变...
+emt.text.The One Ring=天下精灵铸三戒,地底矮人得七戒,寿定凡人持九戒,魔多妖境暗影伏,闇王坐拥至尊戒.至尊戒,驭众戒;至尊戒,寻众戒,魔戒至尊引众戒,禁锢众戒黑暗中,魔多妖境暗影伏.-J.R.R.Tolkien指环王题词.<BR>你梦想着从隐于众目,免于一切的攻击.你听说这个戒指在某处的遗迹中遗留着,时间流逝恒久不变...
 
 emt.rsname.Feather Wings=羽毛羽翼
 emt.tag.Feather Wings=在动漫里才会起效...
@@ -373,7 +374,7 @@ emt.text.Nanosuit Wings=利用神秘锭将魔法与纳米科技结合到你的�
 
 emt.rsname.Quantum Wings=量子羽翼
 emt.tag.Quantum Wings=量子科技
-emt.text.Quantum Wings=在探索完纳米科技所有的可能性后,你决定做最后一搏,量子.你可以在空中再跳几格的高度, 极好的防护,并且的下降的过程极大减缓了.然而,量子的不可预测又一次发生了.同时按住潜行键和空格键时你的下降会完全停止.你不知道为何会这样,但它就是这样.摔落伤害减免:100%.
+emt.text.Quantum Wings=在探索完纳米科技所有的可能性后,你决定做最后一搏,量子.你可以在空中再跳几格的高度,极好的防护,并且的下降的过程极大减缓了.然而,量子的不可预测又一次发生了.同时按住潜行键和空格键时你的下降会完全停止.你不知道为何会这样,但它就是这样.摔落伤害减免:100%.
 
 emt.rsname.Infused Quantum Armor=注魔量子胸甲
 emt.tag.Infused Quantum Armor=最后的一步...

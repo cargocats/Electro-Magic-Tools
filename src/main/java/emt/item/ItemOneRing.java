@@ -171,15 +171,15 @@ public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear, IRun
                     ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "The Ring suddenly starts to glow purple"));
                 }
 		if (random.nextInt(300) == 0) { //randomly every 5 minutes
-		    ThaumcraftApiHelper.addWarpToPlayer(player, 1, false); //adds 1 perm warp
-		    ThaumcraftApiHelper.addStickyWarpToPlayer(player, random.nextInt(1)); //adds 0-1 sticky warp
+		    ThaumcraftApiHelper.addWarpToPlayer((EntityPlayer) player, 1, false); //adds 1 perm warp
+		    ThaumcraftApiHelper.addStickyWarpToPlayer((EntityPlayer) player, random.nextInt(1)); //adds 0-1 sticky warp
 		    ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "Your body suddenly starts to glow purple"));
 		}
 		if (corruption >= 3600) { //if you wear it for more than an hour total
 		    if (random.nextInt(300) == 0) {
-		        ThaumcraftApiHelper.addWarpToPlayer(player, 5 + random.nextInt(5), false); //adds 5-10 perm warp
-		        ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5 + random.nextInt(5)); //adds 5-10 sticky warp
-			ThaumcraftApiHelper.addWarpToPlayer(player, 10 + random.nextInt(40), true); //adds 10-50 temp warp, but this is ultra easy to remove
+		        ThaumcraftApiHelper.addWarpToPlayer((EntityPlayer) player, 5 + random.nextInt(5), false); //adds 5-10 perm warp
+		        ThaumcraftApiHelper.addStickyWarpToPlayer((EntityPlayer) player, 5 + random.nextInt(5)); //adds 5-10 sticky warp
+			ThaumcraftApiHelper.addWarpToPlayer((EntityPlayer) player, 10 + random.nextInt(40), true); //adds 10-50 temp warp, but this is ultra easy to remove
 		        ((EntityPlayer) player).addChatMessage(new ChatComponentText(EMTTextHelper.PURPLE + "Your body resonates with the Ring and suddenly starts to glow purple ominously"));
 		    }
 		}

@@ -151,7 +151,7 @@ public class EMTConfigHandler {
         nightVisionOff = config.get(RANDOM, "Disable nightvision helmets", false, "This was added because of mods making you totally blind if using nightvision. For example, enable that when in the Deep Dark.").getBoolean(nightVisionOff);
         enchanting = config.get(RANDOM, "Enable enchanting tools", false, "Warning: the enchantability is low.").getBoolean(enchanting);
         smoke = config.get(RANDOM, "Disable smoke effect for boots", false, "This effect only appears when the player isn't on the ground").getBoolean(smoke);
-        oneRingSpawn = config.get(RANDOM, "Disable One Ring in dungeon chests", false, "There is no other way to get this item.").getBoolean(oneRingSpawn);
+        oneRingSpawn = config.get(RANDOM, "Disable One Ring in dungeon chests", true, "There is a recipe to get this item.").getBoolean(oneRingSpawn);
         chanceTaintedMjolnir = config.get(RANDOM, "Tainted Mjolnir spawning change", 25, "If you have a lot of mods adding dungeon loot, you should definetely increase this").getInt();
         chanceOneRing = config.get(RANDOM, "One Ring spawning chance", 15, "If you have a lot of mods adding dungeon loot, you should definetely increase this").getInt();
         removeAmberAndCinnabarMacerating = config.get(RANDOM, "Clear Amber/Cinnabar Macerating", true, "This is here because of conflicts between mods that add the same input and different outputs").getBoolean(removeAmberAndCinnabarMacerating);

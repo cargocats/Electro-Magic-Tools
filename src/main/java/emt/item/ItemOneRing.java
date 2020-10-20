@@ -57,6 +57,13 @@ public class ItemOneRing extends ItemBase implements IBauble, IWarpingGear, IRun
         return "item." + EMT.MOD_ID + ".bauble." + name;
     }
 
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) {
+        list.add("§4The Ring whispers to you, promising power. But at what cost? Long-term usage is NOT advised.");
+        list.add("Can ruin your game if you don't understand what this does. READ THE QUEST");
+        super.addInformation(itemStack, player, list, par4);
+    }
+
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister ri) {
         this.icon[0] = ri.registerIcon(EMT.TEXTURE_PATH + ":onering");

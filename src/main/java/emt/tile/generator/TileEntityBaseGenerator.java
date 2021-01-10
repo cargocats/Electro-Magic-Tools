@@ -119,6 +119,9 @@ public class TileEntityBaseGenerator
     }
 
     public void fillfrompipe() {
+        if (!side)
+            return;
+
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
@@ -139,31 +142,24 @@ public class TileEntityBaseGenerator
     }
 
     public void createEnergy() {
+        if (!side) {
+            if (this.isActive && this.tick < 400) {
+                this.tick += 1;
+            }
+            return;
+        }
+
         if (this.fuel > 0) {
             if (this.storage + this.generating / 20.0D / 20.0D < this.maxstorage) {
                 this.isActive = true;
-                if (side) {
-                    this.energySource.addEnergy(this.generating / 20.0D / 20.0D);
-                    this.storage = ((int) this.energySource.getEnergyStored());
-                }
+                this.energySource.addEnergy(this.generating / 20.0D / 20.0D);
+                this.storage = ((int) this.energySource.getEnergyStored());
                 this.tick += 1;
                 if (this.tick == 400) {
                     this.fuel -= 1;
                     this.tick = 0;
                 }
-            } else if (this.storage == this.maxstorage) {
-                this.isActive = false;
-            } else if ((this.storage + this.generating / 20.0D / 20.0D > this.maxstorage)) {
-                this.isActive = true;
-                if (side) {
-                    this.energySource.setEnergyStored(this.maxstorage);
-                    this.storage = this.maxstorage;
-                }
-                this.tick += 1;
-                if (this.tick == 400) {
-                    this.fuel -= 1;
-                    this.tick = 0;
-                }
+            } else {
                 this.isActive = false;
             }
         } else {
@@ -334,6 +330,9 @@ public class TileEntityBaseGenerator
     }
 
     public void inputintoGTnet() {
+        if (!side)
+            return;
+
         for (byte i = 0; i < 6; i = (byte) (i + 1)) {
             if (getIGregTechTileEntityAtSide(i) != null) {
                 if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage())) {

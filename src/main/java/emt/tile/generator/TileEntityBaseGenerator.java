@@ -96,6 +96,9 @@ public class TileEntityBaseGenerator
 
 
     public void storeFuel() {
+        if (!side)
+            return;
+
         if (this.fuel < this.maxfuel) {
             for (int x = this.xCoord - 4; x < this.xCoord + 4; x++) {
                 for (int y = this.yCoord - 4; y < this.yCoord + 4; y++) {

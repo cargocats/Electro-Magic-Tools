@@ -122,6 +122,9 @@ public class TileEntityBaseGenerator
         if (!side)
             return;
 
+        if (this.fuel == this.maxfuel)
+            return;
+
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
@@ -299,7 +302,7 @@ public class TileEntityBaseGenerator
     }
 
     public int getSuctionAmount(ForgeDirection face) {
-        return 128;
+        return this.fuel == this.maxfuel ? 0 : 128;
     }
 
     public int takeEssentia(Aspect aspect, int amount, ForgeDirection face) {

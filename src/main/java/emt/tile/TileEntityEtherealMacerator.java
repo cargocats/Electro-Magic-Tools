@@ -1,5 +1,6 @@
 package emt.tile;
 
+import com.google.common.collect.Lists;
 import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.IC2Items;
@@ -16,6 +17,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.ConfigItems;
 
+import java.util.List;
+
 public class TileEntityEtherealMacerator extends TileEntityEMT implements ISidedInventory, IWrenchable {
 
     private static final int[] slots_top = new int[]{0};
@@ -24,6 +27,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     public int maceratingSpeed = EMTConfigHandler.etherealProcessorBaseSpeed;
     public int cookTime;
     private ItemStack[] slots = new ItemStack[3];
+    List<String> allowedOreDictList = Lists.newArrayList("ore", "cluster");
 
     public int getSizeInventory() {
         return this.slots.length;
@@ -118,7 +122,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     }
 
     public void updateEntity() {
-        if (this.canSmelt() && isOverLimit(1) == false && isOverLimit(2) == false && isOP() == false) {
+        if (this.canSmelt() && !isOverLimit(1) && !isOverLimit(2) && isAllowed()) {
             ++this.cookTime;
             this.isOn = true;
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -226,18 +230,17 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
         }
     }
 
-    public boolean isOP() {
-        final int cobblestoneId = OreDictionary.getOreID("blockCobble");
+    public boolean isAllowed() {
 
-        if (OreDictionary.getOreID(this.slots[0]) == cobblestoneId || this.slots[0].getItem() == Item.getItemFromBlock(Blocks.sand) || this.slots[0].getItem() == Items.potato || this.slots[0].getItem() == Items.porkchop || this.slots[0].getItem() == Items.beef || this.slots[0].getItem() == Items.chicken || this.slots[0].getItem() == Items.fish
-                || this.slots[0].getItem() == IC2Items.getItem("coalDust").getItem()
-                || (OreDictionary.getOreName(OreDictionary.getOreID(this.slots[0])).toLowerCase().contains("dust") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("armour") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("armor") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("helm")
-                || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("legging") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("boot") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("chestp") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("pick")
-                || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("shovel") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("axe") || this.slots[0].getItem().getUnlocalizedName(this.slots[0]).toLowerCase().contains("pick"))) {
-            return true;
-        } else {
-            return false;
+        int[] OreDictIDs = OreDictionary.getOreIDs(this.slots[0]);
+        for (int ID : OreDictIDs) {
+            String tName = OreDictionary.getOreName(ID);
+            for (String allowed : allowedOreDictList) {
+                if (tName.contains(allowed)) return true;
+            }
         }
+        return false;
+
     }
 
     @Override

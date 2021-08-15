@@ -1,6 +1,5 @@
 package emt.tile;
 
-import com.google.common.collect.Lists;
 import emt.init.EMTBlocks;
 import emt.util.EMTConfigHandler;
 import ic2.api.tile.IWrenchable;
@@ -23,7 +22,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     public int maceratingSpeed = EMTConfigHandler.etherealProcessorBaseSpeed;
     public int cookTime;
     private ItemStack[] slots = new ItemStack[3];
-    List<String> allowedOreDictList = Lists.newArrayList("ore", "cluster");
+    List<String> allowedOreDictList = EMTConfigHandler.etherealMaceratorWhiteList;
 
     public int getSizeInventory() {
         return this.slots.length;
@@ -232,7 +231,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
         for (int ID : OreDictIDs) {
             String tName = OreDictionary.getOreName(ID);
             for (String allowed : allowedOreDictList) {
-                if (tName.contains(allowed)) return true;
+                if (tName.indexOf(allowed) == 0) return true;
             }
         }
         return false;

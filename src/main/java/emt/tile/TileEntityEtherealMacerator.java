@@ -12,8 +12,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.common.config.ConfigItems;
 
-import java.util.List;
-
 public class TileEntityEtherealMacerator extends TileEntityEMT implements ISidedInventory, IWrenchable {
 
     private static final int[] slots_top = new int[]{0};
@@ -22,7 +20,6 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     public int maceratingSpeed = EMTConfigHandler.etherealProcessorBaseSpeed;
     public int cookTime;
     private ItemStack[] slots = new ItemStack[3];
-    List<String> allowedOreDictList = EMTConfigHandler.etherealMaceratorWhiteList;
 
     public int getSizeInventory() {
         return this.slots.length;
@@ -228,9 +225,9 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     public boolean isAllowed() {
 
         int[] OreDictIDs = OreDictionary.getOreIDs(this.slots[0]);
-        for (int ID : OreDictIDs) {
-            String tName = OreDictionary.getOreName(ID);
-            for (String allowed : allowedOreDictList) {
+        for (int OreDictID : OreDictIDs) {
+            String tName = OreDictionary.getOreName(OreDictID);
+            for (String allowed : EMTConfigHandler.etherealMaceratorWhiteList) {
                 if (tName.indexOf(allowed) == 0) return true;
             }
         }

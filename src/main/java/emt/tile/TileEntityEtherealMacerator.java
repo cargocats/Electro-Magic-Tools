@@ -224,9 +224,9 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
 
     public boolean isAllowed() {
 
-        int[] OreDictIDs = OreDictionary.getOreIDs(this.slots[0]);
-        for (int OreDictID : OreDictIDs) {
-            String tName = OreDictionary.getOreName(OreDictID);
+        int[] oreDictIDs = OreDictionary.getOreIDs(this.slots[0]);
+        for (int oreDictID : oreDictIDs) {
+            String tName = OreDictionary.getOreName(oreDictID);
             for (String allowed : EMTConfigHandler.etherealMaceratorWhiteList) {
                 if (tName.indexOf(allowed) == 0) return true;
             }

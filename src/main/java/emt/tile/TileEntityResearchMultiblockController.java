@@ -5,10 +5,17 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_MultiBlockBase;
+import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Utility;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
+
+import java.util.ArrayList;
 
 public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_MultiBlockBase {
     private final int MAX_LENGTH = 13;
@@ -38,13 +45,38 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
         return true;
     }
 
-    //TODO check for valid research note
     @Override
     public boolean checkRecipe(ItemStack itemStack) {
+        ArrayList<ItemStack> tInputList = this.getStoredInputs();
+
+        for (ItemStack stack : tInputList) {
+            if (GT_Utility.isStackValid(stack) && stack.stackSize > 0) {
+                if (stack.getItem() == ConfigItems.itemResearchNotes) {
+                    this.mEfficiency = 10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000;
+                    this.mEfficiencyIncrease = 10000;
+                    this.calculateOverclockedNessMulti(120, 1200, 1, this.getMaxInputVoltage());
+                    if (this.mMaxProgresstime == 2147483646 && this.mEUt == 2147483646) {
+                        return false;
+                    }
+                    if (this.mEUt > 0) {
+                        this.mEUt = -this.mEUt;
+                    }
+
+                    //Create a completed version of the note to output
+                    this.mOutputItems = new ItemStack[]{GT_Utility.copyAmount(1L, stack)};
+                    this.mOutputItems[0].stackTagCompound.setBoolean("complete", true);
+                    this.mOutputItems[0].setItemDamage(64);
+                    stack.stackSize -= 1;
+                    this.sendLoopStart((byte)20);
+                    this.updateSlots();
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
-    //TODO structure check
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
         int xDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetX;
@@ -121,8 +153,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
 
         return coordinates;
     }
-
-    //TODO what does this do?
+    
     @Override
     public int getMaxEfficiency(ItemStack itemStack) {
         return 10000;

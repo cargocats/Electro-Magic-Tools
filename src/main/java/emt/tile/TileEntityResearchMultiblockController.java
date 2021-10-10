@@ -5,23 +5,19 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_MultiBlockBase;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import thaumcraft.api.ThaumcraftApi;
+import org.lwjgl.input.Keyboard;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.nodes.INode;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
-import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.research.ResearchManager;
@@ -33,7 +29,6 @@ import java.util.ArrayList;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_IMPLOSION_COMPRESSOR_GLOW;
 
-//TODO make sure completed notes can't go back in
 public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_MultiBlockBase {
     private final int MAX_LENGTH = 13;
 
@@ -61,7 +56,6 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
         super(aName);
     }
 
-    //TODO deplete nodes, stop if no nodes are available
     @Override
     public boolean onRunningTick(ItemStack aStack) {
         //TODO consider only doing this every x ticks and make sure it finishes x ticks before the end of the recipe
@@ -159,7 +153,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
         int xDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetX;
         int zDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetZ;
-
+        //TODO add minimum casing number
         this.length = findLength(iGregTechTileEntity, xDir, zDir);
         if (this.length < 2)
             return false;
@@ -183,10 +177,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
                     byte tMeta = iGregTechTileEntity.getMetaIDOffset(offsetCoords.x, offsetCoords.y, offsetCoords.z);
 
                     if (h == 0) {
-                        if (sidewaysOffset == 0) { //Check for air or node TODO maybe remove, no need to require specific blocks here
-                            //if (!GT_Utility.isBlockAir(getBaseMetaTileEntity().getWorld(), offsetCoords.x, offsetCoords.y, offsetCoords.z))
-                        } else { //Check for warded glass
-                            //TODO check for new casing once added
+                        if (sidewaysOffset != 0) { //Check for warded glass
                             if (tBlock != ConfigBlocks.blockCosmeticOpaque || tMeta != 2)
                                 return false;
                         }
@@ -194,7 +185,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
                         if (sidewaysOffset != 0 || forwardsOffset == 0 || Math.abs(forwardsOffset) == this.length - 1) { //Check ring shapes on top and bottom
                             //TODO change casing index to correct for this multi
                             if (!this.addMaintenanceToMachineList(tTileEntity, 16) && !this.addInputToMachineList(tTileEntity, 16) && !this.addOutputToMachineList(tTileEntity, 16) && !this.addEnergyInputToMachineList(tTileEntity, 16)) {
-                                if ((tBlock != GregTech_API.sBlockCasings2 || tMeta != 0))
+                                if ((tBlock != GregTech_API.sBlockCasings8 || tMeta != 5))
                                     return false;
                             }
                         }
@@ -256,13 +247,28 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
         return new TileEntityResearchMultiblockController(this.mName);
     }
 
-    //TODO finish tooltip using tooltip builder
     @Override
     public String[] getDescription() {
-        return new String[]{
-                "Controller block for the Thaumcraft Research Multiblock.",
-                "Completes research notes using EU and Thaumcraft nodes",
-        };
+        GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+        tt.addMachineType("Research Completer")
+                .addInfo("Controller block for the Research Completer")
+                .addInfo("Completes Thaumcraft research notes using EU and Thaumcraft nodes")
+                .addInfo("Place nodes in the center row")
+                .addSeparator()
+                .beginVariableStructureBlock(3, 3, 3, 3, 3, MAX_LENGTH, true)
+                .addController("Front center")
+                .addOtherStructurePart("[x] machine casing", "Top and bottom layers outside")
+                .addOtherStructurePart("Warded glass", "Middle layer outside")
+                .addEnergyHatch("Any casing")
+                .addMaintenanceHatch("Any casing")
+                .addInputBus("Any casing")
+                .addOutputBus("Any casing")
+                .toolTipFinisher("Electro-Magic Tools");
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            return tt.getStructureInformation();
+        } else {
+            return tt.getInformation();
+        }
     }
 
     //TODO texture

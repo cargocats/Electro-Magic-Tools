@@ -33,7 +33,7 @@ public class EMTResearches {
         new EMTResearchItem("The One Ring", 6, -7, 0, new ItemStack(EMTItems.onering)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(""));
         new EMTResearchItem("Electric Cloud", 4, -7, 0, new ItemStack(EMTBlocks.electricCloud)).setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage("1"), new ResearchPage("2"));
         new EMTResearchItem("Feather Wings", 0, 2, 0, new ItemStack(EMTItems.featherWing)).setParents("Electric Magic Tools").setRound().setAutoUnlock().registerResearchItem().setPages(new ResearchPage(EMTRecipes.cardboard), new ResearchPage(EMTRecipes.featherWing), new ResearchPage(EMTRecipes.featherWings));
-        new EMTResearchItem("ResearchCompleter", EMTResearchAspects.researchCompleter, -4, -2, 0, new ItemStack(GregTech_API.sBlockMachines, 1, 13001)).setParents("Electric Magic Tools").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.magicalMachineCasing), new ResearchPage(EMTRecipes.researchCompleter));
+        new EMTResearchItem("ResearchCompleter", EMTResearchAspects.researchCompleter, -4, -2, 0, new ItemStack(GregTech_API.sBlockMachines, 1, 13001)).setParents("Electric Magic Tools").setParentsHidden("WANDPED").registerResearchItem().setPages(new ResearchPage(""), new ResearchPage(EMTRecipes.magicalMachineCasing), new ResearchPage(EMTRecipes.researchCompleter));
         /*************************************/
 
         /** Research that can be disabled **/

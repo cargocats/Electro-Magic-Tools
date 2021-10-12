@@ -58,7 +58,6 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
 
     @Override
     public boolean onRunningTick(ItemStack aStack) {
-        //TODO consider only doing this every x ticks and make sure it finishes x ticks before the end of the recipe
         float progressAmount = ((float) this.mProgresstime) / this.mMaxProgresstime;
         int requiredVis = (int)Math.ceil(progressAmount * recipeAspectCost - aspectsAbsorbed);
 
@@ -153,7 +152,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
         int xDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetX;
         int zDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetZ;
-        //TODO add minimum casing number
+        int casingAmount = 0;
         this.length = findLength(iGregTechTileEntity, xDir, zDir);
         if (this.length < 2)
             return false;
@@ -184,9 +183,11 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
                     } else { //Check for machine casings and buses etc.
                         if (sidewaysOffset != 0 || forwardsOffset == 0 || Math.abs(forwardsOffset) == this.length - 1) { //Check ring shapes on top and bottom
                             //TODO change casing index to correct for this multi
-                            if (!this.addMaintenanceToMachineList(tTileEntity, 16) && !this.addInputToMachineList(tTileEntity, 16) && !this.addOutputToMachineList(tTileEntity, 16) && !this.addEnergyInputToMachineList(tTileEntity, 16)) {
-                                if ((tBlock != GregTech_API.sBlockCasings8 || tMeta != 5))
+                            if (!this.addMaintenanceToMachineList(tTileEntity, 182) && !this.addInputToMachineList(tTileEntity, 182) && !this.addOutputToMachineList(tTileEntity, 182) && !this.addEnergyInputToMachineList(tTileEntity, 182)) {
+                                if ((tBlock != GregTech_API.sBlockCasings8 || tMeta != 6))
                                     return false;
+                                else
+                                    casingAmount++;
                             }
                         }
                     }
@@ -194,7 +195,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
             }
         }
 
-        return true;
+        return casingAmount >= length * 3;
     }
 
     private int findLength(final IGregTechTileEntity iGregTechTileEntity, final int xDir, final int zDir) {
@@ -257,7 +258,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
                 .addSeparator()
                 .beginVariableStructureBlock(3, 3, 3, 3, 3, MAX_LENGTH, true)
                 .addController("Front center")
-                .addOtherStructurePart("[x] machine casing", "Top and bottom layers outside")
+                .addOtherStructurePart("Magical machine casing", "Top and bottom layers outside. 3 x L minimum")
                 .addOtherStructurePart("Warded glass", "Middle layer outside")
                 .addEnergyHatch("Any casing")
                 .addMaintenanceHatch("Any casing")
@@ -271,24 +272,18 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
         }
     }
 
-    //TODO texture
-    /*@Override
-    public ITexture[] getTexture(IGregTechTileEntity iGregTechTileEntity, byte b, byte b1, byte b2, boolean b3, boolean b4) {
-        return new ITexture[0];
-    }*/
-    //Temp copied from implosion compressor
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, byte aSide, byte aFacing, byte aColorIndex, boolean aActive, boolean aRedstone) {
         if (aSide == aFacing) {
             if (aActive) return new ITexture[]{
-                    Textures.BlockIcons.casingTexturePages[0][16],
-                    TextureFactory.of(OVERLAY_FRONT_IMPLOSION_COMPRESSOR_ACTIVE),
-                    TextureFactory.builder().addIcon(OVERLAY_FRONT_IMPLOSION_COMPRESSOR_ACTIVE_GLOW).glow().build()};
+                    Textures.BlockIcons.casingTexturePages[1][54],
+                    TextureFactory.of(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE_GLOW).extFacing().glow().build()};
             return new ITexture[]{
-                    Textures.BlockIcons.casingTexturePages[0][16],
-                    TextureFactory.of(OVERLAY_FRONT_IMPLOSION_COMPRESSOR),
-                    TextureFactory.builder().addIcon(OVERLAY_FRONT_IMPLOSION_COMPRESSOR_GLOW).glow().build()};
+                    Textures.BlockIcons.casingTexturePages[1][54],
+                    TextureFactory.of(OVERLAY_FRONT_RESEARCH_COMPLETER),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_GLOW).extFacing().glow().build()};
         }
-        return new ITexture[]{Textures.BlockIcons.casingTexturePages[0][16]};
+        return new ITexture[]{Textures.BlockIcons.casingTexturePages[1][54]};
     }
 }

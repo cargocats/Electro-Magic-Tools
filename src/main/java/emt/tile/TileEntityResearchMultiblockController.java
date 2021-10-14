@@ -1,19 +1,19 @@
 package emt.tile;
 
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_MultiBlockBase;
+import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_EnhancedMultiBlockBase;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gregtech.api.util.GT_Utility;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.lwjgl.input.Keyboard;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
@@ -26,11 +26,13 @@ import thaumcraft.common.tiles.TileNode;
 
 import java.util.ArrayList;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_IMPLOSION_COMPRESSOR_GLOW;
+import static gregtech.api.util.GT_StructureUtility.ofHatchAdder;
 
-public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_MultiBlockBase {
-    private final int MAX_LENGTH = 13;
+public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_EnhancedMultiBlockBase<TileEntityResearchMultiblockController> {
+    private static final int CASING_INDEX = 182;
+    private static final int MAX_LENGTH = 13;
 
     private int length;
     private int recipeAspectCost;
@@ -48,6 +50,58 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
         public int z;
     }
 
+    private static final String STRUCTURE_PIECE_FIRST = "first";
+    private static final String STRUCTURE_PIECE_LATER = "later";
+    private static final String STRUCTURE_PIECE_LAST = "last";
+    private static final String STRUCTURE_PIECE_LATER_HINT = "laterHint";
+    private static final IStructureDefinition<TileEntityResearchMultiblockController> STRUCTURE_DEFINITION = StructureDefinition.<TileEntityResearchMultiblockController>builder()
+            .addShape(STRUCTURE_PIECE_FIRST, transpose(new String[][]{
+                    {"ccc"},
+                    {"g~g"},
+                    {"ccc"},
+            }))
+            .addShape(STRUCTURE_PIECE_LATER, transpose(new String[][]{
+                    {"c c"},
+                    {"gxg"},
+                    {"c c"},
+            }))
+            .addShape(STRUCTURE_PIECE_LAST, transpose(new String[][]{
+                    {"c"},
+                    {"g"},
+                    {"c"},
+            }))
+            .addShape(STRUCTURE_PIECE_LATER_HINT, transpose(new String[][]{
+                    {"c c"},
+                    {"g g"},
+                    {"c c"},
+            }))
+            .addElement('c', ofChain( //Magical machine casing or hatch
+                    ofHatchAdder(TileEntityResearchMultiblockController::addEnergyInputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(TileEntityResearchMultiblockController::addInputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(TileEntityResearchMultiblockController::addOutputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(TileEntityResearchMultiblockController::addMaintenanceToMachineList, CASING_INDEX, 1),
+                    onElementPass(TileEntityResearchMultiblockController::onCasingFound, ofBlock(GregTech_API.sBlockCasings8, 6))
+            ))
+            .addElement('x', ofChain( //Check for the end but otherwise treat as a skipped spot
+                    onElementPass(TileEntityResearchMultiblockController::onEndFound, ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
+                    isAir(), //Forgive me
+                    notAir()
+            ))
+            .addElement('g', ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)) // warded glass
+            .build();
+
+    protected int mCasing;
+    protected boolean endFound;
+
+
+    protected void onCasingFound() {
+        mCasing++;
+    }
+
+    protected void onEndFound() {
+        endFound = true;
+    }
+
     public TileEntityResearchMultiblockController(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
@@ -55,6 +109,8 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
     public TileEntityResearchMultiblockController(String aName) {
         super(aName);
     }
+
+
 
     @Override
     public boolean onRunningTick(ItemStack aStack) {
@@ -98,8 +154,6 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
 
         return super.onRunningTick(aStack);
     }
-
-
 
     @Override
     public boolean isCorrectMachinePart(ItemStack itemStack) {
@@ -150,77 +204,21 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
 
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
-        int xDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetX;
-        int zDir = ForgeDirection.getOrientation(iGregTechTileEntity.getBackFacing()).offsetZ;
-        int casingAmount = 0;
-        this.length = findLength(iGregTechTileEntity, xDir, zDir);
-        if (this.length < 2)
+        length = 1;
+        mCasing = 0;
+        endFound = false;
+
+        //check front
+        if (!checkPiece(STRUCTURE_PIECE_FIRST, 1, 1, 0))
             return false;
 
-        boolean eastWest = xDir != 0;
-
-        for (int i = 0; i < this.length; i++) {
-            for (int j = -1; j < 2; j++) {
-                for (int h = -1; h < 2; h++) {
-                    int forwardsOffset = eastWest ? i * xDir : i * zDir;
-                    int sidewaysOffset = j;
-                    int upwardsOffset = h;
-
-                    if (forwardsOffset == 0 && sidewaysOffset == 0 && upwardsOffset == 0) //Controller
-                        continue;
-
-                    Coordinates offsetCoords = calcOffsetCoords(forwardsOffset, sidewaysOffset, upwardsOffset, eastWest);
-
-                    IGregTechTileEntity tTileEntity = iGregTechTileEntity.getIGregTechTileEntityOffset(offsetCoords.x, offsetCoords.y, offsetCoords.z);
-                    Block tBlock = iGregTechTileEntity.getBlockOffset(offsetCoords.x, offsetCoords.y, offsetCoords.z);
-                    byte tMeta = iGregTechTileEntity.getMetaIDOffset(offsetCoords.x, offsetCoords.y, offsetCoords.z);
-
-                    if (h == 0) {
-                        if (sidewaysOffset != 0) { //Check for warded glass
-                            if (tBlock != ConfigBlocks.blockCosmeticOpaque || tMeta != 2)
-                                return false;
-                        }
-                    } else { //Check for machine casings and buses etc.
-                        if (sidewaysOffset != 0 || forwardsOffset == 0 || Math.abs(forwardsOffset) == this.length - 1) { //Check ring shapes on top and bottom
-                            //TODO change casing index to correct for this multi
-                            if (!this.addMaintenanceToMachineList(tTileEntity, 182) && !this.addInputToMachineList(tTileEntity, 182) && !this.addOutputToMachineList(tTileEntity, 182) && !this.addEnergyInputToMachineList(tTileEntity, 182)) {
-                                if ((tBlock != GregTech_API.sBlockCasings8 || tMeta != 6))
-                                    return false;
-                                else
-                                    casingAmount++;
-                            }
-                        }
-                    }
-                }
-            }
+        //check middle pieces
+        while (!endFound && length++ < MAX_LENGTH) {
+            if (!checkPiece(STRUCTURE_PIECE_LATER, 1, 1, -(length - 1)))
+                return false;
         }
 
-        return casingAmount >= length * 3;
-    }
-
-    private int findLength(final IGregTechTileEntity iGregTechTileEntity, final int xDir, final int zDir) {
-        for (int i = 1; i < this.MAX_LENGTH; i++) {
-            Block tBlock = iGregTechTileEntity.getBlockOffset(xDir * i, 0, zDir * i);
-            byte tMeta = iGregTechTileEntity.getMetaIDOffset(xDir * i, 0, zDir * i);
-            if (tBlock == ConfigBlocks.blockCosmeticOpaque && tMeta == 2) {
-                return i + 1;
-            }
-        }
-        return -1;
-    }
-
-    private Coordinates calcOffsetCoords(final int forwardsOffset, final int sidewaysOffset, final int upwardsOffset, final boolean eastWest) {
-        Coordinates coordinates = new Coordinates();
-        if (eastWest) {
-            coordinates.x = forwardsOffset;
-            coordinates.z = sidewaysOffset;
-        } else {
-            coordinates.x = sidewaysOffset;
-            coordinates.z = forwardsOffset;
-        }
-        coordinates.y = upwardsOffset;
-
-        return coordinates;
+        return endFound && length >= 3 && checkPiece(STRUCTURE_PIECE_LAST, 0, 1, -(length - 1)) && mCasing >= length * 3;
     }
 
     @Override
@@ -249,7 +247,27 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
     }
 
     @Override
-    public String[] getDescription() {
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, byte aSide, byte aFacing, byte aColorIndex, boolean aActive, boolean aRedstone) {
+        if (aSide == aFacing) {
+            if (aActive) return new ITexture[]{
+                    Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE).extFacing().build(),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE_GLOW).extFacing().glow().build()};
+            return new ITexture[]{
+                    Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER).extFacing().build(),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_GLOW).extFacing().glow().build()};
+        }
+        return new ITexture[]{Textures.BlockIcons.getCasingTextureForId(CASING_INDEX)};
+    }
+
+    @Override
+    public IStructureDefinition<TileEntityResearchMultiblockController> getStructureDefinition() {
+        return STRUCTURE_DEFINITION;
+    }
+
+    @Override
+    protected GT_Multiblock_Tooltip_Builder createTooltip() {
         GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
         tt.addMachineType("Research Completer")
                 .addInfo("Controller block for the Research Completer")
@@ -265,25 +283,16 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_Mu
                 .addInputBus("Any casing")
                 .addOutputBus("Any casing")
                 .toolTipFinisher("Electro-Magic Tools");
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            return tt.getStructureInformation();
-        } else {
-            return tt.getInformation();
-        }
+        return tt;
     }
 
     @Override
-    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, byte aSide, byte aFacing, byte aColorIndex, boolean aActive, boolean aRedstone) {
-        if (aSide == aFacing) {
-            if (aActive) return new ITexture[]{
-                    Textures.BlockIcons.casingTexturePages[1][54],
-                    TextureFactory.of(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE),
-                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE_GLOW).extFacing().glow().build()};
-            return new ITexture[]{
-                    Textures.BlockIcons.casingTexturePages[1][54],
-                    TextureFactory.of(OVERLAY_FRONT_RESEARCH_COMPLETER),
-                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_GLOW).extFacing().glow().build()};
+    public void construct(ItemStack stackSize, boolean hintsOnly) {
+        buildPiece(STRUCTURE_PIECE_FIRST, stackSize, hintsOnly, 1, 1, 0);
+        int tTotalLength = Math.min(MAX_LENGTH, stackSize.stackSize + 2);
+        for (int i = 1; i < tTotalLength; i++) {
+            buildPiece(STRUCTURE_PIECE_LATER_HINT, stackSize, hintsOnly, 1, 1, -i);
         }
-        return new ITexture[]{Textures.BlockIcons.casingTexturePages[1][54]};
+        buildPiece(STRUCTURE_PIECE_LAST, stackSize, hintsOnly, 0, 1, -(tTotalLength - 1));
     }
 }

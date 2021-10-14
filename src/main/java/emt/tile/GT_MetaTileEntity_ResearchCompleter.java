@@ -30,31 +30,22 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GT_StructureUtility.ofHatchAdder;
 
-public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_EnhancedMultiBlockBase<TileEntityResearchMultiblockController> {
+public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_ResearchCompleter> {
     private static final int CASING_INDEX = 182;
     private static final int MAX_LENGTH = 13;
 
-    private int length;
     private int recipeAspectCost;
     private int aspectsAbsorbed;
 
-    private class Coordinates {
-        public Coordinates() {}
-        public Coordinates(int x, int y, int z) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-        public int x;
-        public int y;
-        public int z;
-    }
+    protected int mLength;
+    protected int mCasing;
+    protected boolean endFound;
 
     private static final String STRUCTURE_PIECE_FIRST = "first";
     private static final String STRUCTURE_PIECE_LATER = "later";
     private static final String STRUCTURE_PIECE_LAST = "last";
     private static final String STRUCTURE_PIECE_LATER_HINT = "laterHint";
-    private static final IStructureDefinition<TileEntityResearchMultiblockController> STRUCTURE_DEFINITION = StructureDefinition.<TileEntityResearchMultiblockController>builder()
+    private static final IStructureDefinition<GT_MetaTileEntity_ResearchCompleter> STRUCTURE_DEFINITION = StructureDefinition.<GT_MetaTileEntity_ResearchCompleter>builder()
             .addShape(STRUCTURE_PIECE_FIRST, transpose(new String[][]{
                     {"ccc"},
                     {"g~g"},
@@ -76,41 +67,28 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
                     {"c c"},
             }))
             .addElement('c', ofChain( //Magical machine casing or hatch
-                    ofHatchAdder(TileEntityResearchMultiblockController::addEnergyInputToMachineList, CASING_INDEX, 1),
-                    ofHatchAdder(TileEntityResearchMultiblockController::addInputToMachineList, CASING_INDEX, 1),
-                    ofHatchAdder(TileEntityResearchMultiblockController::addOutputToMachineList, CASING_INDEX, 1),
-                    ofHatchAdder(TileEntityResearchMultiblockController::addMaintenanceToMachineList, CASING_INDEX, 1),
-                    onElementPass(TileEntityResearchMultiblockController::onCasingFound, ofBlock(GregTech_API.sBlockCasings8, 6))
+                    ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addEnergyInputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addInputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addOutputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addMaintenanceToMachineList, CASING_INDEX, 1),
+                    onElementPass(GT_MetaTileEntity_ResearchCompleter::onCasingFound, ofBlock(GregTech_API.sBlockCasings8, 6))
             ))
             .addElement('x', ofChain( //Check for the end but otherwise treat as a skipped spot
-                    onElementPass(TileEntityResearchMultiblockController::onEndFound, ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
+                    onElementPass(GT_MetaTileEntity_ResearchCompleter::onEndFound, ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
                     isAir(), //Forgive me
                     notAir()
             ))
-            .addElement('g', ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)) // warded glass
+            .addElement('g', ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)) //Warded glass
             .build();
 
-    protected int mCasing;
-    protected boolean endFound;
 
-
-    protected void onCasingFound() {
-        mCasing++;
-    }
-
-    protected void onEndFound() {
-        endFound = true;
-    }
-
-    public TileEntityResearchMultiblockController(int aID, String aName, String aNameRegional) {
+    public GT_MetaTileEntity_ResearchCompleter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public TileEntityResearchMultiblockController(String aName) {
+    public GT_MetaTileEntity_ResearchCompleter(String aName) {
         super(aName);
     }
-
-
 
     @Override
     public boolean onRunningTick(ItemStack aStack) {
@@ -122,9 +100,11 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
         int xDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetX;
         int zDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetZ;
         int i = 1;
-        while (i < this.length - 1 && requiredVis > 0) {
-            Coordinates nodeCoordinates = new Coordinates(aBaseMetaTileEntity.getXCoord() + xDir * i, aBaseMetaTileEntity.getYCoord(), aBaseMetaTileEntity.getZCoord() + zDir * i);
-            TileEntity tileEntity = aBaseMetaTileEntity.getWorld().getTileEntity(nodeCoordinates.x, nodeCoordinates.y, nodeCoordinates.z);
+        while (i < this.mLength - 1 && requiredVis > 0) {
+            int nodeX = aBaseMetaTileEntity.getXCoord() + xDir * i;
+            int nodeY = aBaseMetaTileEntity.getYCoord();
+            int nodeZ = aBaseMetaTileEntity.getZCoord() + zDir * i;
+            TileEntity tileEntity = aBaseMetaTileEntity.getWorld().getTileEntity(nodeX, nodeY, nodeZ);
             if (tileEntity instanceof TileNode) {
                 TileNode aNode = (TileNode)tileEntity;
                 AspectList aspectsBase = aNode.getAspectsBase();
@@ -141,10 +121,10 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
                 }
 
                 if (aspectsBase.visSize() <= 0)
-                    aBaseMetaTileEntity.getWorld().setBlockToAir(nodeCoordinates.x, nodeCoordinates.y, nodeCoordinates.z);
+                    aBaseMetaTileEntity.getWorld().setBlockToAir(nodeX, nodeY, nodeZ);
 
                 aNode.markDirty();
-                aBaseMetaTileEntity.getWorld().markBlockForUpdate(nodeCoordinates.x, nodeCoordinates.y, nodeCoordinates.z);
+                aBaseMetaTileEntity.getWorld().markBlockForUpdate(nodeX, nodeY, nodeZ);
             }
             i++;
         }
@@ -204,7 +184,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
 
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
-        length = 1;
+        mLength = 1;
         mCasing = 0;
         endFound = false;
 
@@ -213,12 +193,12 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
             return false;
 
         //check middle pieces
-        while (!endFound && length++ < MAX_LENGTH) {
-            if (!checkPiece(STRUCTURE_PIECE_LATER, 1, 1, -(length - 1)))
+        while (!endFound && mLength++ < MAX_LENGTH) {
+            if (!checkPiece(STRUCTURE_PIECE_LATER, 1, 1, -(mLength - 1)))
                 return false;
         }
 
-        return endFound && length >= 3 && checkPiece(STRUCTURE_PIECE_LAST, 0, 1, -(length - 1)) && mCasing >= length * 3;
+        return endFound && mLength >= 3 && checkPiece(STRUCTURE_PIECE_LAST, 0, 1, -(mLength - 1)) && mCasing >= mLength * 3;
     }
 
     @Override
@@ -243,7 +223,15 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new TileEntityResearchMultiblockController(this.mName);
+        return new GT_MetaTileEntity_ResearchCompleter(this.mName);
+    }
+
+    protected void onCasingFound() {
+        mCasing++;
+    }
+
+    protected void onEndFound() {
+        endFound = true;
     }
 
     @Override
@@ -262,7 +250,7 @@ public class TileEntityResearchMultiblockController extends GT_MetaTileEntity_En
     }
 
     @Override
-    public IStructureDefinition<TileEntityResearchMultiblockController> getStructureDefinition() {
+    public IStructureDefinition<GT_MetaTileEntity_ResearchCompleter> getStructureDefinition() {
         return STRUCTURE_DEFINITION;
     }
 

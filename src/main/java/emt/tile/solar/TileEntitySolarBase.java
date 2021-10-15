@@ -118,10 +118,10 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
                 return 2F;
             }
             case AER:
-            case TERRA:
-            case IGNIS: {
+            case TERRA: {
                 return 3F;
             }
+            case IGNIS:
             case AQUA: {
                 return 6F;
             }
@@ -169,12 +169,14 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
                     return 1F;
             }
             case IGNIS: {
+                float mult = 1F;
+
                 if (VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, 10) >= 10)
-                    return 3F;
-                else if (this.worldObj.provider.dimensionId == (-1))
-                    return 2F;
-                else
-                    return 1F;
+                    mult *= 3F;
+                if (this.worldObj.provider.dimensionId == (-1))
+                    mult *= 2F;
+
+                return mult;
             }
             default:
                 return 1f;

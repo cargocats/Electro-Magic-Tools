@@ -38,7 +38,7 @@ import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GT_StructureUtility.ofHatchAdder;
 
 public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_ResearchCompleter> {
-    private static final int CASING_INDEX = 182;
+    private static final int CASING_INDEX = 184;
     private static final int MAX_LENGTH = 13;
     private static final int RECIPE_LENGTH = 1200;
     private static final int RECIPE_EUT = 120;
@@ -55,8 +55,6 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
     private int lastNodeDistance;
     private int lastNodeColor;
     private int syncTimer;
-    @SideOnly(Side.CLIENT)
-    private int nodeDistanceClient, nodeColorClient;
 
     private static final String STRUCTURE_PIECE_FIRST = "first";
     private static final String STRUCTURE_PIECE_LATER = "later";
@@ -88,7 +86,7 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
                     ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addInputToMachineList, CASING_INDEX, 1),
                     ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addOutputToMachineList, CASING_INDEX, 1),
                     ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addMaintenanceToMachineList, CASING_INDEX, 1),
-                    onElementPass(GT_MetaTileEntity_ResearchCompleter::onCasingFound, ofBlock(GregTech_API.sBlockCasings8, 6))
+                    onElementPass(GT_MetaTileEntity_ResearchCompleter::onCasingFound, ofBlock(GregTech_API.sBlockCasings8, 8))
             ))
             .addElement('x', ofChain( //Check for the end but otherwise treat as a skipped spot
                     onElementPass(GT_MetaTileEntity_ResearchCompleter::onEndFound, ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
@@ -125,10 +123,10 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
         super.loadNBTData(aNBT);
     }
 
-    @SideOnly(Side.CLIENT)
+    //For client beam animation
     public void setNodeValues(int nodeDistance, int nodeColor) {
-        this.nodeDistanceClient = nodeDistance;
-        this.nodeColorClient = nodeColor;
+        this.lastNodeDistance = nodeDistance;
+        this.lastNodeColor = nodeColor;
     }
 
     @Override
@@ -141,10 +139,10 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
                 double xCoord = aBaseMetaTileEntity.getXCoord() + 0.5;
                 double yCoord = aBaseMetaTileEntity.getYCoord() + 0.5;
                 double zCoord = aBaseMetaTileEntity.getZCoord() + 0.5;
-                Thaumcraft.proxy.beam(aBaseMetaTileEntity.getWorld(), xCoord + 0.5 * xDir, yCoord + 0.5 * yDir, zCoord + 0.5 * zDir, xCoord + xDir * nodeDistanceClient, yCoord + yDir * nodeDistanceClient, zCoord + zDir * nodeDistanceClient, 3, nodeColorClient, true, 2, 1);
+                Thaumcraft.proxy.beam(aBaseMetaTileEntity.getWorld(), xCoord + 0.5 * xDir, yCoord + 0.5 * yDir, zCoord + 0.5 * zDir, xCoord + xDir * lastNodeDistance, yCoord + yDir * lastNodeDistance, zCoord + zDir * lastNodeDistance, 3, lastNodeColor, true, 2, 1);
             } else {
-                nodeDistanceClient = 0;
-                nodeColorClient = 0;
+                lastNodeDistance = 0;
+                lastNodeColor = 0;
             }
         }
 

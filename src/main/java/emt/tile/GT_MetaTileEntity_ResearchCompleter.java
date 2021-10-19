@@ -2,6 +2,11 @@ package emt.tile;
 
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.network.PacketNodeInfo;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -12,12 +17,14 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
+import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.research.ResearchManager;
@@ -33,6 +40,9 @@ import static gregtech.api.util.GT_StructureUtility.ofHatchAdder;
 public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_ResearchCompleter> {
     private static final int CASING_INDEX = 182;
     private static final int MAX_LENGTH = 13;
+    private static final int RECIPE_LENGTH = 1200;
+    private static final int RECIPE_EUT = 120;
+    private static final float NODE_COST_MULTIPLIER = 1.0f;
 
     private int recipeAspectCost;
     private int aspectsAbsorbed;
@@ -40,6 +50,13 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
     protected int mLength;
     protected int mCasing;
     protected boolean endFound;
+
+    //For displaying beam
+    private int lastNodeDistance;
+    private int lastNodeColor;
+    private int syncTimer;
+    @SideOnly(Side.CLIENT)
+    private int nodeDistanceClient, nodeColorClient;
 
     private static final String STRUCTURE_PIECE_FIRST = "first";
     private static final String STRUCTURE_PIECE_LATER = "later";
@@ -91,20 +108,68 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
     }
 
     @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        aNBT.setInteger("recipeAspectCost", recipeAspectCost);
+        aNBT.setInteger("aspectsAbsorbed", aspectsAbsorbed);
+        aNBT.setInteger("mLength", mLength);
+
+        super.saveNBTData(aNBT);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        recipeAspectCost = aNBT.getInteger("recipeAspectCost");
+        aspectsAbsorbed = aNBT.getInteger("aspectsAbsorbed");
+        mLength = aNBT.getInteger("mLength");
+
+        super.loadNBTData(aNBT);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void setNodeValues(int nodeDistance, int nodeColor) {
+        this.nodeDistanceClient = nodeDistance;
+        this.nodeColorClient = nodeColor;
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isClientSide()) {
+            if (aBaseMetaTileEntity.isActive()) {
+                int xDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetX;
+                int yDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetY;
+                int zDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetZ;
+                double xCoord = aBaseMetaTileEntity.getXCoord() + 0.5;
+                double yCoord = aBaseMetaTileEntity.getYCoord() + 0.5;
+                double zCoord = aBaseMetaTileEntity.getZCoord() + 0.5;
+                Thaumcraft.proxy.beam(aBaseMetaTileEntity.getWorld(), xCoord + 0.5 * xDir, yCoord + 0.5 * yDir, zCoord + 0.5 * zDir, xCoord + xDir * nodeDistanceClient, yCoord + yDir * nodeDistanceClient, zCoord + zDir * nodeDistanceClient, 3, nodeColorClient, true, 2, 1);
+            } else {
+                nodeDistanceClient = 0;
+                nodeColorClient = 0;
+            }
+        }
+
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+    }
+
+    @Override
     public boolean onRunningTick(ItemStack aStack) {
         float progressAmount = ((float) this.mProgresstime) / this.mMaxProgresstime;
         int requiredVis = (int)Math.ceil(progressAmount * recipeAspectCost - aspectsAbsorbed);
+        syncTimer--;
 
-        //Loop through node spaces and drain them from front to back
         IGregTechTileEntity aBaseMetaTileEntity = this.getBaseMetaTileEntity();
         int xDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetX;
+        int yDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetY;
         int zDir = ForgeDirection.getOrientation(aBaseMetaTileEntity.getBackFacing()).offsetZ;
         int i = 1;
+
+        //Loop through node spaces and drain them from front to back
         while (i < this.mLength - 1 && requiredVis > 0) {
             int nodeX = aBaseMetaTileEntity.getXCoord() + xDir * i;
-            int nodeY = aBaseMetaTileEntity.getYCoord();
+            int nodeY = aBaseMetaTileEntity.getYCoord() + yDir * i;
             int nodeZ = aBaseMetaTileEntity.getZCoord() + zDir * i;
             TileEntity tileEntity = aBaseMetaTileEntity.getWorld().getTileEntity(nodeX, nodeY, nodeZ);
+
             if (tileEntity instanceof TileNode) {
                 TileNode aNode = (TileNode)tileEntity;
                 AspectList aspectsBase = aNode.getAspectsBase();
@@ -116,23 +181,46 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
                     aNode.takeFromContainer(aspect, drainAmount);
                     requiredVis -= drainAmount;
                     aspectsAbsorbed += drainAmount;
-                    if (requiredVis <= 0)
+
+                    if (requiredVis <= 0) {
+                        if (i != lastNodeDistance || aspect.getColor() != lastNodeColor)
+                            sendClientAnimationUpdate(aBaseMetaTileEntity, i, aspect.getColor());
+
                         break;
+                    }
                 }
 
                 if (aspectsBase.visSize() <= 0)
                     aBaseMetaTileEntity.getWorld().setBlockToAir(nodeX, nodeY, nodeZ);
-
-                aNode.markDirty();
-                aBaseMetaTileEntity.getWorld().markBlockForUpdate(nodeX, nodeY, nodeZ);
+                else {
+                    aNode.markDirty();
+                    aBaseMetaTileEntity.getWorld().markBlockForUpdate(nodeX, nodeY, nodeZ);
+                }
             }
             i++;
         }
+
+        if (syncTimer <= 0)
+            sendClientAnimationUpdate(aBaseMetaTileEntity, lastNodeDistance, lastNodeColor);
 
         if (requiredVis > 0)
             this.criticalStopMachine();
 
         return super.onRunningTick(aStack);
+    }
+
+    private void sendClientAnimationUpdate(IGregTechTileEntity aBaseMetaTileEntity, int nodeDistance, int nodeColor) {
+        int xCoord = aBaseMetaTileEntity.getXCoord();
+        int yCoord = aBaseMetaTileEntity.getYCoord();
+        int zCoord = aBaseMetaTileEntity.getZCoord();
+        int dim = aBaseMetaTileEntity.getWorld().provider.dimensionId;
+
+        PacketNodeInfo packet = new PacketNodeInfo(xCoord, yCoord, zCoord, dim, nodeDistance, nodeColor);
+        EMT.INSTANCE.sendToAllAround(packet, new NetworkRegistry.TargetPoint(dim, xCoord, yCoord, zCoord, 128));
+
+        lastNodeDistance = nodeDistance;
+        lastNodeColor = nodeColor;
+        syncTimer = 100;
     }
 
     @Override
@@ -156,7 +244,7 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
 
                     this.mEfficiency = 10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000;
                     this.mEfficiencyIncrease = 10000;
-                    this.calculateOverclockedNessMulti(120, 1200, 1, this.getMaxInputVoltage());
+                    this.calculateOverclockedNessMulti(RECIPE_EUT, RECIPE_LENGTH, 1, this.getMaxInputVoltage());
                     if (this.mMaxProgresstime == 2147483646 && this.mEUt == 2147483646) {
                         return false;
                     }
@@ -170,7 +258,10 @@ public class GT_MetaTileEntity_ResearchCompleter extends GT_MetaTileEntity_Enhan
                     this.mOutputItems[0].setItemDamage(64);
                     stack.stackSize -= 1;
                     this.aspectsAbsorbed = 0;
-                    this.recipeAspectCost = researchItem.tags.visSize();
+                    this.recipeAspectCost = (int)Math.ceil(researchItem.tags.visSize() * NODE_COST_MULTIPLIER);
+
+                    this.lastNodeDistance = 0;
+                    this.lastNodeColor = 0;
 
                     this.sendLoopStart((byte) 20);
                     this.updateSlots();

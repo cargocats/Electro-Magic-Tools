@@ -7,8 +7,7 @@ import emt.util.EMTEssentiasOutputs;
 public class Registry {
     private static final EMT_GT_Loader gtloader = new EMT_GT_Loader();
 
-    public static void registerPreInit() {
-    }
+    public static void registerPreInit() {}
 
     public static void registerInit() {
         EMTBlocks.registerBlocks();
@@ -23,7 +22,7 @@ public class Registry {
         EMTBlocks.addAspects();
         gtloader.runlate();
         EMTRecipes.registerLateRecipes();
-        //new EMT_GTNH_Recipes_And_Researches().run();
+        // new EMT_GTNH_Recipes_And_Researches().run();
         EMTRecipes.registerUUMInfusionRecipes();
         EMTResearches.register();
         Solars.registerReverseRecipes();

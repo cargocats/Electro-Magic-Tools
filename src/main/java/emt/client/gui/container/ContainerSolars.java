@@ -1,16 +1,14 @@
 package emt.client.gui.container;
 
 import emt.tile.solar.TileEntitySolarBase;
+import java.nio.ByteBuffer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 
-import java.nio.ByteBuffer;
-
-public class ContainerSolars
-        extends Container {
+public class ContainerSolars extends Container {
     byte[] generating = new byte[8];
     byte[] mpStorage = new byte[8];
     private TileEntitySolarBase tileentity;
@@ -20,8 +18,11 @@ public class ContainerSolars
     }
 
     public void detectAndSendChanges() {
-        byte[] generating = ByteBuffer.allocate(8).putDouble(this.tileentity.generating).array();
-        byte[] mpStorage = ByteBuffer.allocate(8).putDouble(this.tileentity.getSourceStored() / 1000).array();
+        byte[] generating =
+                ByteBuffer.allocate(8).putDouble(this.tileentity.generating).array();
+        byte[] mpStorage = ByteBuffer.allocate(8)
+                .putDouble(this.tileentity.getSourceStored() / 1000)
+                .array();
         for (int i = 0; i < this.crafters.size(); i++) {
             ICrafting icrafting = (ICrafting) this.crafters.get(i);
 
@@ -38,8 +39,7 @@ public class ContainerSolars
     public void updateProgressBar(int i, int j) {
         if (i < 8) {
             generating[i] = (byte) j;
-            if (i == 7)
-                this.tileentity.generating = ByteBuffer.wrap(generating).getDouble();
+            if (i == 7) this.tileentity.generating = ByteBuffer.wrap(generating).getDouble();
         }
         if (i > 7 && i < 16) {
             mpStorage[i - 8] = (byte) j;

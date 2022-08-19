@@ -1,5 +1,7 @@
 package emt.client.renderer;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import emt.EMT;
 import emt.entity.EntityShield;
 import net.minecraft.client.Minecraft;
@@ -12,10 +14,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import static org.lwjgl.opengl.GL11.*;
-
 public class RenderShield extends Render {
-    private static final ResourceLocation shieldTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/shield.png");
+    private static final ResourceLocation shieldTexture =
+            new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/shield.png");
     static int glCallList;
 
     static {
@@ -79,7 +80,11 @@ public class RenderShield extends Render {
         glDisable(GL_CULL_FACE);
 
         glPushMatrix();
-        if (((EntityShield) entityShield).owner != null && !Minecraft.getMinecraft().thePlayer.getDisplayName().equals(((EntityShield) entityShield).owner.getDisplayName())) {
+        if (((EntityShield) entityShield).owner != null
+                && !Minecraft.getMinecraft()
+                        .thePlayer
+                        .getDisplayName()
+                        .equals(((EntityShield) entityShield).owner.getDisplayName())) {
             glTranslated(x, y, z);
         }
 
@@ -94,5 +99,4 @@ public class RenderShield extends Render {
     protected ResourceLocation getEntityTexture(Entity texture) {
         return shieldTexture;
     }
-
 }

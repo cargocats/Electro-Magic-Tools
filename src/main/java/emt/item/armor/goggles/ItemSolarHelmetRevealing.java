@@ -5,15 +5,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 
@@ -76,13 +75,16 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
             return;
         }
 
-        if (worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY + 1, (int) player.posZ) && !worldObj.isRaining()) {
+        if (worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY + 1, (int) player.posZ)
+                && !worldObj.isRaining()) {
             double enerj = worldObj.isDaytime() ? (double) genDay : (double) genNight;
 
             for (int i = 0; i < player.inventory.armorInventory.length; i++) {
                 if (enerj > 0) {
-                    if ((player.inventory.armorInventory[i] != null) && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
-                        double sentPacket = ElectricItem.manager.charge(player.inventory.armorInventory[i], enerj, 4, false, false);
+                    if ((player.inventory.armorInventory[i] != null)
+                            && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
+                        double sentPacket =
+                                ElectricItem.manager.charge(player.inventory.armorInventory[i], enerj, 4, false, false);
                         enerj -= sentPacket;
                     }
                 } else {
@@ -91,8 +93,10 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
             }
             for (int j = 0; j < player.inventory.mainInventory.length; j++) {
                 if (enerj > 0) {
-                    if ((player.inventory.mainInventory[j] != null) && (player.inventory.mainInventory[j].getItem() instanceof IElectricItem)) {
-                        double sentPacket = ElectricItem.manager.charge(player.inventory.mainInventory[j], enerj, 4, false, false);
+                    if ((player.inventory.mainInventory[j] != null)
+                            && (player.inventory.mainInventory[j].getItem() instanceof IElectricItem)) {
+                        double sentPacket =
+                                ElectricItem.manager.charge(player.inventory.mainInventory[j], enerj, 4, false, false);
                         enerj -= sentPacket;
                     }
                 } else {

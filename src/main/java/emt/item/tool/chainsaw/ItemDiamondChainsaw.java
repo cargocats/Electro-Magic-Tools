@@ -8,6 +8,9 @@ import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -31,10 +34,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 
     public int maxCharge = 50000;
@@ -57,14 +56,17 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(
+            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
         ElectricItem.manager.use(stack, cost, entityLiving);
         return true;
     }
 
     @Override
     public boolean canHarvestBlock(Block block, ItemStack stack) {
-        return Items.diamond_axe.canHarvestBlock(block, stack) || Items.diamond_sword.canHarvestBlock(block, stack) || Items.shears.canHarvestBlock(block, stack);
+        return Items.diamond_axe.canHarvestBlock(block, stack)
+                || Items.diamond_sword.canHarvestBlock(block, stack)
+                || Items.shears.canHarvestBlock(block, stack);
     }
 
     @Override
@@ -73,7 +75,8 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
             return 1.0F;
         }
 
-        if (Items.wooden_axe.getDigSpeed(stack, block, meta) > 1.0F || Items.wooden_sword.getDigSpeed(stack, block, meta) > 1.0F) {
+        if (Items.wooden_axe.getDigSpeed(stack, block, meta) > 1.0F
+                || Items.wooden_sword.getDigSpeed(stack, block, meta) > 1.0F) {
             return efficiencyOnProperMaterial;
         } else {
             return super.getDigSpeed(stack, block, meta);
@@ -102,7 +105,17 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
+    public boolean onItemUse(
+            ItemStack stack,
+            EntityPlayer player,
+            World world,
+            int x,
+            int y,
+            int z,
+            int side,
+            float xOffset,
+            float yOffset,
+            float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
             if (torchStack == null) {
@@ -170,7 +183,13 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
         if (block instanceof IShearable) {
             IShearable target = (IShearable) block;
             if (target.isShearable(itemstack, player.worldObj, x, y, z)) {
-                ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+                ArrayList<ItemStack> drops = target.onSheared(
+                        itemstack,
+                        player.worldObj,
+                        x,
+                        y,
+                        z,
+                        EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
                 Random rand = new Random();
 
                 for (ItemStack stack : drops) {
@@ -178,7 +197,8 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
                     double xOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
                     double yOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
                     double zOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-                    EntityItem entityitem = new EntityItem(player.worldObj, (double) x + xOffset, (double) y + yOffset, (double) z + zOffset, stack);
+                    EntityItem entityitem = new EntityItem(
+                            player.worldObj, (double) x + xOffset, (double) y + yOffset, (double) z + zOffset, stack);
                     entityitem.delayBeforeCanPickup = 10;
                     player.worldObj.spawnEntityInWorld(entityitem);
                 }
@@ -201,8 +221,15 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
         }
         if (entity instanceof IShearable) {
             IShearable target = (IShearable) entity;
-            if (target.isShearable(itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ)) {
-                ArrayList<ItemStack> drops = target.onSheared(itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ, EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+            if (target.isShearable(
+                    itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ)) {
+                ArrayList<ItemStack> drops = target.onSheared(
+                        itemstack,
+                        entity.worldObj,
+                        (int) entity.posX,
+                        (int) entity.posY,
+                        (int) entity.posZ,
+                        EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
 
                 Random rand = new Random();
                 for (ItemStack stack : drops) {
@@ -225,7 +252,6 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
             if (!nbt.hasKey("shearsMode")) {
                 nbt.setBoolean("shearsMode", true);
             }
-
         }
     }
 

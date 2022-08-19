@@ -9,6 +9,7 @@ import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.api.item.IMetalArmor;
+import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -29,9 +30,8 @@ import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 
-import java.util.List;
-
-public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor, IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
+public class ItemElectricBootsTraveller extends ItemArmor
+        implements IRunicArmor, IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
 
     public int maxCharge = 100000;
     public int energyPerDamage = 1000;
@@ -68,13 +68,15 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor
     }
 
     @Override
-    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+    public ArmorProperties getProperties(
+            EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
         if (source.isUnblockable()) {
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 0);
         } else {
             double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
             int energyPerDamage = getEnergyPerDamage();
-            double damageLimit = energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            double damageLimit =
+                    energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, absorptionRatio, (int) damageLimit);
         }
     }
@@ -117,8 +119,10 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if ((!player.capabilities.isFlying) && (player.moveForward > 0.0F)) {
             if ((player.worldObj.isRemote) && (!player.isSneaking())) {
-                if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(Integer.valueOf(player.getEntityId()))) {
-                    Thaumcraft.instance.entityEventHandler.prevStep.put(Integer.valueOf(player.getEntityId()), Float.valueOf(player.stepHeight));
+                if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(
+                        Integer.valueOf(player.getEntityId()))) {
+                    Thaumcraft.instance.entityEventHandler.prevStep.put(
+                            Integer.valueOf(player.getEntityId()), Float.valueOf(player.stepHeight));
                 }
                 player.stepHeight = 1.0F;
             }
@@ -134,10 +138,10 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor
     public void onPlayerJump(LivingEvent.LivingJumpEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
-            boolean hasArmor = player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem() == this;
+            boolean hasArmor = player.getCurrentArmor(0) != null
+                    && player.getCurrentArmor(0).getItem() == this;
 
-            if (hasArmor)
-                player.motionY += jumpBonus;
+            if (hasArmor) player.motionY += jumpBonus;
         }
     }
 
@@ -155,17 +159,24 @@ public class ItemElectricBootsTraveller extends ItemArmor implements IRunicArmor
         if ((EMT.instance.isSimulating()) && ((event.entity instanceof EntityLivingBase))) {
             if (event.entity instanceof EntityPlayer) {
                 EntityPlayer entity = (EntityPlayer) event.entity;
-                if ((entity.inventory.armorInventory[0] != null) && (entity.inventory.armorInventory[0].getItem() instanceof ItemElectricBootsTraveller)) {
-                    ItemElectricBootsTraveller tUsedBoots = (ItemElectricBootsTraveller) entity.inventory.armorInventory[0].getItem();
+                if ((entity.inventory.armorInventory[0] != null)
+                        && (entity.inventory.armorInventory[0].getItem() instanceof ItemElectricBootsTraveller)) {
+                    ItemElectricBootsTraveller tUsedBoots =
+                            (ItemElectricBootsTraveller) entity.inventory.armorInventory[0].getItem();
                     ItemStack stack = entity.inventory.armorInventory[0];
 
                     // Check if we dropped the minimum amount; To cover the jump-boost bonus without penalty
                     if (tUsedBoots.getMinimumDropDist() > event.distance) {
                         event.setCanceled(true);
                     } else {
-                        float tEnergyDemand = tUsedBoots.energyPerDamage * (((event.distance > tUsedBoots.getMaxHealthyDropDist()) ? event.distance * 3 : event.distance) - 4.0F);
+                        float tEnergyDemand = tUsedBoots.energyPerDamage
+                                * (((event.distance > tUsedBoots.getMaxHealthyDropDist())
+                                                ? event.distance * 3
+                                                : event.distance)
+                                        - 4.0F);
                         if (tEnergyDemand <= ElectricItem.manager.getCharge(stack)) {
-                            //EMT.LOGGER.info( String.format("FD: %f DMG: %f EPD: %d HDD: %f", event.distance, tEnergyDemand, tUsedBoots.energyPerDamage, tUsedBoots.getMaxHealthyDropDist() ));
+                            // EMT.LOGGER.info( String.format("FD: %f DMG: %f EPD: %d HDD: %f", event.distance,
+                            // tEnergyDemand, tUsedBoots.energyPerDamage, tUsedBoots.getMaxHealthyDropDist() ));
                             ElectricItem.manager.discharge(stack, tEnergyDemand, Integer.MAX_VALUE, true, false, false);
                             event.setCanceled(true);
                         }

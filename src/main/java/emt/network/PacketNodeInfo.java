@@ -1,6 +1,5 @@
 package emt.network;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -58,7 +57,8 @@ public class PacketNodeInfo implements IMessage, IMessageHandler<PacketNodeInfo,
                 if (tileEntity instanceof IGregTechTileEntity) {
                     IGregTechTileEntity gtTile = (IGregTechTileEntity) tileEntity;
                     if (gtTile.getMetaTileEntity() instanceof GT_MetaTileEntity_ResearchCompleter) {
-                        GT_MetaTileEntity_ResearchCompleter researchCompleter = (GT_MetaTileEntity_ResearchCompleter) gtTile.getMetaTileEntity();
+                        GT_MetaTileEntity_ResearchCompleter researchCompleter =
+                                (GT_MetaTileEntity_ResearchCompleter) gtTile.getMetaTileEntity();
                         researchCompleter.setNodeValues(message.nodeDistance, message.nodeColor);
                     }
                 }

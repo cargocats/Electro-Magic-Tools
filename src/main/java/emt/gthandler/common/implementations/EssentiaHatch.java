@@ -5,6 +5,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input;
+import java.util.ArrayList;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,9 +13,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidStack;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-
-import java.util.ArrayList;
-
 
 public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
 
@@ -36,12 +34,9 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     public boolean addAspectList(final AspectList A) {
 
         if ((this.mTier + 1) * ApTe > A.size() + current.size()) {
-            if (current.visSize() + A.visSize() < (this.mTier + 1) * ApTe * 64)
-                current.add(A);
+            if (current.visSize() + A.visSize() < (this.mTier + 1) * ApTe * 64) current.add(A);
             return true;
-        } else
-            return false;
-
+        } else return false;
     }
 
     public void setCurrent(AspectList List) {
@@ -53,19 +48,19 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     }
 
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new EssentiaHatch("Essentia Hatch " + GT_Values.VN[this.mTier], this.mTier, this.getDescription(), this.mTextures);
+        return new EssentiaHatch(
+                "Essentia Hatch " + GT_Values.VN[this.mTier], this.mTier, this.getDescription(), this.mTextures);
     }
-
 
     @Override
     public Object getClientGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
-        //TODO: new GUI.
+        // TODO: new GUI.
         return null;
     }
 
     @Override
     public Object getServerGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
-        //TODO: new contanier GUI.
+        // TODO: new contanier GUI.
         return null;
     }
 
@@ -96,12 +91,12 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     }
 
     @Override
-    public String[] getDescription() { //this is the fucking tooltip -_-'
-        return new String[]{
-                "Essentia Hatch for usage in Multiblocks",
-                "Can only be filled with the Essentia Filler",
-                "Can hold " + Integer.toString((ApTe * (mTier + 1))) + " Different Essentia Types",
-                "Can hold " + Integer.toString((64 * ApTe * (mTier + 1))) + " Essentia in total"
+    public String[] getDescription() { // this is the fucking tooltip -_-'
+        return new String[] {
+            "Essentia Hatch for usage in Multiblocks",
+            "Can only be filled with the Essentia Filler",
+            "Can hold " + Integer.toString((ApTe * (mTier + 1))) + " Different Essentia Types",
+            "Can hold " + Integer.toString((64 * ApTe * (mTier + 1))) + " Essentia in total"
         };
     }
 
@@ -151,7 +146,6 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
         return ret;
     }
 
-
     public boolean isFluidInputAllowed(FluidStack aFluid) {
         return false;
     }
@@ -167,5 +161,4 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     public int getCapacity() {
         return 0;
     }
-
 }

@@ -1,11 +1,10 @@
 package emt.util;
 
 import ic2.api.item.ElectricItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.Random;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class EMTRandomHelper {
 

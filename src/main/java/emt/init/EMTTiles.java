@@ -13,9 +13,8 @@ public class EMTTiles {
 
     public static void registerTileEntities() {
 
-
-        //Essentia Gens
-        //legacy support
+        // Essentia Gens
+        // legacy support
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "tileentitypotentiagenerator");
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "tileentityignisgenerator");
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "tileentityauramgenerator");
@@ -23,16 +22,16 @@ public class EMTTiles {
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "tileentityaergenerator");
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "tileentitylucrumgenerator");
 
-        //new TEs will be called TileEntityEssentiaGenerator
+        // new TEs will be called TileEntityEssentiaGenerator
         GameRegistry.registerTileEntity(TileEntityBaseGenerator.class, "TileEntityEssentiaGenerator");
 
-        //Machinery
+        // Machinery
         GameRegistry.registerTileEntity(TileEntityIndustrialWandRecharge.class, "tileentityindustrialwandrecharge");
         GameRegistry.registerTileEntity(TileEntityEtherealMacerator.class, "tileentityetherealmacerator");
         GameRegistry.registerTileEntity(EssentiaFiller.class, "EssentiaFillerTE");
 
-        //Solars
-        //legacy support
+        // Solars
+        // legacy support
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "tileentitycompressedsolar");
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "tileentitydoublecompressedsolar");
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "tileentitytriplecompressedsolar");
@@ -55,10 +54,10 @@ public class EMTTiles {
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "tileentitydoubleearthsolar");
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "tileentitytripleearthsolar");
 
-        //new TEs will be called TileEntityXCompressedSolar
+        // new TEs will be called TileEntityXCompressedSolar
         GameRegistry.registerTileEntity(TileEntitySolarBase.class, "TileEntityXCompressedSolar");
 
-        //Random Stuff
+        // Random Stuff
         GameRegistry.registerTileEntity(TileEntityPortableNode.class, "tileentityportablenode");
         GameRegistry.registerTileEntity(TileElectricCloud.class, "tileEntityElectricCloud");
     }

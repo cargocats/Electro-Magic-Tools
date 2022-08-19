@@ -26,7 +26,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.visnet.VisNetHandler;
 
-public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IWrenchable, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
+public class TileEntitySolarBase extends TileEntityEMT
+        implements IInventory, IWrenchable, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
 
     private static final byte NOTHING = 0;
     private static final byte ORDO = 1;
@@ -67,7 +68,6 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         this.meta = meta;
     }
 
-
     /**
      * DO NOT CALL THIS ITS USED INTERNALLY ONLY
      */
@@ -76,34 +76,28 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     private static byte getByteFromAspect(Aspect aspect) {
-        if (aspect == null)
-            return NOTHING;
-        if (aspect.equals(Aspect.ORDER))
-            return ORDO;
-        else if (aspect.equals(Aspect.ENTROPY))
-            return PERDITIO;
-        else if (aspect.equals(Aspect.AIR))
-            return AER;
-        else if (aspect.equals(Aspect.EARTH))
-            return TERRA;
-        else if (aspect.equals(Aspect.WATER))
-            return AQUA;
-        else if (aspect.equals(Aspect.FIRE))
-            return IGNIS;
+        if (aspect == null) return NOTHING;
+        if (aspect.equals(Aspect.ORDER)) return ORDO;
+        else if (aspect.equals(Aspect.ENTROPY)) return PERDITIO;
+        else if (aspect.equals(Aspect.AIR)) return AER;
+        else if (aspect.equals(Aspect.EARTH)) return TERRA;
+        else if (aspect.equals(Aspect.WATER)) return AQUA;
+        else if (aspect.equals(Aspect.FIRE)) return IGNIS;
         return 0;
     }
 
     private int getTierFromCapacity(long capacity) {
         for (int i = 0; i < GT_Values.V.length; i++) {
-            if (capacity / 1000 < GT_Values.V[i])
-                return i;
+            if (capacity / 1000 < GT_Values.V[i]) return i;
         }
         return GT_Values.V.length - 1;
     }
 
     @Override
     public void updateEntity() {
-        this.side = !this.worldObj.isRemote ? FMLCommonHandler.instance().getEffectiveSide().isServer() : FMLCommonHandler.instance().getSide().isServer();
+        this.side = !this.worldObj.isRemote
+                ? FMLCommonHandler.instance().getEffectiveSide().isServer()
+                : FMLCommonHandler.instance().getSide().isServer();
         this.dead = false;
         this.timer = +1L;
         inputintoGTnet();
@@ -133,48 +127,36 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     public float calc_multi() {
         switch (aspect) {
             case ORDO: {
-                if (this.worldObj.isDaytime())
-                    return 2F;
+                if (this.worldObj.isDaytime()) return 2F;
                 else return 0.75F;
             }
             case PERDITIO: {
-                if (this.worldObj.isDaytime())
-                    return 0.75F;
+                if (this.worldObj.isDaytime()) return 0.75F;
                 else return 2F;
             }
             case AER: {
-                if (this.yCoord < 5)
-                    return 1F;
-                else if (this.yCoord > 220)
-                    return 3F;
-                else
-                    return (float) ((41D / 43D) + ((2D / 215D) * (double) this.yCoord));
+                if (this.yCoord < 5) return 1F;
+                else if (this.yCoord > 220) return 3F;
+                else return (float) ((41D / 43D) + ((2D / 215D) * (double) this.yCoord));
             }
             case TERRA: {
-                if (this.yCoord < 5)
-                    return 3F;
-                else if (this.yCoord > 220)
-                    return 1F;
-                else
-                    return (float) ((-2D) / 215D * (double) this.yCoord + 131D / 43D);
+                if (this.yCoord < 5) return 3F;
+                else if (this.yCoord > 220) return 1F;
+                else return (float) ((-2D) / 215D * (double) this.yCoord + 131D / 43D);
             }
             case AQUA: {
-                if (worldObj.isThundering())
-                    return 6F;
-                else if (worldObj.isRaining())
-                    return 3F;
-                else if (!worldObj.isThundering() && !worldObj.isRaining() && worldObj.getBlock(xCoord, yCoord + 1, zCoord).equals(Blocks.water))
-                    return 2F;
-                else
-                    return 1F;
+                if (worldObj.isThundering()) return 6F;
+                else if (worldObj.isRaining()) return 3F;
+                else if (!worldObj.isThundering()
+                        && !worldObj.isRaining()
+                        && worldObj.getBlock(xCoord, yCoord + 1, zCoord).equals(Blocks.water)) return 2F;
+                else return 1F;
             }
             case IGNIS: {
                 float mult = 1F;
 
-                if (VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, 10) >= 10)
-                    mult *= 3F;
-                if (this.worldObj.provider.dimensionId == (-1))
-                    mult *= 2F;
+                if (VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, 10) >= 10) mult *= 3F;
+                if (this.worldObj.provider.dimensionId == (-1)) mult *= 2F;
 
                 return mult;
             }
@@ -223,7 +205,9 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         switch (aspect) {
             case ORDO:
             case PERDITIO: {
-                if ((this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) && (!this.worldObj.isRaining()) && (!this.worldObj.isThundering())) {
+                if ((this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord))
+                        && (!this.worldObj.isRaining())
+                        && (!this.worldObj.isThundering())) {
                     isActive = true;
                     if (side) {
                         this.energySource.addEnergy(this.output * calc_multi());
@@ -280,7 +264,6 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         subtag.setByte("aspect", this.aspect);
         subtag.setDouble("Output", this.output);
         nbttagcompound.setTag("solarstats", subtag);
-
     }
 
     @Override
@@ -317,8 +300,7 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         return null;
     }
 
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-    }
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {}
 
     public boolean hasCustomInventoryName() {
         return true;
@@ -336,11 +318,9 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
         return true;
     }
 
-    public void openInventory() {
-    }
+    public void openInventory() {}
 
-    public void closeInventory() {
-    }
+    public void closeInventory() {}
 
     public int gaugeEnergyScaled(long i) {
         return (int) ((this.mp_storage * 1000 * i) / this.maxstorage);
@@ -362,8 +342,7 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     @Override
-    public void setFacing(short facing) {
-    }
+    public void setFacing(short facing) {}
 
     @Override
     public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
@@ -381,8 +360,7 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     public void inputintoGTnet() {
-        if (!side)
-            return;
+        if (!side) return;
 
         if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage())) {
             long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
@@ -419,32 +397,31 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
             voltAmp[1] = 1L;
         } else if (generating % GT_Values.V[energySource.getSourceTier()] == 0.0D) {
             voltAmp[1] = (generating / GT_Values.V[energySource.getSourceTier()]);
-        } else
-            voltAmp[1] = (1L + (generating / GT_Values.V[energySource.getSourceTier()]));
+        } else voltAmp[1] = (1L + (generating / GT_Values.V[energySource.getSourceTier()]));
         return voltAmp;
     }
 
     public long getOutputAmperage() {
         return calculateMaxVoltAmp()[1];
-//        long ret;
-//        if (this.energySource.getSourceTier() <= 4) {
-//            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
-//                ret = 1L;
-//            }
-//            if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
-//                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
-//            } else
-//                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
-//        } else {
-//            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
-//                ret = 1L;
-//            }
-//            if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
-//                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
-//            } else
-//                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
-//        }
-//        return ret;
+        //        long ret;
+        //        if (this.energySource.getSourceTier() <= 4) {
+        //            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
+        //                ret = 1L;
+        //            }
+        //            if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
+        //                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
+        //            } else
+        //                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
+        //        } else {
+        //            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
+        //                ret = 1L;
+        //            }
+        //            if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
+        //                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
+        //            } else
+        //                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
+        //        }
+        //        return ret;
     }
 
     public long getOutputVoltage() {
@@ -473,7 +450,8 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     public boolean drainEnergyUnits(byte aSide, long aVoltage, long aAmperage) {
-        return decreaseStoredEnergyUnits(aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
+        return decreaseStoredEnergyUnits(
+                aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
     }
 
     public long getAverageElectricInput() {
@@ -775,15 +753,18 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     public void sendBlockEvent(byte aID, byte aValue) {
-        GT_Values.NW.sendPacketToAllPlayersInRange(this.worldObj, new GT_Packet_Block_Event(this.xCoord, (short) this.yCoord, this.zCoord, aID, aValue), this.xCoord, this.zCoord);
+        GT_Values.NW.sendPacketToAllPlayersInRange(
+                this.worldObj,
+                new GT_Packet_Block_Event(this.xCoord, (short) this.yCoord, this.zCoord, aID, aValue),
+                this.xCoord,
+                this.zCoord);
     }
 
     public long getTimer() {
         return this.timer;
     }
 
-    public void setLightValue(byte aLightValue) {
-    }
+    public void setLightValue(byte aLightValue) {}
 
     public boolean isInvalidTileEntity() {
         return this.tileEntityInvalid;

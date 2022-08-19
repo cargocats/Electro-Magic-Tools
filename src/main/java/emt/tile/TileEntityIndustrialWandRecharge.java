@@ -73,7 +73,8 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
                 ItemStack wand = getStackInSlot(0);
                 if (wand != null && wand.getItem() instanceof ItemWandCasting) {
                     ItemWandCasting wandItem = (ItemWandCasting) wand.getItem();
-                    if (ic2EnergySink.useEnergy(EMTConfigHandler.wandChargerConsumption) && wandItem.getAspectsWithRoom(wand) != null) {
+                    if (ic2EnergySink.useEnergy(EMTConfigHandler.wandChargerConsumption)
+                            && wandItem.getAspectsWithRoom(wand) != null) {
                         wandItem.addVis(wand, Aspect.ORDER, 1, true);
                         wandItem.addVis(wand, Aspect.FIRE, 1, true);
                         wandItem.addVis(wand, Aspect.ENTROPY, 1, true);
@@ -168,12 +169,10 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
     }
 
     @Override
-    public void openInventory() {
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeInventory() {
-    }
+    public void closeInventory() {}
 
     @Override
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
@@ -186,9 +185,7 @@ public class TileEntityIndustrialWandRecharge extends TileEntityEMT implements I
     }
 
     @Override
-    public void setFacing(short facing) {
-
-    }
+    public void setFacing(short facing) {}
 
     @Override
     public boolean wrenchCanRemove(EntityPlayer entityPlayer) {

@@ -2,6 +2,8 @@ package emt.command;
 
 import emt.util.EMTEssentiasOutputs;
 import emt.util.EMTTextHelper;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -11,9 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import thaumcraft.api.aspects.Aspect;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommandOutputs extends CommandBase {
 
@@ -33,15 +32,25 @@ public class CommandOutputs extends CommandBase {
         for (final Aspect aspect : Aspect.aspects.values()) {
             ++counter;
 
-            if (aspect.equals(Aspect.ENERGY) || aspect.equals(Aspect.TREE) || aspect.equals(Aspect.FIRE) || aspect.equals(Aspect.AURA) || aspect.equals(Aspect.GREED) || aspect.equals(Aspect.AIR))
-                text3 += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D / 20D) + "EU\n";
+            if (aspect.equals(Aspect.ENERGY)
+                    || aspect.equals(Aspect.TREE)
+                    || aspect.equals(Aspect.FIRE)
+                    || aspect.equals(Aspect.AURA)
+                    || aspect.equals(Aspect.GREED)
+                    || aspect.equals(Aspect.AIR))
+                text3 += aspect.getTag() + ": "
+                        + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D / 20D) + "EU\n";
 
             if (counter < 12) {
-                text2 += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D) + "EU/t\n";
-                text += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag())) + "EU\n";
+                text2 += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D)
+                        + "EU/t\n";
+                text += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()))
+                        + "EU\n";
             } else {
-                text2 += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D) + "EU\n";
-                text += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag())) + "EU\n";
+                text2 += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()) / 20D)
+                        + "EU\n";
+                text += aspect.getTag() + ": " + String.valueOf(EMTEssentiasOutputs.outputs.get(aspect.getTag()))
+                        + "EU\n";
                 bookL.add(text);
                 bookL2.add(text2);
                 text2 = "";
@@ -109,8 +118,12 @@ public class CommandOutputs extends CommandBase {
     public void processCommand(ICommandSender command, String[] astring) {
         ItemStack book = mkbook();
 
-        if (!command.getEntityWorld().getPlayerEntityByName(command.getCommandSenderName()).inventory.addItemStackToInventory(book))
-            command.getEntityWorld().getPlayerEntityByName(command.getCommandSenderName()).entityDropItem(book, 0);
-
+        if (!command.getEntityWorld()
+                .getPlayerEntityByName(command.getCommandSenderName())
+                .inventory
+                .addItemStackToInventory(book))
+            command.getEntityWorld()
+                    .getPlayerEntityByName(command.getCommandSenderName())
+                    .entityDropItem(book, 0);
     }
 }

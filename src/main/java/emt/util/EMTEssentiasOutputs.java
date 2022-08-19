@@ -1,9 +1,8 @@
 package emt.util;
 
-import thaumcraft.api.aspects.Aspect;
-
 import java.util.Collection;
 import java.util.HashMap;
+import thaumcraft.api.aspects.Aspect;
 
 public class EMTEssentiasOutputs {
 
@@ -25,8 +24,7 @@ public class EMTEssentiasOutputs {
     public static void addOutputs() {
         Collection<Aspect> aspectCollection = Aspect.aspects.values();
         for (Aspect aspect : aspectCollection) {
-            if (!aspect.isPrimal())
-                addOutput(aspect);
+            if (!aspect.isPrimal()) addOutput(aspect);
         }
     }
 

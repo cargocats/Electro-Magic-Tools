@@ -11,7 +11,8 @@ import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class ItemExplosionFocus extends ItemBaseFocus {
-    private static final AspectList visCost = new AspectList().add(Aspect.FIRE, 200).add(Aspect.ENTROPY, 200);
+    private static final AspectList visCost =
+            new AspectList().add(Aspect.FIRE, 200).add(Aspect.ENTROPY, 200);
 
     public ItemExplosionFocus() {
         super("explosion");
@@ -33,9 +34,11 @@ public class ItemExplosionFocus extends ItemBaseFocus {
     }
 
     @Override
-    public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
+    public ItemStack onFocusRightClick(
+            ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+        if (player.capabilities.isCreativeMode
+                || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             if (!world.isRemote) {
                 EntityLaser laser;
                 laser = new EntityLaser(world, player, 1);
@@ -47,7 +50,7 @@ public class ItemExplosionFocus extends ItemBaseFocus {
     }
 
     public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) {
-        return new FocusUpgradeType[]{FocusUpgradeType.potency, FocusUpgradeType.frugal};
+        return new FocusUpgradeType[] {FocusUpgradeType.potency, FocusUpgradeType.frugal};
     }
 
     /**
@@ -57,6 +60,4 @@ public class ItemExplosionFocus extends ItemBaseFocus {
     public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
         return true;
     }
-
-
 }

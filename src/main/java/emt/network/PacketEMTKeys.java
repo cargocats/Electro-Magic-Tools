@@ -10,18 +10,26 @@ public class PacketEMTKeys implements IMessage, IMessageHandler<PacketEMTKeys, I
 
     @Override
     public IMessage onMessage(PacketEMTKeys message, MessageContext ctx) {
-        if (ctx.getServerHandler().playerEntity.inventory.armorInventory[2] != null && ctx.getServerHandler().playerEntity.inventory.armorInventory[2].getItem() == EMTItems.quantumArmor) {
-            ctx.getServerHandler().playerEntity.inventory.armorInventory[2].stackTagCompound.setBoolean("unequip", true);
+        if (ctx.getServerHandler().playerEntity.inventory.armorInventory[2] != null
+                && ctx.getServerHandler()
+                                .playerEntity
+                                .inventory
+                                .armorInventory[2]
+                                .getItem()
+                        == EMTItems.quantumArmor) {
+            ctx.getServerHandler()
+                    .playerEntity
+                    .inventory
+                    .armorInventory[2]
+                    .stackTagCompound
+                    .setBoolean("unequip", true);
         }
         return null;
     }
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-
-    }
+    public void fromBytes(ByteBuf buf) {}
 
     @Override
-    public void toBytes(ByteBuf buf) {
-    }
+    public void toBytes(ByteBuf buf) {}
 }

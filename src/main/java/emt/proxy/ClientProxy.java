@@ -26,14 +26,12 @@ public class ClientProxy extends CommonProxy {
         Render empty = new Render() {
 
             @Override
-            public void doRender(Entity e, double x, double y, double z, float f1, float f2) {
-            }
+            public void doRender(Entity e, double x, double y, double z, float f1, float f2) {}
 
             @Override
             protected ResourceLocation getEntityTexture(Entity e) {
                 return null;
             }
-
         };
 
         RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());

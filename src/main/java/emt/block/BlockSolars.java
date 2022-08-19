@@ -4,6 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.tile.solar.Solars;
+import java.util.List;
+import java.util.Objects;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,9 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Objects;
 
 public class BlockSolars extends BlockBaseContainer {
 
@@ -112,8 +111,7 @@ public class BlockSolars extends BlockBaseContainer {
     @Override
     public IIcon getIcon(int side, int meta) {
 
-        if (meta >= countOfMetas)
-            return null;
+        if (meta >= countOfMetas) return null;
 
         if (side < 1) {
             return iconSets[meta].bottom;
@@ -137,7 +135,8 @@ public class BlockSolars extends BlockBaseContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2, float f3) {
+    public boolean onBlockActivated(
+            World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2, float f3) {
         if (player.isSneaking()) {
             return false;
         }

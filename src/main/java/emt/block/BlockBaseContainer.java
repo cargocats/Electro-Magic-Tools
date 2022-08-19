@@ -19,6 +19,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
 
     public int instance;
     public int countOfMetas;
+
     @SideOnly(Side.CLIENT)
     IconSet[] iconSets;
 
@@ -26,11 +27,18 @@ public abstract class BlockBaseContainer extends BlockContainer {
         this(unlocName, material, soundType, 1, hardness);
     }
 
-    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, float hardness) {
+    public BlockBaseContainer(
+            String unlocName, Material material, SoundType soundType, int countOfMetas, float hardness) {
         this(unlocName, material, soundType, countOfMetas, 0, hardness);
     }
 
-    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas, int curInstance, float hardness) {
+    public BlockBaseContainer(
+            String unlocName,
+            Material material,
+            SoundType soundType,
+            int countOfMetas,
+            int curInstance,
+            float hardness) {
         super(material);
         this.setBlockName(EMT.MOD_ID + "." + unlocName);
         this.setCreativeTab(EMT.TAB);
@@ -64,8 +72,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
         TileEntityEMT tile = (TileEntityEMT) access.getTileEntity(x, y, z);
         int meta = access.getBlockMetadata(x, y, z);
 
-        if (meta >= countOfMetas)
-            return null;
+        if (meta >= countOfMetas) return null;
 
         IconSet set = iconSets[meta];
 
@@ -97,8 +104,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
     @Override
     public IIcon getIcon(int side, int meta) {
 
-        if (meta >= countOfMetas)
-            return null;
+        if (meta >= countOfMetas) return null;
 
         IconSet set = iconSets[meta];
 
@@ -120,8 +126,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
         int facing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         TileEntityEMT tile = (TileEntityEMT) world.getTileEntity(x, y, z);
 
-        if (tile == null)
-            return;
+        if (tile == null) return;
 
         switch (facing) {
             case 0:

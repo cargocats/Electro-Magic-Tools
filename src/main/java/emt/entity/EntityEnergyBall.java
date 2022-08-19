@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
@@ -17,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import thaumcraft.common.Thaumcraft;
 
-import java.util.ArrayList;
-
 public class EntityEnergyBall extends Entity implements IProjectile, IEntityAdditionalSpawnData {
     public static final int RADIUS = 8;
     public static final int MAX_TICKS_IN_TILE = 60;
@@ -31,6 +30,7 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
      * Pls, don't ask me why 1 =)
      **/
     public int ticksInAir = 1;
+
     public double accelerationX = 0;
     public double accelerationY = 0;
     public double accelerationZ = 0;
@@ -51,7 +51,12 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
         this(world);
 
         this.shootingEntity = shootingEntity;
-        this.setLocationAndAngles(shootingEntity.posX, shootingEntity.posY + shootingEntity.getEyeHeight(), shootingEntity.posZ, shootingEntity.rotationYaw, shootingEntity.rotationPitch);
+        this.setLocationAndAngles(
+                shootingEntity.posX,
+                shootingEntity.posY + shootingEntity.getEyeHeight(),
+                shootingEntity.posZ,
+                shootingEntity.rotationYaw,
+                shootingEntity.rotationPitch);
     }
 
     public EntityEnergyBall(World world) {
@@ -97,7 +102,8 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
 
             for (int chX = -chunkSize; chX < chunkSize; chX++) {
                 for (int chZ = -chunkSize; chZ < chunkSize; chZ++) {
-                    Chunk chunk = worldObj.getChunkFromChunkCoords(chX + (int) (this.posX / 16), chZ + (int) (this.posZ / 16));
+                    Chunk chunk = worldObj.getChunkFromChunkCoords(
+                            chX + (int) (this.posX / 16), chZ + (int) (this.posZ / 16));
 
                     if (chunk.isChunkLoaded && chunk.hasEntities) {
                         for (int i = 0; i < chunk.entityLists.length; i++) {
@@ -106,7 +112,8 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
                                 double width = entity.posX - this.posX;
                                 double height = entity.posY - this.posY;
                                 double length = entity.posZ - this.posZ;
-                                double hyp = MathHelper.sqrt_double((width * width) + (length * length) + (height * height));
+                                double hyp =
+                                        MathHelper.sqrt_double((width * width) + (length * length) + (height * height));
 
                                 if (hyp <= RADIUS) {
                                     entities.add(entity);
@@ -116,7 +123,6 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
                                     if (worldObj.isRemote) {
                                         Thaumcraft.proxy.bolt(worldObj, this, entity);
                                     }
-
                                 }
                             }
                         }
@@ -129,7 +135,8 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
         else {
             /** Collision detection **/
             Vec3 vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            Vec3 vec3next = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 vec3next = Vec3.createVectorHelper(
+                    this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition mop = this.worldObj.rayTraceBlocks(vec3, vec3next);
 
             this.ticksInAir++;
@@ -144,7 +151,9 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
             float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
-            for (this.rotationPitch = (float) (Math.atan2((double) f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+            for (this.rotationPitch = (float) (Math.atan2((double) f1, this.motionY) * 180.0D / Math.PI) - 90.0F;
+                    this.rotationPitch - this.prevRotationPitch < -180.0F;
+                    this.prevRotationPitch -= 360.0F) {
                 ;
             }
 
@@ -203,13 +212,12 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
     }
 
     @Override
-    protected void entityInit() {
-    }
+    protected void entityInit() {}
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         nbt.setByte("inTile", (byte) (this.inTile ? 1 : 0));
-        nbt.setTag("direction", this.newDoubleNBTList(new double[]{this.motionX, this.motionY, this.motionZ}));
+        nbt.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
     }
 
     @Override
@@ -229,6 +237,5 @@ public class EntityEnergyBall extends Entity implements IProjectile, IEntityAddi
     }
 
     @Override
-    public void setThrowableHeading(double x, double y, double z, float p1, float p2) {
-    }
+    public void setThrowableHeading(double x, double y, double z, float p1, float p2) {}
 }

@@ -6,6 +6,7 @@ import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,8 +18,6 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
 
@@ -59,7 +58,8 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(
+            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
         if (EMTConfigHandler.toolsInBore == false) {
             cost = 250;
         } else {
@@ -71,7 +71,8 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
 
     @Override
     public boolean canHarvestBlock(Block block, ItemStack stack) {
-        return Items.diamond_pickaxe.canHarvestBlock(block, stack) || Items.diamond_shovel.canHarvestBlock(block, stack);
+        return Items.diamond_pickaxe.canHarvestBlock(block, stack)
+                || Items.diamond_shovel.canHarvestBlock(block, stack);
     }
 
     @Override
@@ -80,7 +81,8 @@ public class ItemThaumiumDrill extends ItemPickaxe implements IElectricItem {
             return 1.0F;
         }
 
-        if (Items.wooden_pickaxe.getDigSpeed(stack, block, meta) > 1.0F || Items.wooden_shovel.getDigSpeed(stack, block, meta) > 1.0F) {
+        if (Items.wooden_pickaxe.getDigSpeed(stack, block, meta) > 1.0F
+                || Items.wooden_shovel.getDigSpeed(stack, block, meta) > 1.0F) {
             return efficiencyOnProperMaterial;
         } else {
             return super.getDigSpeed(stack, block, meta);

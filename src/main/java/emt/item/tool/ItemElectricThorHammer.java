@@ -8,6 +8,7 @@ import emt.util.EMTConfigHandler;
 import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,8 +22,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
 
@@ -69,7 +68,8 @@ public class ItemElectricThorHammer extends ItemSword implements IElectricItem {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(StatCollector.translateToLocal("ic2.item.tooltip.PowerTier") + " " + getTier(new ItemStack(this)));
-        list.add(EMTTextHelper.localize("tooltip.EMT.hammer.electric").replace("%player%", player.getCommandSenderName()));
+        list.add(EMTTextHelper.localize("tooltip.EMT.hammer.electric")
+                .replace("%player%", player.getCommandSenderName()));
     }
 
     @Override

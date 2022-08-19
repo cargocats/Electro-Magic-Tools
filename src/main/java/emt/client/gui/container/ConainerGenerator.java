@@ -1,6 +1,7 @@
 package emt.client.gui.container;
 
 import emt.tile.generator.TileEntityBaseGenerator;
+import java.util.Locale;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -8,10 +9,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.Aspect;
 
-import java.util.Locale;
-
-public class ConainerGenerator
-        extends Container {
+public class ConainerGenerator extends Container {
     private TileEntityBaseGenerator tileentity;
 
     public ConainerGenerator(InventoryPlayer inventoryplayer, TileEntityBaseGenerator tileentity) {
@@ -52,8 +50,7 @@ public class ConainerGenerator
         if (i == 0) {
             this.tileentity.generating = (((int) j) * 400);
         } else if (i == 1) {
-            if (j == 0 || this.tileentity.fuel != j)
-                this.tileentity.tick = 0;
+            if (j == 0 || this.tileentity.fuel != j) this.tileentity.tick = 0;
             this.tileentity.fuel = ((byte) j);
         } else if (i == 2) {
             this.tileentity.mpshownstroage = (short) j;
@@ -82,7 +79,6 @@ public class ConainerGenerator
             this.tileentity.isActive = ((byte) j) == ((byte) 1);
         }
     }
-
 
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         return null;

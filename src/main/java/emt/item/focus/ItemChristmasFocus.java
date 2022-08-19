@@ -11,7 +11,8 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class ItemChristmasFocus extends ItemBaseFocus {
 
-    private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
+    private static final AspectList visCost =
+            new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
 
     public ItemChristmasFocus() {
         super("christmas");
@@ -33,13 +34,15 @@ public class ItemChristmasFocus extends ItemBaseFocus {
     }
 
     @Override
-    public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition mop) {
+    public ItemStack onFocusRightClick(
+            ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition mop) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         if ((mop != null) && (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)) {
             int x = mop.blockX;
             int y = mop.blockY + 1;
             int z = mop.blockZ;
-            if (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+            if (player.capabilities.isCreativeMode
+                    || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
                 if (!world.isRemote) {
                     EntitySnowman snowman;
                     snowman = new EntitySnowman(world);

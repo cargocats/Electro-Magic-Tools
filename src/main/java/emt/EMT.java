@@ -29,8 +29,7 @@ import org.apache.logging.log4j.Logger;
         name = EMT.NAME,
         version = EMT.VERSION,
         guiFactory = EMT.GUI_FACTORY,
-        dependencies = EMT.DEPENDS
-)
+        dependencies = EMT.DEPENDS)
 public class EMT {
     public static final String NAME = "Electro-Magic Tools";
     public static final String MOD_ID = "EMT";
@@ -40,19 +39,19 @@ public class EMT {
     public static final String CLIENT_PROXY = "emt.proxy.ClientProxy";
     public static final String COMMON_PROXY = "emt.proxy.CommonProxy";
     public static final String CHANNEL = "EMT";
-    public static final String DEPENDS =
-            "required-after:Thaumcraft;" +
-                    "required-after:IC2;" +
-                    "required-after:gregtech;" +
-                    "after:Avaritia;" +
-                    "after:MagicBees;" +
-                    "after:ForbiddenMagic;" +
-                    "after:dreamcraft;";
+    public static final String DEPENDS = "required-after:Thaumcraft;" + "required-after:IC2;"
+            + "required-after:gregtech;"
+            + "after:Avaritia;"
+            + "after:MagicBees;"
+            + "after:ForbiddenMagic;"
+            + "after:dreamcraft;";
     public static final CreativeTabs TAB = new EMTCreativeTab("EMT.creativeTab");
     public static final Logger LOGGER = LogManager.getLogger("Electro-Magic Tools");
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("EMT");
+
     @SidedProxy(clientSide = "emt.proxy.ClientProxy", serverSide = "emt.proxy.CommonProxy")
     public static CommonProxy proxy;
+
     @Mod.Instance("EMT")
     public static EMT instance;
 

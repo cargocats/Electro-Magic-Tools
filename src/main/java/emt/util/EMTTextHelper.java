@@ -8,6 +8,7 @@ public class EMTTextHelper {
      * Color Coding *
      */
     public static final String BLACK = (char) 167 + "0";
+
     public static final String BLUE = (char) 167 + "1";
     public static final String GREEN = (char) 167 + "2";
     public static final String TEAL = (char) 167 + "3";
@@ -28,6 +29,7 @@ public class EMTTextHelper {
      * Text formatting *
      */
     public static final String OBFUSCATED = (char) 167 + "k";
+
     public static final String BOLD = (char) 167 + "l";
     public static final String STRIKETHROUGH = (char) 167 + "m";
     public static final String UNDERLINE = (char) 167 + "n";

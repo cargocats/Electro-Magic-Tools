@@ -14,9 +14,9 @@ import thaumcraft.common.config.ConfigItems;
 
 public class TileEntityEtherealMacerator extends TileEntityEMT implements ISidedInventory, IWrenchable {
 
-    private static final int[] slots_top = new int[]{0};
-    private static final int[] slots_bottom = new int[]{2, 1};
-    private static final int[] slots_sides = new int[]{1};
+    private static final int[] slots_top = new int[] {0};
+    private static final int[] slots_bottom = new int[] {2, 1};
+    private static final int[] slots_sides = new int[] {1};
     public int maceratingSpeed = EMTConfigHandler.etherealProcessorBaseSpeed;
     public int cookTime;
     private ItemStack[] slots = new ItemStack[3];
@@ -135,12 +135,9 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
             return false;
         } else {
             ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.slots[0]);
-            if (itemstack == null)
-                return false;
-            if (this.slots[2] == null)
-                return true;
-            if (!this.slots[2].isItemEqual(itemstack))
-                return false;
+            if (itemstack == null) return false;
+            if (this.slots[2] == null) return true;
+            if (!this.slots[2].isItemEqual(itemstack)) return false;
             int result = slots[2].stackSize + (itemstack.stackSize * 2);
             return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
         }
@@ -171,7 +168,9 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
             if (this.worldObj.rand.nextInt(EMTConfigHandler.etherealProcessorBonus) == 0) {
                 if (this.slots[1] == null) {
                     this.setInventorySlotContents(1, new ItemStack(ConfigItems.itemNugget, 1, 6));
-                } else if (this.slots[1].isItemEqual(new ItemStack(ConfigItems.itemNugget, 1, 6)) && this.isOverLimit(1) == false && this.isOverLimit(2) == false) {
+                } else if (this.slots[1].isItemEqual(new ItemStack(ConfigItems.itemNugget, 1, 6))
+                        && this.isOverLimit(1) == false
+                        && this.isOverLimit(2) == false) {
                     slots[1] = new ItemStack(getStackInSlot(1).getItem(), slots[1].stackSize + 1, 2);
                 }
             }
@@ -179,21 +178,21 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     }
 
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this
+                ? false
+                : par1EntityPlayer.getDistanceSq(
+                                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D)
+                        <= 64.0D;
     }
 
-    public void openChest() {
-    }
+    public void openChest() {}
 
-    public void closeChest() {
-    }
+    public void closeChest() {}
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        if (slot != 0)
-            return false;
-        if (FurnaceRecipes.smelting().getSmeltingResult(stack) != null)
-            return true;
+        if (slot != 0) return false;
+        if (FurnaceRecipes.smelting().getSmeltingResult(stack) != null) return true;
         return false;
     }
 
@@ -211,12 +210,9 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
 
     public boolean isOverLimit(int i) {
         if (slots[i] != null) {
-            if (slots[i].stackSize >= 63)
-                return true;
-            else if (slots[i].stackSize < 63)
-                return false;
-            else
-                return false;
+            if (slots[i].stackSize >= 63) return true;
+            else if (slots[i].stackSize < 63) return false;
+            else return false;
         } else {
             return false;
         }
@@ -232,7 +228,6 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
             }
         }
         return false;
-
     }
 
     @Override
@@ -246,9 +241,7 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     }
 
     @Override
-    public void setFacing(short facing) {
-
-    }
+    public void setFacing(short facing) {}
 
     @Override
     public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
@@ -276,12 +269,8 @@ public class TileEntityEtherealMacerator extends TileEntityEMT implements ISided
     }
 
     @Override
-    public void openInventory() {
-
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeInventory() {
-
-    }
+    public void closeInventory() {}
 }

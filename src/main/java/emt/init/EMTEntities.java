@@ -18,8 +18,7 @@ public class EMTEntities {
     private static int getUniqueEntityID() {
         do {
             startEID++;
-        }
-        while (EntityList.getStringFromID(startEID) != null);
+        } while (EntityList.getStringFromID(startEID) != null);
         return startEID;
     }
 

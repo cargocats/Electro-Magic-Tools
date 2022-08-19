@@ -11,7 +11,8 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderLaser extends Render {
 
-    private static final ResourceLocation laserTexture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/lasermodel.png");
+    private static final ResourceLocation laserTexture =
+            new ResourceLocation(EMT.TEXTURE_PATH, "textures/models/lasermodel.png");
 
     @Override
     public void doRender(Entity entityLaser, double x, double y, double z, float par8, float pTick) {

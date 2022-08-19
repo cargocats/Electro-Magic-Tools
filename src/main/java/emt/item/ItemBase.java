@@ -22,6 +22,8 @@ public class ItemBase extends Item {
     }
 
     public String getItemStackDisplayName(ItemStack stack) {
-        return (EMTTextHelper.GREEN + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+        return (EMTTextHelper.GREEN
+                        + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name"))
+                .trim();
     }
 }

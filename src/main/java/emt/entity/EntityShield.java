@@ -33,12 +33,10 @@ public class EntityShield extends Entity {
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound nbt) {
-    }
+    protected void readEntityFromNBT(NBTTagCompound nbt) {}
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound nbt) {
-    }
+    protected void writeEntityToNBT(NBTTagCompound nbt) {}
 
     @Override
     public AxisAlignedBB getBoundingBox() {
@@ -62,7 +60,13 @@ public class EntityShield extends Entity {
         this.posZ = z;
         float f = this.width / 2.0F;
         float f1 = this.height;
-        this.boundingBox.setBounds(x - (double) f, y - (double) this.yOffset - 2 + (double) this.ySize, z - (double) f, x + (double) f, y - (double) this.yOffset - 2 + (double) this.ySize + (double) f1, z + (double) f);
+        this.boundingBox.setBounds(
+                x - (double) f,
+                y - (double) this.yOffset - 2 + (double) this.ySize,
+                z - (double) f,
+                x + (double) f,
+                y - (double) this.yOffset - 2 + (double) this.ySize + (double) f1,
+                z + (double) f);
     }
 
     @Override

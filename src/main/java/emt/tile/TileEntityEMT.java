@@ -6,8 +6,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityEMT
-        extends TileEntity {
+public class TileEntityEMT extends TileEntity {
     public int facing;
     public boolean isOn;
 

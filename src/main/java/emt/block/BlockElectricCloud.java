@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.tile.TileElectricCloud;
+import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -13,8 +14,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXSparkle;
-
-import java.util.Random;
 
 public class BlockElectricCloud extends BlockBase {
     public IIcon icon;
@@ -27,7 +26,17 @@ public class BlockElectricCloud extends BlockBase {
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random rnd) {
-        FXSparkle ef = new FXSparkle(world, x + 0.5F, y + 0.5F, z + 0.5F, x + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, y + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, z + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F, 1.0F, 6, 3);
+        FXSparkle ef = new FXSparkle(
+                world,
+                x + 0.5F,
+                y + 0.5F,
+                z + 0.5F,
+                x + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F,
+                y + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F,
+                z + 0.5F + (rnd.nextFloat() - rnd.nextFloat()) / 3.0F,
+                1.0F,
+                6,
+                3);
         ef.setGravity(0.05F);
         ParticleEngine.instance.addEffect(world, ef);
     }

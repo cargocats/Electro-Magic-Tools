@@ -41,12 +41,15 @@ public class ItemEnergyBallFocus extends ItemBaseFocus {
             return stack;
         }
 
-        float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
+        float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI)
+                        * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI))
+                * 100;
         float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
-        float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
+        float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI)
+                        * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI))
+                * 100;
         world.spawnEntityInWorld(new EntityEnergyBall(world, player, rotX, rotY, rotZ));
 
         return stack;
     }
-
 }

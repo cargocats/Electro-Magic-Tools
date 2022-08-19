@@ -3,9 +3,9 @@ package emt.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
-import emt.util.EMTTextHelper;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import thaumcraft.api.IScribeTools;
 import thaumcraft.common.items.ItemInkwell;
-
-import java.util.List;
 
 public class ItemElectricScribingTools extends ItemInkwell implements IElectricItem, IScribeTools {
 

@@ -51,13 +51,11 @@ public class EMTResearchItem extends ResearchItem {
                 page.text = "emt.text." + key + (page.text.equals("") ? "" : "." + page.text);
 
             if (page.type == PageType.INFUSION_CRAFTING) {
-                if (parentsHidden == null || parentsHidden.length == 0)
-                    parentsHidden = new String[]{"INFUSION"};
+                if (parentsHidden == null || parentsHidden.length == 0) parentsHidden = new String[] {"INFUSION"};
                 else {
                     String[] newParents = new String[parentsHidden.length + 1];
                     newParents[0] = "INFUSION";
-                    for (int i2 = 0; i2 < parentsHidden.length; i2++)
-                        newParents[i2 + 1] = parentsHidden[i2];
+                    for (int i2 = 0; i2 < parentsHidden.length; i2++) newParents[i2 + 1] = parentsHidden[i2];
                     parentsHidden = newParents;
                 }
             }

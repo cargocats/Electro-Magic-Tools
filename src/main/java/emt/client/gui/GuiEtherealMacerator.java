@@ -12,7 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiEtherealMacerator extends GuiContainer {
 
-    public static final ResourceLocation texture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/etherealmacerator.png");
+    public static final ResourceLocation texture =
+            new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/etherealmacerator.png");
 
     public GuiEtherealMacerator(InventoryPlayer inventory, TileEntityEtherealMacerator te) {
         super(new ContainerEtheralMacerator(inventory, te));

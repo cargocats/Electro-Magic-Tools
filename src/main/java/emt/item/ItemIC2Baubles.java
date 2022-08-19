@@ -8,6 +8,8 @@ import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,9 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import thaumcraft.api.IRunicArmor;
-
-import java.util.List;
-import java.util.Random;
 
 public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
 
@@ -89,8 +88,15 @@ public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
                         int energyLeft = EMTConfigHandler.armorBaubleProduction;
                         for (int i = 0; i < ((EntityPlayer) player).inventory.armorInventory.length; i++) {
                             if (energyLeft > 0) {
-                                if ((((EntityPlayer) player).inventory.armorInventory[i] != null) && (((EntityPlayer) player).inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
-                                    double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.armorInventory[i], energyLeft, 4, false, false);
+                                if ((((EntityPlayer) player).inventory.armorInventory[i] != null)
+                                        && (((EntityPlayer) player).inventory.armorInventory[i].getItem()
+                                                instanceof IElectricItem)) {
+                                    double sentPacket = ElectricItem.manager.charge(
+                                            ((EntityPlayer) player).inventory.armorInventory[i],
+                                            energyLeft,
+                                            4,
+                                            false,
+                                            false);
                                     energyLeft -= sentPacket;
                                 }
                             }
@@ -104,8 +110,15 @@ public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
                         int energyLeft = EMTConfigHandler.inventoryBaubleProdution;
                         for (int i = 0; i < ((EntityPlayer) player).inventory.mainInventory.length; i++) {
                             if (energyLeft > 0) {
-                                if ((((EntityPlayer) player).inventory.mainInventory[i] != null) && (((EntityPlayer) player).inventory.mainInventory[i].getItem() instanceof IElectricItem)) {
-                                    double sentPacket = ElectricItem.manager.charge(((EntityPlayer) player).inventory.mainInventory[i], energyLeft, 4, false, false);
+                                if ((((EntityPlayer) player).inventory.mainInventory[i] != null)
+                                        && (((EntityPlayer) player).inventory.mainInventory[i].getItem()
+                                                instanceof IElectricItem)) {
+                                    double sentPacket = ElectricItem.manager.charge(
+                                            ((EntityPlayer) player).inventory.mainInventory[i],
+                                            energyLeft,
+                                            4,
+                                            false,
+                                            false);
                                     energyLeft -= sentPacket;
                                 }
                             }
@@ -117,12 +130,10 @@ public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
     }
 
     @Override
-    public void onEquipped(ItemStack stack, EntityLivingBase player) {
-    }
+    public void onEquipped(ItemStack stack, EntityLivingBase player) {}
 
     @Override
-    public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-    }
+    public void onUnequipped(ItemStack stack, EntityLivingBase player) {}
 
     @Override
     public boolean canEquip(ItemStack stack, EntityLivingBase player) {

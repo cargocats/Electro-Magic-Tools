@@ -66,7 +66,8 @@ public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
         useWings(player, stack, world, 0.11f, 0.9f, 0.9f, 0);
     }
 
-    public void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
+    public void useWings(
+            EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
         NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 
         boolean isJmuping = nbtData.getBoolean("isJumping");
@@ -77,12 +78,9 @@ public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
         if (isJmuping) {
             byte f = nbtData.getByte("f");
             nbtData.setBoolean("isHolding", true);
-            if (IC2.keyboard.isSneakKeyDown(player))
-                nbtData.setByte("f", (byte) (0));
-            else
-                nbtData.setByte("f", (byte) (f + 1));
-            if (f > 7)
-                nbtData.setByte("f", (byte) 7);
+            if (IC2.keyboard.isSneakKeyDown(player)) nbtData.setByte("f", (byte) (0));
+            else nbtData.setByte("f", (byte) (f + 1));
+            if (f > 7) nbtData.setByte("f", (byte) 7);
         } else if (isHolding) {
             byte f = nbtData.getByte("f");
             nbtData.setBoolean("isHolding", false);
@@ -95,7 +93,14 @@ public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
                 }
                 world.playSoundEffect(player.posX, player.posY, player.posZ, "mob.ghast.fireball", 1, 1);
                 for (int i = 0; i < 4; i++) {
-                    world.spawnParticle("cloud", player.posX - 1 + (world.rand.nextInt(100) / 50d), player.posY - 1, player.posZ - 1 + (world.rand.nextInt(100) / 50d), 0, -0.5, 0);
+                    world.spawnParticle(
+                            "cloud",
+                            player.posX - 1 + (world.rand.nextInt(100) / 50d),
+                            player.posY - 1,
+                            player.posZ - 1 + (world.rand.nextInt(100) / 50d),
+                            0,
+                            -0.5,
+                            0);
                 }
             }
             nbtData.setByte("f", (byte) 0);
@@ -110,7 +115,10 @@ public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
         }
 
         if (EMTConfigHandler.impactOfRain) {
-            if ((world.getBiomeGenForCoords((int) player.posX, (int) player.posZ)).canSpawnLightningBolt() && world.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ) && world.isRaining() && !player.capabilities.isCreativeMode) {
+            if ((world.getBiomeGenForCoords((int) player.posX, (int) player.posZ)).canSpawnLightningBolt()
+                    && world.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ)
+                    && world.isRaining()
+                    && !player.capabilities.isCreativeMode) {
                 player.motionY += -0.03;
             }
         }

@@ -3,6 +3,7 @@ package emt.item.focus;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
+import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -14,8 +15,6 @@ import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
-
-import java.util.List;
 
 public abstract class ItemBaseFocus extends ItemFocusBasic {
 
@@ -75,20 +74,20 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
     }
 
     @Override
-    public ItemStack onFocusRightClick(ItemStack paramItemStack, World paramWorld, EntityPlayer paramEntityPlayer, MovingObjectPosition paramMovingObjectPosition) {
-        if (isUseItem(paramItemStack))
-            paramEntityPlayer.setItemInUse(paramItemStack, Integer.MAX_VALUE);
+    public ItemStack onFocusRightClick(
+            ItemStack paramItemStack,
+            World paramWorld,
+            EntityPlayer paramEntityPlayer,
+            MovingObjectPosition paramMovingObjectPosition) {
+        if (isUseItem(paramItemStack)) paramEntityPlayer.setItemInUse(paramItemStack, Integer.MAX_VALUE);
         return paramItemStack;
     }
 
     @Override
-    public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {
-
-    }
+    public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {}
 
     @Override
-    public void onPlayerStoppedUsingFocus(ItemStack itemstack, World world, EntityPlayer player, int count) {
-    }
+    public void onPlayerStoppedUsingFocus(ItemStack itemstack, World world, EntityPlayer player, int count) {}
 
     @Override
     public String getSortingHelper(ItemStack itemstack) {

@@ -2,6 +2,7 @@ package emt.item.focus;
 
 import emt.entity.EntityShield;
 import ic2.core.IC2;
+import java.util.LinkedList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -11,10 +12,9 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
-import java.util.LinkedList;
-
 public class ItemShieldFocus extends ItemBaseFocus {
-    private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 5);
+    private static final AspectList visCost =
+            new AspectList().add(Aspect.ORDER, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 5);
 
     public ItemShieldFocus() {
         super("shield");
@@ -46,16 +46,20 @@ public class ItemShieldFocus extends ItemBaseFocus {
         for (PotionEffect effect : new LinkedList<PotionEffect>(player.getActivePotionEffects())) {
             IC2.platform.removePotion(player, effect.getPotionID());
         }
-        if (!player.capabilities.isCreativeMode && !wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+        if (!player.capabilities.isCreativeMode
+                && !wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
             player.stopUsingItem();
         }
     }
 
     @Override
-    public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition paramMovingObjectPosition) {
+    public ItemStack onFocusRightClick(
+            ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition paramMovingObjectPosition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         player.setItemInUse(itemstack, Integer.MAX_VALUE);
-        if (!world.isRemote && (player.capabilities.isCreativeMode || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true))) {
+        if (!world.isRemote
+                && (player.capabilities.isCreativeMode
+                        || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true))) {
             EntityShield shield = new EntityShield(world, player);
             world.spawnEntityInWorld(shield);
         }

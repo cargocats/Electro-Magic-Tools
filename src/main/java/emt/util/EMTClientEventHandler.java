@@ -31,11 +31,21 @@ public class EMTClientEventHandler {
         if (e.side == Side.CLIENT) {
 
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            Item curItem = player.inventory.getCurrentItem() == null ? null : player.inventory.getCurrentItem().getItem();
+            Item curItem = player.inventory.getCurrentItem() == null
+                    ? null
+                    : player.inventory.getCurrentItem().getItem();
 
-            if (curItem == EMTItems.diamondChainsaw || curItem == EMTItems.streamChainsaw || curItem == EMTItems.thaumiumChainsaw) {
+            if (curItem == EMTItems.diamondChainsaw
+                    || curItem == EMTItems.streamChainsaw
+                    || curItem == EMTItems.thaumiumChainsaw) {
                 if (audio == null)
-                    audio = IC2.audioManager.createSource(player, PositionSpec.Hand, "Tools/Chainsaw/ChainsawIdle.ogg", true, false, IC2.audioManager.getDefaultVolume());
+                    audio = IC2.audioManager.createSource(
+                            player,
+                            PositionSpec.Hand,
+                            "Tools/Chainsaw/ChainsawIdle.ogg",
+                            true,
+                            false,
+                            IC2.audioManager.getDefaultVolume());
                 if (audio != null) {
                     audio.updatePosition();
                     audio.play();
@@ -46,7 +56,12 @@ public class EMTClientEventHandler {
                 audio.stop();
                 audio.remove();
                 audio = null;
-                IC2.audioManager.playOnce(player, PositionSpec.Hand, "Tools/Chainsaw/ChainsawStop.ogg", true, IC2.audioManager.getDefaultVolume());
+                IC2.audioManager.playOnce(
+                        player,
+                        PositionSpec.Hand,
+                        "Tools/Chainsaw/ChainsawStop.ogg",
+                        true,
+                        IC2.audioManager.getDefaultVolume());
             }
 
             lastItem = curItem;

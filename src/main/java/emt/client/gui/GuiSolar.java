@@ -30,7 +30,13 @@ public class GuiSolar extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-        color = this.tileentity.getInventoryName().replaceAll("Solar", "").replaceAll("Compressed", "").replaceAll("Triple", "").replaceAll("Double", "").trim();
+        color = this.tileentity
+                .getInventoryName()
+                .replaceAll("Solar", "")
+                .replaceAll("Compressed", "")
+                .replaceAll("Triple", "")
+                .replaceAll("Double", "")
+                .trim();
         if (color != null)
             switch (color) {
                 case "Aer": {
@@ -63,9 +69,7 @@ public class GuiSolar extends GuiContainer {
                     break;
                 }
             }
-        else
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
+        else GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(tex);
 
@@ -76,8 +80,7 @@ public class GuiSolar extends GuiContainer {
             int l = this.tileentity.gaugeEnergyScaled(33);
             drawTexturedModalRect(h + 18, k + 23, 195, 0, l, 14);
         }
-        if (this.tileentity.generating > 9)
-            drawTexturedModalRect(h + 18, k + 42, 195, 20, 11, 14);
+        if (this.tileentity.generating > 9) drawTexturedModalRect(h + 18, k + 42, 195, 20, 11, 14);
     }
 
     @Override
@@ -85,27 +88,45 @@ public class GuiSolar extends GuiContainer {
         String formatPanelName = I18n.format(this.tileentity.getInventoryName(), new Object[0]);
         int nmPos = (this.xSize - this.fontRendererObj.getStringWidth(formatPanelName)) / 2;
 
-        if (!color.equals("Terra"))
-            this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, 6618118);
-        else
-            this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, cColor);
+        if (!color.equals("Terra")) this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, 6618118);
+        else this.fontRendererObj.drawStringWithShadow(formatPanelName, 0, 7, cColor);
 
         String storageString = I18n.format("emt.Storage", new Object[0]);
 
         if (this.tileentity.maxstorage < 1000)
-            this.fontRendererObj.drawString(storageString + this.tileentity.storage + "/" + this.tileentity.maxstorage + "EU", 36, 22, 0);
+            this.fontRendererObj.drawString(
+                    storageString + this.tileentity.storage + "/" + this.tileentity.maxstorage + "EU", 36, 22, 0);
         else if (10000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 10000000)
-            this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage) + "/" + (this.tileentity.maxstorage / 1000) + "kEU", 36, 22, 0);
+            this.fontRendererObj.drawString(
+                    storageString + (this.tileentity.mp_storage) + "/" + (this.tileentity.maxstorage / 1000) + "kEU",
+                    36,
+                    22,
+                    0);
         else if (10000000 <= this.tileentity.maxstorage && this.tileentity.maxstorage < 1000000000)
-            this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage / 1000) + "/" + (this.tileentity.maxstorage / 1000000) + "MEU", 36, 22, 0);
+            this.fontRendererObj.drawString(
+                    storageString + (this.tileentity.mp_storage / 1000) + "/" + (this.tileentity.maxstorage / 1000000)
+                            + "MEU",
+                    36,
+                    22,
+                    0);
         else if (1000000000 <= this.tileentity.maxstorage)
-            this.fontRendererObj.drawString(storageString + (this.tileentity.mp_storage / 1000000) + "/" + (this.tileentity.maxstorage / 1000000000) + "GEU", 36, 22, 0);
+            this.fontRendererObj.drawString(
+                    storageString + (this.tileentity.mp_storage / 1000000) + "/"
+                            + (this.tileentity.maxstorage / 1000000000) + "GEU",
+                    36,
+                    22,
+                    0);
         if (this.tileentity.isActive)
-//	    	if (Double.toString(this.tileentity.generating).length()>5)
-//	    		this.fontRendererObj.drawString(I18n.format("emt.Generating",new Object[0])+Double.toString(this.tileentity.generating).substring(0, 4)+" EU/t", 36, 35, 0);
-//	    	else
-            this.fontRendererObj.drawString(I18n.format("emt.Generating", new Object[0]) + Double.toString(this.tileentity.generating) + " EU/t", 36, 35, 0);
-        else
-            this.fontRendererObj.drawString(I18n.format("emt.Generating", new Object[0]) + "0 EU/t", 36, 35, 0);
+            //	    	if (Double.toString(this.tileentity.generating).length()>5)
+            //	    		this.fontRendererObj.drawString(I18n.format("emt.Generating",new
+            // Object[0])+Double.toString(this.tileentity.generating).substring(0, 4)+" EU/t", 36, 35, 0);
+            //	    	else
+            this.fontRendererObj.drawString(
+                    I18n.format("emt.Generating", new Object[0]) + Double.toString(this.tileentity.generating)
+                            + " EU/t",
+                    36,
+                    35,
+                    0);
+        else this.fontRendererObj.drawString(I18n.format("emt.Generating", new Object[0]) + "0 EU/t", 36, 35, 0);
     }
 }

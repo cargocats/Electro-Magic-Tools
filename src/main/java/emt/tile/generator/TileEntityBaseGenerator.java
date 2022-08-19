@@ -28,9 +28,13 @@ import thaumcraft.api.aspects.*;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
 
-public class TileEntityBaseGenerator
-        extends TileEntityEMT
-        implements IInventory, IAspectContainer, IEssentiaTransport, IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer {
+public class TileEntityBaseGenerator extends TileEntityEMT
+        implements IInventory,
+                IAspectContainer,
+                IEssentiaTransport,
+                IHasWorldObjectAndCoords,
+                IEnergyConnected,
+                IBasicEnergyContainer {
     public DefinitelyNotAIC2Source energySource = new DefinitelyNotAIC2Source(this, 100000L, 2);
     public Aspect aspect;
     public double generating;
@@ -86,18 +90,15 @@ public class TileEntityBaseGenerator
         this.side = !this.worldObj.isRemote;
         this.dead = false;
         this.timer += 1L;
-        if (this.timer <= Long.MAX_VALUE - 1)
-            this.timer = 0L;
+        if (this.timer <= Long.MAX_VALUE - 1) this.timer = 0L;
         storeFuel();
         fillfrompipe();
         createEnergy();
         inputintoGTnet();
     }
 
-
     public void storeFuel() {
-        if (!side)
-            return;
+        if (!side) return;
 
         if (this.fuel < this.maxfuel) {
             for (int x = this.xCoord - 4; x < this.xCoord + 4; x++) {
@@ -106,9 +107,23 @@ public class TileEntityBaseGenerator
                         TileEntity tile = this.worldObj.getTileEntity(x, y, z);
                         if (tile instanceof IAspectSource) {
                             IAspectSource as = (IAspectSource) tile;
-                            if ((as.doesContainerContainAmount(this.aspect, this.refuel)) &&
-                                    (as.takeFromContainer(this.aspect, this.refuel))) {
-                                PacketHandler.INSTANCE.sendToAllAround(new PacketFXEssentiaSource(this.xCoord, this.yCoord, this.zCoord, (byte) (this.xCoord - x), (byte) (this.yCoord - y), (byte) (this.zCoord - z), this.aspect.getColor()), new NetworkRegistry.TargetPoint(getWorldObj().provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 32.0D));
+                            if ((as.doesContainerContainAmount(this.aspect, this.refuel))
+                                    && (as.takeFromContainer(this.aspect, this.refuel))) {
+                                PacketHandler.INSTANCE.sendToAllAround(
+                                        new PacketFXEssentiaSource(
+                                                this.xCoord,
+                                                this.yCoord,
+                                                this.zCoord,
+                                                (byte) (this.xCoord - x),
+                                                (byte) (this.yCoord - y),
+                                                (byte) (this.zCoord - z),
+                                                this.aspect.getColor()),
+                                        new NetworkRegistry.TargetPoint(
+                                                getWorldObj().provider.dimensionId,
+                                                this.xCoord,
+                                                this.yCoord,
+                                                this.zCoord,
+                                                32.0D));
                                 addToContainer(this.aspect, this.refuel);
                             }
                         }
@@ -119,21 +134,24 @@ public class TileEntityBaseGenerator
     }
 
     public void fillfrompipe() {
-        if (!side)
-            return;
+        if (!side) return;
 
-        if (this.fuel == this.maxfuel)
-            return;
+        if (this.fuel == this.maxfuel) return;
 
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
-            te[i] = ThaumcraftApiHelper.getConnectableTile(this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
+            te[i] = ThaumcraftApiHelper.getConnectableTile(
+                    this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
             if (te[i] != null) {
                 IEssentiaTransport pipe = (IEssentiaTransport) te[i];
                 if (!pipe.canOutputTo(ForgeDirection.VALID_DIRECTIONS[i])) {
                     return;
                 }
-                if ((pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]) != null) && (pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]).equals(this.aspect)) && (pipe.getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i]) < getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i]))) {
+                if ((pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]) != null)
+                        && (pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i])
+                                .equals(this.aspect))
+                        && (pipe.getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i])
+                                < getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i]))) {
                     addToContainer(this.aspect, pipe.takeEssentia(this.aspect, 1, ForgeDirection.VALID_DIRECTIONS[i]));
                 }
             }
@@ -186,8 +204,7 @@ public class TileEntityBaseGenerator
         super.writeToNBT(tag);
         tag.setInteger("fuel", this.fuel);
         tag.setLong("estore", this.energySource.getEnergyStored());
-        if (aspect != null)
-            tag.setString("aspect", this.aspect.getTag());
+        if (aspect != null) tag.setString("aspect", this.aspect.getTag());
     }
 
     public int getSizeInventory() {
@@ -206,8 +223,7 @@ public class TileEntityBaseGenerator
         return null;
     }
 
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-    }
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {}
 
     public boolean hasCustomInventoryName() {
         return false;
@@ -221,11 +237,9 @@ public class TileEntityBaseGenerator
         return true;
     }
 
-    public void openInventory() {
-    }
+    public void openInventory() {}
 
-    public void closeInventory() {
-    }
+    public void closeInventory() {}
 
     public int gaugeEnergyScaled(int i) {
         return this.mpshownstroage * 1000 * i / this.maxstorage;
@@ -243,8 +257,7 @@ public class TileEntityBaseGenerator
         return new AspectList().add(this.aspect, this.fuel);
     }
 
-    public void setAspects(AspectList aspects) {
-    }
+    public void setAspects(AspectList aspects) {}
 
     public boolean doesContainerAccept(Aspect tag) {
         return tag.equals(this.aspect);
@@ -294,8 +307,7 @@ public class TileEntityBaseGenerator
         return false;
     }
 
-    public void setSuction(Aspect aspect, int amount) {
-    }
+    public void setSuction(Aspect aspect, int amount) {}
 
     public Aspect getSuctionType(ForgeDirection face) {
         return this.aspect;
@@ -333,8 +345,7 @@ public class TileEntityBaseGenerator
     }
 
     public void inputintoGTnet() {
-        if (!side)
-            return;
+        if (!side) return;
 
         if (isUniversalEnergyStored(getOutputVoltage() * getOutputAmperage())) {
             long tEU = IEnergyConnected.Util.emitEnergyToNetwork(getOutputVoltage(), getOutputAmperage(), this);
@@ -399,7 +410,8 @@ public class TileEntityBaseGenerator
     }
 
     public boolean drainEnergyUnits(byte aSide, long aVoltage, long aAmperage) {
-        return decreaseStoredEnergyUnits(aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
+        return decreaseStoredEnergyUnits(
+                aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
     }
 
     public long getAverageElectricInput() {
@@ -701,15 +713,18 @@ public class TileEntityBaseGenerator
     }
 
     public void sendBlockEvent(byte aID, byte aValue) {
-        GT_Values.NW.sendPacketToAllPlayersInRange(this.worldObj, new GT_Packet_Block_Event(this.xCoord, (short) this.yCoord, this.zCoord, aID, aValue), this.xCoord, this.zCoord);
+        GT_Values.NW.sendPacketToAllPlayersInRange(
+                this.worldObj,
+                new GT_Packet_Block_Event(this.xCoord, (short) this.yCoord, this.zCoord, aID, aValue),
+                this.xCoord,
+                this.zCoord);
     }
 
     public long getTimer() {
         return this.timer;
     }
 
-    public void setLightValue(byte aLightValue) {
-    }
+    public void setLightValue(byte aLightValue) {}
 
     public boolean isInvalidTileEntity() {
         return this.tileEntityInvalid;
@@ -722,7 +737,6 @@ public class TileEntityBaseGenerator
     public boolean openGUI(EntityPlayer aPlayer) {
         return false;
     }
-
 
     public boolean outputsEnergyTo(byte b, boolean b1) {
         return true;

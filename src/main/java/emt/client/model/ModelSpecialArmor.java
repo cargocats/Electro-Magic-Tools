@@ -15,7 +15,7 @@ public class ModelSpecialArmor extends ModelBiped {
     public ModelRenderer center;
     public ModelRenderer jetpack;
     public boolean isJumping;
-    public int type = 0;// 0 - Nothing, 1 - Jetpack, 2 - Wings
+    public int type = 0; // 0 - Nothing, 1 - Jetpack, 2 - Wings
 
     public ModelSpecialArmor() {
         this(1, 0);
@@ -71,12 +71,22 @@ public class ModelSpecialArmor extends ModelBiped {
         model.rotateAngleZ = z;
     }
 
-    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale) {
+    public void render(
+            Entity entity,
+            float p_78088_2_,
+            float p_78088_3_,
+            float p_78088_4_,
+            float p_78088_5_,
+            float p_78088_6_,
+            float scale) {
         EntityPlayer player = (EntityPlayer) entity;
         this.heldItemRight = player.inventory.getCurrentItem() != null ? 1 : 0;
         this.isRiding = player.isRiding();
         this.isSneak = player.isSneaking();
-        this.aimedBow = player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem().getItemUseAction(player.inventory.getCurrentItem()) == EnumAction.bow && player.isUsingItem();
+        this.aimedBow = player.inventory.getCurrentItem() != null
+                && player.inventory.getCurrentItem().getItem().getItemUseAction(player.inventory.getCurrentItem())
+                        == EnumAction.bow
+                && player.isUsingItem();
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entity);
 
         this.bipedBody.render(scale);
@@ -91,10 +101,16 @@ public class ModelSpecialArmor extends ModelBiped {
                 this.leftWing.render(scale);
                 this.rightWing.render(scale);
         }
-
     }
 
-    public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity entity) {
+    public void setRotationAngles(
+            float p_78087_1_,
+            float p_78087_2_,
+            float p_78087_3_,
+            float p_78087_4_,
+            float p_78087_5_,
+            float p_78087_6_,
+            Entity entity) {
         super.setRotationAngles(p_78087_1_, p_78087_2_, p_78087_3_, p_78087_4_, p_78087_5_, p_78087_6_, entity);
         if (this.isJumping) {
             this.rightWing.rotateAngleY = 0.5f;

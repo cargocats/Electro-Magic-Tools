@@ -29,6 +29,8 @@ public class ItemBlockElectricCloud extends ItemBlock {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return EMTTextHelper.PURPLE + EMTTextHelper.BOLD + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+        return EMTTextHelper.PURPLE
+                + EMTTextHelper.BOLD
+                + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
     }
 }

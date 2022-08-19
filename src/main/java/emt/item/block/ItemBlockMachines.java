@@ -1,11 +1,10 @@
 package emt.item.block;
 
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 public class ItemBlockMachines extends ItemBlock {
 
@@ -54,6 +53,5 @@ public class ItemBlockMachines extends ItemBlock {
                 p_77624_3_.add("Added by bartimaeusnek");
             }
         }
-
     }
 }

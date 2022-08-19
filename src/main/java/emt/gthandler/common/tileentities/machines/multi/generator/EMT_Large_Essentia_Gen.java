@@ -12,6 +12,7 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_MultiBlockBase;
 import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.objects.XSTR;
+import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -20,8 +21,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.visnet.VisNetHandler;
 import thaumcraft.common.config.ConfigBlocks;
-
-import java.util.ArrayList;
 
 public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
 
@@ -40,37 +39,51 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
 
     @Override
     public String[] getDescription() {
-        return new String[]{
-                "Controller Block for the Large Essentia Generator.",
-                "Produces energy from magical essentia decay.",
-                "Size(WxHxD): 7x4x7, Controller (Bottom, Center)",
-                "Top-Middle 5x1x5 layer are Muffler Hatches",
-                "Middle 5x2x5 layer are Essentia Diffusion Cells",
-                "Everything from here on goes either in the bottom or on the sides",
-                "1x Fluid Input Hatch",
-                "1x Essentia Input Hatch",
-                "1x Dynamo Hatches",
-                "1x Maintenance Hatch",
-                "The outer hull is made out of Magic Containing Casings",
-                "Produces 20x more than the singleblock generator per essentia",
-                "Causes magical and serious conventional pollution",
-                "Needs 1L Lubricant per second or will cause way more conventional pollution",
-                "Needs 10 " + EMTTextHelper.LIGHT_BLUE + "Aqua" + EMTTextHelper.LIGHT_GRAY + " cVis per second or will cause way more magical pollution",
-                "Added by EMT",
-                "Made by bartimaeusnek"
+        return new String[] {
+            "Controller Block for the Large Essentia Generator.",
+            "Produces energy from magical essentia decay.",
+            "Size(WxHxD): 7x4x7, Controller (Bottom, Center)",
+            "Top-Middle 5x1x5 layer are Muffler Hatches",
+            "Middle 5x2x5 layer are Essentia Diffusion Cells",
+            "Everything from here on goes either in the bottom or on the sides",
+            "1x Fluid Input Hatch",
+            "1x Essentia Input Hatch",
+            "1x Dynamo Hatches",
+            "1x Maintenance Hatch",
+            "The outer hull is made out of Magic Containing Casings",
+            "Produces 20x more than the singleblock generator per essentia",
+            "Causes magical and serious conventional pollution",
+            "Needs 1L Lubricant per second or will cause way more conventional pollution",
+            "Needs 10 " + EMTTextHelper.LIGHT_BLUE + "Aqua" + EMTTextHelper.LIGHT_GRAY
+                    + " cVis per second or will cause way more magical pollution",
+            "Added by EMT",
+            "Made by bartimaeusnek"
         };
     }
 
     public int getCurrentEfficiency(ItemStack itemStack) {
-        return this.mEfficiency - (this.getIdealStatus() - this.getRepairStatus()) * this.getMaxEfficiency(itemStack) / 10;
+        return this.mEfficiency
+                - (this.getIdealStatus() - this.getRepairStatus()) * this.getMaxEfficiency(itemStack) / 10;
     }
 
     @Override
-    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, byte aSide, byte aFacing, byte aColorIndex, boolean aActive, boolean aRedstone) {
+    public ITexture[] getTexture(
+            IGregTechTileEntity aBaseMetaTileEntity,
+            byte aSide,
+            byte aFacing,
+            byte aColorIndex,
+            boolean aActive,
+            boolean aRedstone) {
         if (aSide == aFacing) {
-            return new ITexture[]{Textures.BlockIcons.getCasingTextureForId(CASING_INDEX), new GT_RenderedTexture(aActive ? Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER_ACTIVE : Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER)};
+            return new ITexture[] {
+                Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
+                new GT_RenderedTexture(
+                        aActive
+                                ? Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER_ACTIVE
+                                : Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER)
+            };
         }
-        return new ITexture[]{Textures.BlockIcons.getCasingTextureForId(CASING_INDEX)};
+        return new ITexture[] {Textures.BlockIcons.getCasingTextureForId(CASING_INDEX)};
     }
 
     @Override
@@ -182,7 +195,8 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
         for (int x = -3; x <= 3; x++) {
             for (int z = -3; z <= 3; z++) {
                 for (int h = 0; h <= 3; h++) {
-                    final IGregTechTileEntity tTileEntity = aBaseMetaTileEntity.getIGregTechTileEntityOffset(xDir + x, h, zDir + z);
+                    final IGregTechTileEntity tTileEntity =
+                            aBaseMetaTileEntity.getIGregTechTileEntityOffset(xDir + x, h, zDir + z);
 
                     if (!(Math.abs(x) == 3 || Math.abs(z) == 3)) {
                         // Muffler on top.
@@ -191,63 +205,64 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
                                 return false;
                             }
                         } else if (h != 0) {
-                            //inside Special Blocks
-                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z) != EMT_CasingBlock.EMT_GT_BLOCKS[0])
-                                return false;
-                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 1))
-                                return false;
-                        } else if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX) || this.addDynamoToMachineList(tTileEntity, CASING_INDEX) || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX) || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
-                            //ground still casings
-                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z) != EMT_CasingBlock.EMT_GT_BLOCKS[0])
-                                return false;
-                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 0))
-                                return false;
+                            // inside Special Blocks
+                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z)
+                                    != EMT_CasingBlock.EMT_GT_BLOCKS[0]) return false;
+                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 1)) return false;
+                        } else if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX)
+                                || this.addDynamoToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
+                            // ground still casings
+                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z)
+                                    != EMT_CasingBlock.EMT_GT_BLOCKS[0]) return false;
+                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 0)) return false;
 
                     } else if (h != 0) {
-                        //walls
-                        if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX) || this.addDynamoToMachineList(tTileEntity, CASING_INDEX) || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX) || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
-                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z) != EMT_CasingBlock.EMT_GT_BLOCKS[0])
-                                return false;
-                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 0))
-                                return false;
+                        // walls
+                        if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX)
+                                || this.addDynamoToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
+                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z)
+                                    != EMT_CasingBlock.EMT_GT_BLOCKS[0]) return false;
+                            else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 0)) return false;
                     } else if (h == 0) {
-                        //top and bottom corners
-                        if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX) || this.addDynamoToMachineList(tTileEntity, CASING_INDEX) || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX) || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
-                            if (((xDir + x) != 0) || ((zDir + z) != 0)) //controller
-                                if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z) != EMT_CasingBlock.EMT_GT_BLOCKS[0])
-                                    return false;
+                        // top and bottom corners
+                        if (!(this.addEssetiaHatchToList(tTileEntity, CASING_INDEX)
+                                || this.addDynamoToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addMaintenanceToMachineList(tTileEntity, CASING_INDEX)
+                                || this.addInputToMachineList(tTileEntity, CASING_INDEX)))
+                            if (((xDir + x) != 0) || ((zDir + z) != 0)) // controller
+                            if (aBaseMetaTileEntity.getBlockOffset(xDir + x, h, zDir + z)
+                                        != EMT_CasingBlock.EMT_GT_BLOCKS[0]) return false;
                                 else if ((aBaseMetaTileEntity.getMetaIDOffset(xDir + x, h, zDir + z) != 0))
                                     return false;
                     }
-
                 }
             }
         }
 
-        if (this.mDynamoHatches.size() != 1)
-            return false;
+        if (this.mDynamoHatches.size() != 1) return false;
 
-        if (this.mInputHatches.size() != 1)
-            return false;
+        if (this.mInputHatches.size() != 1) return false;
 
-        if (this.mMaintenanceHatches.size() != 1)
-            return false;
+        if (this.mMaintenanceHatches.size() != 1) return false;
 
-		/*
-		//repair shit debug shit
-		this.mWrench = true;
-		this.mScrewdriver = true;
-		this.mSoftHammer = true;
-		this.mHardHammer = true;
-		this.mSolderingTool = true;
-		this.mCrowbar = true;
-		*/
+        /*
+        //repair shit debug shit
+        this.mWrench = true;
+        this.mScrewdriver = true;
+        this.mSoftHammer = true;
+        this.mHardHammer = true;
+        this.mSolderingTool = true;
+        this.mCrowbar = true;
+        */
         return true;
     }
 
     public boolean addInputToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
-        if (aTileEntity instanceof EssentiaHatch)
-            return addEssetiaHatchToList(aTileEntity, aBaseCasingIndex);
+        if (aTileEntity instanceof EssentiaHatch) return addEssetiaHatchToList(aTileEntity, aBaseCasingIndex);
         return super.addInputToMachineList(aTileEntity, aBaseCasingIndex);
     }
 
@@ -267,22 +282,21 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
         }
     }
 
-
     private void make_energy() {
         AspectList fuel = this.mEssentiaHatches.get(0).getAspects();
         double cached = 0;
 
         ++tick;
 
-        //make energy
+        // make energy
         for (final Aspect A : fuel.aspects.keySet()) {
             if (fuel.getAmount(A) > 0) {
                 double burnvalue = EMTEssentiasOutputs.outputs.get(A.getTag()).doubleValue();
                 cached += (burnvalue / 20D);
                 cached = Math.ceil(cached);
 
-                if (tick % 20 == 0) { //every second consume 1 essentia
-                    //consume essentia and remove it from the Aspect List if its 0
+                if (tick % 20 == 0) { // every second consume 1 essentia
+                    // consume essentia and remove it from the Aspect List if its 0
                     this.mEssentiaHatches.get(0).getAspects().reduce(A, 1);
                     if (this.mEssentiaHatches.get(0).getAspects().getAmount(A) == 0)
                         this.mEssentiaHatches.get(0).getAspects().remove(A);
@@ -291,26 +305,25 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
         }
 
         if (tick % 20 == 0) {
-            //consume lubricant
-            if (has_lube)
-                this.mInputHatches.get(0).getFluid().amount -= 1;
+            // consume lubricant
+            if (has_lube) this.mInputHatches.get(0).getFluid().amount -= 1;
 
-            tick = 0; //reset ticktimer
+            tick = 0; // reset ticktimer
         }
 
-        //transfer energy into mEU
+        // transfer energy into mEU
         this.mEUt = (int) Math.ceil(cached);
     }
 
     @Override
     public boolean checkRecipe(ItemStack arg0) {
-		/*
-		if (!this.getBaseMetaTileEntity().isActive())
-			if (this.mEfficiency > 100)
-				this.mEfficiency -= 8;
-			else
-				this.mEfficiency = 100;
-		*/
+        /*
+        if (!this.getBaseMetaTileEntity().isActive())
+        	if (this.mEfficiency > 100)
+        		this.mEfficiency -= 8;
+        	else
+        		this.mEfficiency = 100;
+        */
         if (this.mEssentiaHatches.get(0).fuelleft() > 0) {
             this.mMaxProgresstime = 1;
             this.mProgresstime = 0;
@@ -322,19 +335,18 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
     @Override
     public boolean onRunningTick(ItemStack aStack) {
 
-        if (tick % 20 == 0) {//every second
-            //highers eff to max by 0.16% every running tick = 3,2% every second
-            if (this.mEfficiency < this.getMaxEfficiency(null) - 320)
-                this.mEfficiency += 320;
-            else
-                this.mEfficiency = getMaxEfficiency(null);
+        if (tick % 20 == 0) { // every second
+            // highers eff to max by 0.16% every running tick = 3,2% every second
+            if (this.mEfficiency < this.getMaxEfficiency(null) - 320) this.mEfficiency += 320;
+            else this.mEfficiency = getMaxEfficiency(null);
 
-            //check for Lubricant
-            this.has_lube = this.mInputHatches.get(0).getFluid() != null && this.mInputHatches.get(0).getFluid().isFluidEqual(Materials.Lubricant.getFluid(1L)) && this.mInputHatches.get(0).getFluidAmount() > 0;
+            // check for Lubricant
+            this.has_lube = this.mInputHatches.get(0).getFluid() != null
+                    && this.mInputHatches.get(0).getFluid().isFluidEqual(Materials.Lubricant.getFluid(1L))
+                    && this.mInputHatches.get(0).getFluidAmount() > 0;
         }
 
-
-        if (tick % 2 == 0) {//every 2nd tick
+        if (tick % 2 == 0) { // every 2nd tick
 
             final XSTR R = new XSTR();
             final World WORLD = this.getBaseMetaTileEntity().getWorld();
@@ -342,17 +354,27 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
             int y = this.getBaseMetaTileEntity().getYCoord();
             int z = this.getBaseMetaTileEntity().getZCoord();
 
-            //if out of aqua, make much flux but to not stop.
+            // if out of aqua, make much flux but to not stop.
             boolean outOfcVis = VisNetHandler.drainVis(WORLD, x, y, z, Aspect.WATER, 10) <= 9;
 
-            //Random Change of a bit of Flux Gas.
+            // Random Change of a bit of Flux Gas.
             final int RANDOMHATCH = R.nextInt(this.mMufflerHatches.size());
 
-            //gets a chanche to release flux gas based on missing efficiency, min 1%
+            // gets a chanche to release flux gas based on missing efficiency, min 1%
             if ((R.nextInt(getMaxEfficiency(null)) > (this.mEfficiency > 100 ? this.mEfficiency : 100)) || outOfcVis) {
-                x = this.mMufflerHatches.get(RANDOMHATCH).getBaseMetaTileEntity().getXCoord();
-                y = this.mMufflerHatches.get(RANDOMHATCH).getBaseMetaTileEntity().getYCoord() + 1;
-                z = this.mMufflerHatches.get(RANDOMHATCH).getBaseMetaTileEntity().getZCoord();
+                x = this.mMufflerHatches
+                        .get(RANDOMHATCH)
+                        .getBaseMetaTileEntity()
+                        .getXCoord();
+                y = this.mMufflerHatches
+                                .get(RANDOMHATCH)
+                                .getBaseMetaTileEntity()
+                                .getYCoord()
+                        + 1;
+                z = this.mMufflerHatches
+                        .get(RANDOMHATCH)
+                        .getBaseMetaTileEntity()
+                        .getZCoord();
                 WORLD.setBlock(x, y, z, ConfigBlocks.blockFluxGas, R.nextInt(8), 3);
             }
         }
@@ -402,17 +424,17 @@ public class EMT_Large_Essentia_Gen extends GT_MetaTileEntity_MultiBlockBase {
         return old;
     }
 
-/*	@Override
-	public void explodeMultiblock() {
+    /*	@Override
+    public void explodeMultiblock() {
 
-		final World WORLD=this.getBaseMetaTileEntity().getWorld();
-		final int xDir = ForgeDirection.getOrientation(this.getBaseMetaTileEntity().getBackFacing()).offsetX * 3;
-		final int zDir = ForgeDirection.getOrientation(this.getBaseMetaTileEntity().getBackFacing()).offsetZ * 3;
+    	final World WORLD=this.getBaseMetaTileEntity().getWorld();
+    	final int xDir = ForgeDirection.getOrientation(this.getBaseMetaTileEntity().getBackFacing()).offsetX * 3;
+    	final int zDir = ForgeDirection.getOrientation(this.getBaseMetaTileEntity().getBackFacing()).offsetZ * 3;
 
-		for (int x = -3; x <= 3; x++)
-			for (int z = -3; z <= 3; z++)
-				for (int h = 0; h <= 3; h++)
-					WORLD.setBlock(xDir+x, this.getBaseMetaTileEntity().getYCoord()+h, zDir+z, ConfigBlocks.blockFluxGas, 8, 3);
-		super.explodeMultiblock();
-	}*/
+    	for (int x = -3; x <= 3; x++)
+    		for (int z = -3; z <= 3; z++)
+    			for (int h = 0; h <= 3; h++)
+    				WORLD.setBlock(xDir+x, this.getBaseMetaTileEntity().getYCoord()+h, zDir+z, ConfigBlocks.blockFluxGas, 8, 3);
+    	super.explodeMultiblock();
+    }*/
 }

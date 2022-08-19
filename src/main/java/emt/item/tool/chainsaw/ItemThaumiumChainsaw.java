@@ -31,7 +31,8 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(
+            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
         ElectricItem.manager.use(stack, cost, entityLiving);
         return true;
     }

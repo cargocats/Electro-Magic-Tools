@@ -3,6 +3,7 @@ package emt.entity;
 import cpw.mods.fml.common.registry.IThrowableEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -15,8 +16,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class EntityLaser extends Entity implements IThrowableEntity, IProjectile {
     public Entity shootingEntity;
@@ -43,14 +42,21 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
         this.shootingEntity = entity;
 
         this.setSize(0.5F, 0.5F);
-        this.setLocationAndAngles(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
+        this.setLocationAndAngles(
+                entity.posX,
+                entity.posY + (double) entity.getEyeHeight(),
+                entity.posZ,
+                entity.rotationYaw,
+                entity.rotationPitch);
         this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
         this.posY -= 0.10000000149011612D;
         this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
         this.yOffset = 0.0F;
 
-        this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
+        this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
+                * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
+        this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
+                * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
         this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed, 1.0F);
@@ -61,8 +67,7 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
     }
 
     @Override
-    protected void entityInit() {
-    }
+    protected void entityInit() {}
 
     @Override
     public void setThrowableHeading(double x, double y, double z, float speed, float scale) {
@@ -84,7 +89,6 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
         this.motionX = velX;
         this.motionY = velY;
         this.motionZ = velZ;
-
     }
 
     @Override
@@ -95,24 +99,29 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
 
         if (block.getMaterial() != Material.air) {
             block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+            AxisAlignedBB axisalignedbb =
+                    block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-            if (axisalignedbb != null && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
+            if (axisalignedbb != null
+                    && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
                 this.inGround = true;
             }
         }
 
         block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-        AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+        AxisAlignedBB axisalignedbb =
+                block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-        if (axisalignedbb != null && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
+        if (axisalignedbb != null
+                && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
             this.inGround = true;
         }
 
         if (this.inGround) {
             int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
             if (!this.worldObj.isRemote) {
-                this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
+                this.worldObj.createExplosion(
+                        this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
                 this.setDead();
             }
 
@@ -133,17 +142,26 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
         } else {
             ++this.ticksInAir;
             Vec3 vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            Vec3 vec3next = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 vec3next = Vec3.createVectorHelper(
+                    this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec3, vec3next, false, true, false);
             vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            vec3next = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            vec3next = Vec3.createVectorHelper(
+                    this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (movingobjectposition != null) {
-                vec3next = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+                vec3next = Vec3.createVectorHelper(
+                        movingobjectposition.hitVec.xCoord,
+                        movingobjectposition.hitVec.yCoord,
+                        movingobjectposition.hitVec.zCoord);
             }
 
             Entity entity = null;
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
+                    this,
+                    this.boundingBox
+                            .addCoord(this.motionX, this.motionY, this.motionZ)
+                            .expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int l;
             float down;
@@ -153,7 +171,8 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
 
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5)) {
                     down = 0.3F;
-                    AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand((double) down, (double) down, (double) down);
+                    AxisAlignedBB axisalignedbb1 =
+                            entity1.boundingBox.expand((double) down, (double) down, (double) down);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec3next, vec3);
 
                     if (movingobjectposition1 != null) {
@@ -171,10 +190,14 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
                 movingobjectposition = new MovingObjectPosition(entity);
             }
 
-            if (movingobjectposition != null && movingobjectposition.entityHit != null && movingobjectposition.entityHit instanceof EntityPlayer) {
+            if (movingobjectposition != null
+                    && movingobjectposition.entityHit != null
+                    && movingobjectposition.entityHit instanceof EntityPlayer) {
                 EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.entityHit;
 
-                if (entityplayer.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer && !((EntityPlayer) this.shootingEntity).canAttackPlayer(entityplayer)) {
+                if (entityplayer.capabilities.disableDamage
+                        || this.shootingEntity instanceof EntityPlayer
+                                && !((EntityPlayer) this.shootingEntity).canAttackPlayer(entityplayer)) {
                     movingobjectposition = null;
                 }
             }
@@ -184,9 +207,11 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
 
             if (movingobjectposition != null) {
                 if (movingobjectposition.entityHit != null) {
-                    f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+                    f2 = MathHelper.sqrt_double(
+                            this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
                     if (!this.worldObj.isRemote) {
-                        this.worldObj.createExplosion(this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
+                        this.worldObj.createExplosion(
+                                this, (int) this.posX, (int) this.posY, (int) this.posZ, explosionStrength, true);
                         this.setDead();
                     }
                 } else {
@@ -198,7 +223,8 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
                     this.motionX = movingobjectposition.hitVec.xCoord - this.posX;
                     this.motionY = movingobjectposition.hitVec.yCoord - this.posY;
                     this.motionZ = movingobjectposition.hitVec.zCoord - this.posZ;
-                    f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+                    f2 = MathHelper.sqrt_double(
+                            this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
                     this.posX -= this.motionX / (double) f2 * 0.05000000074505806D;
                     this.posY -= this.motionY / (double) f2 * 0.05000000074505806D;
                     this.posZ -= this.motionZ / (double) f2 * 0.05000000074505806D;
@@ -212,7 +238,9 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
             f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-            for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+            for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f2) * 180.0D / Math.PI);
+                    this.rotationPitch - this.prevRotationPitch < -180.0F;
+                    this.prevRotationPitch -= 360.0F)
                 ;
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
@@ -227,13 +255,18 @@ public class EntityLaser extends Entity implements IThrowableEntity, IProjectile
                 this.prevRotationYaw += 360.0F;
             }
 
-
             if (this.isInWater()) {
                 for (int j1 = 0; j1 < 4; ++j1) {
                     f3 = 0.25F;
-                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double) f3, this.posY - this.motionY * (double) f3, this.posZ - this.motionZ * (double) f3, this.motionX, this.motionY, this.motionZ);
+                    this.worldObj.spawnParticle(
+                            "bubble",
+                            this.posX - this.motionX * (double) f3,
+                            this.posY - this.motionY * (double) f3,
+                            this.posZ - this.motionZ * (double) f3,
+                            this.motionX,
+                            this.motionY,
+                            this.motionZ);
                 }
-
             }
             this.setPosition(this.posX, this.posY, this.posZ);
         }

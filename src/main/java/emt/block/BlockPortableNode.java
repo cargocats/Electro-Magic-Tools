@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.tile.TileEntityPortableNode;
+import java.util.Random;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +13,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import thaumcraft.common.blocks.BlockAiry;
-
-import java.util.Random;
 
 public class BlockPortableNode extends BlockAiry {
 
@@ -54,8 +53,7 @@ public class BlockPortableNode extends BlockAiry {
         return false;
     }
 
-    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
-    }
+    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {}
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -69,7 +67,8 @@ public class BlockPortableNode extends BlockAiry {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(
+            World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (!world.isRemote && player.isSneaking() && player.getHeldItem() == null) {
             world.setBlockToAir(x, y, z);
             world.removeTileEntity(x, y, z);

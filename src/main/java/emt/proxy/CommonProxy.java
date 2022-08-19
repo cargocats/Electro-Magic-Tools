@@ -34,7 +34,8 @@ public class CommonProxy implements IGuiHandler {
         switch (ID) {
             case 0:
                 if (entity != null && entity instanceof TileEntityIndustrialWandRecharge) {
-                    return new ContainerIndustrialWandRecharge(player.inventory, (TileEntityIndustrialWandRecharge) entity);
+                    return new ContainerIndustrialWandRecharge(
+                            player.inventory, (TileEntityIndustrialWandRecharge) entity);
                 }
             case 1:
                 if (entity != null && entity instanceof TileEntityEtherealMacerator) {

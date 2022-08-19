@@ -36,7 +36,8 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(
+            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
         if (!EMTConfigHandler.toolsInBore) {
             cost = 200;
         } else {

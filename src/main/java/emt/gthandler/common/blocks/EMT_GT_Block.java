@@ -7,6 +7,7 @@ import emt.gthandler.common.items.EMT_CasingBlock;
 import gregtech.api.enums.Textures;
 import gregtech.api.render.TextureFactory;
 import gregtech.common.blocks.GT_Block_Casings_Abstract;
+import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,12 +15,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import java.util.List;
-
 public class EMT_GT_Block extends GT_Block_Casings_Abstract {
 
     @SideOnly(Side.CLIENT)
     private IIcon[] texture;
+
     private final String[] textureNames;
 
     public EMT_GT_Block(String[] texture) {
@@ -59,5 +59,4 @@ public class EMT_GT_Block extends GT_Block_Casings_Abstract {
             texture[i] = par1IconRegister.registerIcon(textureNames[i]);
         }
     }
-
 }

@@ -78,7 +78,8 @@ public class EMTItems {
     public static Item nanoWing;
     public static Item quantumWing;
     public static Item quantumArmor;
-    public static ItemArmor.ArmorMaterial featherWingMaterial = EnumHelper.addArmorMaterial("FEATEHRWiNG", 1, new int[]{2, 2, 2, 2}, 6);
+    public static ItemArmor.ArmorMaterial featherWingMaterial =
+            EnumHelper.addArmorMaterial("FEATEHRWiNG", 1, new int[] {2, 2, 2, 2}, 6);
 
     public static void registerItems() {
         itemEMTItems = new ItemMaterials();
@@ -92,42 +93,54 @@ public class EMTItems {
         onering = new ItemOneRing();
         GameRegistry.registerItem(onering, "BaseBaubles");
 
-        quantumArmor = new ItemInfusedQuantumChestplate(InternalName.itemArmorQuantumChestplate, 1).setUnlocalizedName(EMT.MOD_ID + ".quantum");
+        quantumArmor = new ItemInfusedQuantumChestplate(InternalName.itemArmorQuantumChestplate, 1)
+                .setUnlocalizedName(EMT.MOD_ID + ".quantum");
 
-        electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(EMT.MOD_ID + ".goggles.electric");
+        electricGoggles = new ItemElectricGoggles(ItemArmor.ArmorMaterial.IRON, 3, 0)
+                .setUnlocalizedName(EMT.MOD_ID + ".goggles.electric");
         GameRegistry.registerItem(electricGoggles, "ElectricGogglesRevealing");
 
-        nanoThaumicHelmet = new ItemNanoGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(EMT.MOD_ID + ".goggles.nano");
+        nanoThaumicHelmet = new ItemNanoGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0)
+                .setUnlocalizedName(EMT.MOD_ID + ".goggles.nano");
         GameRegistry.registerItem(nanoThaumicHelmet, "NanosuitGogglesRevealing");
 
-        quantumThaumicHelmet = new ItemQuantumGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(EMT.MOD_ID + ".goggles.quantum");
+        quantumThaumicHelmet = new ItemQuantumGoggles(ItemArmor.ArmorMaterial.DIAMOND, 3, 0)
+                .setUnlocalizedName(EMT.MOD_ID + ".goggles.quantum");
         GameRegistry.registerItem(quantumThaumicHelmet, "QuantumGogglesRevealing");
 
-        solarHelmetRevealing = new ItemSolarHelmetRevealing(ItemArmor.ArmorMaterial.DIAMOND, 3, 0).setUnlocalizedName(EMT.MOD_ID + ".goggles.solar");
+        solarHelmetRevealing = new ItemSolarHelmetRevealing(ItemArmor.ArmorMaterial.DIAMOND, 3, 0)
+                .setUnlocalizedName(EMT.MOD_ID + ".goggles.solar");
         GameRegistry.registerItem(solarHelmetRevealing, "SolarHelmetRevealing");
 
-        electricBootsTraveller = new ItemElectricBootsTraveller(ItemArmor.ArmorMaterial.IRON, 3, 3).setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.electric");
+        electricBootsTraveller = new ItemElectricBootsTraveller(ItemArmor.ArmorMaterial.IRON, 3, 3)
+                .setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.electric");
         GameRegistry.registerItem(electricBootsTraveller, "ElectricBootsTraveller");
 
-        nanoBootsTraveller = new ItemNanoBootsTraveller(ItemArmor.ArmorMaterial.DIAMOND, 3, 3).setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.nano");
+        nanoBootsTraveller = new ItemNanoBootsTraveller(ItemArmor.ArmorMaterial.DIAMOND, 3, 3)
+                .setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.nano");
         GameRegistry.registerItem(nanoBootsTraveller, "NanoBootsTraveller");
 
-        quantumBootsTraveller = new ItemQuantumBootsTraveller(ItemArmor.ArmorMaterial.DIAMOND, 3, 3).setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.quantum");
+        quantumBootsTraveller = new ItemQuantumBootsTraveller(ItemArmor.ArmorMaterial.DIAMOND, 3, 3)
+                .setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.quantum");
         GameRegistry.registerItem(quantumBootsTraveller, "QuantumBootsTraveller");
 
-        electricScribingTools = new ItemElectricScribingTools().setUnlocalizedName(EMT.MOD_ID + ".scribingtools.electric");
+        electricScribingTools =
+                new ItemElectricScribingTools().setUnlocalizedName(EMT.MOD_ID + ".scribingtools.electric");
         GameRegistry.registerItem(electricScribingTools, "ElectricScribingTools");
 
         featherWing = new ItemFeatherWing(featherWingMaterial, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.feather");
         GameRegistry.registerItem(featherWing, "FeatherWing");
 
-        thaumiumWing = new ItemThaumiumReinforcedWing(ThaumcraftApi.armorMatThaumium, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.thaumium");
+        thaumiumWing = new ItemThaumiumReinforcedWing(ThaumcraftApi.armorMatThaumium, 7, 1)
+                .setUnlocalizedName(EMT.MOD_ID + ".wing.thaumium");
         GameRegistry.registerItem(thaumiumWing, "ThaumiumWing");
 
-        nanoWing = new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.nano");
+        nanoWing =
+                new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.nano");
         GameRegistry.registerItem(nanoWing, "NanosuitWing");
 
-        quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.quantum");
+        quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1)
+                .setUnlocalizedName(EMT.MOD_ID + ".wing.quantum");
         GameRegistry.registerItem(quantumWing, "QuantumWing");
 
         thorHammer = new ItemThorHammer().setUnlocalizedName(EMT.MOD_ID + ".hammer");

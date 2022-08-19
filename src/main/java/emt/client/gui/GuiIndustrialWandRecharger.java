@@ -12,7 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiIndustrialWandRecharger extends GuiContainer {
 
-    public static final ResourceLocation texture = new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/wandcharger.png");
+    public static final ResourceLocation texture =
+            new ResourceLocation(EMT.TEXTURE_PATH, "textures/guis/wandcharger.png");
 
     public GuiIndustrialWandRecharger(InventoryPlayer inventory, TileEntityIndustrialWandRecharge te) {
         super(new ContainerIndustrialWandRecharge(inventory, te));

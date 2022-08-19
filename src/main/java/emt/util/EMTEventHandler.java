@@ -28,8 +28,7 @@ public class EMTEventHandler {
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent e) {
-        if (!(e.entityLiving instanceof EntityPlayer) || e.source != DamageSource.fall)
-            return;
+        if (!(e.entityLiving instanceof EntityPlayer) || e.source != DamageSource.fall) return;
 
         ItemStack s = ((EntityPlayer) e.entityLiving).inventory.armorInventory[2];
 
@@ -50,8 +49,7 @@ public class EMTEventHandler {
         }
 
         if (e.player.motionY > 0) {
-            if (e.player.fallDistance > 0)
-                e.player.fallDistance -= e.player.motionY;
+            if (e.player.fallDistance > 0) e.player.fallDistance -= e.player.motionY;
         }
     }
 
@@ -64,7 +62,8 @@ public class EMTEventHandler {
             }
         }
         if (event.entityLiving instanceof EntityTaintChicken) {
-            event.entityLiving.entityDropItem(new ItemStack(EMTItems.itemEMTItems, event.entityLiving.worldObj.rand.nextInt(3), 13), 1);
+            event.entityLiving.entityDropItem(
+                    new ItemStack(EMTItems.itemEMTItems, event.entityLiving.worldObj.rand.nextInt(3), 13), 1);
         }
     }
 
@@ -88,7 +87,6 @@ public class EMTEventHandler {
                     ((EntityLiving) e.entityLiving).setAttackTarget(null);
                 }
             }
-
         }
     }
 
@@ -117,5 +115,4 @@ public class EMTEventHandler {
 
         e.world.setBlock(e.x, e.y, e.z, EMTBlocks.electricCloud);
     }
-
 }

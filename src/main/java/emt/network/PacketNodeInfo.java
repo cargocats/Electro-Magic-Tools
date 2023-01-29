@@ -1,5 +1,9 @@
 package emt.network;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.tileentity.TileEntity;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -8,9 +12,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import emt.tile.GT_MetaTileEntity_ResearchCompleter;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.tileentity.TileEntity;
 
 public class PacketNodeInfo implements IMessage, IMessageHandler<PacketNodeInfo, IMessage> {
 
@@ -57,8 +58,8 @@ public class PacketNodeInfo implements IMessage, IMessageHandler<PacketNodeInfo,
                 if (tileEntity instanceof IGregTechTileEntity) {
                     IGregTechTileEntity gtTile = (IGregTechTileEntity) tileEntity;
                     if (gtTile.getMetaTileEntity() instanceof GT_MetaTileEntity_ResearchCompleter) {
-                        GT_MetaTileEntity_ResearchCompleter researchCompleter =
-                                (GT_MetaTileEntity_ResearchCompleter) gtTile.getMetaTileEntity();
+                        GT_MetaTileEntity_ResearchCompleter researchCompleter = (GT_MetaTileEntity_ResearchCompleter) gtTile
+                                .getMetaTileEntity();
                         researchCompleter.setNodeValues(message.nodeDistance, message.nodeColor);
                     }
                 }

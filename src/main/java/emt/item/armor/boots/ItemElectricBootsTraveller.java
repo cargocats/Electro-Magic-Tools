@@ -1,16 +1,7 @@
 package emt.item.armor.boots;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.init.EMTItems;
-import emt.util.EMTConfigHandler;
-import emt.util.EMTTextHelper;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
-import ic2.api.item.IMetalArmor;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -26,11 +17,22 @@ import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.armor.Hover;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.init.EMTItems;
+import emt.util.EMTConfigHandler;
+import emt.util.EMTTextHelper;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.IMetalArmor;
 
 public class ItemElectricBootsTraveller extends ItemArmor
         implements IRunicArmor, IElectricItem, IVisDiscountGear, IMetalArmor, ISpecialArmor {
@@ -71,15 +73,15 @@ public class ItemElectricBootsTraveller extends ItemArmor
     }
 
     @Override
-    public ArmorProperties getProperties(
-            EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage,
+            int slot) {
         if (source.isUnblockable()) {
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 0);
         } else {
             double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
             int energyPerDamage = getEnergyPerDamage();
-            double damageLimit =
-                    energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            double damageLimit = energyPerDamage <= 0 ? 0
+                    : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, absorptionRatio, (int) damageLimit);
         }
     }
@@ -138,11 +140,13 @@ public class ItemElectricBootsTraveller extends ItemArmor
             } else if (Hover.getHover(player.getEntityId())) {
                 // Base ItemBootsTraveller jumpBonus equals to jumpBonus of Electric Boots,
                 // so any other boots factor can be calculated via proportion method
-                player.jumpMovementFactor =
-                        0.03F / ((ItemElectricBootsTraveller) EMTItems.electricBootsTraveller).jumpBonus * jumpBonus;
+                player.jumpMovementFactor = 0.03F
+                        / ((ItemElectricBootsTraveller) EMTItems.electricBootsTraveller).jumpBonus
+                        * jumpBonus;
             } else {
-                player.jumpMovementFactor =
-                        0.05F / ((ItemElectricBootsTraveller) EMTItems.electricBootsTraveller).jumpBonus * jumpBonus;
+                player.jumpMovementFactor = 0.05F
+                        / ((ItemElectricBootsTraveller) EMTItems.electricBootsTraveller).jumpBonus
+                        * jumpBonus;
             }
         }
     }
@@ -151,8 +155,7 @@ public class ItemElectricBootsTraveller extends ItemArmor
     public void onPlayerJump(LivingEvent.LivingJumpEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
-            boolean hasArmor = player.getCurrentArmor(0) != null
-                    && player.getCurrentArmor(0).getItem() == this;
+            boolean hasArmor = player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem() == this;
 
             if (hasArmor) player.motionY += jumpBonus;
         }
@@ -174,8 +177,8 @@ public class ItemElectricBootsTraveller extends ItemArmor
                 EntityPlayer entity = (EntityPlayer) event.entity;
                 if ((entity.inventory.armorInventory[0] != null)
                         && (entity.inventory.armorInventory[0].getItem() instanceof ItemElectricBootsTraveller)) {
-                    ItemElectricBootsTraveller tUsedBoots =
-                            (ItemElectricBootsTraveller) entity.inventory.armorInventory[0].getItem();
+                    ItemElectricBootsTraveller tUsedBoots = (ItemElectricBootsTraveller) entity.inventory.armorInventory[0]
+                            .getItem();
                     ItemStack stack = entity.inventory.armorInventory[0];
 
                     // Check if we dropped the minimum amount; To cover the jump-boost bonus without penalty
@@ -183,10 +186,8 @@ public class ItemElectricBootsTraveller extends ItemArmor
                         event.setCanceled(true);
                     } else {
                         float tEnergyDemand = tUsedBoots.energyPerDamage
-                                * (((event.distance > tUsedBoots.getMaxHealthyDropDist())
-                                                ? event.distance * 3
-                                                : event.distance)
-                                        - 4.0F);
+                                * (((event.distance > tUsedBoots.getMaxHealthyDropDist()) ? event.distance * 3
+                                        : event.distance) - 4.0F);
                         if (tEnergyDemand <= ElectricItem.manager.getCharge(stack)) {
                             // EMT.LOGGER.info( String.format("FD: %f DMG: %f EPD: %d HDD: %f", event.distance,
                             // tEnergyDemand, tUsedBoots.energyPerDamage, tUsedBoots.getMaxHealthyDropDist() ));

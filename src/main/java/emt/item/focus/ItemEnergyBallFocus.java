@@ -1,12 +1,13 @@
 package emt.item.focus;
 
-import emt.entity.EntityEnergyBall;
-import ic2.api.item.ElectricItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import emt.entity.EntityEnergyBall;
+import ic2.api.item.ElectricItem;
 
 public class ItemEnergyBallFocus extends ItemBaseFocus {
 
@@ -42,12 +43,10 @@ public class ItemEnergyBallFocus extends ItemBaseFocus {
         }
 
         float rotX = (-MathHelper.sin(player.rotationYaw / 180.0F * (float) Math.PI)
-                        * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI))
-                * 100;
+                * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
         float rotY = (-MathHelper.sin(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
         float rotZ = (MathHelper.cos(player.rotationYaw / 180.0F * (float) Math.PI)
-                        * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI))
-                * 100;
+                * MathHelper.cos(player.rotationPitch / 180.0F * (float) Math.PI)) * 100;
         world.spawnEntityInWorld(new EntityEnergyBall(world, player, rotX, rotY, rotZ));
 
         return stack;

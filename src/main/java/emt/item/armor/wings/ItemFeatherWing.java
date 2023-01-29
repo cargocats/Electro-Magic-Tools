@@ -1,13 +1,5 @@
 package emt.item.armor.wings;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.client.model.ModelWings;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.core.IC2;
-import ic2.core.util.StackUtil;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -17,9 +9,19 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
 import thaumcraft.api.IRunicArmor;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.client.model.ModelWings;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.core.IC2;
+import ic2.core.util.StackUtil;
 
 public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
+
     public int visDiscount = 0;
 
     public ItemFeatherWing(ArmorMaterial material, int par3, int par4) {
@@ -66,8 +68,8 @@ public class ItemFeatherWing extends ItemArmor implements IRunicArmor {
         useWings(player, stack, world, 0.11f, 0.9f, 0.9f, 0);
     }
 
-    public void useWings(
-            EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1, int amount) {
+    public void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1,
+            int amount) {
         NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
 
         boolean isJmuping = nbtData.getBoolean("isJumping");

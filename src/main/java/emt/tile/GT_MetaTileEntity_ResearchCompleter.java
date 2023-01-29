@@ -4,8 +4,27 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GT_StructureUtility.ofHatchAdder;
 
+import java.util.ArrayList;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ResearchItem;
+import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
+import thaumcraft.common.lib.research.ResearchManager;
+import thaumcraft.common.lib.research.ResearchNoteData;
+import thaumcraft.common.tiles.TileNode;
+
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import emt.EMT;
 import emt.network.PacketNodeInfo;
@@ -18,24 +37,10 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_EnhancedMul
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gregtech.api.util.GT_Utility;
-import java.util.ArrayList;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ResearchItem;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.config.ConfigItems;
-import thaumcraft.common.lib.research.ResearchManager;
-import thaumcraft.common.lib.research.ResearchNoteData;
-import thaumcraft.common.tiles.TileNode;
 
 public class GT_MetaTileEntity_ResearchCompleter
         extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_ResearchCompleter> {
+
     private static final int CASING_INDEX = 184;
     private static final int MAX_LENGTH = 13;
     private static final int RECIPE_LENGTH = 1200;
@@ -58,52 +63,38 @@ public class GT_MetaTileEntity_ResearchCompleter
     private static final String STRUCTURE_PIECE_LATER = "later";
     private static final String STRUCTURE_PIECE_LAST = "last";
     private static final String STRUCTURE_PIECE_LATER_HINT = "laterHint";
-    private static final IStructureDefinition<GT_MetaTileEntity_ResearchCompleter> STRUCTURE_DEFINITION =
-            StructureDefinition.<GT_MetaTileEntity_ResearchCompleter>builder()
-                    .addShape(STRUCTURE_PIECE_FIRST, transpose(new String[][] {
-                        {"ccc"}, {"g~g"}, {"ccc"},
-                    }))
-                    .addShape(STRUCTURE_PIECE_LATER, transpose(new String[][] {
-                        {"c c"}, {"gxg"}, {"c c"},
-                    }))
-                    .addShape(STRUCTURE_PIECE_LAST, transpose(new String[][] {
-                        {"c"}, {"g"}, {"c"},
-                    }))
-                    .addShape(STRUCTURE_PIECE_LATER_HINT, transpose(new String[][] {
-                        {"c c"}, {"g g"}, {"c c"},
-                    }))
-                    .addElement(
-                            'c',
-                            ofChain( // Magical machine casing or hatch
-                                    ofHatchAdder(
-                                            GT_MetaTileEntity_ResearchCompleter::addEnergyInputToMachineList,
-                                            CASING_INDEX,
-                                            1),
-                                    ofHatchAdder(
-                                            GT_MetaTileEntity_ResearchCompleter::addInputToMachineList,
-                                            CASING_INDEX,
-                                            1),
-                                    ofHatchAdder(
-                                            GT_MetaTileEntity_ResearchCompleter::addOutputToMachineList,
-                                            CASING_INDEX,
-                                            1),
-                                    ofHatchAdder(
-                                            GT_MetaTileEntity_ResearchCompleter::addMaintenanceToMachineList,
-                                            CASING_INDEX,
-                                            1),
-                                    onElementPass(
-                                            GT_MetaTileEntity_ResearchCompleter::onCasingFound,
-                                            ofBlock(GregTech_API.sBlockCasings8, 8))))
-                    .addElement(
-                            'x',
-                            ofChain( // Check for the end but otherwise treat as a skipped spot
-                                    onElementPass(
-                                            GT_MetaTileEntity_ResearchCompleter::onEndFound,
-                                            ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
-                                    isAir(), // Forgive me
-                                    notAir()))
-                    .addElement('g', ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)) // Warded glass
-                    .build();
+    private static final IStructureDefinition<GT_MetaTileEntity_ResearchCompleter> STRUCTURE_DEFINITION = StructureDefinition
+            .<GT_MetaTileEntity_ResearchCompleter>builder()
+            .addShape(STRUCTURE_PIECE_FIRST, transpose(new String[][] { { "ccc" }, { "g~g" }, { "ccc" }, }))
+            .addShape(STRUCTURE_PIECE_LATER, transpose(new String[][] { { "c c" }, { "gxg" }, { "c c" }, }))
+            .addShape(STRUCTURE_PIECE_LAST, transpose(new String[][] { { "c" }, { "g" }, { "c" }, }))
+            .addShape(STRUCTURE_PIECE_LATER_HINT, transpose(new String[][] { { "c c" }, { "g g" }, { "c c" }, }))
+            .addElement(
+                    'c',
+                    ofChain( // Magical machine casing or hatch
+                            ofHatchAdder(
+                                    GT_MetaTileEntity_ResearchCompleter::addEnergyInputToMachineList,
+                                    CASING_INDEX,
+                                    1),
+                            ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addInputToMachineList, CASING_INDEX, 1),
+                            ofHatchAdder(GT_MetaTileEntity_ResearchCompleter::addOutputToMachineList, CASING_INDEX, 1),
+                            ofHatchAdder(
+                                    GT_MetaTileEntity_ResearchCompleter::addMaintenanceToMachineList,
+                                    CASING_INDEX,
+                                    1),
+                            onElementPass(
+                                    GT_MetaTileEntity_ResearchCompleter::onCasingFound,
+                                    ofBlock(GregTech_API.sBlockCasings8, 8))))
+            .addElement(
+                    'x',
+                    ofChain( // Check for the end but otherwise treat as a skipped spot
+                            onElementPass(
+                                    GT_MetaTileEntity_ResearchCompleter::onEndFound,
+                                    ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)),
+                            isAir(), // Forgive me
+                            notAir()))
+            .addElement('g', ofBlock(ConfigBlocks.blockCosmeticOpaque, 2)) // Warded glass
+            .build();
 
     public GT_MetaTileEntity_ResearchCompleter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -267,7 +258,7 @@ public class GT_MetaTileEntity_ResearchCompleter
                     }
 
                     // Create a completed version of the note to output
-                    this.mOutputItems = new ItemStack[] {GT_Utility.copyAmount(1L, stack)};
+                    this.mOutputItems = new ItemStack[] { GT_Utility.copyAmount(1L, stack) };
                     this.mOutputItems[0].stackTagCompound.setBoolean("complete", true);
                     this.mOutputItems[0].setItemDamage(64);
                     stack.stackSize -= 1;
@@ -301,8 +292,7 @@ public class GT_MetaTileEntity_ResearchCompleter
             if (!checkPiece(STRUCTURE_PIECE_LATER, 1, 1, -(mLength - 1))) return false;
         }
 
-        return endFound
-                && mLength >= 3
+        return endFound && mLength >= 3
                 && checkPiece(STRUCTURE_PIECE_LAST, 0, 1, -(mLength - 1))
                 && mCasing >= mLength * 3;
     }
@@ -341,41 +331,19 @@ public class GT_MetaTileEntity_ResearchCompleter
     }
 
     @Override
-    public ITexture[] getTexture(
-            IGregTechTileEntity aBaseMetaTileEntity,
-            byte aSide,
-            byte aFacing,
-            byte aColorIndex,
-            boolean aActive,
-            boolean aRedstone) {
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, byte aSide, byte aFacing, byte aColorIndex,
+            boolean aActive, boolean aRedstone) {
         if (aSide == aFacing) {
-            if (aActive)
-                return new ITexture[] {
-                    Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
-                    TextureFactory.builder()
-                            .addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE)
-                            .extFacing()
-                            .build(),
-                    TextureFactory.builder()
-                            .addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE_GLOW)
-                            .extFacing()
-                            .glow()
-                            .build()
-                };
-            return new ITexture[] {
-                Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
-                TextureFactory.builder()
-                        .addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER)
-                        .extFacing()
-                        .build(),
-                TextureFactory.builder()
-                        .addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_GLOW)
-                        .extFacing()
-                        .glow()
-                        .build()
-            };
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE).extFacing().build(),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_ACTIVE_GLOW).extFacing().glow()
+                            .build() };
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER).extFacing().build(),
+                    TextureFactory.builder().addIcon(OVERLAY_FRONT_RESEARCH_COMPLETER_GLOW).extFacing().glow()
+                            .build() };
         }
-        return new ITexture[] {Textures.BlockIcons.getCasingTextureForId(CASING_INDEX)};
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX) };
     }
 
     @Override
@@ -386,19 +354,13 @@ public class GT_MetaTileEntity_ResearchCompleter
     @Override
     protected GT_Multiblock_Tooltip_Builder createTooltip() {
         GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
-        tt.addMachineType("Research Completer")
-                .addInfo("Controller block for the Research Completer")
+        tt.addMachineType("Research Completer").addInfo("Controller block for the Research Completer")
                 .addInfo("Completes Thaumcraft research notes using EU and Thaumcraft nodes")
-                .addInfo("Place nodes in the center row")
-                .addSeparator()
-                .beginVariableStructureBlock(3, 3, 3, 3, 3, MAX_LENGTH, true)
-                .addController("Front center")
+                .addInfo("Place nodes in the center row").addSeparator()
+                .beginVariableStructureBlock(3, 3, 3, 3, 3, MAX_LENGTH, true).addController("Front center")
                 .addOtherStructurePart("Magical machine casing", "Top and bottom layers outside. 3 x L minimum")
-                .addOtherStructurePart("Warded glass", "Middle layer outside")
-                .addEnergyHatch("Any casing")
-                .addMaintenanceHatch("Any casing")
-                .addInputBus("Any casing")
-                .addOutputBus("Any casing")
+                .addOtherStructurePart("Warded glass", "Middle layer outside").addEnergyHatch("Any casing")
+                .addMaintenanceHatch("Any casing").addInputBus("Any casing").addOutputBus("Any casing")
                 .toolTipFinisher("Electro-Magic Tools");
         return tt;
     }

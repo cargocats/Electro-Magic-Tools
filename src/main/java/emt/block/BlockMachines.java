@@ -1,15 +1,8 @@
 package emt.block;
 
-import com.gtnewhorizons.modularui.api.UIInfos;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.gthandler.common.implementations.automation.EssentiaFiller;
-import emt.tile.TileEntityEtherealMacerator;
-import emt.tile.TileEntityIndustrialWandRecharge;
-import ic2.api.item.IC2Items;
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,6 +15,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.gtnewhorizons.modularui.api.UIInfos;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.gthandler.common.implementations.automation.EssentiaFiller;
+import emt.tile.TileEntityEtherealMacerator;
+import emt.tile.TileEntityIndustrialWandRecharge;
+import ic2.api.item.IC2Items;
 
 public class BlockMachines extends BlockBaseContainer {
 
@@ -77,8 +80,8 @@ public class BlockMachines extends BlockBaseContainer {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
+            float par8, float par9) {
         if (!world.isRemote) {
             TileEntity te = world.getTileEntity(x, y, z);
             if (te instanceof TileEntityIndustrialWandRecharge || te instanceof TileEntityEtherealMacerator) {
@@ -125,8 +128,7 @@ public class BlockMachines extends BlockBaseContainer {
                         new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
 
                 if (item.hasTagCompound()) {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound)
-                            item.getTagCompound().copy());
+                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
                 }
 
                 float factor = 0.05F;

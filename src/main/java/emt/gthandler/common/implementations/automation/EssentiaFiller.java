@@ -1,19 +1,21 @@
 package emt.gthandler.common.implementations.automation;
 
-import emt.gthandler.common.implementations.EssentiaHatch;
-import emt.tile.TileEntityEMT;
-import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import java.util.ArrayList;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.aspects.IEssentiaTransport;
+import emt.gthandler.common.implementations.EssentiaHatch;
+import emt.tile.TileEntityEMT;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 
 public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, IEssentiaTransport {
 
@@ -90,14 +92,13 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
 
     private boolean checkTE(final TileEntity T) {
         if (T == null) return false;
-        if (this.current.visSize() > 0)
-            if (T instanceof IGregTechTileEntity) {
-                IMetaTileEntity M = ((IGregTechTileEntity) T).getMetaTileEntity();
-                if (M instanceof EssentiaHatch) {
-                    if (((EssentiaHatch) M).addAspectList(current)) this.current = new AspectList();
-                    return true;
-                }
+        if (this.current.visSize() > 0) if (T instanceof IGregTechTileEntity) {
+            IMetaTileEntity M = ((IGregTechTileEntity) T).getMetaTileEntity();
+            if (M instanceof EssentiaHatch) {
+                if (((EssentiaHatch) M).addAspectList(current)) this.current = new AspectList();
+                return true;
             }
+        }
 
         return false;
     }
@@ -106,7 +107,11 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(
-                    this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
+                    this.worldObj,
+                    this.xCoord,
+                    this.yCoord,
+                    this.zCoord,
+                    ForgeDirection.VALID_DIRECTIONS[i]);
             if (te[i] != null) {
                 IEssentiaTransport pipe = (IEssentiaTransport) te[i];
                 if (!pipe.canOutputTo(ForgeDirection.VALID_DIRECTIONS[i])) {
@@ -165,10 +170,9 @@ public class EssentiaFiller extends TileEntityEMT implements IAspectContainer, I
     @Override
     public boolean doesContainerContain(AspectList aspectList) {
         ArrayList<Boolean> ret = new ArrayList<Boolean>();
-        for (Aspect a : aspectList.aspects.keySet())
-            if (current.aspects.containsKey(a)) {
-                ret.add(true);
-            } else ret.add(false);
+        for (Aspect a : aspectList.aspects.keySet()) if (current.aspects.containsKey(a)) {
+            ret.add(true);
+        } else ret.add(false);
         return !ret.contains(false);
     }
 

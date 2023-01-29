@@ -1,11 +1,7 @@
 package emt.item.tool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,10 +12,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.blocks.BlockCustomPlant;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.lib.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
 
 public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
 
@@ -64,17 +66,8 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int par7,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7,
+            float par8, float par9, float par10) {
         if (stack.hasTagCompound()) {
             stack.stackTagCompound.setBoolean("Unbreakable", true);
         }
@@ -111,7 +104,12 @@ public class ItemElectricHoeGrowth extends ItemHoe implements IElectricItem {
             }
             if (did) {
                 world.playSoundEffect(
-                        x + 0.5D, y + 0.5D, z + 0.5D, "thaumcraft:wand", 0.75F, 0.9F + world.rand.nextFloat() * 0.2F);
+                        x + 0.5D,
+                        y + 0.5D,
+                        z + 0.5D,
+                        "thaumcraft:wand",
+                        0.75F,
+                        0.9F + world.rand.nextFloat() * 0.2F);
             }
         }
         if (stack.hasTagCompound()) {

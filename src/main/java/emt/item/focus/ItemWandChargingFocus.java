@@ -1,24 +1,21 @@
 package emt.item.focus;
 
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
 import java.util.Map.Entry;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
 
 public class ItemWandChargingFocus extends ItemBaseFocus {
 
-    AspectList visCost = new AspectList()
-            .add(Aspect.FIRE, 10)
-            .add(Aspect.WATER, 10)
-            .add(Aspect.AIR, 10)
-            .add(Aspect.EARTH, 10)
-            .add(Aspect.ORDER, 10)
-            .add(Aspect.ENTROPY, 10);
+    AspectList visCost = new AspectList().add(Aspect.FIRE, 10).add(Aspect.WATER, 10).add(Aspect.AIR, 10)
+            .add(Aspect.EARTH, 10).add(Aspect.ORDER, 10).add(Aspect.ENTROPY, 10);
 
     public ItemWandChargingFocus() {
         super("chargeWand");
@@ -42,14 +39,14 @@ public class ItemWandChargingFocus extends ItemBaseFocus {
     @Override
     public AspectList getVisCost(ItemStack stack) {
         AspectList actualCost = new AspectList();
-        for (Entry<Aspect, Integer> e : visCost.aspects.entrySet())
-            actualCost.add(
-                    e.getKey(), (int) (e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
+        for (Entry<Aspect, Integer> e : visCost.aspects.entrySet()) actualCost.add(
+                e.getKey(),
+                (int) (e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
         return visCost;
     }
 
     public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) {
-        return new FocusUpgradeType[] {FocusUpgradeType.potency, FocusUpgradeType.frugal};
+        return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
     }
 
     public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {

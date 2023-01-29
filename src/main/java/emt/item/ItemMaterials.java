@@ -1,9 +1,7 @@
 package emt.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -19,8 +17,12 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+
 import thaumcraft.common.config.Config;
 import thaumcraft.common.lib.utils.InventoryUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
 
 public class ItemMaterials extends Item {
 
@@ -157,8 +159,8 @@ public class ItemMaterials extends Item {
             float f1 = player.prevRotationPitch + ((player.rotationPitch - player.prevRotationPitch) * f);
             float f2 = player.prevRotationYaw + ((player.rotationYaw - player.prevRotationYaw) * f);
             double playerX = player.prevPosX + ((player.posX - player.prevPosX) * f);
-            double playerY =
-                    (player.prevPosY + ((player.posY - player.prevPosY) * f) + 1.6200000000000001D) - player.yOffset;
+            double playerY = (player.prevPosY + ((player.posY - player.prevPosY) * f) + 1.6200000000000001D)
+                    - player.yOffset;
             double playerZ = player.prevPosZ + ((player.posZ - player.prevPosZ) * f);
             Vec3 playerLoc = Vec3.createVectorHelper(playerX, playerY, playerZ);
             float f3 = MathHelper.cos((-f2 * 0.01745329F) - 3.141593F);
@@ -216,8 +218,7 @@ public class ItemMaterials extends Item {
 
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
         super.onUpdate(stack, world, entity, par4, par5);
-        if ((!entity.worldObj.isRemote)
-                && ((stack.getItemDamage() == 13))
+        if ((!entity.worldObj.isRemote) && ((stack.getItemDamage() == 13))
                 && ((entity instanceof EntityLivingBase))
                 && (!((EntityLivingBase) entity).isEntityUndead())
                 && (!((EntityLivingBase) entity).isPotionActive(Config.potionTaintPoisonID))

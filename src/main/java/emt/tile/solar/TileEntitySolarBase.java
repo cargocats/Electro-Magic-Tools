@@ -1,26 +1,5 @@
 package emt.tile.solar;
 
-import com.gtnewhorizons.modularui.api.ModularUITextures;
-import com.gtnewhorizons.modularui.api.drawable.Text;
-import com.gtnewhorizons.modularui.api.screen.ITileWithModularUI;
-import com.gtnewhorizons.modularui.api.screen.ModularWindow;
-import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
-import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
-import com.gtnewhorizons.modularui.common.widget.ProgressBar;
-import com.gtnewhorizons.modularui.common.widget.TextWidget;
-import cpw.mods.fml.common.FMLCommonHandler;
-import emt.client.gui.EMT_UITextures;
-import emt.init.EMTBlocks;
-import emt.tile.DefinitelyNotAIC2Source;
-import emt.tile.TileEntityEMT;
-import emt.util.EMTTextHelper;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.interfaces.tileentity.IBasicEnergyContainer;
-import gregtech.api.interfaces.tileentity.IEnergyConnected;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
-import gregtech.api.net.GT_Packet_Block_Event;
-import ic2.api.tile.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,16 +13,35 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.visnet.VisNetHandler;
 
-public class TileEntitySolarBase extends TileEntityEMT
-        implements IInventory,
-                IWrenchable,
-                IHasWorldObjectAndCoords,
-                IEnergyConnected,
-                IBasicEnergyContainer,
-                ITileWithModularUI {
+import com.gtnewhorizons.modularui.api.ModularUITextures;
+import com.gtnewhorizons.modularui.api.drawable.Text;
+import com.gtnewhorizons.modularui.api.screen.ITileWithModularUI;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.gtnewhorizons.modularui.common.widget.ProgressBar;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import emt.client.gui.EMT_UITextures;
+import emt.init.EMTBlocks;
+import emt.tile.DefinitelyNotAIC2Source;
+import emt.tile.TileEntityEMT;
+import emt.util.EMTTextHelper;
+import gregtech.api.enums.GT_Values;
+import gregtech.api.interfaces.tileentity.IBasicEnergyContainer;
+import gregtech.api.interfaces.tileentity.IEnergyConnected;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
+import gregtech.api.net.GT_Packet_Block_Event;
+import ic2.api.tile.IWrenchable;
+
+public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IWrenchable, IHasWorldObjectAndCoords,
+        IEnergyConnected, IBasicEnergyContainer, ITileWithModularUI {
 
     private static final byte NOTHING = 0;
     private static final byte ORDO = 1;
@@ -111,8 +109,7 @@ public class TileEntitySolarBase extends TileEntityEMT
 
     @Override
     public void updateEntity() {
-        this.side = !this.worldObj.isRemote
-                ? FMLCommonHandler.instance().getEffectiveSide().isServer()
+        this.side = !this.worldObj.isRemote ? FMLCommonHandler.instance().getEffectiveSide().isServer()
                 : FMLCommonHandler.instance().getSide().isServer();
         if (!side) return;
         this.dead = false;
@@ -164,9 +161,9 @@ public class TileEntitySolarBase extends TileEntityEMT
             case AQUA: {
                 if (worldObj.isThundering()) return 6F;
                 else if (worldObj.isRaining()) return 3F;
-                else if (!worldObj.isThundering()
-                        && !worldObj.isRaining()
-                        && worldObj.getBlock(xCoord, yCoord + 1, zCoord).equals(Blocks.water)) return 2F;
+                else if (!worldObj.isThundering() && !worldObj.isRaining()
+                        && worldObj.getBlock(xCoord, yCoord + 1, zCoord).equals(Blocks.water))
+                    return 2F;
                 else return 1F;
             }
             case IGNIS: {
@@ -437,25 +434,25 @@ public class TileEntitySolarBase extends TileEntityEMT
     @Override
     public long getOutputAmperage() {
         return calculateMaxVoltAmp()[1];
-        //        long ret;
-        //        if (this.energySource.getSourceTier() <= 4) {
-        //            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
-        //                ret = 1L;
-        //            }
-        //            if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
-        //                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
-        //            } else
-        //                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
-        //        } else {
-        //            if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
-        //                ret = 1L;
-        //            }
-        //            if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
-        //                ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
-        //            } else
-        //                ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
-        //        }
-        //        return ret;
+        // long ret;
+        // if (this.energySource.getSourceTier() <= 4) {
+        // if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 2]) {
+        // ret = 1L;
+        // }
+        // if (this.generating % GT_Values.V[this.energySource.getSourceTier() - 2] == 0.0D) {
+        // ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]);
+        // } else
+        // ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 2]));
+        // } else {
+        // if (this.generating <= GT_Values.V[this.energySource.getSourceTier() - 1]) {
+        // ret = 1L;
+        // }
+        // if (this.generating % GT_Values.V[this.energySource.getSourceTier()] == 0.0D) {
+        // ret = (long) (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]);
+        // } else
+        // ret = (long) (1L + (this.generating / GT_Values.V[this.energySource.getSourceTier() - 1]));
+        // }
+        // return ret;
     }
 
     @Override
@@ -491,7 +488,8 @@ public class TileEntitySolarBase extends TileEntityEMT
     @Override
     public boolean drainEnergyUnits(byte aSide, long aVoltage, long aAmperage) {
         return decreaseStoredEnergyUnits(
-                aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
+                aVoltage * aAmperage,
+                this.energySource.getEnergyStored() > aVoltage * aAmperage);
     }
 
     @Override
@@ -892,33 +890,30 @@ public class TileEntitySolarBase extends TileEntityEMT
         ModularWindow.Builder builder = ModularWindow.builder(176, 107);
         builder.setBackground(ModularUITextures.VANILLA_BACKGROUND);
 
-        builder.widget(new TextWidget(
-                                new Text(getInventoryName()).color(0x64fc06).shadow())
-                        .setPos(9, 9))
-                .widget(new ProgressBar()
+        builder.widget(new TextWidget(new Text(getInventoryName()).color(0x64fc06).shadow()).setPos(9, 9)).widget(
+                new ProgressBar()
                         .setTexture(EMT_UITextures.PICTURE_GAUGE_EMPTY_25, EMT_UITextures.PICTURE_GAUGE_SOLAR, 25)
-                        .setProgress(() -> (float) storage / this.maxstorage)
-                        .setSynced(false, false)
-                        .setPos(9, 24)
+                        .setProgress(() -> (float) storage / this.maxstorage).setSynced(false, false).setPos(9, 24)
                         .setSize(25, 11))
-                .widget(new ProgressBar()
-                        .setTexture(EMT_UITextures.PICTURE_GAUGE_EMPTY_11, EMT_UITextures.PICTURE_SOLAR_INDICATOR, 11)
-                        .setProgress(() -> generating > 9 ? 1f : 0f)
-                        .setSynced(false, false)
-                        .setPos(9, 43)
-                        .setSize(11, 11))
-                .widget(TextWidget.dynamicString(() -> StatCollector.translateToLocal("emt.Storage")
-                                + EMTTextHelper.formatNumber(storage) + "/"
-                                + EMTTextHelper.formatNumber(maxstorage) + "EU")
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 22))
+                .widget(
+                        new ProgressBar()
+                                .setTexture(
+                                        EMT_UITextures.PICTURE_GAUGE_EMPTY_11,
+                                        EMT_UITextures.PICTURE_SOLAR_INDICATOR,
+                                        11)
+                                .setProgress(() -> generating > 9 ? 1f : 0f).setSynced(false, false).setPos(9, 43)
+                                .setSize(11, 11))
+                .widget(
+                        TextWidget.dynamicString(
+                                () -> StatCollector.translateToLocal("emt.Storage") + EMTTextHelper
+                                        .formatNumber(storage) + "/" + EMTTextHelper.formatNumber(maxstorage) + "EU")
+                                .setSynced(false).setDefaultColor(0).setPos(36, 22))
                 .widget(new FakeSyncWidget.LongSyncer(() -> storage, val -> storage = val))
-                .widget(TextWidget.dynamicString(
-                                () -> StatCollector.translateToLocal("emt.Generating") + generating + " EU/t")
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 35))
+                .widget(
+                        TextWidget
+                                .dynamicString(
+                                        () -> StatCollector.translateToLocal("emt.Generating") + generating + " EU/t")
+                                .setSynced(false).setDefaultColor(0).setPos(36, 35))
                 .widget(new FakeSyncWidget.DoubleSyncer(() -> generating, val -> generating = val));
 
         return builder.build();

@@ -1,27 +1,24 @@
 package emt.item.focus;
 
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
 import java.util.Map.Entry;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
 
 public class ItemChargeFocus extends ItemBaseFocus {
 
-    private static final AspectList visCost = new AspectList()
-            .add(Aspect.FIRE, 10)
-            .add(Aspect.WATER, 10)
-            .add(Aspect.AIR, 10)
-            .add(Aspect.EARTH, 10)
-            .add(Aspect.ORDER, 10)
-            .add(Aspect.ENTROPY, 10);
+    private static final AspectList visCost = new AspectList().add(Aspect.FIRE, 10).add(Aspect.WATER, 10)
+            .add(Aspect.AIR, 10).add(Aspect.EARTH, 10).add(Aspect.ORDER, 10).add(Aspect.ENTROPY, 10);
 
     public ItemChargeFocus() {
         super("charge");
@@ -35,9 +32,9 @@ public class ItemChargeFocus extends ItemBaseFocus {
     @Override
     public AspectList getVisCost(ItemStack stack) {
         AspectList actualCost = new AspectList();
-        for (Entry<Aspect, Integer> e : visCost.aspects.entrySet())
-            actualCost.add(
-                    e.getKey(), (int) (e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
+        for (Entry<Aspect, Integer> e : visCost.aspects.entrySet()) actualCost.add(
+                e.getKey(),
+                (int) (e.getValue() * Math.pow(1.1, getUpgradeLevel(stack, FocusUpgradeType.potency))));
         return visCost;
     }
 
@@ -47,7 +44,7 @@ public class ItemChargeFocus extends ItemBaseFocus {
     }
 
     public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) {
-        return new FocusUpgradeType[] {FocusUpgradeType.potency, FocusUpgradeType.frugal};
+        return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
     }
 
     public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
@@ -55,8 +52,8 @@ public class ItemChargeFocus extends ItemBaseFocus {
     }
 
     @Override
-    public ItemStack onFocusRightClick(
-            ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
+    public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player,
+            MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         if (player.capabilities.isCreativeMode
                 || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
@@ -68,8 +65,8 @@ public class ItemChargeFocus extends ItemBaseFocus {
                     if (energyLeft > 0) {
                         if ((player.inventory.armorInventory[i] != null)
                                 && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
-                            double sentPacket = ElectricItem.manager.charge(
-                                    player.inventory.armorInventory[i], energyLeft, 4, false, false);
+                            double sentPacket = ElectricItem.manager
+                                    .charge(player.inventory.armorInventory[i], energyLeft, 4, false, false);
                             energyLeft -= sentPacket;
                         }
                     } else {
@@ -80,8 +77,8 @@ public class ItemChargeFocus extends ItemBaseFocus {
                     if (energyLeft > 0) {
                         if ((player.inventory.mainInventory[j] != null)
                                 && (player.inventory.mainInventory[j].getItem() instanceof IElectricItem)) {
-                            double sentPacket = ElectricItem.manager.charge(
-                                    player.inventory.mainInventory[j], energyLeft, 4, false, false);
+                            double sentPacket = ElectricItem.manager
+                                    .charge(player.inventory.mainInventory[j], energyLeft, 4, false, false);
                             energyLeft -= sentPacket;
                         }
                     } else {

@@ -1,13 +1,7 @@
 package emt.item.armor.wings;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
-import ic2.api.item.IMetalArmor;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -19,6 +13,14 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.IMetalArmor;
 
 public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectricItem, ISpecialArmor, IMetalArmor {
 
@@ -103,15 +105,15 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
     }
 
     @Override
-    public ArmorProperties getProperties(
-            EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage,
+            int slot) {
         if (source.isUnblockable()) {
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 3);
         } else {
             double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
             int energyPerDamage = getEnergyPerDamage();
-            double damageLimit =
-                    energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            double damageLimit = energyPerDamage <= 0 ? 0
+                    : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(3, absorptionRatio, (int) damageLimit);
         }
     }

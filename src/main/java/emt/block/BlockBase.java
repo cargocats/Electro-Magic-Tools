@@ -1,10 +1,12 @@
 package emt.block;
 
-import emt.EMT;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
+import emt.EMT;
+
 public abstract class BlockBase extends Block {
+
     public final String name;
 
     public BlockBase(String unlocName, Material material, String textureName, SoundType soundType, float hardness) {

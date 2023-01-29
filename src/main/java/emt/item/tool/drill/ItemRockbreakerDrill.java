@@ -1,13 +1,9 @@
 package emt.item.tool.drill;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,47 +22,25 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.ForgeEventFactory;
+
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.EntityFollowingItem;
 import thaumcraft.common.lib.utils.BlockUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
 
 public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
-    private static final Block[] isEffective = {
-        Blocks.nether_brick,
-        Blocks.netherrack,
-        Blocks.glowstone,
-        Blocks.iron_block,
-        Blocks.gold_block,
-        Blocks.diamond_block,
-        Blocks.lapis_block,
-        Blocks.redstone_block,
-        Blocks.redstone_ore,
-        Blocks.emerald_ore,
-        Blocks.emerald_block,
-        Blocks.stonebrick,
-        Blocks.glass,
-        Blocks.stone,
-        Blocks.gold_ore,
-        Blocks.iron_ore,
-        Blocks.coal_ore,
-        Blocks.cobblestone,
-        Blocks.diamond_ore,
-        Blocks.lapis_ore,
-        Blocks.dirt,
-        Blocks.gravel,
-        Blocks.sand,
-        Blocks.sandstone,
-        Blocks.soul_sand,
-        Blocks.clay,
-        Blocks.grass,
-        Blocks.snow_layer,
-        Blocks.snow,
-        Blocks.farmland,
-        Blocks.hardened_clay,
-        Blocks.stained_hardened_clay,
-        Blocks.mossy_cobblestone
-    };
+    private static final Block[] isEffective = { Blocks.nether_brick, Blocks.netherrack, Blocks.glowstone,
+            Blocks.iron_block, Blocks.gold_block, Blocks.diamond_block, Blocks.lapis_block, Blocks.redstone_block,
+            Blocks.redstone_ore, Blocks.emerald_ore, Blocks.emerald_block, Blocks.stonebrick, Blocks.glass,
+            Blocks.stone, Blocks.gold_ore, Blocks.iron_ore, Blocks.coal_ore, Blocks.cobblestone, Blocks.diamond_ore,
+            Blocks.lapis_ore, Blocks.dirt, Blocks.gravel, Blocks.sand, Blocks.sandstone, Blocks.soul_sand, Blocks.clay,
+            Blocks.grass, Blocks.snow_layer, Blocks.snow, Blocks.farmland, Blocks.hardened_clay,
+            Blocks.stained_hardened_clay, Blocks.mossy_cobblestone };
     public int searchCost = 1000;
     public int hitCost = 400;
     int side;
@@ -103,8 +77,8 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
-        MovingObjectPosition movingobjectposition =
-                BlockUtils.getTargetBlock(((Entity) (player)).worldObj, player, true);
+        MovingObjectPosition movingobjectposition = BlockUtils
+                .getTargetBlock(((Entity) (player)).worldObj, player, true);
         if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
             side = movingobjectposition.sideHit;
         }
@@ -112,8 +86,8 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z,
+            EntityLivingBase entityLiving) {
         if (EMTConfigHandler.toolsInBore == false) {
             cost = 350;
         } else {
@@ -162,9 +136,8 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
                         continue;
                     }
                     ItemStack is;
-                    for (Iterator i$ = ret.iterator();
-                            i$.hasNext();
-                            world.spawnEntityInWorld(new EntityFollowingItem(
+                    for (Iterator i$ = ret.iterator(); i$.hasNext(); world.spawnEntityInWorld(
+                            new EntityFollowingItem(
                                     world,
                                     (double) x + (double) xx + 0.5D,
                                     (double) y + (double) yy + 0.5D,
@@ -181,25 +154,12 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int side,
-            float xOffset,
-            float yOffset,
-            float zOffset) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+            float xOffset, float yOffset, float zOffset) {
         if (!player.isSneaking()) {
             for (int i = 0; i < player.inventory.mainInventory.length; i++) {
                 ItemStack torchStack = player.inventory.mainInventory[i];
-                if (torchStack == null
-                        || !torchStack
-                                .getUnlocalizedName()
-                                .toLowerCase(Locale.US)
-                                .contains("torch")) {
+                if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
                     continue;
                 }
                 Item item = torchStack.getItem();
@@ -208,8 +168,8 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
                 }
                 int oldMeta = torchStack.getItemDamage();
                 int oldSize = torchStack.stackSize;
-                boolean result =
-                        torchStack.tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset, zOffset);
+                boolean result = torchStack
+                        .tryPlaceItemIntoWorld(player, world, x, y, z, side, xOffset, yOffset, zOffset);
                 if (player.capabilities.isCreativeMode) {
                     torchStack.setItemDamage(oldMeta);
                     torchStack.stackSize = oldSize;
@@ -244,8 +204,7 @@ public class ItemRockbreakerDrill extends ItemThaumiumDrill {
 
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         if (!((Entity) (player)).worldObj.isRemote
-                && (!(entity instanceof EntityPlayer)
-                        || MinecraftServer.getServer().isPVPEnabled())) {
+                && (!(entity instanceof EntityPlayer) || MinecraftServer.getServer().isPVPEnabled())) {
             entity.setFire(2);
         }
         return super.onLeftClickEntity(stack, player, entity);

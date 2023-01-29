@@ -1,5 +1,23 @@
 package emt.tile.generator;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.IFluidHandler;
+
+import thaumcraft.api.ThaumcraftApiHelper;
+import thaumcraft.api.aspects.*;
+import thaumcraft.common.lib.network.PacketHandler;
+import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
+
 import com.gtnewhorizons.modularui.api.ModularUITextures;
 import com.gtnewhorizons.modularui.api.drawable.Text;
 import com.gtnewhorizons.modularui.api.screen.ITileWithModularUI;
@@ -8,6 +26,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.ProgressBar;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import emt.client.gui.EMT_UITextures;
 import emt.tile.DefinitelyNotAIC2Source;
@@ -21,31 +40,10 @@ import gregtech.api.interfaces.tileentity.IEnergyConnected;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
 import gregtech.api.net.GT_Packet_Block_Event;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.IFluidHandler;
-import thaumcraft.api.ThaumcraftApiHelper;
-import thaumcraft.api.aspects.*;
-import thaumcraft.common.lib.network.PacketHandler;
-import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
 
-public class TileEntityBaseGenerator extends TileEntityEMT
-        implements IInventory,
-                IAspectContainer,
-                IEssentiaTransport,
-                IHasWorldObjectAndCoords,
-                IEnergyConnected,
-                IBasicEnergyContainer,
-                ITileWithModularUI {
+public class TileEntityBaseGenerator extends TileEntityEMT implements IInventory, IAspectContainer, IEssentiaTransport,
+        IHasWorldObjectAndCoords, IEnergyConnected, IBasicEnergyContainer, ITileWithModularUI {
+
     public DefinitelyNotAIC2Source energySource = new DefinitelyNotAIC2Source(this, 100000L, 2);
     public Aspect aspect;
     public double generating;
@@ -153,15 +151,18 @@ public class TileEntityBaseGenerator extends TileEntityEMT
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(
-                    this.worldObj, this.xCoord, this.yCoord, this.zCoord, ForgeDirection.VALID_DIRECTIONS[i]);
+                    this.worldObj,
+                    this.xCoord,
+                    this.yCoord,
+                    this.zCoord,
+                    ForgeDirection.VALID_DIRECTIONS[i]);
             if (te[i] != null) {
                 IEssentiaTransport pipe = (IEssentiaTransport) te[i];
                 if (!pipe.canOutputTo(ForgeDirection.VALID_DIRECTIONS[i])) {
                     return;
                 }
                 if ((pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]) != null)
-                        && (pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i])
-                                .equals(this.aspect))
+                        && (pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]).equals(this.aspect))
                         && (pipe.getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i])
                                 < getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i]))) {
                     addToContainer(this.aspect, pipe.takeEssentia(this.aspect, 1, ForgeDirection.VALID_DIRECTIONS[i]));
@@ -470,7 +471,8 @@ public class TileEntityBaseGenerator extends TileEntityEMT
     @Override
     public boolean drainEnergyUnits(byte aSide, long aVoltage, long aAmperage) {
         return decreaseStoredEnergyUnits(
-                aVoltage * aAmperage, this.energySource.getEnergyStored() > aVoltage * aAmperage);
+                aVoltage * aAmperage,
+                this.energySource.getEnergyStored() > aVoltage * aAmperage);
     }
 
     @Override
@@ -871,45 +873,47 @@ public class TileEntityBaseGenerator extends TileEntityEMT
         ModularWindow.Builder builder = ModularWindow.builder(176, 107);
         builder.setBackground(ModularUITextures.VANILLA_BACKGROUND);
 
-        builder.widget(new TextWidget(
-                                new Text(getInventoryName()).color(0x64fc06).shadow())
-                        .setPos(9, 9))
-                .widget(new ProgressBar()
+        builder.widget(new TextWidget(new Text(getInventoryName()).color(0x64fc06).shadow()).setPos(9, 9)).widget(
+                new ProgressBar()
                         .setTexture(EMT_UITextures.PICTURE_GAUGE_EMPTY_25, EMT_UITextures.PICTURE_GAUGE_GENERATOR, 25)
-                        .setProgress(() -> (float) storage / this.maxstorage)
-                        .setSynced(false, false)
-                        .setPos(9, 24)
+                        .setProgress(() -> (float) storage / this.maxstorage).setSynced(false, false).setPos(9, 24)
                         .setSize(25, 11))
-                .widget(new ProgressBar()
-                        .setTexture(EMT_UITextures.PICTURE_GAUGE_EMPTY_25, EMT_UITextures.PICTURE_GAUGE_GENERATOR, 25)
-                        .setProgress(() -> (float) fuel / this.maxfuel)
-                        .setSynced(false, false)
-                        .setPos(9, 43)
-                        .setSize(25, 11))
-                .widget(TextWidget.dynamicString(() -> StatCollector.translateToLocal("emt.Storage")
-                                + EMTTextHelper.formatNumber(storage) + "/"
-                                + EMTTextHelper.formatNumber(maxstorage) + "EU")
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 22))
+                .widget(
+                        new ProgressBar()
+                                .setTexture(
+                                        EMT_UITextures.PICTURE_GAUGE_EMPTY_25,
+                                        EMT_UITextures.PICTURE_GAUGE_GENERATOR,
+                                        25)
+                                .setProgress(() -> (float) fuel / this.maxfuel).setSynced(false, false).setPos(9, 43)
+                                .setSize(25, 11))
+                .widget(
+                        TextWidget
+                                .dynamicString(
+                                        () -> StatCollector.translateToLocal("emt.Storage")
+                                                + EMTTextHelper.formatNumber(storage)
+                                                + "/"
+                                                + EMTTextHelper.formatNumber(maxstorage)
+                                                + "EU")
+                                .setSynced(false).setDefaultColor(0).setPos(36, 22))
                 .widget(new FakeSyncWidget.IntegerSyncer(() -> storage, val -> storage = val))
-                .widget(TextWidget.dynamicString(() -> StatCollector.translateToLocal("emt.Generating")
-                                + (isActive ? generating / 20 / 20 : 0) + " EU/t")
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 35))
+                .widget(
+                        TextWidget.dynamicString(
+                                () -> StatCollector.translateToLocal("emt.Generating")
+                                        + (isActive ? generating / 20 / 20 : 0)
+                                        + " EU/t")
+                                .setSynced(false).setDefaultColor(0).setPos(36, 35))
                 .widget(new FakeSyncWidget.DoubleSyncer(() -> generating, val -> generating = val))
                 .widget(new FakeSyncWidget.BooleanSyncer(() -> isActive, val -> isActive = val))
-                .widget(TextWidget.dynamicString(() -> StatCollector.translateToLocal("emt.Fuel") + ": " + fuel)
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 48))
+                .widget(
+                        TextWidget.dynamicString(() -> StatCollector.translateToLocal("emt.Fuel") + ": " + fuel)
+                                .setSynced(false).setDefaultColor(0).setPos(36, 48))
                 .widget(new FakeSyncWidget.ByteSyncer(() -> fuel, val -> fuel = val))
-                .widget(TextWidget.dynamicString(() ->
-                                StatCollector.translateToLocal("emt.remaining_second") + ((fuel * 20 * 20) - tick) / 20)
-                        .setSynced(false)
-                        .setDefaultColor(0)
-                        .setPos(36, 63))
+                .widget(
+                        TextWidget
+                                .dynamicString(
+                                        () -> StatCollector.translateToLocal("emt.remaining_second")
+                                                + ((fuel * 20 * 20) - tick) / 20)
+                                .setSynced(false).setDefaultColor(0).setPos(36, 63))
                 .widget(new FakeSyncWidget.IntegerSyncer(() -> tick, val -> tick = val));
 
         return builder.build();

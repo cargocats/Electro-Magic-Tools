@@ -1,10 +1,5 @@
 package emt.item.tool.omnitool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +7,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
 
 public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
 
@@ -36,8 +37,8 @@ public class ItemOmnitoolDiamond extends ItemOmnitoolIron {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6,
+            EntityLivingBase entityLiving) {
         if (!EMTConfigHandler.toolsInBore) {
             cost = 200;
         } else {

@@ -2,6 +2,10 @@ package emt.init;
 
 import static thaumcraft.api.ThaumcraftApi.registerObjectTag;
 
+import net.minecraft.block.Block;
+
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.block.*;
 import emt.item.block.ItemBlockElectricCloud;
@@ -10,9 +14,6 @@ import emt.item.block.ItemBlockMachines;
 import emt.item.block.ItemBlockSolars;
 import emt.tile.solar.Solars;
 import ic2.api.item.IC2Items;
-import net.minecraft.block.Block;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 
 public class EMTBlocks {
 
@@ -62,17 +63,11 @@ public class EMTBlocks {
                 new AspectList().add(Aspect.METAL, 2).add(Aspect.ENERGY, 2).add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("waterMill"),
-                new AspectList()
-                        .add(Aspect.METAL, 2)
-                        .add(Aspect.ENERGY, 1)
-                        .add(Aspect.WATER, 2)
+                new AspectList().add(Aspect.METAL, 2).add(Aspect.ENERGY, 1).add(Aspect.WATER, 2)
                         .add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("solarPanel"),
-                new AspectList()
-                        .add(Aspect.METAL, 1)
-                        .add(Aspect.ENERGY, 1)
-                        .add(Aspect.LIGHT, 2)
+                new AspectList().add(Aspect.METAL, 1).add(Aspect.ENERGY, 1).add(Aspect.LIGHT, 2)
                         .add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("windMill"),
@@ -94,31 +89,19 @@ public class EMTBlocks {
                 new AspectList().add(Aspect.METAL, 2).add(Aspect.FIRE, 2).add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("electroFurnace"),
-                new AspectList()
-                        .add(Aspect.METAL, 2)
-                        .add(Aspect.ENERGY, 1)
-                        .add(Aspect.FIRE, 3)
+                new AspectList().add(Aspect.METAL, 2).add(Aspect.ENERGY, 1).add(Aspect.FIRE, 3)
                         .add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("macerator"),
-                new AspectList()
-                        .add(Aspect.METAL, 1)
-                        .add(Aspect.ENERGY, 2)
-                        .add(Aspect.MINE, 2)
+                new AspectList().add(Aspect.METAL, 1).add(Aspect.ENERGY, 2).add(Aspect.MINE, 2)
                         .add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("extractor"),
-                new AspectList()
-                        .add(Aspect.METAL, 2)
-                        .add(Aspect.ENERGY, 1)
-                        .add(Aspect.CRAFT, 2)
+                new AspectList().add(Aspect.METAL, 2).add(Aspect.ENERGY, 1).add(Aspect.CRAFT, 2)
                         .add(Aspect.MECHANISM, 1));
         registerObjectTag(
                 IC2Items.getItem("compressor"),
-                new AspectList()
-                        .add(Aspect.METAL, 1)
-                        .add(Aspect.ENERGY, 2)
-                        .add(Aspect.VOID, 3)
+                new AspectList().add(Aspect.METAL, 1).add(Aspect.ENERGY, 2).add(Aspect.VOID, 3)
                         .add(Aspect.MECHANISM, 1));
     }
 }

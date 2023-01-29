@@ -1,5 +1,12 @@
 package emt.init;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.oredict.OreDictionary;
+
+import thaumcraft.api.ThaumcraftApi;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.EMT;
 import emt.item.ItemElectricScribingTools;
@@ -32,12 +39,6 @@ import emt.item.tool.omnitool.ItemOmnitoolDiamond;
 import emt.item.tool.omnitool.ItemOmnitoolIron;
 import emt.item.tool.omnitool.ItemOmnitoolThaumium;
 import ic2.core.init.InternalName;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.oredict.OreDictionary;
-import thaumcraft.api.ThaumcraftApi;
 
 public class EMTItems {
 
@@ -78,8 +79,8 @@ public class EMTItems {
     public static Item nanoWing;
     public static Item quantumWing;
     public static Item quantumArmor;
-    public static ItemArmor.ArmorMaterial featherWingMaterial =
-            EnumHelper.addArmorMaterial("FEATEHRWiNG", 1, new int[] {2, 2, 2, 2}, 6);
+    public static ItemArmor.ArmorMaterial featherWingMaterial = EnumHelper
+            .addArmorMaterial("FEATEHRWiNG", 1, new int[] { 2, 2, 2, 2 }, 6);
 
     public static void registerItems() {
         itemEMTItems = new ItemMaterials();
@@ -124,8 +125,8 @@ public class EMTItems {
                 .setUnlocalizedName(EMT.MOD_ID + ".boots.traveller.quantum");
         GameRegistry.registerItem(quantumBootsTraveller, "QuantumBootsTraveller");
 
-        electricScribingTools =
-                new ItemElectricScribingTools().setUnlocalizedName(EMT.MOD_ID + ".scribingtools.electric");
+        electricScribingTools = new ItemElectricScribingTools()
+                .setUnlocalizedName(EMT.MOD_ID + ".scribingtools.electric");
         GameRegistry.registerItem(electricScribingTools, "ElectricScribingTools");
 
         featherWing = new ItemFeatherWing(featherWingMaterial, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.feather");
@@ -135,8 +136,8 @@ public class EMTItems {
                 .setUnlocalizedName(EMT.MOD_ID + ".wing.thaumium");
         GameRegistry.registerItem(thaumiumWing, "ThaumiumWing");
 
-        nanoWing =
-                new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1).setUnlocalizedName(EMT.MOD_ID + ".wing.nano");
+        nanoWing = new ItemNanoWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1)
+                .setUnlocalizedName(EMT.MOD_ID + ".wing.nano");
         GameRegistry.registerItem(nanoWing, "NanosuitWing");
 
         quantumWing = new ItemQuantumWing(ItemArmor.ArmorMaterial.DIAMOND, 7, 1)

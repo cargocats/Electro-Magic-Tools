@@ -1,13 +1,14 @@
 package emt.tile;
 
+import net.minecraft.tileentity.TileEntity;
+
+import thaumcraft.client.fx.ParticleEngine;
+import thaumcraft.client.fx.particles.FXWisp;
+import thaumcraft.common.Thaumcraft;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.tileentity.TileEntity;
-import thaumcraft.client.fx.ParticleEngine;
-import thaumcraft.client.fx.particles.FXWisp;
-import thaumcraft.common.Thaumcraft;
 
 public class TileElectricCloud extends TileEntity {
 
@@ -18,9 +19,9 @@ public class TileElectricCloud extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote
-                && FMLCommonHandler.instance().getSide().isClient()
-                && FMLClientHandler.instance().getClient().renderViewEntity != null) fx();
+        if (worldObj.isRemote && FMLCommonHandler.instance().getSide().isClient()
+                && FMLClientHandler.instance().getClient().renderViewEntity != null)
+            fx();
     }
 
     @SideOnly(Side.CLIENT)

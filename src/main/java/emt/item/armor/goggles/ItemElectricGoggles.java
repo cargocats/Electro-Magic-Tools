@@ -1,14 +1,7 @@
 package emt.item.armor.goggles;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import emt.util.EMTTextHelper;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
-import ic2.api.item.IMetalArmor;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -21,11 +14,20 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import emt.util.EMTTextHelper;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.IMetalArmor;
 
 public class ItemElectricGoggles extends ItemArmor
         implements IRunicArmor, IElectricItem, IVisDiscountGear, IGoggles, IRevealer, IMetalArmor, ISpecialArmor {
@@ -112,15 +114,15 @@ public class ItemElectricGoggles extends ItemArmor
     }
 
     @Override
-    public ArmorProperties getProperties(
-            EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage,
+            int slot) {
         if (source.isUnblockable()) {
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, 0.0D, 0);
         } else {
             double absorptionRatio = getBaseAbsorptionRatio() * getDamageAbsorptionRatio();
             int energyPerDamage = getEnergyPerDamage();
-            double damageLimit =
-                    energyPerDamage <= 0 ? 0 : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
+            double damageLimit = energyPerDamage <= 0 ? 0
+                    : (25 * ElectricItem.manager.getCharge(armor)) / energyPerDamage;
             return new net.minecraftforge.common.ISpecialArmor.ArmorProperties(0, absorptionRatio, (int) damageLimit);
         }
     }

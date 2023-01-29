@@ -1,10 +1,5 @@
 package emt.block;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.TileEntityEMT;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +9,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.tile.TileEntityEMT;
 
 public abstract class BlockBaseContainer extends BlockContainer {
 
@@ -27,18 +28,13 @@ public abstract class BlockBaseContainer extends BlockContainer {
         this(unlocName, material, soundType, 1, hardness);
     }
 
-    public BlockBaseContainer(
-            String unlocName, Material material, SoundType soundType, int countOfMetas, float hardness) {
+    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas,
+            float hardness) {
         this(unlocName, material, soundType, countOfMetas, 0, hardness);
     }
 
-    public BlockBaseContainer(
-            String unlocName,
-            Material material,
-            SoundType soundType,
-            int countOfMetas,
-            int curInstance,
-            float hardness) {
+    public BlockBaseContainer(String unlocName, Material material, SoundType soundType, int countOfMetas,
+            int curInstance, float hardness) {
         super(material);
         this.setBlockName(EMT.MOD_ID + "." + unlocName);
         this.setCreativeTab(EMT.TAB);
@@ -154,6 +150,7 @@ public abstract class BlockBaseContainer extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public static class IconSet {
+
         public IIcon top;
         public IIcon bottom;
         public IIcon side;

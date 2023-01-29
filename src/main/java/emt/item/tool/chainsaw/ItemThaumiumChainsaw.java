@@ -1,9 +1,5 @@
 package emt.item.tool.chainsaw;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import ic2.api.item.ElectricItem;
 
 public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
 
@@ -31,8 +32,8 @@ public class ItemThaumiumChainsaw extends ItemDiamondChainsaw {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6,
+            EntityLivingBase entityLiving) {
         ElectricItem.manager.use(stack, cost, entityLiving);
         return true;
     }

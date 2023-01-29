@@ -1,18 +1,20 @@
 package emt.gthandler.common.implementations;
 
-import gregtech.api.enums.GT_Values;
-import gregtech.api.interfaces.ITexture;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input;
 import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidStack;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import gregtech.api.enums.GT_Values;
+import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input;
 
 public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
 
@@ -50,7 +52,10 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
     @Override
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new EssentiaHatch(
-                "Essentia Hatch " + GT_Values.VN[this.mTier], this.mTier, this.getDescription(), this.mTextures);
+                "Essentia Hatch " + GT_Values.VN[this.mTier],
+                this.mTier,
+                this.getDescription(),
+                this.mTextures);
     }
 
     @Override
@@ -72,26 +77,19 @@ public class EssentiaHatch extends GT_MetaTileEntity_Hatch_Input {
 
         return ret;
 
-        /*String[] old = super.getInfoData();
-        if (old.length!=0) {
-            String[] newDescription = new String[old.length + 1];
-            for (int i = 0; i < old.length; i++) {
-                newDescription[i] = old[i];
-            }
-            newDescription[old.length] = "This Contains: " + current.size() + " different Aspects";
-            return newDescription;
-        }else
-            return new String[]{"This Contains: " + current.size() + " different Aspects"};*/
+        /*
+         * String[] old = super.getInfoData(); if (old.length!=0) { String[] newDescription = new String[old.length +
+         * 1]; for (int i = 0; i < old.length; i++) { newDescription[i] = old[i]; } newDescription[old.length] =
+         * "This Contains: " + current.size() + " different Aspects"; return newDescription; }else return new
+         * String[]{"This Contains: " + current.size() + " different Aspects"};
+         */
     }
 
     @Override
     public String[] getDescription() { // this is the fucking tooltip -_-'
-        return new String[] {
-            "Essentia Hatch for usage in Multiblocks",
-            "Can only be filled with the Essentia Filler",
-            "Can hold " + Integer.toString((ApTe * (mTier + 1))) + " Different Essentia Types",
-            "Can hold " + Integer.toString((64 * ApTe * (mTier + 1))) + " Essentia in total"
-        };
+        return new String[] { "Essentia Hatch for usage in Multiblocks", "Can only be filled with the Essentia Filler",
+                "Can hold " + Integer.toString((ApTe * (mTier + 1))) + " Different Essentia Types",
+                "Can hold " + Integer.toString((64 * ApTe * (mTier + 1))) + " Essentia in total" };
     }
 
     @Override

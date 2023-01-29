@@ -1,12 +1,8 @@
 package emt.item.armor.goggles;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
 import java.util.HashMap;
 import java.util.Map;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,15 +10,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+
 public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
 
     private static final Map potionCost = new HashMap();
-    /*private int ticker;
-    private int generating;
-    private boolean sunIsUp;
-    private boolean skyIsVisible;
-    private boolean noSunWorld;
-    private boolean dampPlace;*/
+    /*
+     * private int ticker; private int generating; private boolean sunIsUp; private boolean skyIsVisible; private
+     * boolean noSunWorld; private boolean dampPlace;
+     */
     private int genDay;
     private int genNight;
 
@@ -83,8 +83,8 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
                 if (enerj > 0) {
                     if ((player.inventory.armorInventory[i] != null)
                             && (player.inventory.armorInventory[i].getItem() instanceof IElectricItem)) {
-                        double sentPacket =
-                                ElectricItem.manager.charge(player.inventory.armorInventory[i], enerj, 4, false, false);
+                        double sentPacket = ElectricItem.manager
+                                .charge(player.inventory.armorInventory[i], enerj, 4, false, false);
                         enerj -= sentPacket;
                     }
                 } else {
@@ -95,8 +95,8 @@ public class ItemSolarHelmetRevealing extends ItemQuantumGoggles {
                 if (enerj > 0) {
                     if ((player.inventory.mainInventory[j] != null)
                             && (player.inventory.mainInventory[j].getItem() instanceof IElectricItem)) {
-                        double sentPacket =
-                                ElectricItem.manager.charge(player.inventory.mainInventory[j], enerj, 4, false, false);
+                        double sentPacket = ElectricItem.manager
+                                .charge(player.inventory.mainInventory[j], enerj, 4, false, false);
                         enerj -= sentPacket;
                     }
                 } else {

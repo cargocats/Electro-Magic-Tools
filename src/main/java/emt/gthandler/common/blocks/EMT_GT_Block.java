@@ -1,5 +1,14 @@
 package emt.gthandler.common.blocks;
 
+import java.util.List;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
@@ -7,13 +16,6 @@ import emt.gthandler.common.items.EMT_CasingBlock;
 import gregtech.api.enums.Textures;
 import gregtech.api.render.TextureFactory;
 import gregtech.common.blocks.GT_Block_Casings_Abstract;
-import java.util.List;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 public class EMT_GT_Block extends GT_Block_Casings_Abstract {
 

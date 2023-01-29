@@ -1,12 +1,15 @@
 package emt.client;
 
+import net.minecraft.client.settings.KeyBinding;
+
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import emt.EMT;
 import emt.util.EMTTextHelper;
-import net.minecraft.client.settings.KeyBinding;
-import org.lwjgl.input.Keyboard;
 
 public class EMTKeys {
+
     public static KeyBinding keyUnequip;
 
     public static void registerKeys() {

@@ -1,21 +1,23 @@
 package emt.item.armor.goggles;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import ic2.api.item.IC2Items;
-import ic2.core.IC2;
-import ic2.core.util.Keyboard;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import ic2.api.item.IC2Items;
+import ic2.core.IC2;
+import ic2.core.util.Keyboard;
 
 public class ItemQuantumGoggles extends ItemNanoGoggles {
 

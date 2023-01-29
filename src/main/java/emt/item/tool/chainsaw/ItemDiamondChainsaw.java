@@ -1,16 +1,9 @@
 package emt.item.tool.chainsaw;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
-import ic2.core.IC2;
-import ic2.core.util.StackUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -34,6 +27,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.core.IC2;
+import ic2.core.util.StackUtil;
+
 public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
 
     public int maxCharge = 50000;
@@ -56,16 +58,15 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6,
+            EntityLivingBase entityLiving) {
         ElectricItem.manager.use(stack, cost, entityLiving);
         return true;
     }
 
     @Override
     public boolean canHarvestBlock(Block block, ItemStack stack) {
-        return Items.diamond_axe.canHarvestBlock(block, stack)
-                || Items.diamond_sword.canHarvestBlock(block, stack)
+        return Items.diamond_axe.canHarvestBlock(block, stack) || Items.diamond_sword.canHarvestBlock(block, stack)
                 || Items.shears.canHarvestBlock(block, stack);
     }
 
@@ -105,17 +106,8 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int side,
-            float xOffset,
-            float yOffset,
-            float zOffset) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+            float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
             if (torchStack == null) {
@@ -198,7 +190,11 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
                     double yOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
                     double zOffset = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
                     EntityItem entityitem = new EntityItem(
-                            player.worldObj, (double) x + xOffset, (double) y + yOffset, (double) z + zOffset, stack);
+                            player.worldObj,
+                            (double) x + xOffset,
+                            (double) y + yOffset,
+                            (double) z + zOffset,
+                            stack);
                     entityitem.delayBeforeCanPickup = 10;
                     player.worldObj.spawnEntityInWorld(entityitem);
                 }
@@ -221,8 +217,8 @@ public class ItemDiamondChainsaw extends ItemAxe implements IElectricItem {
         }
         if (entity instanceof IShearable) {
             IShearable target = (IShearable) entity;
-            if (target.isShearable(
-                    itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ)) {
+            if (target
+                    .isShearable(itemstack, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ)) {
                 ArrayList<ItemStack> drops = target.onSheared(
                         itemstack,
                         entity.worldObj,

@@ -2,6 +2,7 @@ package emt.util;
 
 import java.util.Collection;
 import java.util.HashMap;
+
 import thaumcraft.api.aspects.Aspect;
 
 public class EMTEssentiasOutputs {

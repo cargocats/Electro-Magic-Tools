@@ -1,10 +1,11 @@
 package emt.item;
 
-import emt.EMT;
-import emt.util.EMTTextHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
+import emt.EMT;
+import emt.util.EMTTextHelper;
 
 public class ItemBase extends Item {
 
@@ -23,7 +24,6 @@ public class ItemBase extends Item {
 
     public String getItemStackDisplayName(ItemStack stack) {
         return (EMTTextHelper.GREEN
-                        + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name"))
-                .trim();
+                + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 }

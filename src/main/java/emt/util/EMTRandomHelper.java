@@ -1,10 +1,12 @@
 package emt.util;
 
-import ic2.api.item.ElectricItem;
 import java.util.ArrayList;
 import java.util.Random;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import ic2.api.item.ElectricItem;
 
 public class EMTRandomHelper {
 
@@ -15,6 +17,7 @@ public class EMTRandomHelper {
     }
 
     public static class Bolt {
+
         public ArrayList<Point> points = new ArrayList<Point>();
         public float angleZ = 0;
         public float angleY = 0;
@@ -55,6 +58,7 @@ public class EMTRandomHelper {
     }
 
     public static class Point {
+
         public float x = 0;
         public float y = 0;
         public float z = 0;

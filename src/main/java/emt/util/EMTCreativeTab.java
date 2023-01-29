@@ -1,8 +1,9 @@
 package emt.util;
 
-import emt.init.EMTItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+
+import emt.init.EMTItems;
 
 public class EMTCreativeTab extends CreativeTabs {
 

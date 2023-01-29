@@ -2,23 +2,18 @@ package emt.init;
 
 import static thaumcraft.api.aspects.Aspect.*;
 
-import emt.EMT;
-import emt.util.EMTResearchItem;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_OreDictUnificator;
-import gregtech.api.util.GT_Utility;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.AspectList;
@@ -28,6 +23,13 @@ import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
+import emt.EMT;
+import emt.util.EMTResearchItem;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GT_Utility;
 
 public class EMT_GTNH_Recipes_And_Researches implements Runnable {
 
@@ -36,40 +38,35 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
     private static LinkedHashMap<String, CrucibleRecipe> cruciblRecipeLinkedHashMap = new LinkedHashMap<>();
 
     private static AspectList getPrimals(int amount) {
-        return new AspectList()
-                .add(ORDER, amount)
-                .add(ENTROPY, amount)
-                .add(AIR, amount)
-                .add(EARTH, amount)
-                .add(WATER, amount)
-                .add(FIRE, amount);
+        return new AspectList().add(ORDER, amount).add(ENTROPY, amount).add(AIR, amount).add(EARTH, amount)
+                .add(WATER, amount).add(FIRE, amount);
     }
 
     @Override
     public void run() {
 
-        //        ItemStack glue =new ItemStack(EMTItems.itemEMTItems,1,8);
-        //        HashSet<ShapelessRecipes> recipesHashSet = new HashSet<>();
-        //       recipesHashSet.add(new ShapelessRecipes(glue,
+        // ItemStack glue =new ItemStack(EMTItems.itemEMTItems,1,8);
+        // HashSet<ShapelessRecipes> recipesHashSet = new HashSet<>();
+        // recipesHashSet.add(new ShapelessRecipes(glue,
         // Arrays.asList(GT_ModHandler.getModItem("TConstruct","materials",1,36),GT_ModHandler.getModItem("TConstruct","materials",1,36))));
-        //        recipesHashSet.add(new ShapelessRecipes(glue,
+        // recipesHashSet.add(new ShapelessRecipes(glue,
         // Collections.singletonList(GT_ModHandler.getModItem("TConstruct", "materials", 2, 36))));
-        //        for ( ShapelessRecipes sr : recipesHashSet)
-        //            CraftingManager.getInstance().getRecipeList().add(sr);
+        // for ( ShapelessRecipes sr : recipesHashSet)
+        // CraftingManager.getInstance().getRecipeList().add(sr);
         //
-        //        //Rubber ball recipes
+        // //Rubber ball recipes
         //
         // GT_Values.RA.addAlloySmelterRecipe(Materials.RubberTreeSap.getDust(4),ItemList.Shape_Mold_Ball.get(0),new
         // ItemStack(EMTItems.itemEMTItems,1,10),200,16);
-        //        GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(Items.paper,12),new
+        // GT_Values.RA.addAssemblerRecipe(new ItemStack[]{new ItemStack(Items.paper,12),new
         // ItemStack(EMTItems.itemEMTItems,1,10)},Materials.Glue.getMolten(6912),new
         // ItemStack(EMTItems.itemEMTItems,1,9),600,30);
         //
         // GT_Values.RA.addFluidSolidifierRecipe(ItemList.Shape_Mold_Ball.get(0),Materials.Rubber.getMolten(576),new
         // ItemStack(EMTItems.itemEMTItems,1,10),100,30);
-        //        GT_Values.RA.addPulveriserRecipe(new ItemStack(EMTItems.itemEMTItems,1,10),new
+        // GT_Values.RA.addPulveriserRecipe(new ItemStack(EMTItems.itemEMTItems,1,10),new
         // ItemStack[]{Materials.Rubber.getDust(4)},null,300,2);
-        //        GT_Values.RA.addFormingPressRecipe(Materials.Rubber.getPlates(4),ItemList.Shape_Mold_Ball.get(0),new
+        // GT_Values.RA.addFormingPressRecipe(Materials.Rubber.getPlates(4),ItemList.Shape_Mold_Ball.get(0),new
         // ItemStack(EMTItems.itemEMTItems,1,10),100,30);
 
         EMTResearches.addResearchTab();
@@ -126,25 +123,24 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
 
     private void runResreaches() {
         HashSet<ResearchItem> researches = new HashSet<>();
-        researches.add(new EMTResearchItem(
-                        "ElectricMagicTools", 0, 0, 0, new ResourceLocation(EMT.TEXTURE_PATH, "textures/misc/emt.png"))
-                .setSpecial()
-                .setAutoUnlock()
-                .setPages(new ResearchPage("")));
-        researches.add(new EMTResearchItem(
+        researches.add(
+                new EMTResearchItem(
+                        "ElectricMagicTools",
+                        0,
+                        0,
+                        0,
+                        new ResourceLocation(EMT.TEXTURE_PATH, "textures/misc/emt.png")).setSpecial().setAutoUnlock()
+                                .setPages(new ResearchPage("")));
+        researches.add(
+                new EMTResearchItem(
                         "DiamondChainsaw",
-                        new AspectList()
-                                .add(GREED, 12)
-                                .add(FIRE, 9)
-                                .add(METAL, 6)
-                                .add(EARTH, 3),
+                        new AspectList().add(GREED, 12).add(FIRE, 9).add(METAL, 6).add(EARTH, 3),
                         0,
                         -2,
                         2,
                         new ItemStack(EMTItems.diamondChainsaw))
-                .setPages(new ResearchPage(arcaneRecipeLinkedHashMap.get("DiamondChainsaw")))
-                .setRound()
-                .setParentsHidden("ElectricMagicTools"));
+                                .setPages(new ResearchPage(arcaneRecipeLinkedHashMap.get("DiamondChainsaw"))).setRound()
+                                .setParentsHidden("ElectricMagicTools"));
         // researches.add(new EMTResearchItem("DiamondChainsaw",new
         // AspectList().add(GREED,12).add(FIRE,9).add(METAL,6).add(EARTH,3),0,-2,2,new
         // ItemStack(EMTItems.diamondChainsaw)).setRound());
@@ -152,6 +148,7 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
     }
 
     class ShapedArcaneRecipeIgnoresNBT extends ShapedArcaneRecipe {
+
         protected String research;
         protected ItemStack result;
         protected AspectList aspects;
@@ -167,9 +164,8 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
             this.recipe = recipe;
             int rows = 0;
             int colums = 0;
-            if (!(recipe[0] instanceof String))
-                throw new UnsupportedOperationException(
-                        "The Recipe must start with at least one String for the first row!");
+            if (!(recipe[0] instanceof String)) throw new UnsupportedOperationException(
+                    "The Recipe must start with at least one String for the first row!");
             int i = 0;
             rowcolm = new int[3];
             do {
@@ -207,19 +203,17 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
                                     GT_OreDictUnificator.getFirstOre(itemReplacement, 1),
                                     GT_OreDictUnificator.get(slot),
                                     true))
-                                if (!OreDictionary.getOres((String) itemReplacement)
-                                        .contains(slot)) return false;
+                                if (!OreDictionary.getOres((String) itemReplacement).contains(slot)) return false;
                         } else if (itemReplacement instanceof ItemStack) {
                             if (!GT_Utility.isStackValid(itemReplacement)) {
                                 return false;
                             }
                             if (!GT_Utility.areStacksEqual((ItemStack) itemReplacement, slot, true))
                                 if (!GT_Utility.areUnificationsEqual((ItemStack) itemReplacement, slot, true))
-                                    if (!(((ItemStack) itemReplacement)
-                                                    .getItem()
-                                                    .equals(slot.getItem())
+                                    if (!(((ItemStack) itemReplacement).getItem().equals(slot.getItem())
                                             && ((ItemStack) itemReplacement).getItemDamage()
-                                                    == OreDictionary.WILDCARD_VALUE)) return false;
+                                                    == OreDictionary.WILDCARD_VALUE))
+                                        return false;
                         } else if (itemReplacement instanceof Collection) {
                             boolean hit = false;
                             for (Object o : (Collection) itemReplacement) {
@@ -227,7 +221,8 @@ public class EMT_GTNH_Recipes_And_Researches implements Runnable {
                                         || GT_Utility.areUnificationsEqual((ItemStack) o, slot, true)
                                         || (((ItemStack) o).getItem().equals(slot.getItem())
                                                 && ((ItemStack) itemReplacement).getItemDamage()
-                                                        == OreDictionary.WILDCARD_VALUE)) hit = true;
+                                                        == OreDictionary.WILDCARD_VALUE))
+                                    hit = true;
                             }
                             if (!hit) {
                                 return false;

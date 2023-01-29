@@ -3,6 +3,24 @@ package emt.init;
 import static emt.util.EMTRandomHelper.getChargedItem;
 import static thaumcraft.api.ThaumcraftApi.*;
 
+import java.util.Iterator;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
+
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.CrucibleRecipe;
+import thaumcraft.api.crafting.InfusionRecipe;
+import thaumcraft.api.crafting.ShapedArcaneRecipe;
+import thaumcraft.api.crafting.ShapelessArcaneRecipe;
+import thaumcraft.common.blocks.ItemJarNode;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.config.ConfigItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
@@ -14,22 +32,6 @@ import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 import ic2.core.BasicMachineRecipeManager;
 import ic2.core.Ic2Items;
-import java.util.Iterator;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.InfusionRecipe;
-import thaumcraft.api.crafting.ShapedArcaneRecipe;
-import thaumcraft.api.crafting.ShapelessArcaneRecipe;
-import thaumcraft.common.blocks.ItemJarNode;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.config.ConfigItems;
 
 public class EMTRecipes {
 
@@ -179,7 +181,10 @@ public class EMTRecipes {
                 'Z',
                 new ItemStack(EMTItems.itemEMTItems, 1, 11));
         featherWings = GameRegistry.addShapedRecipe(
-                new ItemStack(EMTItems.featherWing), "XX", 'X', new ItemStack(EMTItems.itemEMTItems, 1, 12));
+                new ItemStack(EMTItems.featherWing),
+                "XX",
+                'X',
+                new ItemStack(EMTItems.itemEMTItems, 1, 12));
         taintedFeathers = GameRegistry.addShapedRecipe(
                 new ItemStack(EMTItems.itemEMTItems, 1, 13),
                 " X ",
@@ -246,15 +251,25 @@ public class EMTRecipes {
 
         /** Smelting Recipes **/
         GameRegistry.addSmelting(
-                new ItemStack(EMTItems.itemEMTItems, 1, 1), new ItemStack(ConfigItems.itemResource, 1, 6), 0.0F);
+                new ItemStack(EMTItems.itemEMTItems, 1, 1),
+                new ItemStack(ConfigItems.itemResource, 1, 6),
+                0.0F);
         GameRegistry.addSmelting(
-                new ItemStack(EMTItems.itemEMTItems, 1, 2), new ItemStack(ConfigItems.itemResource, 1, 6), 0.0F);
+                new ItemStack(EMTItems.itemEMTItems, 1, 2),
+                new ItemStack(ConfigItems.itemResource, 1, 6),
+                0.0F);
         GameRegistry.addSmelting(
-                new ItemStack(EMTItems.itemEMTItems, 1, 3), new ItemStack(ConfigItems.itemResource, 1, 3), 0.0F);
+                new ItemStack(EMTItems.itemEMTItems, 1, 3),
+                new ItemStack(ConfigItems.itemResource, 1, 3),
+                0.0F);
         GameRegistry.addSmelting(
-                new ItemStack(EMTItems.itemEMTItems, 1, 4), new ItemStack(ConfigItems.itemResource, 1, 3), 0.0F);
+                new ItemStack(EMTItems.itemEMTItems, 1, 4),
+                new ItemStack(ConfigItems.itemResource, 1, 3),
+                0.0F);
         GameRegistry.addSmelting(
-                new ItemStack(EMTItems.itemEMTItems, 1, 10), new ItemStack(EMTItems.itemEMTItems, 2, 8), 0.0F);
+                new ItemStack(EMTItems.itemEMTItems, 1, 10),
+                new ItemStack(EMTItems.itemEMTItems, 2, 8),
+                0.0F);
     }
 
     private static void registerShaplessRecipes() {}
@@ -277,10 +292,8 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.uuMatterInfusions,
                 IC2Items.getItem("Uran238"),
-                new ItemStack[] {
-                    uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell,
-                    uuMCell
-                });
+                new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell,
+                        uuMCell, uuMCell, uuMCell });
 
         ItemStack uranium = IC2Items.getItem("Uran238").copy();
         uranium.stackSize = 2;
@@ -290,7 +303,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.lesserUUMInfusions,
                 new ItemStack(Items.diamond),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell, uuMCell });
 
         ItemStack diamond = new ItemStack(Items.diamond).copy();
         diamond.stackSize = 1;
@@ -300,7 +313,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(Items.gold_ingot),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell, uuMCell });
 
         ItemStack gold = new ItemStack(Items.gold_ingot).copy();
         gold.stackSize = 2;
@@ -310,7 +323,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapestUUMInfusions,
                 new ItemStack(Items.iron_ingot),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
         ItemStack ironOre = new ItemStack(Blocks.iron_ore).copy();
         ironOre.stackSize = 16;
@@ -320,11 +333,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(Blocks.stonebrick),
-                new ItemStack[] {uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell });
 
         /**
-         * ItemStack copperOre = Items.getItem("copperOre").copy(); BUGGED IN
-         * 1.6 IF IC2 OREGEN IS DISABLED
+         * ItemStack copperOre = Items.getItem("copperOre").copy(); BUGGED IN 1.6 IF IC2 OREGEN IS DISABLED
          **/
         ItemStack copperOre = IC2Items.getItem("crushedCopperOre").copy();
         copperOre.stackSize = 32;
@@ -334,11 +346,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6),
-                new ItemStack[] {uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell });
 
         /**
-         * ItemStack tinOre = Items.getItem("tinOre").copy(); BUGGED IN 1.6 IF
-         * IC2 OREGEN IS DISABLED
+         * ItemStack tinOre = Items.getItem("tinOre").copy(); BUGGED IN 1.6 IF IC2 OREGEN IS DISABLED
          **/
         ItemStack tinOre = IC2Items.getItem("crushedTinOre").copy();
         tinOre.stackSize = 32;
@@ -348,11 +359,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 7),
-                new ItemStack[] {uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell });
 
         /**
-         * ItemStack leadOre = Items.getItem("leadOre").copy(); BUGGED IN 1.6 IF
-         * IC2 OREGEN IS DISABLED
+         * ItemStack leadOre = Items.getItem("leadOre").copy(); BUGGED IN 1.6 IF IC2 OREGEN IS DISABLED
          **/
         ItemStack leadOre = IC2Items.getItem("crushedLeadOre").copy();
         leadOre.stackSize = 32;
@@ -362,7 +372,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 0),
-                new ItemStack[] {uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell });
 
         ItemStack uraniumOre = IC2Items.getItem("uraniumOre").copy();
         uraniumOre.stackSize = 8;
@@ -372,7 +382,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.lesserUUMInfusions,
                 new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 1),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
         ItemStack coal = new ItemStack(Items.coal, 1, 0).copy();
         coal.stackSize = 16;
@@ -382,7 +392,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(Items.coal, 1, 1),
-                new ItemStack[] {uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell });
 
         ItemStack stickyResin = IC2Items.getItem("resin").copy();
         stickyResin.stackSize = 21;
@@ -392,7 +402,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
         ItemStack redstone = new ItemStack(Items.redstone).copy();
         redstone.stackSize = 24;
@@ -402,7 +412,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
         ItemStack lapisLazuli = new ItemStack(Items.dye, 1, 4).copy();
         lapisLazuli.stackSize = 8;
@@ -412,7 +422,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapUUMInfusions,
                 new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {uuMCell, uuMCell, uuMCell});
+                new ItemStack[] { uuMCell, uuMCell, uuMCell });
 
         ItemStack glowstone = new ItemStack(Blocks.glowstone).copy();
         glowstone.stackSize = 1;
@@ -422,7 +432,7 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.cheapestUUMInfusions,
                 new ItemStack(Items.glowstone_dust),
-                new ItemStack[] {uuMCell});
+                new ItemStack[] { uuMCell });
     }
 
     public static void registerLateRecipes() {
@@ -433,14 +443,9 @@ public class EMTRecipes {
                 10,
                 new AspectList().add(Aspect.GREED, 64).add(Aspect.EXCHANGE, 128),
                 new ItemStack(EMTBlocks.essentiaGens, 1, 0),
-                new ItemStack[] {
-                    new ItemStack(Blocks.gold_block),
-                    new ItemStack(Blocks.gold_block),
-                    new ItemStack(Blocks.gold_block),
-                    new ItemStack(Blocks.gold_block),
-                    new ItemStack(Blocks.gold_block),
-                    new ItemStack(Blocks.gold_block)
-                });
+                new ItemStack[] { new ItemStack(Blocks.gold_block), new ItemStack(Blocks.gold_block),
+                        new ItemStack(Blocks.gold_block), new ItemStack(Blocks.gold_block),
+                        new ItemStack(Blocks.gold_block), new ItemStack(Blocks.gold_block) });
 
         thaumiumDrill = addInfusionCraftingRecipe(
                 "Thaumium Drill",
@@ -448,14 +453,9 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.thaumiumDrillCrafting,
                 new ItemStack(IC2Items.getItem("diamondDrill").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(Items.diamond),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    IC2Items.getItem("denseplateiron")
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.diamond),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron") });
 
         thaumiumChainsaw = addInfusionCraftingRecipe(
                 "Thaumium Chainsaw",
@@ -463,14 +463,9 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.thaumiumChainsawCrafting,
                 new ItemStack(EMTItems.diamondChainsaw, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(Items.diamond),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    IC2Items.getItem("denseplateiron")
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.diamond),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), IC2Items.getItem("denseplateiron") });
 
         thaumicQuantumHelmet = addInfusionCraftingRecipe(
                 "Quantum Goggles of Revealing",
@@ -478,15 +473,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.thaumicQuantumHelmetCrafting,
                 new ItemStack(EMTItems.nanoThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(Items.milk_bucket),
-                    new ItemStack(IC2Items.getItem("quantumHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("advancedCircuit")
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.milk_bucket),
+                        new ItemStack(IC2Items.getItem("quantumHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        IC2Items.getItem("iridiumPlate"), IC2Items.getItem("advancedCircuit") });
 
         thaumicNanoHelmet = addInfusionCraftingRecipe(
                 "Nanosuit Goggles of Revealing",
@@ -494,15 +484,10 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.thaumicNanoHelmetCrafting,
                 new ItemStack(EMTItems.electricGoggles, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(Items.gold_ingot),
-                    new ItemStack(IC2Items.getItem("nanoHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    IC2Items.getItem("carbonPlate"),
-                    IC2Items.getItem("electronicCircuit")
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(Items.gold_ingot),
+                        new ItemStack(IC2Items.getItem("nanoHelmet").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        IC2Items.getItem("carbonPlate"), IC2Items.getItem("electronicCircuit") });
 
         thaumiumOmnitool = addInfusionCraftingRecipe(
                 "Thaumium Omnitool",
@@ -510,14 +495,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.thaumiumOmnitoolCrafting,
                 new ItemStack(EMTItems.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    IC2Items.getItem("carbonPlate"),
-                    IC2Items.getItem("plateobsidian")
-                });
+                new ItemStack[] { new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), IC2Items.getItem("carbonPlate"),
+                        IC2Items.getItem("plateobsidian") });
 
         diamondOmnitoolToThaumium = addInfusionCraftingRecipe(
                 "Thaumium Omnitool",
@@ -525,14 +506,11 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.thaumiumOmnitoolCrafting,
                 new ItemStack(EMTItems.diamondOmnitool, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Blocks.diamond_block),
-                    new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                    new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                    new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("carbonPlate"),
-                    IC2Items.getItem("advancedCircuit")
-                });
+                new ItemStack[] { new ItemStack(Blocks.diamond_block),
+                        new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
+                        new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
+                        new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("carbonPlate"), IC2Items.getItem("advancedCircuit") });
 
         explosionFocus = addInfusionCraftingRecipe(
                 "Explosion Focus",
@@ -541,12 +519,9 @@ public class EMTRecipes {
                 EMTCraftingAspects.laserFocusCrafting,
                 new ItemStack(ConfigItems.itemFocusHellbat, 1),
                 new ItemStack[] {
-                    new ItemStack(IC2Items.getItem("miningLaser").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(Items.arrow),
-                    new ItemStack(Items.gunpowder),
-                    new ItemStack(Items.firework_charge),
-                    new ItemStack(ConfigItems.itemResource, 1, 1)
-                });
+                        new ItemStack(IC2Items.getItem("miningLaser").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(Items.arrow), new ItemStack(Items.gunpowder),
+                        new ItemStack(Items.firework_charge), new ItemStack(ConfigItems.itemResource, 1, 1) });
 
         shieldFocus = addInfusionCraftingRecipe(
                 "Shield Focus",
@@ -554,15 +529,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.shieldFocusCrafting,
                 new ItemStack(ConfigItems.itemFocusPortableHole, 1),
-                new ItemStack[] {
-                    IC2Items.getItem("reinforcedStone"),
-                    IC2Items.getItem("reinforcedGlass"),
-                    IC2Items.getItem("reinforcedStone"),
-                    IC2Items.getItem("reinforcedGlass"),
-                    new ItemStack(Blocks.soul_sand),
-                    new ItemStack(Blocks.obsidian),
-                    new ItemStack(Blocks.obsidian)
-                });
+                new ItemStack[] { IC2Items.getItem("reinforcedStone"), IC2Items.getItem("reinforcedGlass"),
+                        IC2Items.getItem("reinforcedStone"), IC2Items.getItem("reinforcedGlass"),
+                        new ItemStack(Blocks.soul_sand), new ItemStack(Blocks.obsidian),
+                        new ItemStack(Blocks.obsidian) });
 
         potentiaGenerator = addInfusionCraftingRecipe(
                 "Potentia Generator",
@@ -570,16 +540,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.potentiaGeneratorCrafting,
                 IC2Items.getItem("semifluidGenerator"),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(ConfigItems.itemFocusTrade),
-                    new ItemStack(Blocks.hopper),
-                    new ItemStack(ConfigBlocks.blockJar),
-                    IC2Items.getItem("mvTransformer"),
-                    IC2Items.getItem("advancedMachine"),
-                    IC2Items.getItem("orewashingplant"),
-                    IC2Items.getItem("scrap")
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), new ItemStack(ConfigItems.itemFocusTrade),
+                        new ItemStack(Blocks.hopper), new ItemStack(ConfigBlocks.blockJar),
+                        IC2Items.getItem("mvTransformer"), IC2Items.getItem("advancedMachine"),
+                        IC2Items.getItem("orewashingplant"), IC2Items.getItem("scrap") });
 
         streamChainsaw = addInfusionCraftingRecipe(
                 "Chainsaw of the Stream",
@@ -587,14 +551,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.streamChaisnawCrafting,
                 new ItemStack(EMTItems.thaumiumChainsaw, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.water_bucket),
-                    new ItemStack(ConfigItems.itemAxeElemental),
-                    new ItemStack(ConfigBlocks.blockMagicalLog),
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("overclockerUpgrade")
-                });
+                new ItemStack[] { new ItemStack(Items.water_bucket), new ItemStack(ConfigItems.itemAxeElemental),
+                        new ItemStack(ConfigBlocks.blockMagicalLog),
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("iridiumPlate"), IC2Items.getItem("overclockerUpgrade") });
 
         rockbreakerDrill = addInfusionCraftingRecipe(
                 "Drill of the Rockbreaker",
@@ -602,16 +562,11 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.rockbreakerDrillCrafting,
                 new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.flint_and_steel),
-                    new ItemStack(Items.fire_charge),
-                    new ItemStack(ConfigItems.itemPickElemental),
-                    new ItemStack(ConfigItems.itemShovelElemental),
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("reinforcedStone"),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("overclockerUpgrade")
-                });
+                new ItemStack[] { new ItemStack(Items.flint_and_steel), new ItemStack(Items.fire_charge),
+                        new ItemStack(ConfigItems.itemPickElemental), new ItemStack(ConfigItems.itemShovelElemental),
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("reinforcedStone"), IC2Items.getItem("iridiumPlate"),
+                        IC2Items.getItem("overclockerUpgrade") });
 
         thorHammer = addInfusionCraftingRecipe(
                 "Mjolnir",
@@ -619,14 +574,10 @@ public class EMTRecipes {
                 7,
                 EMTCraftingAspects.thorHammerCrafting,
                 new ItemStack(EMTItems.taintedThorHammer, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.itemEMTItems, 1, 6),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 6),
-                    new ItemStack(ConfigItems.itemSwordElemental),
-                    new ItemStack(ConfigItems.itemResource, 1, 1),
-                    new ItemStack(ConfigItems.itemFocusShock),
-                    IC2Items.getItem("rubber")
-                });
+                new ItemStack[] { new ItemStack(EMTItems.itemEMTItems, 1, 6),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 6), new ItemStack(ConfigItems.itemSwordElemental),
+                        new ItemStack(ConfigItems.itemResource, 1, 1), new ItemStack(ConfigItems.itemFocusShock),
+                        IC2Items.getItem("rubber") });
 
         superchargedThorHammer = addInfusionCraftingRecipe(
                 "Supercharged Mjolnir",
@@ -634,17 +585,12 @@ public class EMTRecipes {
                 10,
                 EMTCraftingAspects.superchargedThorHammerCrafting,
                 new ItemStack(EMTItems.thorHammer, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.itemEMTItems, 1, 6),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 6),
-                    new ItemStack(Blocks.web),
-                    new ItemStack(ConfigItems.itemFocusHellbat),
-                    new ItemStack(ConfigItems.itemSwordElemental),
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate"),
-                    new ItemStack(IC2Items.getItem("nanoSaber").getItem(), 1, OreDictionary.WILDCARD_VALUE)
-                });
+                new ItemStack[] { new ItemStack(EMTItems.itemEMTItems, 1, 6),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 6), new ItemStack(Blocks.web),
+                        new ItemStack(ConfigItems.itemFocusHellbat), new ItemStack(ConfigItems.itemSwordElemental),
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"),
+                        new ItemStack(IC2Items.getItem("nanoSaber").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
         wandRecharger = addInfusionCraftingRecipe(
                 "Industrial Wand Charging Station",
@@ -652,13 +598,9 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.wandCharger,
                 new ItemStack(ConfigBlocks.blockStoneDevice, 1, 5),
-                new ItemStack[] {
-                    IC2Items.getItem("replicator"),
-                    IC2Items.getItem("iridiumPlate"),
-                    new ItemStack(Blocks.diamond_block),
-                    new ItemStack(ConfigItems.itemShard, 1, 5),
-                    new ItemStack(ConfigBlocks.blockJar)
-                });
+                new ItemStack[] { IC2Items.getItem("replicator"), IC2Items.getItem("iridiumPlate"),
+                        new ItemStack(Blocks.diamond_block), new ItemStack(ConfigItems.itemShard, 1, 5),
+                        new ItemStack(ConfigBlocks.blockJar) });
 
         solarHelmetRevealing = addInfusionCraftingRecipe(
                 "Solar Helmet of Revealing",
@@ -666,12 +608,9 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.solarHelmetRevealing,
                 new ItemStack(EMTItems.quantumThaumicHelmet, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    IC2Items.getItem("glassFiberCableItem"),
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(ConfigItems.itemShard, 1, 4)
-                });
+                new ItemStack[] { new ItemStack(EMTBlocks.solars[0], 1, 1), IC2Items.getItem("glassFiberCableItem"),
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(ConfigItems.itemShard, 1, 4) });
 
         electricBootsTravel = addInfusionCraftingRecipe(
                 "Electric Boots of the Traveller",
@@ -679,13 +618,9 @@ public class EMTRecipes {
                 2,
                 EMTCraftingAspects.electricBootsTravel,
                 new ItemStack(ConfigItems.itemBootsTraveller),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    IC2Items.getItem("elemotor"),
-                    IC2Items.getItem("coil"),
-                    IC2Items.getItem("hazmatBoots"),
-                    new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE)
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), IC2Items.getItem("elemotor"), IC2Items.getItem("coil"),
+                        IC2Items.getItem("hazmatBoots"),
+                        new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
         nanoBootsTravel = addInfusionCraftingRecipe(
                 "Nano Boots of the Traveller",
@@ -693,11 +628,9 @@ public class EMTRecipes {
                 2,
                 EMTCraftingAspects.nanoBootsTravel,
                 new ItemStack(EMTItems.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    new ItemStack(IC2Items.getItem("nanoBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE)
-                });
+                new ItemStack[] { new ItemStack(Items.diamond),
+                        new ItemStack(IC2Items.getItem("nanoBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(IC2Items.getItem("energyCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE) });
 
         quantumBootsTravel = addInfusionCraftingRecipe(
                 "Quantum Boots of the Traveller",
@@ -705,12 +638,10 @@ public class EMTRecipes {
                 2,
                 EMTCraftingAspects.quantumBootsTravel,
                 new ItemStack(EMTItems.nanoBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Blocks.diamond_block),
-                    new ItemStack(IC2Items.getItem("quantumBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("iridiumPlate")
-                });
+                new ItemStack[] { new ItemStack(Blocks.diamond_block),
+                        new ItemStack(IC2Items.getItem("quantumBoots").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("iridiumPlate") });
 
         etheralProcessor = addInfusionCraftingRecipe(
                 "Etheral Processor",
@@ -718,16 +649,11 @@ public class EMTRecipes {
                 3,
                 EMTCraftingAspects.etherealProcessor,
                 IC2Items.getItem("macerator"),
-                new ItemStack[] {
-                    IC2Items.getItem("electroFurnace"),
-                    new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                    new ItemStack(Blocks.end_stone),
-                    new ItemStack(Blocks.end_stone),
-                    new ItemStack(Blocks.iron_block),
-                    new ItemStack(Blocks.iron_block),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5)
-                });
+                new ItemStack[] { IC2Items.getItem("electroFurnace"),
+                        new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9), new ItemStack(Blocks.end_stone),
+                        new ItemStack(Blocks.end_stone), new ItemStack(Blocks.iron_block),
+                        new ItemStack(Blocks.iron_block), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5) });
 
         tripleCompressedSolar = addInfusionCraftingRecipe(
                 "Compressed Solars",
@@ -735,16 +661,10 @@ public class EMTRecipes {
                 2,
                 EMTCraftingAspects.compressedSolars,
                 new ItemStack(EMTBlocks.solars[0], 1, 1),
-                new ItemStack[] {
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1),
-                    new ItemStack(EMTBlocks.solars[0], 1, 1)
-                });
+                new ItemStack[] { new ItemStack(EMTBlocks.solars[0], 1, 1), new ItemStack(EMTBlocks.solars[0], 1, 1),
+                        new ItemStack(EMTBlocks.solars[0], 1, 1), new ItemStack(EMTBlocks.solars[0], 1, 1),
+                        new ItemStack(EMTBlocks.solars[0], 1, 1), new ItemStack(EMTBlocks.solars[0], 1, 1),
+                        new ItemStack(EMTBlocks.solars[0], 1, 1), new ItemStack(EMTBlocks.solars[0], 1, 1) });
 
         electricHoeGrowth = addInfusionCraftingRecipe(
                 "Electric Hoe of Growth",
@@ -753,13 +673,10 @@ public class EMTRecipes {
                 EMTCraftingAspects.electricHoeGrowth,
                 new ItemStack(ConfigItems.itemHoeElemental),
                 new ItemStack[] {
-                    new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(IC2Items.getItem("electricHoe").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(Items.dye, 1, 15),
-                    IC2Items.getItem("elemotor"),
-                    IC2Items.getItem("coil"),
-                    new ItemStack(Blocks.sapling, 1, OreDictionary.WILDCARD_VALUE)
-                });
+                        new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(IC2Items.getItem("electricHoe").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(Items.dye, 1, 15), IC2Items.getItem("elemotor"), IC2Items.getItem("coil"),
+                        new ItemStack(Blocks.sapling, 1, OreDictionary.WILDCARD_VALUE) });
 
         chargeFocus = addInfusionCraftingRecipe(
                 "Wand Focus: Charging",
@@ -767,14 +684,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.chargeFocus,
                 new ItemStack(IC2Items.getItem("advBattery").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    IC2Items.getItem("generator"),
-                    IC2Items.getItem("batBox"),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(EMTItems.itemEMTItems, 1, 5),
-                    new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE)
-                });
+                new ItemStack[] { IC2Items.getItem("generator"), IC2Items.getItem("batBox"),
+                        new ItemStack(EMTItems.itemEMTItems, 1, 5), new ItemStack(EMTItems.itemEMTItems, 1, 5),
+                        new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(ConfigItems.itemShard, 1, OreDictionary.WILDCARD_VALUE) });
 
         wandChargeFocus = addInfusionCraftingRecipe(
                 "Wand Focus: Wand Charging",
@@ -782,12 +695,9 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.wandChargeFocus,
                 new ItemStack(EMTBlocks.emtMachines, 1, 0),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.chargeFocus),
-                    new ItemStack(IC2Items.getItem("energyPack").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate")
-                });
+                new ItemStack[] { new ItemStack(EMTItems.chargeFocus),
+                        new ItemStack(IC2Items.getItem("energyPack").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate") });
 
         energyBallFocus = addInfusionCraftingRecipe(
                 "Wand Focus: Energy Ball",
@@ -795,12 +705,9 @@ public class EMTRecipes {
                 4,
                 EMTResearchAspects.energyBallFocusResearch,
                 new ItemStack(ConfigItems.itemFocusShock),
-                new ItemStack[] {
-                    new ItemStack(Blocks.tnt),
-                    new ItemStack(IC2Items.getItem("advBattery").getItem()),
-                    new ItemStack(IC2Items.getItem("advBattery").getItem()),
-                    new ItemStack(IC2Items.getItem("advBattery").getItem())
-                });
+                new ItemStack[] { new ItemStack(Blocks.tnt), new ItemStack(IC2Items.getItem("advBattery").getItem()),
+                        new ItemStack(IC2Items.getItem("advBattery").getItem()),
+                        new ItemStack(IC2Items.getItem("advBattery").getItem()) });
 
         inventoryChargingRing = addInfusionCraftingRecipe(
                 "Inventory Charging Ring",
@@ -808,15 +715,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.inventoryChargingRing,
                 new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("generator"),
-                    IC2Items.getItem("geothermalGenerator"),
-                    IC2Items.getItem("solarPanel"),
-                    ic2.core.Ic2Items.WindKineticGenerator,
-                    ic2.core.Ic2Items.WaterKineticGenerator,
-                    IC2Items.getItem("nuclearReactor")
-                });
+                new ItemStack[] { new ItemStack(EMTItems.thaumiumDrill, 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"),
+                        IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator,
+                        ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
         armorChargingRing = addInfusionCraftingRecipe(
                 "Armor Charging Ring",
@@ -824,15 +726,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.armorChargingRing,
                 new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                new ItemStack[] {
-                    new ItemStack(EMTItems.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
-                    IC2Items.getItem("generator"),
-                    IC2Items.getItem("geothermalGenerator"),
-                    IC2Items.getItem("solarPanel"),
-                    ic2.core.Ic2Items.WindKineticGenerator,
-                    ic2.core.Ic2Items.WaterKineticGenerator,
-                    IC2Items.getItem("nuclearReactor")
-                });
+                new ItemStack[] { new ItemStack(EMTItems.electricBootsTraveller, 1, OreDictionary.WILDCARD_VALUE),
+                        IC2Items.getItem("generator"), IC2Items.getItem("geothermalGenerator"),
+                        IC2Items.getItem("solarPanel"), ic2.core.Ic2Items.WindKineticGenerator,
+                        ic2.core.Ic2Items.WaterKineticGenerator, IC2Items.getItem("nuclearReactor") });
 
         nanoWings = addInfusionCraftingRecipe(
                 "Nanosuit Wings",
@@ -840,13 +737,10 @@ public class EMTRecipes {
                 4,
                 EMTCraftingAspects.nanoWing,
                 new ItemStack(EMTItems.thaumiumWing),
-                new ItemStack[] {
-                    IC2Items.getItem("carbonPlate"),
-                    IC2Items.getItem("carbonPlate"),
-                    IC2Items.getItem("carbonPlate"),
-                    new ItemStack(IC2Items.getItem("nanoBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(ConfigItems.itemResource, 1, 1)
-                });
+                new ItemStack[] { IC2Items.getItem("carbonPlate"), IC2Items.getItem("carbonPlate"),
+                        IC2Items.getItem("carbonPlate"),
+                        new ItemStack(IC2Items.getItem("nanoBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(ConfigItems.itemResource, 1, 1) });
 
         quantumWings = addInfusionCraftingRecipe(
                 "Quantum Wings",
@@ -854,13 +748,10 @@ public class EMTRecipes {
                 6,
                 EMTCraftingAspects.quantumWing,
                 new ItemStack(EMTItems.nanoWing, 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate"),
-                    new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                    new ItemStack(ConfigItems.itemResource, 1, 1)
-                });
+                new ItemStack[] { IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"),
+                        IC2Items.getItem("iridiumPlate"),
+                        new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
+                        new ItemStack(ConfigItems.itemResource, 1, 1) });
 
         infusedQuantumArmor = addInfusionCraftingRecipe(
                 "Infused Quantum Armor",
@@ -868,14 +759,9 @@ public class EMTRecipes {
                 5,
                 EMTCraftingAspects.quantumWing,
                 new ItemStack(IC2Items.getItem("quantumBodyarmor").getItem(), 1, OreDictionary.WILDCARD_VALUE),
-                new ItemStack[] {
-                    new ItemStack(Items.diamond),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate"),
-                    IC2Items.getItem("iridiumPlate"),
-                    new ItemStack(EMTBlocks.shield),
-                    new ItemStack(EMTBlocks.shield)
-                });
+                new ItemStack[] { new ItemStack(Items.diamond), IC2Items.getItem("iridiumPlate"),
+                        IC2Items.getItem("iridiumPlate"), IC2Items.getItem("iridiumPlate"),
+                        new ItemStack(EMTBlocks.shield), new ItemStack(EMTBlocks.shield) });
 
         /** Arcane Worktable Recipes **/
         diamondOmnitool = addShapelessArcaneCraftingRecipe(
@@ -1171,7 +1057,10 @@ public class EMTRecipes {
         ItemStack itemStack = new ItemStack(ConfigItems.itemJarNode);
         ((ItemJarNode) itemStack.getItem()).setAspects(itemStack, new AspectList());
         portableNode = addCrucibleRecipe(
-                "Portable Node", new ItemStack(EMTBlocks.portableNode), itemStack, EMTCraftingAspects.portableNode);
+                "Portable Node",
+                new ItemStack(EMTBlocks.portableNode),
+                itemStack,
+                EMTCraftingAspects.portableNode);
 
         uuMCrystal = addCrucibleRecipe(
                 "UU-Matter Infusion",
@@ -1184,57 +1073,51 @@ public class EMTRecipes {
         /* Ore Clusters Macerator Recipes */
         ItemStack ironClusterRecipe = IC2Items.getItem("smallIronDust").copy();
         ironClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)),
-                        null,
-                        true,
-                        ironClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)),
+                null,
+                true,
+                ironClusterRecipe);
 
         ItemStack goldClusterRecipe = IC2Items.getItem("smallGoldDust").copy();
         goldClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)),
-                        null,
-                        true,
-                        goldClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)),
+                null,
+                true,
+                goldClusterRecipe);
 
         ItemStack copperClusterRecipe = IC2Items.getItem("smallCopperDust").copy();
         copperClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)),
-                        null,
-                        true,
-                        copperClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)),
+                null,
+                true,
+                copperClusterRecipe);
 
         ItemStack tinClusterRecipe = IC2Items.getItem("smallTinDust").copy();
         tinClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)),
-                        null,
-                        true,
-                        tinClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)),
+                null,
+                true,
+                tinClusterRecipe);
 
         ItemStack silverClusterRecipe = IC2Items.getItem("smallSilverDust").copy();
         silverClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)),
-                        null,
-                        true,
-                        silverClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)),
+                null,
+                true,
+                silverClusterRecipe);
 
         ItemStack leadClusterRecipe = IC2Items.getItem("smallLeadDust").copy();
         leadClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator)
-                .addRecipe(
-                        new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)),
-                        null,
-                        true,
-                        leadClusterRecipe);
+        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)),
+                null,
+                true,
+                leadClusterRecipe);
 
         /* Thaumium Plates Recipes */
         thaumiumPlate = GameRegistry.addShapedRecipe(
@@ -1255,9 +1138,7 @@ public class EMTRecipes {
 
         /* Ore Processing for Amber and Cinnabar */
         if (EMTConfigHandler.removeAmberAndCinnabarMacerating) {
-            for (Iterator<IRecipeInput> it =
-                            Recipes.macerator.getRecipes().keySet().iterator();
-                    it.hasNext(); ) {
+            for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
                 IRecipeInput input = it.next();
                 if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
                     it.remove();
@@ -1265,9 +1146,7 @@ public class EMTRecipes {
                 }
             }
 
-            for (Iterator<IRecipeInput> it =
-                            Recipes.macerator.getRecipes().keySet().iterator();
-                    it.hasNext(); ) {
+            for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
                 IRecipeInput input = it.next();
                 if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
                     it.remove();
@@ -1278,7 +1157,9 @@ public class EMTRecipes {
         ItemStack crushedAmberRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 1);
         crushedAmberRecipe.stackSize = 2;
         Recipes.macerator.addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7)), null, crushedAmberRecipe);
+                new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7)),
+                null,
+                crushedAmberRecipe);
 
         ItemStack crushedCinnabarRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 3);
         crushedCinnabarRecipe.stackSize = 2;

@@ -1,10 +1,7 @@
 package emt.item.tool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTTextHelper;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
 import org.lwjgl.input.Keyboard;
+
 import thaumcraft.api.IRepairable;
 import thaumcraft.common.entities.projectile.EntityAlumentum;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTTextHelper;
 
 public class ItemThorHammerBroken extends ItemSword implements IRepairable {
 

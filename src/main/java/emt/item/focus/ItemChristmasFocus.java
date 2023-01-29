@@ -5,14 +5,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class ItemChristmasFocus extends ItemBaseFocus {
 
-    private static final AspectList visCost =
-            new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
+    private static final AspectList visCost = new AspectList().add(Aspect.ORDER, 500).add(Aspect.AIR, 500);
 
     public ItemChristmasFocus() {
         super("christmas");
@@ -34,8 +34,8 @@ public class ItemChristmasFocus extends ItemBaseFocus {
     }
 
     @Override
-    public ItemStack onFocusRightClick(
-            ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition mop) {
+    public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player,
+            MovingObjectPosition mop) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         if ((mop != null) && (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)) {
             int x = mop.blockX;

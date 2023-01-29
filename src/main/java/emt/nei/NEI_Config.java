@@ -1,9 +1,10 @@
 package emt.nei;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import codechicken.nei.api.IConfigureNEI;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import emt.EMT;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class NEI_Config implements IConfigureNEI {
 

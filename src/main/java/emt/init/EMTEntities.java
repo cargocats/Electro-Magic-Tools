@@ -1,14 +1,15 @@
 package emt.init;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityList.EntityEggInfo;
+
 import cpw.mods.fml.common.registry.EntityRegistry;
 import emt.EMT;
 import emt.entity.EntityArcher;
 import emt.entity.EntityEnergyBall;
 import emt.entity.EntityLaser;
 import emt.entity.EntityShield;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityList.EntityEggInfo;
 
 public class EMTEntities {
 

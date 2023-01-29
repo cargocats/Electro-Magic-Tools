@@ -1,5 +1,11 @@
 package emt;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -19,10 +25,6 @@ import emt.network.PacketNodeInfo;
 import emt.proxy.CommonProxy;
 import emt.tile.solar.Solars;
 import emt.util.*;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(
         modid = EMT.MOD_ID,
@@ -31,6 +33,7 @@ import org.apache.logging.log4j.Logger;
         guiFactory = EMT.GUI_FACTORY,
         dependencies = EMT.DEPENDS)
 public class EMT {
+
     public static final String NAME = "Electro-Magic Tools";
     public static final String MOD_ID = "EMT";
     public static final String VERSION = "GRADLETOKEN_VERSION";

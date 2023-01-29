@@ -1,15 +1,17 @@
 package emt.client.model;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
 public class ModelSpecialArmor extends ModelBiped {
+
     public ModelRenderer rightWing;
     public ModelRenderer leftWing;
     public ModelRenderer center;
@@ -71,14 +73,8 @@ public class ModelSpecialArmor extends ModelBiped {
         model.rotateAngleZ = z;
     }
 
-    public void render(
-            Entity entity,
-            float p_78088_2_,
-            float p_78088_3_,
-            float p_78088_4_,
-            float p_78088_5_,
-            float p_78088_6_,
-            float scale) {
+    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
+            float p_78088_6_, float scale) {
         EntityPlayer player = (EntityPlayer) entity;
         this.heldItemRight = player.inventory.getCurrentItem() != null ? 1 : 0;
         this.isRiding = player.isRiding();
@@ -103,14 +99,8 @@ public class ModelSpecialArmor extends ModelBiped {
         }
     }
 
-    public void setRotationAngles(
-            float p_78087_1_,
-            float p_78087_2_,
-            float p_78087_3_,
-            float p_78087_4_,
-            float p_78087_5_,
-            float p_78087_6_,
-            Entity entity) {
+    public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_,
+            float p_78087_5_, float p_78087_6_, Entity entity) {
         super.setRotationAngles(p_78087_1_, p_78087_2_, p_78087_3_, p_78087_4_, p_78087_5_, p_78087_6_, entity);
         if (this.isJumping) {
             this.rightWing.rotateAngleY = 0.5f;

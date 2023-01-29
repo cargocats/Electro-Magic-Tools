@@ -1,22 +1,24 @@
 package emt.item.tool.chainsaw;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import ic2.api.item.ElectricItem;
 import java.awt.*;
 import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXBlockBubble;
 import thaumcraft.common.lib.utils.BlockUtils;
 import thaumcraft.common.lib.utils.Utils;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import ic2.api.item.ElectricItem;
 
 public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
 
@@ -49,20 +51,10 @@ public class ItemStreamChainsaw extends ItemThaumiumChainsaw {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack itemstack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int par7,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7,
+            float par8, float par9, float par10) {
         Block bi = world.getBlock(x, y, z);
-        if ((!player.isSneaking())
-                && (Utils.isWoodLog(world, x, y, z))
+        if ((!player.isSneaking()) && (Utils.isWoodLog(world, x, y, z))
                 && ElectricItem.manager.getCharge(itemstack) > cost) {
             if (!world.isRemote) {
                 if (BlockUtils.breakFurthestBlock(world, x, y, z, bi, player)) {

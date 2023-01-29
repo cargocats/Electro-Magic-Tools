@@ -1,13 +1,14 @@
 package emt.item.block;
 
-import emt.EMT;
-import emt.util.EMTTextHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+
+import emt.EMT;
+import emt.util.EMTTextHelper;
 
 public class ItemBlockElectricCloud extends ItemBlock {
 
@@ -29,8 +30,7 @@ public class ItemBlockElectricCloud extends ItemBlock {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return EMTTextHelper.PURPLE
-                + EMTTextHelper.BOLD
+        return EMTTextHelper.PURPLE + EMTTextHelper.BOLD
                 + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
     }
 }

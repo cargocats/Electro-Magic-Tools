@@ -1,23 +1,9 @@
 package emt.item.armor.chestplate;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.client.model.ModelSpecialArmor;
-import emt.init.EMTItems;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IC2Items;
-import ic2.core.IC2;
-import ic2.core.audio.AudioSource;
-import ic2.core.audio.PositionSpec;
-import ic2.core.init.InternalName;
-import ic2.core.item.armor.ItemArmorElectric;
-import ic2.core.util.StackUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -34,7 +20,23 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+
 import thaumcraft.api.IRunicArmor;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.client.model.ModelSpecialArmor;
+import emt.init.EMTItems;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IC2Items;
+import ic2.core.IC2;
+import ic2.core.audio.AudioSource;
+import ic2.core.audio.PositionSpec;
+import ic2.core.init.InternalName;
+import ic2.core.item.armor.ItemArmorElectric;
+import ic2.core.util.StackUtil;
 
 public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements IRunicArmor {
 
@@ -173,11 +175,13 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
                     nbt.setByte("wing", JETPACK);
                     // int charge = (int) ElectricItem.manager.getCharge(itemStack);
                     // if (ElectricItem.manager.getCharge(player.inventory.getCurrentItem()) < 30000) {
-                    //	ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(currentStack),
+                    // ElectricItem.manager.use(itemStack, 30000 - ElectricItem.manager.getCharge(currentStack),
                     // player);
                     // }
-                    nbt.setInteger("jetpackCharge", (int) (ElectricItem.manager.getCharge(
-                            currentStack) /* + charge - (int) ElectricItem.manager.getCharge(itemStack))*/));
+                    nbt.setInteger(
+                            "jetpackCharge",
+                            (int) (ElectricItem.manager.getCharge(
+                                    currentStack) /* + charge - (int) ElectricItem.manager.getCharge(itemStack)) */));
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 } else if (currentItem == EMTItems.thaumiumWing) {
                     IC2.platform.messagePlayer(player, "Thaumium wings enabled.", new Object[0]);
@@ -188,26 +192,29 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
                     nbt.setByte("wing", NANO);
                     // int charge = (int) ElectricItem.manager.getCharge(itemStack);
                     // if (ElectricItem.manager.getCharge(currentStack) < ItemNanoWing.maxCharge) {
-                    //	ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge -
+                    // ElectricItem.manager.use(itemStack, ItemNanoWing.maxCharge -
                     // ElectricItem.manager.getCharge(currentStack), player);
                     // }
                     nbt.setInteger(
                             "NWCharge",
-                            (int)
-                                    (ElectricItem.manager.getCharge(
-                                            player.inventory
-                                                    .getCurrentItem()) /* + charge - (int) ElectricItem.manager.getCharge(itemStack)*/));
+                            (int) (ElectricItem.manager.getCharge(
+                                    player.inventory.getCurrentItem()) /*
+                                                                        * + charge - (int)
+                                                                        * ElectricItem.manager.getCharge(itemStack)
+                                                                        */));
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 } else if (currentItem == EMTItems.quantumWing) {
                     IC2.platform.messagePlayer(player, "Quantum wings enabled.", new Object[0]);
                     nbt.setByte("wing", QUANTUM);
                     // int charge = (int) ElectricItem.manager.getCharge(itemStack);
                     // if (ElectricItem.manager.getCharge(currentStack) < ItemQuantumWing.maxCharge) {
-                    //	ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge -
+                    // ElectricItem.manager.use(itemStack, ItemQuantumWing.maxCharge -
                     // ElectricItem.manager.getCharge(currentStack), player);
                     // }
-                    nbt.setInteger("QWCharge", (int) (ElectricItem.manager.getCharge(
-                            currentStack) /* + charge - (int) ElectricItem.manager.getCharge(itemStack)*/));
+                    nbt.setInteger(
+                            "QWCharge",
+                            (int) (ElectricItem.manager.getCharge(
+                                    currentStack) /* + charge - (int) ElectricItem.manager.getCharge(itemStack) */));
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
             }
@@ -218,8 +225,7 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
                 if (wing == JETPACK) {
                     IC2.platform.messagePlayer(player, "Jetpack disabled.", new Object[0]);
                     nbt.setByte("wing", NONE);
-                    ItemStack charged =
-                            new ItemStack(IC2Items.getItem("electricJetpack").getItem());
+                    ItemStack charged = new ItemStack(IC2Items.getItem("electricJetpack").getItem());
                     if (nbt.getInteger("jetpackCharge") > 0)
                         ElectricItem.manager.charge(charged, nbt.getInteger("jetpackCharge"), 1, true, false);
                     else ElectricItem.manager.charge(charged, 0, 1, true, false);
@@ -230,7 +236,8 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
                     IC2.platform.messagePlayer(player, "Thaumium wings disabled.", new Object[0]);
                     nbt.setByte("wing", NONE);
                     player.inventory.setInventorySlotContents(
-                            player.inventory.currentItem, new ItemStack(EMTItems.thaumiumWing));
+                            player.inventory.currentItem,
+                            new ItemStack(EMTItems.thaumiumWing));
                 }
 
                 if (wing == NANO) {
@@ -417,8 +424,8 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
         }
 
         if (((float) ElectricItem.manager.getCharge(stack) / (float) jetpackMaxCharge) <= dropPercentage) {
-            power = (float)
-                    (power * (ElectricItem.manager.getCharge(stack) / (float) jetpackMaxCharge) * dropPercentage);
+            power = (float) (power * (ElectricItem.manager.getCharge(stack) / (float) jetpackMaxCharge)
+                    * dropPercentage);
         }
 
         if (IC2.keyboard.isForwardKeyDown(player)) {
@@ -475,15 +482,8 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
         return true;
     }
 
-    void useWings(
-            EntityPlayer player,
-            ItemStack stack,
-            World world,
-            float motionY,
-            float motionXZ,
-            float f1,
-            int amount,
-            boolean isElectric) {
+    void useWings(EntityPlayer player, ItemStack stack, World world, float motionY, float motionXZ, float f1,
+            int amount, boolean isElectric) {
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
         boolean isJumping = IC2.keyboard.isJumpKeyDown(player);
         nbt.setBoolean("isJumping", isJumping);

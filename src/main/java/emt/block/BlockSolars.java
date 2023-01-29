@@ -1,12 +1,8 @@
 package emt.block;
 
-import com.gtnewhorizons.modularui.api.UIInfos;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.solar.Solars;
 import java.util.List;
 import java.util.Objects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +13,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.gtnewhorizons.modularui.api.UIInfos;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.tile.solar.Solars;
 
 public class BlockSolars extends BlockBaseContainer {
 
@@ -41,14 +44,13 @@ public class BlockSolars extends BlockBaseContainer {
         IIcon airSide = ir.registerIcon(EMT.TEXTURE_PATH + ":solars/air/airside");
         IIcon earthSide = ir.registerIcon(EMT.TEXTURE_PATH + ":solars/earth/earthside");
 
-        IIcon[] sides = {side, orderSide, darkSide, airSide, earthSide, waterSide, fireSide};
+        IIcon[] sides = { side, orderSide, darkSide, airSide, earthSide, waterSide, fireSide };
 
-        if (instance != 1 && instance != 0)
-            for (int i = 0; i < countOfMetas; i++) {
-                iconSets[i].bottom = bottom;
-                iconSets[i].side = sides[(Objects.requireNonNull(Solars.getTileEntitySolarBase(instance, i)).aspect)];
-                iconSets[i].top = tripleSolarTop;
-            }
+        if (instance != 1 && instance != 0) for (int i = 0; i < countOfMetas; i++) {
+            iconSets[i].bottom = bottom;
+            iconSets[i].side = sides[(Objects.requireNonNull(Solars.getTileEntitySolarBase(instance, i)).aspect)];
+            iconSets[i].top = tripleSolarTop;
+        }
         else if (instance == 0) {
             for (int i = 0; i < countOfMetas; i++) {
                 iconSets[i].bottom = bottom;
@@ -136,8 +138,8 @@ public class BlockSolars extends BlockBaseContainer {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2, float f3) {
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2,
+            float f3) {
         if (player.isSneaking()) {
             return false;
         }

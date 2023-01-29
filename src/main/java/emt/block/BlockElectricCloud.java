@@ -1,10 +1,7 @@
 package emt.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.TileElectricCloud;
 import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -12,10 +9,16 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXSparkle;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.tile.TileElectricCloud;
 
 public class BlockElectricCloud extends BlockBase {
+
     public IIcon icon;
 
     public BlockElectricCloud(String unlocName) {

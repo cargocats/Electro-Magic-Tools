@@ -1,12 +1,8 @@
 package emt.block;
 
-import com.gtnewhorizons.modularui.api.UIInfos;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.tile.generator.TileEntityBaseGenerator;
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -17,6 +13,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.gtnewhorizons.modularui.api.UIInfos;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.tile.generator.TileEntityBaseGenerator;
 
 public class BlockEssentiaGenerators extends BlockBaseContainer {
 
@@ -79,8 +82,8 @@ public class BlockEssentiaGenerators extends BlockBaseContainer {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2, float f3) {
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int s, float f1, float f2,
+            float f3) {
         if (player.isSneaking()) {
             return false;
         }

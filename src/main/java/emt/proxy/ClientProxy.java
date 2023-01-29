@@ -1,5 +1,10 @@
 package emt.proxy;
 
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderSnowMan;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import emt.client.EMTKeys;
 import emt.client.renderer.RenderLaser;
@@ -8,10 +13,6 @@ import emt.entity.EntityArcher;
 import emt.entity.EntityEnergyBall;
 import emt.entity.EntityLaser;
 import emt.entity.EntityShield;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderSnowMan;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 
 public class ClientProxy extends CommonProxy {
 

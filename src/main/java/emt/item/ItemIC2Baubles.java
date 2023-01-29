@@ -1,5 +1,17 @@
 package emt.item;
 
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+
+import thaumcraft.api.IRunicArmor;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.relauncher.Side;
@@ -8,16 +20,6 @@ import emt.EMT;
 import emt.util.EMTConfigHandler;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
-import java.util.List;
-import java.util.Random;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import thaumcraft.api.IRunicArmor;
 
 public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
 
@@ -89,8 +91,8 @@ public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
                         for (int i = 0; i < ((EntityPlayer) player).inventory.armorInventory.length; i++) {
                             if (energyLeft > 0) {
                                 if ((((EntityPlayer) player).inventory.armorInventory[i] != null)
-                                        && (((EntityPlayer) player).inventory.armorInventory[i].getItem()
-                                                instanceof IElectricItem)) {
+                                        && (((EntityPlayer) player).inventory.armorInventory[i]
+                                                .getItem() instanceof IElectricItem)) {
                                     double sentPacket = ElectricItem.manager.charge(
                                             ((EntityPlayer) player).inventory.armorInventory[i],
                                             energyLeft,
@@ -111,8 +113,8 @@ public class ItemIC2Baubles extends ItemBase implements IBauble, IRunicArmor {
                         for (int i = 0; i < ((EntityPlayer) player).inventory.mainInventory.length; i++) {
                             if (energyLeft > 0) {
                                 if ((((EntityPlayer) player).inventory.mainInventory[i] != null)
-                                        && (((EntityPlayer) player).inventory.mainInventory[i].getItem()
-                                                instanceof IElectricItem)) {
+                                        && (((EntityPlayer) player).inventory.mainInventory[i]
+                                                .getItem() instanceof IElectricItem)) {
                                     double sentPacket = ElectricItem.manager.charge(
                                             ((EntityPlayer) player).inventory.mainInventory[i],
                                             energyLeft,

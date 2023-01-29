@@ -1,13 +1,8 @@
 package emt.item.tool.omnitool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import emt.EMT;
-import emt.util.EMTConfigHandler;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
 import java.util.List;
 import java.util.Locale;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +17,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import emt.EMT;
+import emt.util.EMTConfigHandler;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
 
 public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 
@@ -61,8 +63,8 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
     }
 
     @Override
-    public boolean onBlockDestroyed(
-            ItemStack stack, World world, Block block, int par4, int par5, int par6, EntityLivingBase entityLiving) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6,
+            EntityLivingBase entityLiving) {
         if (!EMTConfigHandler.toolsInBore) {
             cost = 100;
         } else {
@@ -74,8 +76,7 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
 
     @Override
     public boolean canHarvestBlock(Block block, ItemStack stack) {
-        return Items.iron_axe.canHarvestBlock(block, stack)
-                || Items.iron_sword.canHarvestBlock(block, stack)
+        return Items.iron_axe.canHarvestBlock(block, stack) || Items.iron_sword.canHarvestBlock(block, stack)
                 || Items.iron_pickaxe.canHarvestBlock(block, stack)
                 || Items.iron_shovel.canHarvestBlock(block, stack)
                 || Items.shears.canHarvestBlock(block, stack);
@@ -107,21 +108,11 @@ public class ItemOmnitoolIron extends ItemPickaxe implements IElectricItem {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int side,
-            float xOffset,
-            float yOffset,
-            float zOffset) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+            float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
-            if (torchStack == null
-                    || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
+            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase(Locale.US).contains("torch")) {
                 continue;
             }
             Item item = torchStack.getItem();

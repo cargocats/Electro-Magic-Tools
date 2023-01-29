@@ -2,16 +2,18 @@ package emt.client.gui.config;
 
 import static emt.util.EMTConfigHandler.*;
 
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
-import emt.EMT;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
+
+import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.IConfigElement;
+import emt.EMT;
 
 public class EMTGuiConfig extends GuiConfig {
 

@@ -1,10 +1,12 @@
 package emt.tile;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import gregtech.api.enums.GT_Values;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import gregtech.api.enums.GT_Values;
+
 public class DefinitelyNotAIC2Source {
+
     public final TileEntity parent;
     protected long capacity;
     protected byte tier;

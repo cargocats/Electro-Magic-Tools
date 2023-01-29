@@ -1,12 +1,13 @@
 package emt.item.armor.boots;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 
 public class ItemQuantumBootsTraveller extends ItemElectricBootsTraveller {
 

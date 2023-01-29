@@ -30,7 +30,8 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.targetTasks.addTask(
-                3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, IMob.mobSelector));
+                3,
+                new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, IMob.mobSelector));
         this.tasks.addTask(4, new EntityAIWander(this, 0.30D));
     }
 
@@ -84,13 +85,17 @@ public class EntityArcher extends EntitySnowman implements IExtendedEntityProper
 
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase entity, float par2) {
-        EntityArrow entityarrow = new EntityArrow(this.worldObj, this, entity, 1.6F, (float)
-                (14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+        EntityArrow entityarrow = new EntityArrow(
+                this.worldObj,
+                this,
+                entity,
+                1.6F,
+                (float) (14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
         int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int punchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-        entityarrow.setDamage((double) (par2 * 2.0F)
-                + this.rand.nextGaussian() * 0.25D
-                + (double) ((float) this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
+        entityarrow.setDamage(
+                (double) (par2 * 2.0F) + this.rand.nextGaussian() * 0.25D
+                        + (double) ((float) this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
 
         if (powerLevel > 0) {
             entityarrow.setDamage(entityarrow.getDamage() + (double) powerLevel * 0.5D + 0.5D);

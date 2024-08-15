@@ -1,20 +1,16 @@
 package emt.item.focus;
 
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
-import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
 
@@ -103,17 +99,4 @@ public abstract class ItemBaseFocus extends ItemFocusBasic {
         return 5;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, @SuppressWarnings("rawtypes") List list,
-            boolean par4) {
-        AspectList cost = getVisCost(stack);
-        if (cost != null && cost.size() > 0) {
-            list.add(StatCollector.translateToLocal(isVisCostPerTick() ? "item.Focus.cost2" : "item.Focus.cost1"));
-            for (Aspect aspect : cost.getAspectsSorted()) {
-                float amount = cost.getAmount(aspect) / 100.0F;
-                list.add(" " + '\u00a7' + aspect.getChatcolor() + aspect.getName() + '\u00a7' + "r x " + amount);
-            }
-        }
-    }
 }

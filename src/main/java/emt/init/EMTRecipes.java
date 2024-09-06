@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
@@ -1091,54 +1092,58 @@ public class EMTRecipes {
 
         /** IC2 Stuff related recipes **/
 
-        /* Ore Clusters Macerator Recipes */
-        ItemStack ironClusterRecipe = IC2Items.getItem("smallIronDust").copy();
-        ironClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)),
-                null,
-                true,
-                ironClusterRecipe);
+        final boolean isDreamcraftNotLoaded = !Loader.isModLoaded("dreamcraft");
 
-        ItemStack goldClusterRecipe = IC2Items.getItem("smallGoldDust").copy();
-        goldClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)),
-                null,
-                true,
-                goldClusterRecipe);
+        if (isDreamcraftNotLoaded) {
+            /* Ore Clusters Macerator Recipes */
+            ItemStack ironClusterRecipe = IC2Items.getItem("smallIronDust").copy();
+            ironClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 16)),
+                    null,
+                    true,
+                    ironClusterRecipe);
 
-        ItemStack copperClusterRecipe = IC2Items.getItem("smallCopperDust").copy();
-        copperClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)),
-                null,
-                true,
-                copperClusterRecipe);
+            ItemStack goldClusterRecipe = IC2Items.getItem("smallGoldDust").copy();
+            goldClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 31)),
+                    null,
+                    true,
+                    goldClusterRecipe);
 
-        ItemStack tinClusterRecipe = IC2Items.getItem("smallTinDust").copy();
-        tinClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)),
-                null,
-                true,
-                tinClusterRecipe);
+            ItemStack copperClusterRecipe = IC2Items.getItem("smallCopperDust").copy();
+            copperClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 17)),
+                    null,
+                    true,
+                    copperClusterRecipe);
 
-        ItemStack silverClusterRecipe = IC2Items.getItem("smallSilverDust").copy();
-        silverClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)),
-                null,
-                true,
-                silverClusterRecipe);
+            ItemStack tinClusterRecipe = IC2Items.getItem("smallTinDust").copy();
+            tinClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 18)),
+                    null,
+                    true,
+                    tinClusterRecipe);
 
-        ItemStack leadClusterRecipe = IC2Items.getItem("smallLeadDust").copy();
-        leadClusterRecipe.stackSize = 22;
-        ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)),
-                null,
-                true,
-                leadClusterRecipe);
+            ItemStack silverClusterRecipe = IC2Items.getItem("smallSilverDust").copy();
+            silverClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 19)),
+                    null,
+                    true,
+                    silverClusterRecipe);
+
+            ItemStack leadClusterRecipe = IC2Items.getItem("smallLeadDust").copy();
+            leadClusterRecipe.stackSize = 22;
+            ((BasicMachineRecipeManager) Recipes.macerator).addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemNugget, 1, 20)),
+                    null,
+                    true,
+                    leadClusterRecipe);
+        }
 
         /* Thaumium Plates Recipes */
         thaumiumPlate = GameRegistry.addShapedRecipe(
@@ -1152,76 +1157,79 @@ public class EMTRecipes {
                 new ItemStack(IC2Items.getItem("ForgeHammer").getItem(), 1, OreDictionary.WILDCARD_VALUE),
                 'Z',
                 new ItemStack(Blocks.obsidian));
-        Recipes.metalformerRolling.addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigItems.itemResource, 1, 2)),
-                null,
-                new ItemStack(EMTItems.itemEMTItems, 1, 5));
 
-        /* Ore Processing for Amber and Cinnabar */
-        if (EMTConfigHandler.removeAmberAndCinnabarMacerating) {
-            for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
-                IRecipeInput input = it.next();
-                if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
-                    it.remove();
-                    EMT.LOGGER.info("Removing conflicting amber macerating recipe(s)");
+        if (isDreamcraftNotLoaded) {
+            Recipes.metalformerRolling.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigItems.itemResource, 1, 2)),
+                    null,
+                    new ItemStack(EMTItems.itemEMTItems, 1, 5));
+
+            /* Ore Processing for Amber and Cinnabar */
+            if (EMTConfigHandler.removeAmberAndCinnabarMacerating) {
+                for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
+                    IRecipeInput input = it.next();
+                    if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7))) {
+                        it.remove();
+                        EMT.LOGGER.info("Removing conflicting amber macerating recipe(s)");
+                    }
+                }
+
+                for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
+                    IRecipeInput input = it.next();
+                    if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
+                        it.remove();
+                        EMT.LOGGER.info("Removing Conflicting cinnabar macerating recipe(s)");
+                    }
                 }
             }
+            ItemStack crushedAmberRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 1);
+            crushedAmberRecipe.stackSize = 2;
+            Recipes.macerator.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7)),
+                    null,
+                    crushedAmberRecipe);
 
-            for (Iterator<IRecipeInput> it = Recipes.macerator.getRecipes().keySet().iterator(); it.hasNext();) {
-                IRecipeInput input = it.next();
-                if (input.matches(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0))) {
-                    it.remove();
-                    EMT.LOGGER.info("Removing Conflicting cinnabar macerating recipe(s)");
-                }
-            }
+            ItemStack crushedCinnabarRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 3);
+            crushedCinnabarRecipe.stackSize = 2;
+            Recipes.macerator.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0)),
+                    null,
+                    crushedCinnabarRecipe);
+
+            NBTTagCompound waterAmount = new NBTTagCompound();
+            waterAmount.setInteger("amount", 1000);
+
+            ItemStack smallCopperDust = IC2Items.getItem("smallCopperDust");
+            smallCopperDust.stackSize = 2;
+            ItemStack smallTinDust = IC2Items.getItem("smallTinDust");
+            smallCopperDust.stackSize = 2;
+
+            Recipes.oreWashing.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 1)),
+                    waterAmount,
+                    new ItemStack(EMTItems.itemEMTItems, 1, 2),
+                    smallCopperDust,
+                    IC2Items.getItem("stoneDust"));
+            Recipes.oreWashing.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 3)),
+                    waterAmount,
+                    new ItemStack(EMTItems.itemEMTItems, 1, 4),
+                    smallTinDust,
+                    IC2Items.getItem("stoneDust"));
+
+            NBTTagCompound heatAmount = new NBTTagCompound();
+            heatAmount.setInteger("minHeat", 1000);
+
+            Recipes.centrifuge.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 2)),
+                    heatAmount,
+                    IC2Items.getItem("smallCopperDust"),
+                    new ItemStack(ConfigItems.itemResource, 1, 6));
+            Recipes.centrifuge.addRecipe(
+                    new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 4)),
+                    heatAmount,
+                    IC2Items.getItem("smallTinDust"),
+                    new ItemStack(ConfigItems.itemResource, 1, 3));
         }
-        ItemStack crushedAmberRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 1);
-        crushedAmberRecipe.stackSize = 2;
-        Recipes.macerator.addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 7)),
-                null,
-                crushedAmberRecipe);
-
-        ItemStack crushedCinnabarRecipe = new ItemStack(EMTItems.itemEMTItems, 1, 3);
-        crushedCinnabarRecipe.stackSize = 2;
-        Recipes.macerator.addRecipe(
-                new RecipeInputItemStack(new ItemStack(ConfigBlocks.blockCustomOre, 1, 0)),
-                null,
-                crushedCinnabarRecipe);
-
-        NBTTagCompound waterAmount = new NBTTagCompound();
-        waterAmount.setInteger("amount", 1000);
-
-        ItemStack smallCopperDust = IC2Items.getItem("smallCopperDust");
-        smallCopperDust.stackSize = 2;
-        ItemStack smallTinDust = IC2Items.getItem("smallTinDust");
-        smallCopperDust.stackSize = 2;
-
-        Recipes.oreWashing.addRecipe(
-                new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 1)),
-                waterAmount,
-                new ItemStack(EMTItems.itemEMTItems, 1, 2),
-                smallCopperDust,
-                IC2Items.getItem("stoneDust"));
-        Recipes.oreWashing.addRecipe(
-                new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 3)),
-                waterAmount,
-                new ItemStack(EMTItems.itemEMTItems, 1, 4),
-                smallTinDust,
-                IC2Items.getItem("stoneDust"));
-
-        NBTTagCompound heatAmount = new NBTTagCompound();
-        heatAmount.setInteger("minHeat", 1000);
-
-        Recipes.centrifuge.addRecipe(
-                new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 2)),
-                heatAmount,
-                IC2Items.getItem("smallCopperDust"),
-                new ItemStack(ConfigItems.itemResource, 1, 6));
-        Recipes.centrifuge.addRecipe(
-                new RecipeInputItemStack(new ItemStack(EMTItems.itemEMTItems, 1, 4)),
-                heatAmount,
-                IC2Items.getItem("smallTinDust"),
-                new ItemStack(ConfigItems.itemResource, 1, 3));
     }
 }

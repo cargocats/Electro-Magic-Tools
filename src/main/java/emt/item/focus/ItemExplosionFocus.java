@@ -31,7 +31,7 @@ public class ItemExplosionFocus extends ItemBaseFocus {
 
     @Override
     public String getSortingHelper(ItemStack itemstack) {
-        return "EXPLOSION";
+        return "EXPLOSION" + super.getSortingHelper(itemstack);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ItemExplosionFocus extends ItemBaseFocus {
             MovingObjectPosition movingobjectposition) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
         if (player.capabilities.isCreativeMode
-                || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, true)) {
+                || wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, false)) {
             if (!world.isRemote) {
                 EntityLaser laser;
                 laser = new EntityLaser(world, player, 1);
@@ -54,12 +54,4 @@ public class ItemExplosionFocus extends ItemBaseFocus {
         return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal };
     }
 
-    /**
-     * Use this method to define custom logic about which upgrades can be applied. This can be used to set up upgrade
-     * "trees" that make certain upgrades available only when others are unlocked first, when certain research is
-     * completed, or similar logic.
-     */
-    public boolean canApplyUpgrade(ItemStack focusstack, EntityPlayer player, FocusUpgradeType type, int rank) {
-        return true;
-    }
 }

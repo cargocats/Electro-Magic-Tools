@@ -35,7 +35,7 @@ public class ItemMaintenanceFocus extends ItemBaseFocus {
 
     @Override
     public String getSortingHelper(ItemStack itemstack) {
-        return "MAINTENANCE";
+        return "MAINTENANCE" + super.getSortingHelper(itemstack);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ItemMaintenanceFocus extends ItemBaseFocus {
                 if (hatchCandidateMetaTile instanceof MTEHatchMaintenance) {
                     MTEHatchMaintenance hatch = (MTEHatchMaintenance) hatchCandidateMetaTile;
                     if (player.capabilities.isCreativeMode
-                            || wand.consumeAllVis(itemStack, player, getVisCost(itemStack), true, true)) {
+                            || wand.consumeAllVis(itemStack, player, getVisCost(itemStack), true, false)) {
                         hatch.mCrowbar = true;
                         hatch.mScrewdriver = true;
                         hatch.mHardHammer = true;

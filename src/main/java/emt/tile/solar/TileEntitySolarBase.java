@@ -713,17 +713,17 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     @Override
-    public byte getMetaID(int aX, int aY, int aZ) {
+    public int getMetaID(int aX, int aY, int aZ) {
         return (byte) this.worldObj.getBlockMetadata(aX, aY, aZ);
     }
 
     @Override
-    public byte getMetaIDOffset(int aX, int aY, int aZ) {
+    public int getMetaIDOffset(int aX, int aY, int aZ) {
         return getMetaID(this.xCoord + aX, this.yCoord + aY, this.zCoord + aZ);
     }
 
     @Override
-    public byte getMetaIDAtSide(ForgeDirection side) {
+    public int getMetaIDAtSide(ForgeDirection side) {
         int tX = getOffsetX(side, 1);
         int tY = getOffsetY(side, 1);
         int tZ = getOffsetZ(side, 1);
@@ -731,7 +731,7 @@ public class TileEntitySolarBase extends TileEntityEMT implements IInventory, IW
     }
 
     @Override
-    public byte getMetaIDAtSideAndDistance(ForgeDirection side, int aDistance) {
+    public int getMetaIDAtSideAndDistance(ForgeDirection side, int aDistance) {
         if (aDistance == 1) {
             return getMetaIDAtSide(side);
         }

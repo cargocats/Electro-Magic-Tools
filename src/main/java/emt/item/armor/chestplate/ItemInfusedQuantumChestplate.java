@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,6 +29,8 @@ import emt.EMT;
 import emt.client.model.ModelSpecialArmor;
 import emt.init.EMTItems;
 import emt.util.EMTConfigHandler;
+import gregtech.api.hazards.Hazard;
+import gregtech.api.hazards.IHazardProtector;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IC2Items;
 import ic2.core.IC2;
@@ -38,7 +41,8 @@ import ic2.core.item.armor.ItemArmorElectric;
 import ic2.core.util.StackUtil;
 import thaumcraft.api.IRunicArmor;
 
-public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements IRunicArmor {
+@Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech")
+public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements IRunicArmor, IHazardProtector {
 
     public static AudioSource audioSource;
     protected static ArrayList<Integer> potionRemovalCost = new ArrayList<Integer>();
@@ -563,5 +567,11 @@ public class ItemInfusedQuantumChestplate extends ItemArmorElectric implements I
     @Override
     public int getRunicCharge(ItemStack itemStack) {
         return 0;
+    }
+
+    @Override
+    @Optional.Method(modid = "gregtech")
+    public boolean protectsAgainst(ItemStack itemStack, Hazard hazard) {
+        return true;
     }
 }

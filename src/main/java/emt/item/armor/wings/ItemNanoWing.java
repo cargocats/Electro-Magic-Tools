@@ -14,15 +14,20 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import emt.EMT;
 import emt.util.EMTConfigHandler;
+import gregtech.api.hazards.Hazard;
+import gregtech.api.hazards.IHazardProtector;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.api.item.IMetalArmor;
 
-public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectricItem, ISpecialArmor, IMetalArmor {
+@Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech")
+public class ItemNanoWing extends ItemThaumiumReinforcedWing
+        implements IElectricItem, ISpecialArmor, IMetalArmor, IHazardProtector {
 
     public static int maxCharge = 1000000;
     public int tier = 3;
@@ -175,5 +180,11 @@ public class ItemNanoWing extends ItemThaumiumReinforcedWing implements IElectri
     @Override
     public Item getEmptyItem(ItemStack itemStack) {
         return this;
+    }
+
+    @Override
+    @Optional.Method(modid = "gregtech")
+    public boolean protectsAgainst(ItemStack itemStack, Hazard hazard) {
+        return true;
     }
 }

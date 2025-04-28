@@ -56,12 +56,17 @@ public class TileEntityBaseGenerator extends TileEntityEMT implements IInventory
     public int storage;
     public short mpshownstroage;
     public int maxstorage;
-    public byte maxfuel;
-    public byte fuel;
-    public byte refuel;
-    public long timer = 0L;
+    public byte maxfuel = 64;
+    public byte fuel = 0;
+    // The amount to pull from jars (through the air like the runic matrix) when empty.
+    // Values above 1 do not work with essentia mirrors.
+    public byte refuel = 1;
+    // Used to make the generator sleep between failed attempts to draw essentia from nearby jars.
+    public int timer = 0;
+    // The number of ticks to wait after failing to draw essentia.
+    public final int refuelSleepTime = 40;
     public boolean dead = true;
-    public byte color;
+    public byte color = -1;
     private boolean side;
 
     protected static final NumberFormatMUI numberFormat = new NumberFormatMUI();
@@ -94,18 +99,17 @@ public class TileEntityBaseGenerator extends TileEntityEMT implements IInventory
     public TileEntityBaseGenerator() {
         this.energySource.setCapacity(EMTConfigHandler.EssentiaGeneratorStorage);
         this.maxstorage = ((int) this.energySource.getCapacity());
-        this.maxfuel = 64;
-        this.fuel = 0;
-        this.refuel = 1;
-        this.color = -1;
     }
 
     @Override
     public void updateEntity() {
         this.side = !this.worldObj.isRemote;
         this.dead = false;
-        this.timer += 1L;
-        if (this.timer <= Long.MAX_VALUE - 1) this.timer = 0L;
+        this.timer--;
+        if (this.timer <= Integer.MIN_VALUE + 1) this.timer = 0;
+        if (this.fuel + this.refuel > this.maxfuel) {
+            this.timer = refuelSleepTime;
+        }
         storeFuel();
         fillfrompipe();
         createEnergy();
@@ -113,64 +117,61 @@ public class TileEntityBaseGenerator extends TileEntityEMT implements IInventory
     }
 
     public void storeFuel() {
-        if (!side) return;
-
-        if (this.fuel < this.maxfuel) {
-            for (int x = this.xCoord - 4; x < this.xCoord + 4; x++) {
-                for (int y = this.yCoord - 4; y < this.yCoord + 4; y++) {
-                    for (int z = this.zCoord - 4; z < this.zCoord + 4; z++) {
-                        TileEntity tile = this.worldObj.getTileEntity(x, y, z);
-                        if (tile instanceof IAspectSource) {
-                            IAspectSource as = (IAspectSource) tile;
-                            if ((as.doesContainerContainAmount(this.aspect, this.refuel))
-                                    && (as.takeFromContainer(this.aspect, this.refuel))) {
-                                PacketHandler.INSTANCE.sendToAllAround(
-                                        new PacketFXEssentiaSource(
-                                                this.xCoord,
-                                                this.yCoord,
-                                                this.zCoord,
-                                                (byte) (this.xCoord - x),
-                                                (byte) (this.yCoord - y),
-                                                (byte) (this.zCoord - z),
-                                                this.aspect.getColor()),
-                                        new NetworkRegistry.TargetPoint(
-                                                getWorldObj().provider.dimensionId,
-                                                this.xCoord,
-                                                this.yCoord,
-                                                this.zCoord,
-                                                32.0D));
-                                addToContainer(this.aspect, this.refuel);
-                            }
+        if (this.timer > 0 || !side) {
+            return;
+        }
+        boolean stored = false;
+        for (int x = this.xCoord - 4; x < this.xCoord + 4; x++) {
+            for (int y = this.yCoord - 4; y < this.yCoord + 4; y++) {
+                for (int z = this.zCoord - 4; z < this.zCoord + 4; z++) {
+                    TileEntity tile = this.worldObj.getTileEntity(x, y, z);
+                    if (tile instanceof IAspectSource as && as.takeFromContainer(this.aspect, this.refuel)) {
+                        PacketHandler.INSTANCE.sendToAllAround(
+                                new PacketFXEssentiaSource(
+                                        this.xCoord,
+                                        this.yCoord,
+                                        this.zCoord,
+                                        (byte) (this.xCoord - x),
+                                        (byte) (this.yCoord - y),
+                                        (byte) (this.zCoord - z),
+                                        this.aspect.getColor()),
+                                new NetworkRegistry.TargetPoint(
+                                        getWorldObj().provider.dimensionId,
+                                        this.xCoord,
+                                        this.yCoord,
+                                        this.zCoord,
+                                        32.0D));
+                        addToContainer(this.aspect, this.refuel);
+                        if (this.fuel + this.refuel > this.maxfuel) {
+                            return;
                         }
+                        stored = true;
                     }
                 }
             }
         }
+        if (!stored) {
+            this.timer = refuelSleepTime;
+        }
     }
 
     public void fillfrompipe() {
-        if (!side) return;
+        if (this.fuel >= this.maxfuel || !side) return;
 
-        if (this.fuel == this.maxfuel) return;
-
-        TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
-        for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
-            te[i] = ThaumcraftApiHelper.getConnectableTile(
-                    this.worldObj,
-                    this.xCoord,
-                    this.yCoord,
-                    this.zCoord,
-                    ForgeDirection.VALID_DIRECTIONS[i]);
-            if (te[i] != null) {
-                IEssentiaTransport pipe = (IEssentiaTransport) te[i];
-                if (!pipe.canOutputTo(ForgeDirection.VALID_DIRECTIONS[i])) {
-                    return;
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            TileEntity pipeTE = ThaumcraftApiHelper
+                    .getConnectableTile(this.worldObj, this.xCoord, this.yCoord, this.zCoord, direction);
+            if (pipeTE != null) {
+                IEssentiaTransport pipe = (IEssentiaTransport) pipeTE;
+                if (!pipe.canOutputTo(direction)) {
+                    continue;
                 }
-                if ((pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]) != null)
-                        && (pipe.getEssentiaType(ForgeDirection.VALID_DIRECTIONS[i]).equals(this.aspect))
-                        && (pipe.getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i])
-                                < getSuctionAmount(ForgeDirection.VALID_DIRECTIONS[i]))) {
-                    addToContainer(this.aspect, pipe.takeEssentia(this.aspect, 1, ForgeDirection.VALID_DIRECTIONS[i]));
+                if ((pipe.getEssentiaType(direction) != null) && (pipe.getEssentiaType(direction).equals(this.aspect))
+                        && (pipe.getSuctionAmount(direction) < getSuctionAmount(direction))) {
+                    addToContainer(this.aspect, pipe.takeEssentia(this.aspect, 1, direction));
+                    if (this.fuel >= this.maxfuel) {
+                        return;
+                    }
                 }
             }
         }
@@ -508,11 +509,6 @@ public class TileEntityBaseGenerator extends TileEntityEMT implements IInventory
     @Override
     public long getSteamCapacity() {
         return 0L;
-    }
-
-    @Override
-    public boolean increaseStoredSteam(long aEnergy, boolean aIgnoreTooMuchEnergy) {
-        return false;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package emt.item.focus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -50,7 +53,8 @@ public class ItemShieldFocus extends ItemBaseFocus {
     @Override
     public void onUsingFocusTick(ItemStack itemstack, EntityPlayer player, int count) {
         ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
-        for (PotionEffect effect : player.getActivePotionEffects()) {
+        List<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());
+        for (PotionEffect effect : potionEffects) {
             IC2.platform.removePotion(player, effect.getPotionID());
         }
         if (!player.capabilities.isCreativeMode
